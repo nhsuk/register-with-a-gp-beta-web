@@ -1,0 +1,3 @@
+{
+  "presets": ["modern-node", "es2017", "stage-3"]
+}
