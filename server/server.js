@@ -17,7 +17,7 @@ const manifest = {
         register: 'good',
         options: {
           reporters: {
-            myConsoleReporter: [
+            console: [
               {
                 module: 'good-squeeze',
                 name: 'Squeeze',
@@ -32,13 +32,13 @@ const manifest = {
     },
     {
       plugin: {
-        register: './routes',
+        register: 'vision',
         options: {}
       }
     },
     {
       plugin: {
-        register: 'vision',
+        register: './index',
         options: {}
       }
     },

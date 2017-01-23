@@ -1,0 +1,8 @@
+<html>
+{% include "layouts/includes/head.nunjucks" %}
+<body>
+{% block content %}
+{% endblock %}
+{% include "layouts/includes/foot.nunjucks" %}
+</body>
+</html>
