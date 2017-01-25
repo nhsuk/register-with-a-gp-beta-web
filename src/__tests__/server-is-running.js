@@ -9,7 +9,7 @@ beforeAll(() => {
   return new Promise((resolve) => {
     randomPort({from: 3000}, (port) => {
       process.env.PORT = port.toString();
-      server = require('../server/server');
+      server = require('../server/');
       server.start().then((instance) => {
         running_instance = instance;
         resolve();

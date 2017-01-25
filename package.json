@@ -15,16 +15,21 @@
     "inert": "^4.1.0",
     "nodemon": "^1.11.0",
     "nunjucks": "^3.0.0",
-    "random-port": "^0.1.0",
     "vision": "^4.1.1"
   },
   "devDependencies": {
+    "assets-webpack-plugin": "^3.5.1",
     "babel-cli": "^6.22.2",
-    "jest": "^18.1.0"
+    "jest": "^18.1.0",
+    "random-port": "^0.1.0",
+    "webpack": "beta",
+    "webpack-dashboard": "^0.2.1",
+    "webpack-dev-middleware": "^1.9.0",
+    "webpack-hot-middleware": "^2.15.0"
   },
   "scripts": {
     "test": "jest",
-    "start": "babel-node src/server/server.js",
-    "build": "babel src -d dist"
+    "start": "webpack-dashboard -- ./node_modules/.bin/babel-node src/server/index.js",
+    "build": "webpack --config src/client/webpack.config.babel.js && babel src -d dist --copy-files --source-maps"
   }
 }

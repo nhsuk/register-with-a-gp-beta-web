@@ -4,5 +4,6 @@
 {% block content %}
 {% endblock %}
 {% include "layouts/includes/foot.nunjucks" %}
+<script src="static/compiled/{{ jsBundle }}"></script>
 </body>
 </html>

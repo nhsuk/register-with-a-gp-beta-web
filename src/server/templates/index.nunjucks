@@ -4,5 +4,6 @@
   <div>
     <h1>{{ title }}</h1>
     <p>{{ message }}</p>
+    <p>Time: {{ time }}</p>
   </div>
 {% endblock %}
