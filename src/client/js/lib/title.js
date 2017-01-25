@@ -1,1 +1,3 @@
-document.querySelector('h1').innerHTML = '👹';
+export default {
+  init () {document.querySelector('h1').innerHTML = '👹';}
+};
