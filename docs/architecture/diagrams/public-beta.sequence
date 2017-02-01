@@ -1,0 +1,31 @@
+participant Patient as c
+participant Register GP Frontend as p
+participant Postcode Lookup as l
+participant GP Finder as f
+participant Register GP Backend as b
+participant NHSMail API as m
+participant GP Inbox as gp
+
+c->p: submit personal data
+p->c: store in session
+c-->p: postcode lookup
+p->l: postcode
+l->p: postcode results
+p-->c: postcode results
+c->p: submit address
+p->c: store in session
+c->p: submit personal data
+p->c: store in session
+c-->p: search for current GP
+p-->f: search for current GP
+f-->p: search for GP: results
+p-->c: search for GP: results
+c->p: submit personal data
+p->c: store in session
+c->p: submit confirmation
+p->b: submit confirmation
+b->m: formatted data as email
+m->gp: email reg. application
+m->b: success
+b->p: success
+p->c: show end page & clear session

@@ -49,3 +49,4 @@ node_modules
 /dist/
 /src/client/compiled/
 /src/client/webpack-assets.json
+/docs/architecture/diagrams/*.sequence.svg
