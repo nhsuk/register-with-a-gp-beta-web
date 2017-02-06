@@ -24,6 +24,7 @@ exports.register = function(server, options, next) {
             return function (context) {
               const data = readJson(webpackAssetsPath);
               options.environment.addGlobal('jsBundle', data.main.js);
+              options.environment.addGlobal('cssBundle', data.main.css);
               const template = Nunjucks.compile(src, options.environment);
               return template.render(context);
             };
@@ -39,6 +40,7 @@ exports.register = function(server, options, next) {
             noCache: debug
           });
           options.compileOptions.environment.addGlobal('jsBundle', webpackAssets.main.js);
+          options.compileOptions.environment.addGlobal('cssBundle', webpackAssets.main.css);
           return next();
         }
       }

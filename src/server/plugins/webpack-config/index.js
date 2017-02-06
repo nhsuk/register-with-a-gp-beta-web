@@ -8,8 +8,15 @@ exports.register = function(server, options, next) {
   if (server.settings.app.debug) {
     const webpackConfigPath = Path.resolve(Path.join(Process.cwd(), options));
     const config = require(webpackConfigPath).default;
-    config.entry.push('webpack-hot-middleware/client?/__webpack_hmr');
+    config.entry.main.push('webpack-hot-middleware/client?/__webpack_hmr');
     config.plugins.push(new Webpack.HotModuleReplacementPlugin());
+
+    config.module.loaders = [
+      {
+        test: /\.scss$/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+      }
+    ];
 
     const compiler = Webpack(config);
 
@@ -29,8 +36,11 @@ exports.register = function(server, options, next) {
       log: () => {
       },
       reload: true,
-      publicPath: '/__webpack_hmr'
+      publicPath: '/__webpack_hmr',
+      hot: true
     });
+
+
     server.ext('onRequest', (request, reply) => {
       hotMiddleware(request.raw.req, request.raw.res, (err) => {
         if (err) {

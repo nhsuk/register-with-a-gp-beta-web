@@ -1,6 +1,5 @@
 'use strict';
 import Glue from 'glue';
-import chokidar from 'chokidar';
 import Path from 'path';
 
 const env = process.env.NODE_ENV || 'development';
