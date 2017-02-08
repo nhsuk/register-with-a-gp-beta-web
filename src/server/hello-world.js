@@ -4,7 +4,7 @@ exports.register = function(server, options, next) {
     path: '/',
     handler: function (request, reply) {
       reply.view('index', {
-        message:'Hello, worlds!',
+        message:'Hello, template context!',
         title: 'hello from nunjucks',
         time: Date.now()
       });

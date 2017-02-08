@@ -1,13 +1,9 @@
 import Webpack from 'webpack';
-import Path from 'path';
-import Process from 'process';
 import WebpackDevMiddleware from 'webpack-dev-middleware';
 import WebpackHotMiddleware from 'webpack-hot-middleware';
 
-exports.register = function(server, options, next) {
+exports.register = function(server, config, next) {
   if (server.settings.app.debug) {
-    const webpackConfigPath = Path.resolve(Path.join(Process.cwd(), options));
-    const config = require(webpackConfigPath).default;
     config.entry.main.push('webpack-hot-middleware/client?/__webpack_hmr');
     config.plugins.push(new Webpack.HotModuleReplacementPlugin());
 

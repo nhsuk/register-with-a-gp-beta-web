@@ -85,7 +85,7 @@ if (env === 'development') {
     {
       plugin: {
         register: './plugins/webpack-config',
-        options: './src/client/webpack.config.babel.js'
+        options: require('../client/webpack.config.babel.js').default
       }
     }
   );

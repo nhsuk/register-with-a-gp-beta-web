@@ -15,7 +15,7 @@
       </div>
     {%- endmacro %}
 
-    {% call render_dialog('Hello World') %}
+    {% call render_dialog('Hello Macros') %}
       This is a simple dialog rendered by using a macro and
       a call block.
     {% endcall %}

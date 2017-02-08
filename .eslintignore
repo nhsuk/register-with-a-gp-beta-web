@@ -1,0 +1,4 @@
+/src/coverage/
+/src/client/compiled/
+node_modules
+/dist/
