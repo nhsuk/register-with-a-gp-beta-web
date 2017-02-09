@@ -1,6 +1,9 @@
 'use strict';
 import Glue from 'glue';
 import Path from 'path';
+import Dotenv from 'dotenv';
+import webpackConfig from '../client/webpack.config.babel.js';
+Dotenv.config();
 
 const env = process.env.NODE_ENV || 'development';
 const port = process.env.PORT || 3000;
@@ -15,7 +18,6 @@ const manifest = {
   connections: [
     {
       port: port,
-      host: 'localhost',
       routes: {
         files: {relativeTo: Path.join(__dirname, '../client')}
       }
@@ -85,7 +87,7 @@ if (env === 'development') {
     {
       plugin: {
         register: './plugins/webpack-config',
-        options: require('../client/webpack.config.babel.js').default
+        options: webpackConfig
       }
     }
   );
@@ -132,4 +134,3 @@ exports.stop = (server) => {
     });
   });
 };
-

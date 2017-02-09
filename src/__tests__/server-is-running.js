@@ -2,7 +2,7 @@ const http = require('http');
 const randomPort = require('random-port');
 
 let server;
-let running_instance;
+let runningInstance;
 
 
 beforeAll(() => {
@@ -11,7 +11,7 @@ beforeAll(() => {
       process.env.PORT = port.toString();
       server = require('../server/');
       server.start().then((instance) => {
-        running_instance = instance;
+        runningInstance = instance;
         resolve();
       });
     });
@@ -21,7 +21,7 @@ beforeAll(() => {
 
 describe('http server', () => {
 
-  it.only('should return a 200 status code', () => {
+  it('should return a 200 status code', () => {
     return new Promise((resolve) => {
       http.get(`http://localhost:${process.env.PORT}/`, res => {
         expect(res.statusCode).toEqual(200);
@@ -32,5 +32,5 @@ describe('http server', () => {
 });
 
 afterAll(() => {
-  return server.stop(running_instance);
+  return server.stop(runningInstance);
 });
