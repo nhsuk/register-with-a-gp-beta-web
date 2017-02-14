@@ -68,7 +68,8 @@ $ yarn run dev
 #### ES2017 and Babel
 
 The JavaScript in the project is written in ES2017 and transpiled into ES5 using
-`Babel`, you can view our babel configuration in
+`Babel`, you can view our babel configuration in [package.json](./package.json)
+under the "babel" key.
 
 #### Environment Variables
 
@@ -89,7 +90,7 @@ We have picked `jest` because it lets us get a test framework up and running
 without having to make too many decision about libraries, runners, mocks and
 execution environments but I can see that we would want to run our tests in
 headless browsers at some point. I recommend moving to a
-mocha/chai-as-promised + jsdom + sinon
+`mocha/chai-as-promised` + `jsdom` + `sinon`
 
 ### Production
 
@@ -120,7 +121,8 @@ that decision.
 
 #### Style Guide
 
-Write code that matches our code style which is [eslint:recommended] plus
+Write code that matches our code style which is
+[eslint:recommended][eslint-recommended] plus
 2 space indentation, always use semi-colons and single quotes for strings.
 
 You can check your code conforms by running
@@ -158,7 +160,7 @@ it should look like:
 
 #### Editorconfig
 
-We have an [.editorconfig] which checks you're not leaving unnecessary spacing,
+We have an [.editorconfig][editorconfig] which checks you're not leaving unnecessary spacing,
 strange indentation or missing new lines at the end of file.
 
 You can probably get a plugin for your editor to tell you when you're breaking
@@ -197,5 +199,6 @@ specification.
 [gh-flow]: https://guides.github.com/introduction/flow/
 [Install Node]: https://nodejs.org/en/download/current/
 [Architecture Decision Records]: http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions
-[eslint:recommended] :https://github.com/eslint/eslint/blob/master/conf/eslint.json
-[.editorconfig]: http://editorconfig.org/
+[eslint-recommended]: https://github.com/eslint/eslint/blob/master/conf/eslint.json
+[editorconfig]: http://editorconfig.org/
+[TravisCI]: https://travis-ci.org/nhsuk/register-with-a-gp-beta-web
