@@ -1,7 +1,11 @@
-{% extends 'layouts/default.nunjucks' %}
+{% extends 'nhsuk-base.njk' %}
 
-{% block content %}
-  <div>
+{% block head_stylesheets %}
+  <link rel="stylesheet" href="{{ cssBundle }}" media="screen" type="text/css">
+{% endblock %}
+
+{% block body_main_content %}
+  <div class="page-section">
     <h1>{{ title }}</h1>
     <p>{{ message }}</p>
     <p>Time: {{ time }}</p>
@@ -21,3 +25,8 @@
     {% endcall %}
   </div>
 {% endblock %}
+
+{% block body_footer_content %}
+  {{ super() }}
+  <script src="{{ jsBundle }}" type="application/javascript"></script>
+{% endblock body_footer_content %}

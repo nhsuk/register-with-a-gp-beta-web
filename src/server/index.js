@@ -6,13 +6,14 @@ import webpackConfig from '../client/webpack.config.babel.js';
 Dotenv.config();
 
 const env = process.env.NODE_ENV || 'development';
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3333;
 const manifest = {
   server: {
     app: {
       slogan: 'Register with a GP Beta',
       env: env,
-      debug: env === 'development'
+      debug: env === 'development',
+      repo_root: Path.join(__dirname, '../../'),
     }
   },
   connections: [

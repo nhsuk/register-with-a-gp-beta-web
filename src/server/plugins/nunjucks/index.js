@@ -10,6 +10,17 @@ function readJson(path) {
   return JSON.parse(text);
 }
 
+function addGlobals(environment, isDebug = false) {
+  const data = isDebug ? readJson(webpackAssetsPath) : webpackAssets;
+
+  const globals = {
+    jsBundle: data.main.js,
+    cssBundle: data.main.css,
+    asset_path: filename => `/${filename}`
+  };
+  Object.entries(globals).map(([name, value]) => environment.addGlobal(name, value));
+}
+
 exports.register = function(server, options, next) {
 
   const debug = server.settings.app.debug;
@@ -22,9 +33,7 @@ exports.register = function(server, options, next) {
             // loads the latest webpack bundle on
             // every request
             return function (context) {
-              const data = readJson(webpackAssetsPath);
-              options.environment.addGlobal('jsBundle', data.main.js);
-              options.environment.addGlobal('cssBundle', data.main.css);
+              addGlobals(options.environment, debug);
               const template = Nunjucks.compile(src, options.environment);
               return template.render(context);
             };
@@ -39,13 +48,15 @@ exports.register = function(server, options, next) {
             watch: debug,
             noCache: debug
           });
-          options.compileOptions.environment.addGlobal('jsBundle', webpackAssets.main.js);
-          options.compileOptions.environment.addGlobal('cssBundle', webpackAssets.main.css);
+          addGlobals(options.compileOptions.environment);
           return next();
         }
       }
     },
-    path: Path.join(__dirname, '../../templates'),
+    path: [
+      Path.join(server.settings.app.repo_root, 'src/server/templates/'),
+      Path.join(server.settings.app.repo_root, 'node_modules/nhsuk-frontend/src/templates'),
+    ],
     isCached: !debug
   };
   server.root.views(engineConfig);
