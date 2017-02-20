@@ -1,54 +1,29 @@
 import Webpack from 'webpack';
 import WebpackDevMiddleware from 'webpack-dev-middleware';
 import WebpackHotMiddleware from 'webpack-hot-middleware';
-import SassImportOnce from 'node-sass-import-once';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 exports.register = function(server, config, next) {
   if (server.settings.app.debug) {
     config.entry.main.push('webpack-hot-middleware/client?/__webpack_hmr');
+
     config.plugins.push(new Webpack.HotModuleReplacementPlugin());
     config.plugins.push(new Webpack.LoaderOptionsPlugin({
       debug: true
     }));
 
-    config.module.loaders = [
-      {
-        test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: 'style-loader',
-          }, {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-            }
-          }, {
-            loader: 'resolve-url-loader'
-          }, {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-              importer: SassImportOnce,
-              importOnce: {
-                index: true,
-                css: true
-              }
-            }
-          }
-        ]
-      },
-      {
-        test: /\.(jpg|jpeg|gif|png|woff|woff2|eot|ttf|svg)$/i,
-        loader: 'file-loader',
-        query: {
-          publicPath: `${server.info.uri}/assets/`
-        }
+    config.plugins = config.plugins.filter(plugin => plugin.constructor.name !== 'ExtractTextPlugin');
+    config.plugins.push(
+      new ExtractTextPlugin({ disable: true })
+    );
+
+    config.module.loaders.map(loader => {
+      if (loader.loader === 'file-loader') {
+        loader.query = {
+          publicPath: `http://127.0.0.1:${server.info.port}/assets/`
+        };
       }
-    ];
+    });
 
     const compiler = Webpack(config);
 

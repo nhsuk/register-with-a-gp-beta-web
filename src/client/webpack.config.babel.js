@@ -18,7 +18,7 @@ export default {
       prettyPrint: true
     }),
     new ExtractTextPlugin('[name].[hash].css'),
-    new Webpack.NoEmitOnErrorsPlugin()
+    new Webpack.NoEmitOnErrorsPlugin(),
   ],
   module: {
     loaders: [
@@ -49,6 +49,9 @@ export default {
                   index: true,
                   css: true
                 },
+                includePaths: [
+                  Path.resolve(__dirname, '../../node_modules'),
+                ]
               },
             }],
         })
