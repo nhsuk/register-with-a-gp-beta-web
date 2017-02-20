@@ -51,7 +51,7 @@
   "scripts": {
     "test": "jest",
     "dev": "nodemon --exec babel-node --watch src/server/ src/server/index.js",
-    "build": "webpack --config src/client/webpack.config.babel.js && babel src -d dist --copy-files --source-maps",
+    "build": "npm run clean && webpack -p --config src/client/webpack.config.babel.js && babel src -d dist --copy-files --source-maps",
     "lint:eslint": "DEBUG=eslint:cli-engine eslint .",
     "lint:editorconfig": "eclint check src/** README.md",
     "lint": "npm-run-all --parallel lint:*",
