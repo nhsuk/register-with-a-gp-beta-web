@@ -43,7 +43,10 @@ exports.register = function(server, config, next) {
       },
       {
         test: /\.(jpg|jpeg|gif|png|woff|woff2|eot|ttf|svg)$/i,
-        loader: 'url-loader?limit=1024'
+        loader: 'file-loader',
+        query: {
+          publicPath: `${server.info.uri}/assets/`
+        }
       }
     ];
 

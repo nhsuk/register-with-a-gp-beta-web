@@ -55,7 +55,7 @@ export default {
       },
       {
         test: /\.(jpg|jpeg|gif|png|woff|woff2|eot|ttf|svg)$/i,
-        loader: 'url-loader?limit=1024'
+        loader: 'file-loader'
       }
     ],
   },
