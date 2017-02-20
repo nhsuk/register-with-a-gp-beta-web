@@ -17,7 +17,7 @@ exports.register = function(server, config, next) {
       new ExtractTextPlugin({ disable: true })
     );
 
-    config.module.loaders.map(loader => {
+    config.module.rules.map(loader => {
       if (loader.loader === 'file-loader') {
         loader.query = {
           publicPath: `http://127.0.0.1:${server.info.port}/assets/`

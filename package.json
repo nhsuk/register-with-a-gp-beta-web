@@ -4,6 +4,7 @@
   },
   "dependencies": {
     "assets-webpack-plugin": "^3.5.1",
+    "babel-preset-es2015": "^6.22.0",
     "blipp": "^2.3.0",
     "dotenv": "^4.0.0",
     "eclint": "^1.1.5",
@@ -22,6 +23,8 @@
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
     "babel-plugin-transform-async-to-generator": "^6.22.0",
     "babel-preset-es2017": "^6.22.0",
     "babel-preset-modern-node": "^3.2.0",
@@ -53,7 +56,7 @@
     "lint:editorconfig": "eclint check src/** README.md",
     "lint": "npm-run-all --parallel lint:*",
     "clean": "rimraf dist/ coverage/ src/client/compiled",
-    "start": "node ./dist/server/"
+    "start": "NODE_ENV=production node ./dist/server/"
   },
   "jest": {
     "collectCoverage": true,
@@ -62,8 +65,7 @@
   },
   "babel": {
     "presets": [
-      "modern-node",
-      "es2017",
+      "es2015",
       "stage-3"
     ]
   },
