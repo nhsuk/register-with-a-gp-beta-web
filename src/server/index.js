@@ -7,12 +7,14 @@ Dotenv.config();
 
 const env = process.env.NODE_ENV || 'development';
 const port = process.env.PORT || 3333;
+const debug = env === 'development';
+
 const manifest = {
   server: {
     app: {
       slogan: 'Register with a GP Beta',
       env: env,
-      debug: env === 'development',
+      debug: debug,
       repo_root: Path.join(__dirname, '../../'),
     }
   },
@@ -36,9 +38,9 @@ const manifest = {
               {
                 module: 'good-squeeze',
                 name: 'Squeeze',
-                args: [{log: '*', response: '*'}]
+                args: [{log: '*', response: '*', error: '*', request: '*'}]
               }, {
-                module: 'good-console'
+                module: 'good-console',
               },
               'stdout']
           }
@@ -59,6 +61,12 @@ const manifest = {
     },
     {
       plugin: {
+        register: 'akaya',
+        options: {}
+      }
+    },
+    {
+      plugin: {
         register: './plugins/nunjucks',
         options: {}
       }
@@ -71,8 +79,17 @@ const manifest = {
     },
     {
       plugin: {
-        register: './hello-world',
+        register: './plugins/start-and-end',
         options: {}
+      }
+    },
+    {
+      plugin: {
+        register: './plugins/register-form',
+        options: {},
+        routes: {
+          prefix: '/register'
+        }
       }
     },
     {

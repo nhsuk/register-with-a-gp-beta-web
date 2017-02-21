@@ -1,0 +1,12 @@
+{% extends 'layouts/base.njk' %}
+
+{% block body_main_content %}
+  <form action="" method="post">
+  {% for field in fields %}
+    <label for="{{ field.id }}">{{ field.label }}
+      <input type="text" name="{{ field.id }}">
+    </label>
+  {% endfor %}
+    <button type="submit">Continue</button>
+  </form>
+{% endblock body_main_content %}
