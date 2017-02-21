@@ -1,10 +1,16 @@
+import Path from 'path';
+
+
 exports.register = function(server, options, next) {
   server.route({
     method: 'GET',
-    path: '/static/{param*}',
+    path: '/assets/{param*}',
     handler: {
       directory: {
-        path: '.',
+        path: [
+          './compiled/',
+          Path.join(server.settings.app.repo_root, 'node_modules/nhsuk-frontend/dist/assets/')
+        ],
         listing: server.settings.app.debug
       }
     }

@@ -1,5 +1,2 @@
-@import './variables.scss';
-
-body {
-  background-color: $global-bg;
-}
+@import './variables';
+@import "nhsuk-frontend/dist/scss/nhsuk";
