@@ -1,0 +1,9 @@
+{% extends 'nhsuk-base.njk' %}
+{% block head_stylesheets %}
+  <link rel="stylesheet" href="{{ cssBundle }}" media="screen" type="text/css">
+{% endblock %}
+
+{% block body_footer %}
+  {{ super() }}
+  <script src="{{ jsBundle }}" type="application/javascript"></script>
+{% endblock body_footer %}

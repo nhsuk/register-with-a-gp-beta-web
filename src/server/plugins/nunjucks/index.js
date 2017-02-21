@@ -26,7 +26,7 @@ exports.register = function(server, options, next) {
   const debug = server.settings.app.debug;
   const engineConfig = {
     engines: {
-      nunjucks: {
+      njk: {
         compile: function (src, options) {
           if (debug) {
             // return a special compile function that

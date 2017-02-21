@@ -1,9 +1,0 @@
-<html>
-{% include "layouts/includes/head.nunjucks" %}
-<body>
-{% block content %}
-{% endblock %}
-{% include "layouts/includes/foot.nunjucks" %}
-<script src="{{ jsBundle }}"></script>
-</body>
-</html>

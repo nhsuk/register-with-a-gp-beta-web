@@ -20,7 +20,9 @@ const manifest = {
     {
       port: port,
       routes: {
-        files: {relativeTo: Path.join(__dirname, '../client')}
+        files: {
+          relativeTo: Path.join(__dirname, '../client')
+        }
       }
     }
   ],

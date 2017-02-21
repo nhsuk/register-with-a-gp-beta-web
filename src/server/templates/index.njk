@@ -1,4 +1,4 @@
-{% extends 'nhsuk-base.njk' %}
+{% extends 'layouts/base.njk' %}
 
 {% block head_stylesheets %}
   <link rel="stylesheet" href="{{ cssBundle }}" media="screen" type="text/css">
@@ -25,8 +25,3 @@
     {% endcall %}
   </div>
 {% endblock %}
-
-{% block body_footer_content %}
-  {{ super() }}
-  <script src="{{ jsBundle }}" type="application/javascript"></script>
-{% endblock body_footer_content %}
