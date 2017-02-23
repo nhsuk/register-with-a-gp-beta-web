@@ -1,30 +1,18 @@
-const http = require('http');
-const randomPort = require('random-port');
+import http from 'http';
+import {startTestServer, stopTestServer} from './helpers';
 
-let server;
-let runningInstance;
-
+const context = {};
 
 beforeAll(() => {
-  return new Promise((resolve) => {
-    randomPort({from: 3000}, (port) => {
-      process.env.PORT = port.toString();
-      server = require('../server/');
-      server.start().then((instance) => {
-        runningInstance = instance;
-        resolve();
-      });
-    });
-  });
-
+  return startTestServer(context);
 });
 
 describe('http server', () => {
-
   it('should return a 200 status code', () => {
     return new Promise((resolve) => {
-      http.get(`http://localhost:${process.env.PORT}/`, res => {
-        expect(res.statusCode).toEqual(200);
+      http.get(`http://localhost:${context.runningInstance.info.port}/`, res => {
+        expect(res.statusCode).toEqual(302);
+        expect(res.headers.location).toEqual('/start');
         resolve();
       });
     });
@@ -32,5 +20,5 @@ describe('http server', () => {
 });
 
 afterAll(() => {
-  return server.stop(runningInstance);
+  return stopTestServer(context.runningInstance);
 });
