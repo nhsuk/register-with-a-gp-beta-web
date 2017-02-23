@@ -3533,6 +3533,10 @@ http-errors@~1.5.0, http-errors@~1.5.1:
     setprototypeof "1.0.2"
     statuses ">= 1.3.1 < 2"
 
+http-post@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/http-post/-/http-post-0.1.1.tgz#b9dc73ca772932157be50fd469c76fa18e83c945"
+
 http-proxy@1.15.2:
   version "1.15.2"
   resolved "https://registry.yarnpkg.com/http-proxy/-/http-proxy-1.15.2.tgz#642fdcaffe52d3448d2bda3b0079e9409064da31"
