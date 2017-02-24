@@ -11,7 +11,7 @@ export default {
       Path.join(__dirname, './styles')
     ],
   },
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
   plugins: [
     new AssetsPlugin({
       path: __dirname,

@@ -25,6 +25,8 @@ exports.register = function(server, config, next) {
       }
     });
 
+    config.devtool = 'cheap-module-eval-source-map';
+
     const compiler = Webpack(config);
 
     const devMiddleware = WebpackDevMiddleware(compiler, {
