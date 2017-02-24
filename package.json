@@ -18,7 +18,7 @@
     "inert": "^4.1.0",
     "joi": "^10.2.2",
     "lodash": "^4.17.4",
-    "nhsuk-frontend": "nhsuk/frontend#fractal",
+    "nhsuk-frontend": "nhsuk/frontend#0.1.0",
     "node-sass": "^4.5.0",
     "npm-run-all": "^4.0.1",
     "nunjucks": "^3.0.0",
