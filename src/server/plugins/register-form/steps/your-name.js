@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import {postHandlerFactory, getHandlerFactory} from './common';
 
 const fields = [
   {id: 'first-name', label: 'First name'},
@@ -7,28 +8,20 @@ const fields = [
 ];
 
 const schema = Joi.object().keys({
-  'first-name': Joi.string(),
-  'middle-names': Joi.string(),
-  'last-name': Joi.string(),
+  'first-name': Joi.string().allow('').optional(),
+  'middle-names': Joi.string().allow('').optional(),
+  'last-name': Joi.string().allow('').optional(),
   'submit': Joi.any().optional().strip()
 }).or('first-name', 'middle-names', 'last-name');
 
 const title = 'What is your name?';
 const key = 'name';
+const nextStep = 'dateOfBirth';
+
 
 const handlers = {
-  GET: (request, reply) => {
-    request.log(['cookie'], request.state.data);
-    return reply
-      .view('register-form/step', {fields: fields});
-  },
-  POST: (request, reply) => {
-    // if form valid then redirect to next step
-    // else return normal template with form.errors in context
-    return reply
-      .redirect(request.aka('register-form:name'))
-      .state('data', {[key]: request.payload});
-  }
+  GET: getHandlerFactory(key, fields, title, schema),
+  POST: postHandlerFactory(key, fields, title, schema, nextStep)
 };
 
 exports.options = {
