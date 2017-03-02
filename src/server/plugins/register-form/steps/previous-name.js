@@ -14,9 +14,9 @@ const schema = Joi.object().keys({
   'submit': Joi.any().optional().strip()
 }).or('first-name', 'middle-names', 'last-name');
 
-const title = 'What is your name?';
-const key = 'name';
-const nextStep = 'dateOfBirth';
+const title = 'Are you registered with a different name?';
+const key = 'previousName';
+const nextStep = 'nhsNumber';
 
 
 const handlers = {

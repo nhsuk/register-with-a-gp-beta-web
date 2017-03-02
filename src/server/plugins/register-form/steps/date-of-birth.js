@@ -19,7 +19,7 @@ const key = 'dateOfBirth';
 
 const handlers = {
   GET: getHandlerFactory(key, fields, title, schema),
-  POST: postHandlerFactory(key, fields, title, schema, 'dateOfBirth')
+  POST: postHandlerFactory(key, fields, title, schema, 'address')
 };
 
 exports.options = {
@@ -28,6 +28,5 @@ exports.options = {
   schema,
   handlers
 };
-const dateOfBirthStep = [key, exports.options];
 
-export default dateOfBirthStep;
+export default [key, exports.options];

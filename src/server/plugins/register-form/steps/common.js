@@ -1,5 +1,12 @@
-import Joi from 'joi';
+import JoiBase from 'joi';
+import JoiPostcode from 'joi-postcode';
+import JoiNHSNumber from '../../../../shared/lib/joi-nhs-number-validator';
 import _ from 'lodash';
+
+const Joi = JoiBase
+  .extend(JoiPostcode)
+  .extend(JoiNHSNumber);
+
 
 export function validate(rawData, schemaDefinition) {
   return new Promise((resolve, reject) => {
