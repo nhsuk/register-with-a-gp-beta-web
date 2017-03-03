@@ -2453,7 +2453,7 @@ es6-weak-map@~0.1.4:
     es6-iterator "~0.1.3"
     es6-symbol "~2.0.1"
 
-escape-html@~1.0.3:
+escape-html@^1.0.3, escape-html@~1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
 
@@ -3374,6 +3374,12 @@ handlebars@^4.0.3, handlebars@^4.0.5:
     source-map "^0.4.4"
   optionalDependencies:
     uglify-js "^2.6"
+
+hapi-dev-error-page@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/hapi-dev-error-page/-/hapi-dev-error-page-0.0.1.tgz#6c401cc97ea8df761ea892904c5710b209c4b392"
+  dependencies:
+    escape-html "^1.0.3"
 
 "hapi@11.x.x || 12.x.x || 13.x.x || 14.x.x || 15.x.x || 16.x.x", hapi@^16.1.0:
   version "16.1.0"

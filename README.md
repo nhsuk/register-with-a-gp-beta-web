@@ -76,7 +76,8 @@ under the "babel" key.
 | Variable | Description | Default |
 |:---------|:------------|:--------|
 | `NODE_ENV` | if we are running in `production` or `development` mode | `development` |
-| `PORT` | the port for the http server to listen on | `3000` |
+| `PORT` | the port for the http server to listen on (optional) | `3333` |
+| `SESSION_SECRET` | the password for signing the session cookie | No default |
 
 
 #### Tests

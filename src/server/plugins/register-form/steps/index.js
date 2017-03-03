@@ -7,8 +7,8 @@ import alreadyRegisteredWithGPStep from './current-gp';
 import previousAddressStep from './previous-address';
 import previousNameStep from './previous-name';
 import nhsNumberStep from './nhs-number';
-// import currentMedicationStep from './current-medication';
-// import allergiesStep from './allergies';
+import currentMedicationStep from './current-medication';
+import allergiesStep from './allergies';
 
 const steps = [
   nameStep,
@@ -21,8 +21,8 @@ const steps = [
   previousAddressStep,
   previousNameStep,
   nhsNumberStep,
-//  currentMedicationStep,
-//  allergiesStep,
+  currentMedicationStep,
+  allergiesStep,
 ];
 
 export default steps;
