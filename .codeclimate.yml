@@ -1,0 +1,21 @@
+engines:
+  eslint:
+    enabled: true
+    channel: "eslint-3"
+    checks:
+      import/no-unresolved:
+        enabled: false
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+  nodesecurity:
+    enabled: false
+ratings:
+  paths:
+  - "src/**"
+  - "lib/**"
+exclude_paths:
+- "**/vendor/"
+- "node_modules/**"
