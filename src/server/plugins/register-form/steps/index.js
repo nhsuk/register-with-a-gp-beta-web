@@ -24,7 +24,7 @@ const steps = [
   nhsNumberStep,
   currentMedicationStep,
   allergiesStep,
-  summaryStep,
+  summaryStep
 ];
 
 export default steps;

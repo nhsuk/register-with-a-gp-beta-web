@@ -21,7 +21,6 @@ function summaryGetHandler(request, reply) {
 }
 
 function summaryPostHandler(request, reply) {
-  // if form valid then redirect to next step
   validate(request.payload, schema)
     .then(value => {
       const data = JSON.stringify(_.get(request, 'state.data', {}));
