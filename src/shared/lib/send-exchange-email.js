@@ -1,16 +1,16 @@
 import EWS from 'node-ews';
 
 
-export default function(toEmail, text, subject) {
-  if (process.env.NODE_ENV === 'development') {
-    /* eslint-disable no-console */
-    console.log(toEmail, text, subject);
-    /* eslint-enable no-console */
-    return new Promise((resolve) => {
-      setTimeout(resolve, 100);
-    });
-  }
+function consoleEmail(toEmail, text, subject) {
+  /* eslint-disable no-console */
+  console.log(toEmail, text, subject);
+  /* eslint-enable no-console */
+  return new Promise((resolve) => {
+    setTimeout(resolve, 100);
+  });
+}
 
+function ewsEmail(toEmail, text, subject) {
   const ews = new EWS({
     username: process.env.EMAIL_USERNAME,
     password: process.env.EMAIL_PASSWORD,
@@ -51,4 +51,12 @@ export default function(toEmail, text, subject) {
   };
 
   return ews.run(ewsFunction, ewsArgs);
+}
+
+
+export default function(toEmail, text, subject) {
+  if (process.env.NODE_ENV === 'development') {
+    return consoleEmail(toEmail, text, subject);
+  }
+  return ewsEmail(toEmail, text, subject);
 }
