@@ -15,7 +15,7 @@ const key = 'allergies';
 
 const handlers = {
   GET: getHandlerFactory(key, fields, title, schema),
-  POST: postHandlerFactory(key, fields, title, schema, 'allergies')
+  POST: postHandlerFactory(key, fields, title, schema, 'summary')
 };
 
 exports.options = {
