@@ -9,6 +9,7 @@ import previousNameStep from './previous-name';
 import nhsNumberStep from './nhs-number';
 import currentMedicationStep from './current-medication';
 import allergiesStep from './allergies';
+import summaryStep from './summary';
 
 const steps = [
   nameStep,
@@ -23,6 +24,7 @@ const steps = [
   nhsNumberStep,
   currentMedicationStep,
   allergiesStep,
+  summaryStep
 ];
 
 export default steps;
