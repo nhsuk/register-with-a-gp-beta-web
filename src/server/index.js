@@ -3,6 +3,7 @@ import Glue from 'glue';
 import Path from 'path';
 import Dotenv from 'dotenv';
 import webpackConfig from '../client/webpack.config.babel.js';
+import Hoek from 'hoek';
 Dotenv.config();
 
 const env = process.env.NODE_ENV || 'development';
@@ -103,14 +104,20 @@ const manifest = {
 };
 
 if (env === 'development') {
-  manifest.registrations.push(
+  Hoek.merge(manifest.registrations, [
     {
       plugin: {
         register: './plugins/webpack-config',
         options: webpackConfig
       }
+    },
+    {
+      plugin: {
+        register: './plugins/dev-error-page',
+        options: {},
+      }
     }
-  );
+  ]);
 }
 
 const options = {
