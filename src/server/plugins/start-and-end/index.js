@@ -14,6 +14,10 @@ function startHandler(request, reply) {
   });
 }
 
+function endHandler(request, reply) {
+  reply.view('end', {});
+}
+
 exports.register = function(server, options, next) {
   const statelessConfig = {
     state: cookies.disableCookies,
@@ -32,6 +36,13 @@ exports.register = function(server, options, next) {
     config: _.merge({}, statelessConfig, {id: 'start'}),
     path: '/start',
     handler: startHandler
+  });
+
+  server.route({
+    method: 'GET',
+    config: _.merge({}, statelessConfig, {id: 'end'}),
+    path: '/end',
+    handler: endHandler
   });
 
   next();

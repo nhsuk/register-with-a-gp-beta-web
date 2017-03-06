@@ -78,6 +78,9 @@ under the "babel" key.
 | `NODE_ENV` | if we are running in `production` or `development` mode | `development` |
 | `PORT` | the port for the http server to listen on (optional) | `3333` |
 | `SESSION_SECRET` | the password for signing the session cookie | No default |
+| `EMAIL_USERNAME` | Username for Exchange Webservice |  |
+| `EMAIL_PASSWORD` | Password for Exchange Webservice |  |
+| `EMAIL_HOST` | Exchange Webservice host (with `https://...`) |  |
 
 
 #### Tests
