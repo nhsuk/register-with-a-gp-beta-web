@@ -16,12 +16,10 @@ const schema = Joi.object().keys({
 
 const title = 'Are you registered with a different name?';
 const key = 'previousName';
-const nextStep = 'nhsNumber';
-
 
 const handlers = {
   GET: getHandlerFactory(key, fields, title, schema),
-  POST: postHandlerFactory(key, fields, title, schema, nextStep)
+  POST: nextStep => postHandlerFactory(key, fields, title, schema, nextStep)
 };
 
 exports.options = {

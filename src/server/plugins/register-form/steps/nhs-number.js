@@ -18,7 +18,7 @@ const key = 'nhsNumber';
 
 const handlers = {
   GET: getHandlerFactory(key, fields, title, schema),
-  POST: postHandlerFactory(key, fields, title, schema, 'medication')
+  POST: nextStep => postHandlerFactory(key, fields, title, schema, nextStep)
 };
 
 exports.options = {

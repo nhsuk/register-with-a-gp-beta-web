@@ -16,12 +16,11 @@ const schema = Joi.object().keys({
 
 const title = 'What is your name?';
 const key = 'name';
-const nextStep = 'dateOfBirth';
 
 
 const handlers = {
   GET: getHandlerFactory(key, fields, title, schema),
-  POST: postHandlerFactory(key, fields, title, schema, nextStep)
+  POST: nextStep => postHandlerFactory(key, fields, title, schema, nextStep)
 };
 
 exports.options = {

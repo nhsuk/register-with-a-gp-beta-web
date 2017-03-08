@@ -13,6 +13,7 @@ exports.register = function(server, options, next) {
     cache: cache.notCacheable,
     state: cookies.enableCookies
   };
+
   const stateConfig = cookies.encryptedCookies(!server.settings.app.debug);
   stateConfig.options.path = server.realm.modifiers.route.prefix || '/';
 
@@ -26,7 +27,9 @@ exports.register = function(server, options, next) {
 
   server.state(stateConfig.name, stateConfig.options);
 
-  steps.forEach(([key, options]) => {
+  steps.forEach(([key, options], index, arr) => {
+    const [nextStep,] = arr[index+1] || ['end'];
+
     server.route({
       config: assign({}, routeConfig, {id: `register-form:${key}`}),
       method: 'GET',
@@ -38,7 +41,7 @@ exports.register = function(server, options, next) {
       config: routeConfig,
       method: 'POST',
       path: `/${slugify(options.title)}`,
-      handler: options.handlers.POST
+      handler: options.handlers.POST(nextStep)
     });
 
   });
