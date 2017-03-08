@@ -23,17 +23,22 @@ function summaryGetHandler(request, reply) {
 function summaryPostHandler(request, reply) {
   validate(request.payload, schema)
     .then(value => {
-      const data = JSON.stringify(_.get(request, 'state.data', {}));
-      sendEmail(
-        process.env.EMAIL_USERNAME,
-        data,
-        'Patient registration'
-      ).then(() => {
-        return reply
-          .redirect(request.aka(nextStep))
-          .state('data', _.merge({}, request.state.data, {[key]: value}));
-      }).catch(err => {
-        throw err;
+      const data = _.get(request, 'state.data', {});
+      request.server.plugins.NunjucksConfig.nunjucksEnv.render(
+        'email/registration-summary.njk',
+        {data: data}
+      ).then(emailText => {
+        sendEmail(
+          process.env.EMAIL_USERNAME,
+          emailText,
+          'Patient registration'
+        ).then(() => {
+          return reply
+            .redirect(request.aka(nextStep))
+            .state('data', _.merge({}, request.state.data, {[key]: value}));
+        }).catch(err => {
+          throw err;
+        });
       });
     })
     .catch(err => {
