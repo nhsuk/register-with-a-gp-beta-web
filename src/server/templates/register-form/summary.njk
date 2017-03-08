@@ -1,9 +1,50 @@
 {% extends 'layouts/base.njk' %}
 
+{% macro render_one_line(title, fields) -%}
+  <dt>{{ title }}</dt>
+  <dd>
+    {%- for name, line in fields -%}
+      {% if line %}{{ line }} {% endif %}
+    {%- endfor -%}
+  </dd>
+{%- endmacro %}
+
+{% macro render_multi_line(title, fields) -%}
+  <dt>{{ title }}</dt>
+  {% for name, line in fields %}
+    {% if line %}
+      <dd>{{ line }}</dd>
+    {% endif %}
+  {% endfor %}
+{%- endmacro %}
+
 {% block body_main_content %}
-  <h1>{{ title }}</h1>
-    {{ data }}
-  <form action="" method="post">
-    <button type="submit">Continue</button>
-  </form>
+  <div class="page-section">
+    <h1>{{ title }}</h1>
+
+    <dl>
+      {{ render_one_line('Name', data.name) }}
+
+      <dt>Date of birth</dt>
+        <dd>{{ formatDate(data.dateOfBirth['year'], data.dateOfBirth['month'],
+        data.dateOfBirth['day']) }}</dd>
+
+      {{ render_multi_line('Address', data.address) }}
+      {{ render_multi_line('Email', data.email) }}
+      {{ render_multi_line('Telephone', data.telephone) }}
+
+      {% if data.alreadyRegisteredWithGP['alreadyRegisteredWithGP'] %}
+        {{ render_multi_line('Previous registered dddress', data.previousAddress) }}
+        {{ render_one_line('Previous registered name', data.previousName) }}
+      {% endif %}
+
+      {{ render_multi_line('NHS number', data.nhsNumber) }}
+      {{ render_multi_line('Medication', data.medication) }}
+      {{ render_multi_line('Alergies', data.alergies) }}
+    </dl>
+
+    <form action="" method="post">
+      <button type="submit">Continue</button>
+    </form>
+  </div>
 {% endblock body_main_content %}
