@@ -189,6 +189,21 @@ as of yet.
 We are looking at using the TeamCity server at https://tc.nhschoices.net but
 at this point in time there doesn't seem to be a compelling case to move over.
 
+#### Deploy to Heroku
+
+```bash
+heroku plugins:install heroku-container-tools
+heroku plugins:install heroku-container-registry
+heroku container:login
+
+heroku create register-with-gp
+heroku config:set NODE_ENV=development --app register-with-gp
+heroku config:set SESSION_SECRET=secret_session_session --app register-with-gp
+heroku ps:scale web=1 --app register-with-gp
+heroku container:push web --app register-with-gp
+heroku open --app register-with-gp
+```
+
 ## License
 Short version: MIT
 Long version: see [LICENCE.txt](LICENSE.txt)
