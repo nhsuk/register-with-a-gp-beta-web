@@ -8,7 +8,7 @@ const schema = Joi.object().keys({
 });
 
 
-const title = 'Summary?';
+const title = 'Summary';
 const key = 'summary';
 const nextStep = 'end';
 
