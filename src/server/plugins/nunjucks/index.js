@@ -61,7 +61,8 @@ exports.register = function(server, options, next) {
     ],
     isCached: !debug
   };
-  server.root.views(engineConfig);
+  const nunjucksEnv = server.root.views(engineConfig);
+  server.expose('nunjucksEnv', nunjucksEnv);
   next();
 };
 
