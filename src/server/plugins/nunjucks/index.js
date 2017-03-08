@@ -1,7 +1,7 @@
 import Path from 'path';
 import Nunjucks from 'nunjucks';
 import fs from 'fs';
-import formatDate from './functions';
+import {formatDate} from './functions';
 
 const webpackAssetsPath = '../../../client/webpack-assets.json';
 const webpackAssets = require(webpackAssetsPath);
