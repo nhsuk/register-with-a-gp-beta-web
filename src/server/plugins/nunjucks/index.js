@@ -1,6 +1,7 @@
 import Path from 'path';
 import Nunjucks from 'nunjucks';
 import fs from 'fs';
+import formatDate from './functions';
 
 const webpackAssetsPath = '../../../client/webpack-assets.json';
 const webpackAssets = require(webpackAssetsPath);
@@ -16,7 +17,8 @@ function addGlobals(environment, isDebug = false) {
   const globals = {
     jsBundle: data.main.js,
     cssBundle: data.main.css,
-    asset_path: filename => `/${filename}`
+    asset_path: filename => `/${filename}`,
+    formatDate: formatDate
   };
   Object.entries(globals).map(([name, value]) => environment.addGlobal(name, value));
 }
