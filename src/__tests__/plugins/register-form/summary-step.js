@@ -1,4 +1,4 @@
-import {renderTemplate, emailGP} from '../../../server/plugins/register-form/steps/summary';
+import {emailGP} from '../../../server/plugins/register-form/steps/summary';
 
 
 describe('summary step', () => {

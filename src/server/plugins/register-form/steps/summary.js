@@ -20,7 +20,7 @@ function summaryGetHandler(request, reply) {
     .view('register-form/summary', {data, title});
 }
 
-export async function renderTemplate(env, context) {
+async function renderTemplate(env, context) {
   return await env.render(
     'email/registration-summary.njk',
     context
