@@ -20,14 +20,14 @@ function summaryGetHandler(request, reply) {
     .view('register-form/summary', {data, title});
 }
 
-async function renderTemplate(env, context) {
+export async function renderTemplate(env, context) {
   return await env.render(
     'email/registration-summary.njk',
     context
   );
 }
 
-function emailGP(emailText) {
+export function emailGP(emailText) {
   return sendEmail(
     process.env.EMAIL_USERNAME,  //TODO - Get GP email from API
     emailText,
