@@ -1,5 +1,7 @@
 # Register With A GP Beta Web
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/nhsuk/register-with-a-gp-beta-web.svg)](https://greenkeeper.io/)
+
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 master: ![master](https://travis-ci.org/nhsuk/register-with-a-gp-beta-web.svg?branch=master)
 last commit: ![build](https://travis-ci.org/nhsuk/register-with-a-gp-beta-web.svg)
