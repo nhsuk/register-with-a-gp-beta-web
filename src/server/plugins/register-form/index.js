@@ -27,21 +27,21 @@ exports.register = function(server, options, next) {
 
   server.state(stateConfig.name, stateConfig.options);
 
-  steps.forEach(([key, options], index, arr) => {
-    const [nextStep,] = arr[index+1] || ['end'];
-
+  steps.forEach((step, index, arr) => {
+    const nextSteps = arr.slice(index+1);
+    server.log(step.key);
     server.route({
-      config: assign({}, routeConfig, {id: `register-form:${key}`}),
+      config: assign({}, routeConfig, {id: `register-form:${step.key}`}),
       method: 'GET',
-      path: `/${slugify(options.title)}`,
-      handler: options.handlers.GET
+      path: `/${slugify(step.title)}`,
+      handler: step.handlers.GET
     });
 
     server.route({
       config: routeConfig,
       method: 'POST',
-      path: `/${slugify(options.title)}`,
-      handler: options.handlers.POST(nextStep)
+      path: `/${slugify(step.title)}`,
+      handler: step.handlers.POST(nextSteps)
     });
 
   });

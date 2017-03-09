@@ -66,10 +66,9 @@ const handlers = {
   POST: () => summaryPostHandler
 };
 
-exports.options = {
+export default {
+  key,
   title,
   schema,
   handlers
 };
-
-export default [key, exports.options];

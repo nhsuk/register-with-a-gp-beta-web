@@ -30,11 +30,9 @@ const handlers = {
   POST: nextStep => postHandlerFactory(key, fields, title, schema, nextStep)
 };
 
-exports.options = {
+export default {
   title,
   fields,
   schema,
   handlers
 };
-
-export default [key, exports.options];

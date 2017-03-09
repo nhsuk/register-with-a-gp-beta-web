@@ -27,7 +27,6 @@ export function getHandlerFactory(
   schema,
   template = 'register-form/step') {
   return (request, reply) => {
-    // TODO: if data already valid and not ?edit=1 then automatically redirect to next step
     request.log(['cookie'], request.state.data);
     const stepData = _.get(request, `state.data.${key}`, {});
     return reply
@@ -35,16 +34,25 @@ export function getHandlerFactory(
   };
 }
 
+function getNextStep(nextSteps) {
+  if (nextSteps.length === 0) {
+    return 'end';
+  } else {
+    return nextSteps[0].key;
+  }
+}
+
 export function postHandlerFactory(
   key,
   fields,
   title,
   schema,
-  nextStep) {
+  nextSteps) {
   return (request, reply) => {
     // if form valid then redirect to next step
     validate(request.payload, schema)
       .then(value => {
+        const nextStep = getNextStep(nextSteps);
         return reply
           .redirect(request.aka(`register-form:${nextStep}`))
           .state('data', _.merge({}, request.state.data, {[key]: value}));
