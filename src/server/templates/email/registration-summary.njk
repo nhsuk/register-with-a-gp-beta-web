@@ -1,0 +1,49 @@
+{%- macro render_one_line(title, fields) -%}
+  {{ title }}:
+  {% for name, line in fields -%}
+    {% if line %}  {{ line }} {% endif %}
+  {%- endfor -%}
+{%- endmacro -%}
+
+{%- macro render_multi_line(title, fields) -%}
+  {{ title }}:
+  {%- for name, line in fields -%}
+    {%- if line %}
+    {{ line }}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endmacro -%}
+
+Hello,
+
+Lorem ipsum dolor sit amet, ne tamquam pertinax has, duo te labitur
+accommodare, ne eum percipit recteque. Volutpat pertinacia consectetuer ea
+mei, ut diam utinam aliquid usu. Quo omnis dictas omittantur et, ne cum dicit
+tantas. Ferri adhuc ea vel, vim regione nonumes eu. Est veri sententiae te.
+
+{{ render_one_line('Name', data.name) }}
+
+Date of Birth:
+    {{ formatDate(data.dateOfBirth['year'], data.dateOfBirth['month'],
+        data.dateOfBirth['day']) }}
+
+{{ render_multi_line('Address', data.address) }}
+
+{{ render_multi_line('Email', data.email) }}
+
+{{ render_multi_line('Telephone', data.telephone) }}
+
+{%- if data.alreadyRegisteredWithGP['alreadyRegisteredWithGP'] %}
+  {{ render_multi_line('Previous registered dddress', data.previousAddress) }}
+
+  {{ render_one_line('Previous registered name', data.previousName) }}
+
+{% endif -%}
+
+{{ render_multi_line('NHS number', data.nhsNumber) }}
+
+{{ render_multi_line('Medication', data.medication) }}
+
+{{ render_multi_line('Alergies', data.alergies) }}
+
+Thank you.
