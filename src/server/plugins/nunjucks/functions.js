@@ -1,3 +1,3 @@
-export function formatDate(day, month, year) {
-  return [year, month, day].map(String).join('/');
+export function formatDate(year, month, day) {
+  return [day, month, year].map(String).join('/');
 }
