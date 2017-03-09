@@ -20,26 +20,39 @@ function summaryGetHandler(request, reply) {
     .view('register-form/summary', {data, title});
 }
 
+async function renderTemplate(env, context) {
+  return await env.render(
+    'email/registration-summary.njk',
+    context
+  );
+}
+
+function emailGP(emailText) {
+  return sendEmail(
+    process.env.EMAIL_USERNAME,  //TODO - Get GP email from API
+    emailText,
+    'Patient registration'
+  );
+}
+
 function summaryPostHandler(request, reply) {
   validate(request.payload, schema)
-    .then(value => {
+    .then(async value => {
       const data = _.get(request, 'state.data', {});
-      request.server.plugins.NunjucksConfig.nunjucksEnv.render(
-        'email/registration-summary.njk',
-        {data: data}
-      ).then(emailText => {
-        sendEmail(
-          process.env.EMAIL_USERNAME,
-          emailText,
-          'Patient registration'
-        ).then(() => {
+
+      const emailText = await renderTemplate(
+        request.server.plugins.NunjucksConfig.nunjucksEnv,
+        {data: data});
+
+      emailGP(emailText)
+        .then(() => {
           return reply
             .redirect(request.aka(nextStep))
             .state('data', _.merge({}, request.state.data, {[key]: value}));
-        }).catch(err => {
+        })
+        .catch(err => {
           throw err;
         });
-      });
     })
     .catch(err => {
       request.log(['error'], err);
