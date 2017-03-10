@@ -1,6 +1,7 @@
 import JoiBase from 'joi';
 import JoiPostcodeExtension from 'joi-postcode';
-import {postHandlerFactory, getHandlerFactory} from './common';
+import {postHandlerFactory, getHandlerFactory, dependsOnBoolean} from './common';
+import alreadyRegisteredWithAGPStep from './current-gp';
 
 const Joi = JoiBase.extend(JoiPostcodeExtension);
 
@@ -30,9 +31,13 @@ const handlers = {
   POST: nextStep => postHandlerFactory(key, fields, title, schema, nextStep)
 };
 
+const checkApplies = dependsOnBoolean(
+  alreadyRegisteredWithAGPStep, 'alreadyRegisteredWithGP');
+
 export default {
   title,
   fields,
   schema,
-  handlers
+  handlers,
+  checkApplies
 };

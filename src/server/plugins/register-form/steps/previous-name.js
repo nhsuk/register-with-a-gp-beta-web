@@ -1,5 +1,10 @@
 import Joi from 'joi';
-import {postHandlerFactory, getHandlerFactory} from './common';
+import alreadyRegisteredWithAGPStep from './current-gp';
+import {
+  postHandlerFactory,
+  getHandlerFactory,
+  dependsOnBoolean
+} from './common';
 
 const fields = [
   {id: 'first-name', label: 'First name', type: 'textbox'},
@@ -22,10 +27,14 @@ const handlers = {
   POST: nextStep => postHandlerFactory(key, fields, title, schema, nextStep)
 };
 
+const checkApplies = dependsOnBoolean(
+  alreadyRegisteredWithAGPStep, 'alreadyRegisteredWithGP');
+
 export default {
   key,
   title,
   fields,
   schema,
-  handlers
+  handlers,
+  checkApplies
 };

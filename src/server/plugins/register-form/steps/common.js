@@ -34,12 +34,20 @@ export function getHandlerFactory(
   };
 }
 
-function getNextStep(nextSteps) {
-  if (nextSteps.length === 0) {
-    return 'end';
-  } else {
-    return nextSteps[0].key;
+function getNextStep(nextSteps, cookieData) {
+  for (let currentStep of nextSteps) {
+    const check = _.get(currentStep, 'checkApplies', () => true);
+    if (check(cookieData)) {
+      return currentStep.key;
+    }
   }
+  return 'end';
+}
+
+export function dependsOnBoolean(step, path, toBe = true) {
+  return function (cookieData) {
+    return _.get(cookieData, `${step.key}.${path}`, false) === toBe;
+  };
 }
 
 export function postHandlerFactory(
@@ -52,10 +60,11 @@ export function postHandlerFactory(
     // if form valid then redirect to next step
     validate(request.payload, schema)
       .then(value => {
-        const nextStep = getNextStep(nextSteps);
+        const newData = _.merge({}, request.state.data, {[key]: value});
+        const nextStep = getNextStep(nextSteps, newData);
         return reply
           .redirect(request.aka(`register-form:${nextStep}`))
-          .state('data', _.merge({}, request.state.data, {[key]: value}));
+          .state('data', newData);
       })
       .catch(err => {
         request.log(['error'], err);
