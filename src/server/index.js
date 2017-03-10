@@ -93,12 +93,12 @@ const manifest = {
         }
       }
     },
-    {
-      plugin: {
-        register: './plugins/getaddressio',
-        options: {}
-      }
-    },
+    // {
+    //   plugin: {
+    //     register: './plugins/getaddressio',
+    //     options: {}
+    //   }
+    // },
     {
       plugin: {
         register: 'blipp',
