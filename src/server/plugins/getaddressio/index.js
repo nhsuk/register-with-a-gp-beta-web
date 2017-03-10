@@ -47,13 +47,14 @@ exports.register = function(server, options, next) {
     state: cookies.disableCookies,
     cache: cache.cacheable
   };
-
-  server.route({
-    method: 'POST',
-    config: _.merge({}, statelessConfig, {id: 'address'}),
-    path: '/address',
-    handler: addressLookuptHandler
-  });
+  if (options.exposeEndpoint) {
+    server.route({
+      method: 'POST',
+      config: _.merge({}, statelessConfig, {id: 'address'}),
+      path: '/address',
+      handler: addressLookuptHandler
+    });
+  }
 
   next();
 };
