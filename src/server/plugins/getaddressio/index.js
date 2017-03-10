@@ -7,9 +7,10 @@ import naturalSort from 'javascript-natural-sort';
 
 function getAddresses(postcode) {
   return new Promise((resolve, reject) => {
+    const cleaned = postcode.replace(/\s+/g, '').toLowerCase();
     https.get({
       host: process.env.POSTCODE_API_HOST,
-      path: `/v2/uk/${ postcode }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`
+      path: `/v2/uk/${ cleaned }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`
     }, function(response) {
       if (response.statusCode === 200 && response.statusMessage === 'OK') {
         let body = '';
