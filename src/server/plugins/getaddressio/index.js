@@ -5,10 +5,13 @@ import cookies from '../../config/cookies';
 import naturalSort from 'javascript-natural-sort';
 
 
-function getAddresses(postcode) {
+const TIMEOUT = 10000;
+
+
+function getAddresses(postcode, timeout=TIMEOUT) {
   return new Promise((resolve, reject) => {
     const cleaned = postcode.replace(/\s+/g, '').toLowerCase();
-    https.get({
+    const request = https.get({
       host: process.env.POSTCODE_API_HOST,
       path: `/v2/uk/${ cleaned }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`
     }, function(response) {
@@ -26,8 +29,15 @@ function getAddresses(postcode) {
         reject();
       }
     });
+    request.setTimeout(timeout, () => {
+      request.abort();
+      reject();
+    });
   });
 }
+
+
+exports.getAddresses = getAddresses;
 
 
 function addressLookuptHandler(request, reply) {
