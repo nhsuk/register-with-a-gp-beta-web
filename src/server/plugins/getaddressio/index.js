@@ -30,7 +30,7 @@ function getAddresses(postcode) {
 
 
 function addressLookuptHandler(request, reply) {
-  getAddresses(request.url.query.postcode)
+  getAddresses(request.payload.postcode)
     .then(addresses => {
       reply(addresses);
     })
@@ -48,7 +48,7 @@ exports.register = function(server, options, next) {
   };
 
   server.route({
-    method: 'GET',
+    method: 'POST',
     config: _.merge({}, statelessConfig, {id: 'address'}),
     path: '/address',
     handler: addressLookuptHandler
