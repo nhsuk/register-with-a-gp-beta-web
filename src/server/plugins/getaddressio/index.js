@@ -24,6 +24,10 @@ function getAddresses(postcode, timeout=TIMEOUT) {
           const addresses = JSON.parse(body).Addresses;
           addresses.sort(naturalSort);
           resolve(addresses);
+          resolve(body);
+        });
+        response.on('error', (err) => {
+          reject(err);
         });
       } else {
         reject();
