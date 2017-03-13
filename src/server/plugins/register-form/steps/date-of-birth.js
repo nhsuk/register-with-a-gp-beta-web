@@ -2,9 +2,9 @@ import Joi from 'joi';
 import {postHandlerFactory, getHandlerFactory} from './common';
 
 const fields = [
-  {id: 'day', label: 'Day'},
-  {id: 'month', label: 'Month'},
-  {id: 'year', label: 'Year'}
+  {id: 'day', label: 'Day', type: 'textbox'},
+  {id: 'month', label: 'Month', type: 'textbox'},
+  {id: 'year', label: 'Year', type: 'textbox'}
 ];
 
 const schema = Joi.object().keys({

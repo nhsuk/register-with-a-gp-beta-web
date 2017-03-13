@@ -6,6 +6,9 @@ import {formatDate} from './functions';
 const webpackAssetsPath = '../../../client/webpack-assets.json';
 const webpackAssets = require(webpackAssetsPath);
 
+const COMPONENTS_PATH = '_components/';
+const COMPONENT_EXT = 'njk';
+
 function readJson(path) {
   const text = fs.readFileSync(require.resolve(path), 'utf8');
   return JSON.parse(text);
@@ -21,6 +24,40 @@ function addGlobals(environment, isDebug = false) {
     formatDate: formatDate
   };
   Object.entries(globals).map(([name, value]) => environment.addGlobal(name, value));
+}
+
+function ComponentExtension(env) {
+  this.tags = ['component'];
+
+  this.parse = function parse(parser, nodes) {
+    const tok = parser.nextToken();
+    const args = parser.parseSignature(null, true);
+
+    parser.advanceAfterBlockEnd(tok.value);
+
+    return new nodes.CallExtension(this, 'run', args);
+  };
+
+  this.run = function run(context, data, args) {
+    const name = typeof args === 'undefined' ? data.name : data;
+    const ctx = typeof args === 'undefined' ? data.context : args;
+
+    let result = '';
+
+    try {
+      result = env.render(`${COMPONENTS_PATH}${name}.${COMPONENT_EXT}`, ctx);
+    } catch (e) {
+      if (e.message.indexOf('template not found') > -1) {
+        result = `Component '${name}' does not exist`;
+      } else {
+        result = e.message;
+      }
+      // TODO: use app logger if there is one
+      // console.error(result);
+    }
+
+    return new Nunjucks.runtime.SafeString(result);
+  };
 }
 
 exports.register = function(server, options, next) {
@@ -51,6 +88,7 @@ exports.register = function(server, options, next) {
             noCache: debug
           });
           addGlobals(options.compileOptions.environment);
+          options.compileOptions.environment.addExtension('ComponentExtension', new ComponentExtension(options.compileOptions.environment));
           return next();
         }
       }
@@ -71,4 +109,3 @@ exports.register.attributes = {
   version: '1.0.0',
   dependencies: 'vision'
 };
-

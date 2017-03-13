@@ -2,7 +2,7 @@ import Joi from 'joi';
 import {postHandlerFactory, getHandlerFactory} from './common';
 
 const fields = [
-  {id: 'medication', label: 'Current Medication'},
+  {id: 'medication', label: 'Current Medication', type: 'textbox'},
 ];
 
 const schema = Joi.object().keys({

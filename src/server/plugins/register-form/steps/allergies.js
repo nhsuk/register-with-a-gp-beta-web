@@ -2,7 +2,7 @@ import Joi from 'joi';
 import {postHandlerFactory, getHandlerFactory} from './common';
 
 const fields = [
-  {id: 'allergies', label: 'Please enter your allergy details'},
+  {id: 'allergies', label: 'Please enter your allergy details', type: 'textbox'},
 ];
 
 const schema = Joi.object().keys({

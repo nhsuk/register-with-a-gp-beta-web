@@ -2,11 +2,19 @@ import Joi from 'joi';
 import {postHandlerFactory, getHandlerFactory} from './common';
 
 const fields = [
-  {id: 'alreadyRegisteredWithGP', label: ''},
+  {
+    id: 'alreadyRegisteredWithGP',
+    label: '',
+    type: 'multiple-choice',
+    children: [
+      { label: 'Yes' },
+      { label: 'No' },
+    ],
+  },
 ];
 
 const schema = Joi.object().keys({
-  'alreadyRegisteredWithGP': Joi.boolean().required(),
+  'alreadyRegisteredWithGP': Joi.boolean().truthy('Yes').falsy('No').required(),
   'submit': Joi.any().optional().strip()
 });
 

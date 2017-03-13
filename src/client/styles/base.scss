@@ -1,2 +1,7 @@
-@import './variables';
+// import all NHS.UK Frontend assets
 @import "nhsuk-frontend/dist/scss/nhsuk";
+
+// components (eg. site search, navigation)
+@import "components/form-label";
+@import "components/form-textbox";
+@import "components/form-multiple-choice";
