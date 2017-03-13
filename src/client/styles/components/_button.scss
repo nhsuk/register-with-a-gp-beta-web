@@ -1,0 +1,55 @@
+.button--back {
+  @include core-font(16);
+  float: left;
+  line-height: 56px;
+  padding: 0;
+
+  @include media(tablet) {
+    line-height: 56px;
+  }
+
+  &:link,
+  &:visited,
+  &:focus,
+  &:active,
+  &:hover {
+    background-color: transparent;
+    color: $grey-1;
+    text-decoration: underline;
+  }
+
+  &:before {
+    content: "";
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid $grey-1;
+    border-top: 5px solid transparent;
+    display: inline-block;
+    height: 0;
+    margin-left: -13px;
+    margin-right: 8px;
+    width: 0;
+
+    @include media(tablet) {
+      margin-left: 0;
+    }
+  }
+}
+
+.button + .button--back {
+  @include media(tablet) {
+    margin-left: 0;
+    margin-right: $default-spacing-unit * 2;
+  }
+}
+
+.button--secondary {
+  &:link,
+  &:visited,
+  &:focus,
+  &:active,
+  &:hover {
+    background-color: #e6eff8;
+    border: 1px solid #ccdff1;
+    color: $black;
+  }
+}
