@@ -83,6 +83,8 @@ under the "babel" key.
 | `EMAIL_USERNAME` | Username for Exchange Webservice |  |
 | `EMAIL_PASSWORD` | Password for Exchange Webservice |  |
 | `EMAIL_HOST` | Exchange Webservice host (with `https://...`) |  |
+| `POSTCODE_API_KEY` | Api key for getAddress.io |  |
+| `POSTCODE_API_HOST` | Api host for getAddress.io |  |
 
 
 #### Tests

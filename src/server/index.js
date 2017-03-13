@@ -95,6 +95,12 @@ const manifest = {
     },
     {
       plugin: {
+        register: './plugins/getaddressio',
+        options: {exposeEndpoint: false}
+      }
+    },
+    {
+      plugin: {
         register: 'blipp',
         options: {}
       }
