@@ -5,11 +5,11 @@ import {postHandlerFactory, getHandlerFactory} from './common';
 const Joi = JoiBase.extend(JoiPostcodeExtension);
 
 const fields = [
-  {id: 'address1', label: ''},
-  {id: 'address2', label: ''},
-  {id: 'address3', label: ''},
-  {id: 'locality', label: 'Town or City'},
-  {id: 'postcode', label: 'Post Code'}
+  {id: 'address1', label: 'Address', type: 'textbox'},
+  {id: 'address2', label: '', type: 'textbox'},
+  {id: 'address3', label: '', type: 'textbox'},
+  {id: 'locality', label: 'Town or City', type: 'textbox'},
+  {id: 'postcode', label: 'Post Code', type: 'textbox'}
 ];
 
 const schema = Joi.object().keys({

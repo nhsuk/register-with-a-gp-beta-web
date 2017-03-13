@@ -2,11 +2,11 @@ import Joi from 'joi';
 import {postHandlerFactory, getHandlerFactory} from './common';
 
 const fields = [
-  {id: 'email', label: 'Email'},
+  {id: 'email', label: 'Email', type: 'textbox'},
 ];
 
 const schema = Joi.object().keys({
-  'email': Joi.string().email(),
+  'email': Joi.string().email().allow('').optional(),
   'submit': Joi.any().optional().strip()
 });
 

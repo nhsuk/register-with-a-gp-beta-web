@@ -5,7 +5,7 @@ import {postHandlerFactory, getHandlerFactory} from './common';
 const Joi = JoiBase.extend(JoiNHSNumber);
 
 const fields = [
-  {id: 'nhsNumber', label: 'NHS Number'},
+  {id: 'nhsNumber', label: 'NHS Number', type: 'textbox'},
 ];
 
 const schema = Joi.object().keys({
