@@ -31,12 +31,14 @@
 {% set hintId = 'hint-' + name %}
 
 <fieldset>
-  <legend class="form-label" id="group-{{ name }}">
-    {{ label }} {% if optional %}(optional){% endif %}
-    {% if hint %}
-      <span class="form-label__hint" id="{{ hintId }}">{{ hint }}</span>
-    {% endif %}
-  </legend>
+  {% if label %}
+    <legend class="form-label" id="group-{{ name }}">
+      {{ label }} {% if optional %}(optional){% endif %}
+      {% if hint %}
+        <span class="form-label__hint" id="{{ hintId }}">{{ hint }}</span>
+      {% endif %}
+    </legend>
+  {% endif %}
 
   <div class="multiple-choice__container">
     {% for option in children %}
