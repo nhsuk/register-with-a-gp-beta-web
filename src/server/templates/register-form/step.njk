@@ -3,13 +3,22 @@
 {% block body_main_content %}
   <div class="page-section">
     <h1>{{ title }}</h1>
+
     <form action="" method="post">
-    {% for field in fields %}
-      <label for="{{ field.id }}">{{ field.label }}
-        <input type="text" name="{{ field.id }}" value="{{ stepData[field.id] }}">
-      </label>
-    {% endfor %}
-      <button type="submit">Continue</button>
+
+      {% for field in fields %}
+        {% component 'form-' + field.type, {
+          label: field.label,
+          name: field.id,
+          children: field.children,
+          error: '',
+          value: stepData[field.id]
+        } %}
+      {% endfor %}
+
+      <button type="submit" class="button">Continue</button>
+      <a href="">Back</a>
+
     </form>
   </div>
 {% endblock body_main_content %}
