@@ -1,0 +1,47 @@
+{##
+ # Family: Control
+ #
+ # @param {string} [variant]  Type of text box (default|large)
+ # @param {string} [label]    Label for the form element
+ # @param {string} [name]     Name for the form element
+ #
+ # @param {string} [value]    The current value - Used to prefill the field (optional)
+ # @param {string} [error]    Whether to display an error on the field (optional)
+ # @param {bool}   [optional] Whether the field is optional or not (optional)
+ #
+ # @return {string} HTML for multiple choice options
+ #
+ # @example
+ #   {% component 'form-textbox', {
+ #     variant:  'large',
+ #     label: 'How old are you?',
+ #     name:  'age'
+ #   } %}
+ #}
+{% set hintId = 'hint-' + name %}
+
+{% if label %}
+  <label for="input-{{ name }}" class="form-label">
+    {{ label }} {% if optional %}(optional){% endif %}
+    {% if hint %}
+      <span class="form-label__hint" id="{{ hintId }}">{{ hint }}</span>
+    {% endif %}
+  </label>
+{% endif %}
+
+{% if variant == 'large' %}
+  <textarea name="{{ name }}" id="input-{{ name }}" rows="4" class="form-textbox{{ ' error' if error }}">{{ value }}</textarea>
+{% else %}
+  <input
+    type="text"
+    name="{{ name }}"
+    id="input-{{ name }}"
+    class="form-textbox{{ ' error' if error }}"
+    {% if value %}
+      value="{{ value }}"
+    {% endif %}
+    {% if hint %}
+      aria-describedby="{{ hintId }}"
+    {% endif %}
+  >
+{% endif %}
