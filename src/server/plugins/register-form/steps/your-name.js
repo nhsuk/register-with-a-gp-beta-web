@@ -23,6 +23,9 @@ const handlers = {
   POST: nextStep => postHandlerFactory(key, fields, title, schema, nextStep)
 };
 
+/**
+ * @type Step
+ */
 export default {
   key,
   title,

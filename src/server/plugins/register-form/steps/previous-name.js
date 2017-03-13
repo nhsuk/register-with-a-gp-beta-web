@@ -30,6 +30,9 @@ const handlers = {
 const checkApplies = dependsOnBoolean(
   alreadyRegisteredWithAGPStep, 'alreadyRegisteredWithGP');
 
+/**
+ * @type Step
+ */
 export default {
   key,
   title,

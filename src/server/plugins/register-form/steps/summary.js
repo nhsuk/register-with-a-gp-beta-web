@@ -66,6 +66,9 @@ const handlers = {
   POST: () => summaryPostHandler
 };
 
+/**
+ * @type Step
+ */
 export default {
   key,
   title,
