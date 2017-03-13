@@ -1,50 +1,49 @@
 {% extends 'layouts/base.njk' %}
 
-{% macro render_one_line(title, fields) -%}
-  <dt>{{ title }}</dt>
-  <dd>
-    {%- for name, line in fields -%}
-      {% if line %}{{ line }} {% endif %}
-    {%- endfor -%}
-  </dd>
-{%- endmacro %}
+{% macro row(title, fields, multiline, separator=' ') -%}
+  {% set join = joiner('<br>') if multiline else joiner(separator) %}
 
-{% macro render_multi_line(title, fields) -%}
-  <dt>{{ title }}</dt>
-  {% for name, line in fields %}
-    {% if line %}
-      <dd>{{ line }}</dd>
-    {% endif %}
-  {% endfor %}
+  <tr>
+    <th class="summary__title" scope="row">{{ title }}</th>
+    <td class="summary__content">
+      {%- for name, line in fields -%}
+        {% if line -%}{{ join() | safe }}{{ line }}{%- endif %}
+      {%- endfor %}
+    </td>
+    <td class="summary__control">
+      <a href="" class="button button--secondary">Change <span class="util-visuallyhidden">{{ title }}</span></a>
+    </td>
+  </tr>
 {%- endmacro %}
 
 {% block body_main_content %}
   <div class="page-section">
-    <h1>{{ title }}</h1>
+    <h1 class="form-title">{{ title }}</h1>
 
-    <dl>
-      {{ render_one_line('Name', data.name) }}
-
-      <dt>Date of birth</dt>
-        <dd>{{ formatDate(data.dateOfBirth['year'], data.dateOfBirth['month'],
-        data.dateOfBirth['day']) }}</dd>
-
-      {{ render_multi_line('Address', data.address) }}
-      {{ render_multi_line('Email', data.email) }}
-      {{ render_multi_line('Telephone', data.telephone) }}
-
+    <table class="summary">
+      {{ row('Name', data.name) }}
+      {{ row('Date of birth', data.dateOfBirth, false, '/') }}
+      {{ row('Address', data.address, true) }}
+      {{ row('Email', data.email, true) }}
+      {{ row('Telephone', data.telephone, true) }}
       {% if data.alreadyRegisteredWithGP['alreadyRegisteredWithGP'] %}
-        {{ render_multi_line('Previous registered dddress', data.previousAddress) }}
-        {{ render_one_line('Previous registered name', data.previousName) }}
+        {{ row('Previous registered dddress', data.previousAddress, true) }}
+        {{ row('Previous registered name', data.previousName) }}
       {% endif %}
-
-      {{ render_multi_line('NHS number', data.nhsNumber) }}
-      {{ render_multi_line('Medication', data.medication) }}
-      {{ render_multi_line('Alergies', data.alergies) }}
-    </dl>
+      {{ row('NHS number', data.nhsNumber, true) }}
+      {{ row('Medication', data.medication, true) }}
+      {{ row('Alergies', data.alergies, true) }}
+    </table>
 
     <form action="" method="post">
-      <button type="submit">Continue</button>
+      <button type="submit" class="button">Send my details</button>
     </form>
+
+    <p>
+      Your details will be sent to {{ PRACTICE_NAME }} to begin your registration.
+      {% if data.email.email %}
+        A confirmation email will be sent to {{ data.email.email }}.
+      {% endif %}
+    </p>
   </div>
 {% endblock body_main_content %}

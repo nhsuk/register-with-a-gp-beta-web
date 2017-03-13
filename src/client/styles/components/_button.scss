@@ -41,3 +41,15 @@
     margin-right: $default-spacing-unit * 2;
   }
 }
+
+.button--secondary {
+  &:link,
+  &:visited,
+  &:focus,
+  &:active,
+  &:hover {
+    background-color: #e6eff8;
+    border: 1px solid #ccdff1;
+    color: $black;
+  }
+}
