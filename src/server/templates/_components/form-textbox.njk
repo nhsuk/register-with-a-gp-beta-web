@@ -30,13 +30,13 @@
 {% endif %}
 
 {% if variant == 'large' %}
-  <textarea name="{{ name }}" id="input-{{ name }}" rows="4" class="form-textbox{{ ' error' if error }}">{{ value }}</textarea>
+  <textarea name="{{ name }}" id="input-{{ name }}" rows="4" class="form-textbox{{ ' has-error' if error }}">{{ value }}</textarea>
 {% else %}
   <input
     type="text"
     name="{{ name }}"
     id="input-{{ name }}"
-    class="form-textbox{{ ' error' if error }}"
+    class="form-textbox{{ ' has-error' if error }}"
     {% if value %}
       value="{{ value }}"
     {% endif %}

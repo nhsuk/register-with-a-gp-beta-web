@@ -10,4 +10,8 @@
   &:focus {
     outline: 3px solid $yellow;
   }
+
+  &.has-error {
+    border-color: $red;
+  }
 }
