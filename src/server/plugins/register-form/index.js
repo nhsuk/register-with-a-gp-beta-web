@@ -17,18 +17,22 @@ exports.register = function(server, options, next) {
   const stateConfig = cookies.encryptedCookies(!server.settings.app.debug);
   stateConfig.options.path = server.realm.modifiers.route.prefix || '/';
 
+  const routeConfig = _.merge({
+    plugins: { crumb: true }
+  }, cookiesNoCacheConfig);
+
   server.state(stateConfig.name, stateConfig.options);
 
   steps.forEach(([key, options]) => {
     server.route({
-      config: _.merge({}, cookiesNoCacheConfig, {id: `register-form:${key}`}),
+      config: _.merge({}, routeConfig, {id: `register-form:${key}`}),
       method: 'GET',
       path: `/${slugify(options.title)}`,
       handler: options.handlers.GET
     });
 
     server.route({
-      config: cookiesNoCacheConfig,
+      config: routeConfig,
       method: 'POST',
       path: `/${slugify(options.title)}`,
       handler: options.handlers.POST
@@ -42,5 +46,5 @@ exports.register = function(server, options, next) {
 exports.register.attributes = {
   name: 'RegistrationFormRoutes',
   version: '1.0.0',
-  dependencies: 'NunjucksConfig'
+  dependencies: ['NunjucksConfig','crumb']
 };
