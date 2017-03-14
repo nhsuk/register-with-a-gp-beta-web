@@ -34,7 +34,7 @@ export function getHandlerFactory(
   };
 }
 
-function getNextStep(nextSteps, cookieData) {
+export function getNextStep(nextSteps, cookieData) {
   for (let currentStep of nextSteps) {
     const check = _.get(currentStep, 'checkApplies', () => true);
     if (check(cookieData)) {
@@ -44,6 +44,14 @@ function getNextStep(nextSteps, cookieData) {
   return 'end';
 }
 
+/**
+ * Helper `checkApplies` for the common case of depending on
+ * a Yes/No question before asking subsequent questions.
+ * @param {Step} step - a registration step
+ * @param {string} path - where to look in the saved cookie data
+ * @param {boolean} [toBe=true] check to see if value at path equals
+ * @returns {Function}
+ */
 export function dependsOnBoolean(step, path, toBe = true) {
   return function (cookieData) {
     return _.get(cookieData, `${step.key}.${path}`, false) === toBe;
@@ -60,7 +68,7 @@ export function postHandlerFactory(
     // if form valid then redirect to next step
     validate(request.payload, schema)
       .then(value => {
-        const newData = _.merge({}, request.state.data, {[key]: value});
+        const newData = Object.assign({}, request.state.data, {[key]: value});
         const nextStep = getNextStep(nextSteps, newData);
         return reply
           .redirect(request.aka(`register-form:${nextStep}`))

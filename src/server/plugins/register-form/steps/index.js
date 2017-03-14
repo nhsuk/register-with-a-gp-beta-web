@@ -32,13 +32,14 @@ import summaryStep from './summary';
  * against.
  * @property {object} handlers - a GET and POST handler, typically created
  * using the postHandlerFactory and getHandlerFactory defined in 'common.js'.
- *
+ * @property {Function} [checkApplies] - function that checks if this step
+ * should be run.
  */
 
 /**
  * A list of registration @Steps, where order is important because
  * that will control the order in which they'll be asked.
- * @type {[Step]}
+ * @type {Array.<Step>}
  */
 const steps = [
   nameStep,
