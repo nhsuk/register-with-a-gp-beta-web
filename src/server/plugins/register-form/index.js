@@ -46,5 +46,5 @@ exports.register = function(server, options, next) {
 exports.register.attributes = {
   name: 'RegistrationFormRoutes',
   version: '1.0.0',
-  dependencies: ['NunjucksConfig','crumb']
+  dependencies: ['NunjucksConfig', 'crumb']
 };

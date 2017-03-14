@@ -35,8 +35,8 @@
       {{ row('Alergies', data.alergies, true) }}
     </table>
 
-    <form action="" method="post">
-      <input type="hidden" name="csrf" value="{{csrf}}"/>
+    <form method="post">
+      <input type="hidden" name="csrf" value="{{csrf}}">
       <button type="submit" class="button">Send my details</button>
     </form>
 
