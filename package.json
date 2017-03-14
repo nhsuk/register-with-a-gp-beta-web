@@ -10,6 +10,7 @@
     "babel-preset-es2015": "^6.22.0",
     "babel-runtime": "^6.23.0",
     "blipp": "^2.3.0",
+    "crumb": "^6.0.3",
     "dotenv": "^4.0.0",
     "eclint": "^1.1.5",
     "glue": "^4.1.0",

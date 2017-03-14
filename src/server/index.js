@@ -86,6 +86,19 @@ const manifest = {
     },
     {
       plugin: {
+        register: 'crumb',
+        options: {
+          key: 'csrf',
+          autoGenerate: false,
+          cookieOptions: {
+            path: '/register',
+            isSecure: !debug
+          }
+        }
+      }
+    },
+    {
+      plugin: {
         register: './plugins/register-form',
         options: {},
         routes: {
