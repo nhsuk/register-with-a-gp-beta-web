@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import _slug from 'slug';
 
 import cache from '../../config/cache';
@@ -17,16 +16,18 @@ exports.register = function(server, options, next) {
   const stateConfig = cookies.encryptedCookies(!server.settings.app.debug);
   stateConfig.options.path = server.realm.modifiers.route.prefix || '/';
 
-  const routeConfig = _.assign({},
-    { plugins: { crumb: true } },
-    cookiesNoCacheConfig
+  const {assign} = Object;
+
+  const routeConfig = assign({},
+    cookiesNoCacheConfig,
+    {plugins: { crumb: true }}
   );
 
   server.state(stateConfig.name, stateConfig.options);
 
   steps.forEach(([key, options]) => {
     server.route({
-      config: _.assign({}, routeConfig, {id: `register-form:${key}`}),
+      config: assign({}, routeConfig, {id: `register-form:${key}`}),
       method: 'GET',
       path: `/${slugify(options.title)}`,
       handler: options.handlers.GET
