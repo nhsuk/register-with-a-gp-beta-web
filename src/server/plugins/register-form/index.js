@@ -18,9 +18,10 @@ exports.register = function(server, options, next) {
 
   const {assign} = Object;
 
-  const routeConfig = assign({},
+  const routeConfig = assign(
+    {},
     cookiesNoCacheConfig,
-    {plugins: { crumb: true }}
+    {plugins: {crumb: true}}
   );
 
   server.state(stateConfig.name, stateConfig.options);
