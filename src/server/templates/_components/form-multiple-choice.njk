@@ -30,7 +30,7 @@
  #}
 {% set hintId = 'hint-' + name %}
 
-<fieldset>
+<fieldset id="input-{{ name }}">
   {% if label %}
     <legend class="form-label" id="group-{{ name }}">
       {{ label }} {% if optional %}(optional){% endif %}

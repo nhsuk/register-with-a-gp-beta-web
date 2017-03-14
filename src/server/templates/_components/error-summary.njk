@@ -10,18 +10,20 @@
  #     children:  [{'error-field': 'Error message'}]
  #   } %}
  #}
-<div class="error-summary" role="group" tabindex="-1">
-  <h1 class="error-summary__heading">There was a problem submitting this page</h1>
+{% if children %}
+  <div class="error-summary" role="group" tabindex="-1">
+    <h1 class="error-summary__heading">There was a problem submitting this page</h1>
 
-  <p>Please correct the following problems:</p>
+    <p>Please correct the following problems:</p>
 
-  {% if children %}
-    <ul class="error-summary__list">
-      {% for key, message in children -%}
-        <li class="error-summary__error">
-          <a href="#input-{{ key }}"  class="error-summary__error-link">{{ message }}</a>
-        </li>
-      {%- endfor %}
-    </ul>
-  {% endif %}
-</div>
+    {% if children %}
+      <ul class="error-summary__list">
+        {% for key, message in children -%}
+          <li class="error-summary__error">
+            <a href="#input-{{ key }}"  class="error-summary__error-link">{{ message }}</a>
+          </li>
+        {%- endfor %}
+      </ul>
+    {% endif %}
+  </div>
+{% endif %}
