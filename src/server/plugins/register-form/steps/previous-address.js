@@ -5,26 +5,18 @@ import alreadyRegisteredWithAGPStep from './current-gp';
 
 const Joi = JoiBase.extend(JoiPostcodeExtension);
 
-const fields = [
-  {id: 'address1', label: 'Address', type: 'textbox'},
-  {id: 'address2', label: '', type: 'textbox'},
-  {id: 'address3', label: '', type: 'textbox'},
-  {id: 'locality', label: 'Town or City', type: 'textbox'},
-  {id: 'postcode', label: 'Post Code', type: 'textbox'}
-];
-
 const schema = Joi.object().keys({
-  'address1': Joi.string().allow('').max(50),
-  'address2': Joi.string().allow('').max(50),
-  'address3': Joi.string().allow('').max(50),
-  'locality': Joi.string().allow('').max(100).required(),
+  'address1': Joi.string().allow('').max(50).label('Address').meta({ componentType: 'textbox' }),
+  'address2': Joi.string().allow('').max(50).meta({ componentType: 'textbox' }),
+  'address3': Joi.string().allow('').max(50).meta({ componentType: 'textbox' }),
+  'locality': Joi.string().allow('').max(100).required().label('Town or City').meta({ componentType: 'textbox' }),
   'postcode': Joi.postcode().uppercase().options({
     language: {
       string: {
         regex: { base: 'must be a valid UK postcode' },
       },
     },
-  }).label('Post Code'),
+  }).label('Post Code').meta({ componentType: 'textbox' }),
   'submit': Joi.any().optional().strip(),
 })
   .or('address1', 'address2', 'address3');
@@ -33,8 +25,8 @@ const title = 'Are you registered with a different address?';
 const key = 'previousAddress';
 
 const handlers = {
-  GET: getHandlerFactory(key, fields, title, schema),
-  POST: nextStep => postHandlerFactory(key, fields, title, schema, nextStep)
+  GET: getHandlerFactory(key, title, schema),
+  POST: nextStep => postHandlerFactory(key, title, schema, nextStep)
 };
 
 const checkApplies = dependsOnBoolean(
@@ -45,7 +37,6 @@ const checkApplies = dependsOnBoolean(
  */
 export default {
   title,
-  fields,
   schema,
   handlers,
   checkApplies

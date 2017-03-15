@@ -1,12 +1,12 @@
 import Joi from 'joi';
 import {postHandlerFactory, getHandlerFactory} from './common';
 
-const fields = [
-  {id: 'medication', label: 'Current Medication', type: 'textbox'},
-];
-
 const schema = Joi.object().keys({
-  'medication': Joi.string().max(200),
+  'medication': Joi.string().max(200).label('Current medication')
+    .meta({
+      componentType: 'textbox',
+      variant: 'large',
+    }),
   'submit': Joi.any().optional().strip()
 });
 
@@ -14,8 +14,8 @@ const title = 'Are you taking any medication?';
 const key = 'medication';
 
 const handlers = {
-  GET: getHandlerFactory(key, fields, title, schema),
-  POST: nextStep => postHandlerFactory(key, fields, title, schema, nextStep)
+  GET: getHandlerFactory(key, title, schema),
+  POST: nextStep => postHandlerFactory(key, title, schema, nextStep)
 };
 
 /**
@@ -24,7 +24,6 @@ const handlers = {
 export default {
   key,
   title,
-  fields,
   schema,
   handlers
 };
