@@ -17,3 +17,9 @@
     margin-top: $baseline-grid-unit * 4;
   }
 }
+
+.form-label__error {
+  color: $red;
+  display: block;
+  font-weight: bold;
+}
