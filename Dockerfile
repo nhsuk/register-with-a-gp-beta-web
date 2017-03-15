@@ -14,7 +14,8 @@ WORKDIR /usr/src/app
 
 COPY package.json yarn.lock ./
 
-RUN yarn
+# install dev dependences because they're used by yarn build
+RUN NODE_ENV=development yarn
 
 RUN npm rebuild node-sass
 RUN cd /usr/src/app/node_modules/nhsuk-frontend && npm run postinstall

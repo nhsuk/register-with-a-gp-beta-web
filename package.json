@@ -67,7 +67,7 @@
     "dev": "nodemon --exec babel-node --watch src/server/ src/server/index.js",
     "build:babel": "babel src -d dist --ignore-files src/client --copy-files --source-maps",
     "build:webpack": "webpack -p --config src/client/webpack.config.babel.js",
-    "build": "npm run clean && npm-run-all --parallel build:* && mkdir -p dist/client/compiled && cp -r src/client/compiled/ dist/client/",
+    "build": "npm-run-all clean --parallel build:* && cp -r src/client/compiled/ dist/client/",
     "lint:eslint": "DEBUG=eslint:cli-engine eslint .",
     "lint:editorconfig": "eclint check src/** README.md",
     "lint": "npm-run-all --parallel lint:*",

@@ -4,7 +4,7 @@ services:
     build: .
     ports:
      - "3333:3333"
-    command: 'yarn start'
+    command: bash -c 'npm run build && npm run start'
     environment:
       NODE_ENV: 'production'
     volumes:
