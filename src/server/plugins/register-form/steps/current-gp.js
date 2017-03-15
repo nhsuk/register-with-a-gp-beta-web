@@ -3,7 +3,7 @@ import {postHandlerFactory, getHandlerFactory} from './common';
 
 const fields = [
   {
-    id: 'alreadyRegisteredWithGP',
+    id: 'previously-registered',
     label: '',
     type: 'multiple-choice',
     children: [
@@ -14,12 +14,12 @@ const fields = [
 ];
 
 const schema = Joi.object().keys({
-  'alreadyRegisteredWithGP': Joi.boolean().truthy('Yes').falsy('No').required(),
+  'previously-registered': Joi.boolean().truthy('Yes').falsy('No').required().label('if you’re registered with a GP'),
   'submit': Joi.any().optional().strip()
 });
 
 const title = 'Are you already registered with a GP?';
-const key = 'alreadyRegisteredWithGP';
+const key = 'previously-registered';
 
 const handlers = {
   GET: getHandlerFactory(key, fields, title, schema),

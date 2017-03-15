@@ -17,7 +17,13 @@ const schema = Joi.object().keys({
   'address2': Joi.string().allow('').max(50),
   'address3': Joi.string().allow('').max(50),
   'locality': Joi.string().allow('').max(100).required(),
-  'postcode': Joi.postcode().uppercase(),
+  'postcode': Joi.postcode().uppercase().options({
+    language: {
+      string: {
+        regex: { base: 'must be a valid UK postcode' },
+      },
+    },
+  }).label('Post Code'),
   'submit': Joi.any().optional().strip(),
 })
   .or('address1', 'address2', 'address3');

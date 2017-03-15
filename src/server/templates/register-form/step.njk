@@ -14,7 +14,7 @@
           label: field.label,
           name: field.id,
           children: field.children,
-          error: '',
+          error: stepErrors[field.id].message | replace(stepErrors[field.id].label, ""),
           value: stepData[field.id]
         } %}
       {% endfor %}

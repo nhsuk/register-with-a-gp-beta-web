@@ -10,7 +10,24 @@ const Joi = JoiBase
 
 export function validate(rawData, schemaDefinition) {
   return new Promise((resolve, reject) => {
-    Joi.validate(rawData, schemaDefinition, (err, value) => {
+    Joi.validate(rawData, schemaDefinition, {
+      abortEarly: false,
+      language: {
+        key: '{{!key}} ',
+        any: {
+          empty: 'cannot be blank',
+          required: '!!Please tell us {{!key}}',
+        },
+        base: {
+          number: 'must be a number',
+        },
+        string: {
+          min: 'must be at least {{limit}} characters',
+          max: 'must be less than {{limit}} characters',
+          length: 'must be {{limit}} characters',
+        },
+      },
+    }, (err, value) => {
       if (err) {
         reject(err);
       } else {
@@ -63,7 +80,8 @@ export function postHandlerFactory(
   fields,
   title,
   schema,
-  nextSteps) {
+  nextSteps,
+  template = 'register-form/step') {
   return (request, reply) => {
     // if form valid then redirect to next step
     validate(request.payload, schema)
@@ -76,8 +94,17 @@ export function postHandlerFactory(
       })
       .catch(err => {
         request.log(['error'], err);
+        const stepErrors = {};
+
+        _.each(err.details, (error) => {
+          stepErrors[error.path] = {
+            message: error.message,
+            label: error.context.key,
+          };
+        });
+
         return reply
-          .redirect(request.aka(`register-form:${key}`));
+          .view(template, {fields, stepData: err._object, title, stepErrors});
       });
   };
 }

@@ -6,7 +6,7 @@ const fields = [
 ];
 
 const schema = Joi.object().keys({
-  'email': Joi.string().email().allow('').optional(),
+  'email': Joi.string().email().allow('').optional().label('Email'),
   'submit': Joi.any().optional().strip()
 });
 
