@@ -4,6 +4,8 @@ services:
     build: .
     ports:
      - "3333:3333"
+    command: 'yarn start'
+    environment:
+      NODE_ENV: 'production'
     volumes:
      - ./:/usr/src/app
-     - /usr/src/app/node_modules

@@ -59,6 +59,11 @@ $ docker-compose up
 > (live-reloading) server, we need to look at removing `devDependences` from the
 > runtime environment when we do start hosting in Rancher
 
+If you want to run in production mode then you should run: 
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+```
+
 ## Usage
 
 ### Development
