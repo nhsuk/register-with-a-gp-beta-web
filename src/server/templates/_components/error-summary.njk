@@ -1,0 +1,27 @@
+{##
+ # Family: Display
+ #
+ # @param {object|array} [children] An array or object of errors
+ #
+ # @return {string} HTML for error summary
+ #
+ # @example
+ #   {% component 'errory-summary', {
+ #     children:  [{'error-field': 'Error message'}]
+ #   } %}
+ #}
+{% if children %}
+  <div class="error-summary" role="group" tabindex="-1">
+    <h1 class="error-summary__heading">There was a problem submitting this page</h1>
+
+    {% if children %}
+      <ul class="error-summary__list">
+        {% for key, error in children -%}
+          <li class="error-summary__error">
+            <a href="#input-{{ key }}"  class="error-summary__error-link">{{ error.message | safe }}</a>
+          </li>
+        {%- endfor %}
+      </ul>
+    {% endif %}
+  </div>
+{% endif %}
