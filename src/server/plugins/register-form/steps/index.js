@@ -26,8 +26,6 @@ import summaryStep from './summary';
  * @property {string} key - a unique ID for url-helpers like request.aka.
  * @property {string} title - Title of the page and what is asked to the user,
  * this is also slugified into the url for the page.
- * @property {[InputField]} fields - list of fields with data required.
- * @property {Array.<InputField>} fields - list of fields with data required.
  * @property {object} schema - a Joi schema to validate the supplied data
  * against.
  * @property {object} handlers - a GET and POST handler, typically created

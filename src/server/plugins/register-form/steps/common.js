@@ -37,17 +37,39 @@ export function validate(rawData, schemaDefinition) {
   });
 }
 
+export function getFieldData(schema) {
+  const fields = [];
+
+  _.each(schema._inner.children, (field) => {
+    const fieldData = {
+      id: field.key,
+      label: field.schema._flags.label,
+    };
+
+    _.each(field.schema._meta[0], (value, key) => {
+      fieldData[key] = value;
+    });
+
+    fields.push(fieldData);
+  });
+
+  return fields;
+}
+
 export function getHandlerFactory(
   key,
-  fields,
   title,
   schema,
   template = 'register-form/step') {
   return (request, reply) => {
     request.log(['cookie'], request.state.data);
     const stepData = _.get(request, `state.data.${key}`, {});
-    return reply
-      .view(template, {fields, stepData, title});
+
+    return reply.view(template, {
+      fields: getFieldData(schema),
+      stepData,
+      title,
+    });
   };
 }
 
@@ -77,7 +99,6 @@ export function dependsOnBoolean(step, path, toBe = true) {
 
 export function postHandlerFactory(
   key,
-  fields,
   title,
   schema,
   nextSteps,
@@ -103,8 +124,12 @@ export function postHandlerFactory(
           };
         });
 
-        return reply
-          .view(template, {fields, stepData: err._object, title, stepErrors});
+        return reply.view(template, {
+          fields: getFieldData(schema),
+          stepData: err._object,
+          title,
+          stepErrors,
+        });
       });
   };
 }

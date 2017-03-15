@@ -1,12 +1,13 @@
 import Joi from 'joi';
 import {postHandlerFactory, getHandlerFactory} from './common';
 
-const fields = [
-  {id: 'allergies', label: 'Please enter your allergy details', type: 'textbox'},
-];
 
 const schema = Joi.object().keys({
-  'allergies': Joi.string().max(200),
+  'allergies': Joi.string().max(200).label('Allergies')
+    .meta({
+      componentType: 'textbox',
+      variant: 'large',
+    }),
   'submit': Joi.any().optional().strip()
 });
 
@@ -14,8 +15,8 @@ const title = 'Do you have any allergies?';
 const key = 'allergies';
 
 const handlers = {
-  GET: getHandlerFactory(key, fields, title, schema),
-  POST: nextStep => postHandlerFactory(key, fields, title, schema, nextStep)
+  GET: getHandlerFactory(key, title, schema),
+  POST: nextStep => postHandlerFactory(key, title, schema, nextStep)
 };
 
 /**
@@ -24,7 +25,6 @@ const handlers = {
 export default {
   key,
   title,
-  fields,
   schema,
   handlers
 };
