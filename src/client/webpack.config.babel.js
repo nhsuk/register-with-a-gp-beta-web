@@ -14,7 +14,7 @@ export default {
   devtool: 'cheap-module-source-map',
   plugins: [
     new AssetsPlugin({
-      path: __dirname,
+      path: Path.join(__dirname, './compiled'),
       prettyPrint: true
     }),
     new ExtractTextPlugin('[name].[hash].css'),

@@ -3,7 +3,7 @@ import Nunjucks from 'nunjucks';
 import fs from 'fs';
 import {formatDate} from './functions';
 
-const webpackAssetsPath = '../../../client/webpack-assets.json';
+const webpackAssetsPath = Path.resolve(__dirname, '../../../client/compiled/webpack-assets.json');
 const webpackAssets = require(webpackAssetsPath);
 
 const COMPONENTS_PATH = '_components/';
