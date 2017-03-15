@@ -1,6 +1,6 @@
 FROM node:7
 
-ENV NODE_ENV development
+ENV NODE_ENV ${NODE_ENV:-development}
 ENV PORT ${PORT:-3333}
 
 RUN npm set progress=false
