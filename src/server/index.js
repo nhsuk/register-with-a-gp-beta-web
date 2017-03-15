@@ -2,7 +2,6 @@
 import Glue from 'glue';
 import Path from 'path';
 import Dotenv from 'dotenv';
-import webpackConfig from '../client/webpack.config.babel.js';
 import Hoek from 'hoek';
 Dotenv.config();
 
@@ -123,6 +122,7 @@ const manifest = {
 };
 
 if (env === 'development') {
+  const webpackConfig = require('../client/webpack.config.babel.js').default;
   Hoek.merge(manifest.registrations, [
     {
       plugin: {
