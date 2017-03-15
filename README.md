@@ -51,8 +51,8 @@ $ yarn
 Make sure you have Docker and compose installed for your operating system
 then run:
 
-```
-$ docker-compose up
+```bash
+$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 ```
 
 > Note: The Dockerfile is currently set up to provide a development
@@ -63,6 +63,33 @@ If you want to run in production mode then you should run:
 ```bash
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
 ```
+
+Because these commands are annoying to type there are some helper scripts in 
+the `bin` directory:
+
+| Script | Command |
+|:---------|:------------|
+| `bin/dev.sh` | `$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up` |
+| `bin/prod.sh` | `$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up` |
+
+To correctly test the production version (it sends cookies with the secure flag)
+you will need to browse it with a HTTPS connection. I do this by installing
+a local proxy that generates a self signed certificate and forwards all the
+traffic.
+
+```bash
+# globally install dev proxy
+$ npm -g i dev-proxy
+
+# start server in detached mode
+$ ./bin/dev.sh -d
+
+# start dev-proxy
+$ dev-proxy -p 3333:3334
+```
+then browse to https://localhost:3334 - you will get a certificate warning and
+you can either install the local dev certificate or ignore the warning if you
+know what you're doing.
 
 ## Usage
 

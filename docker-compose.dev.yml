@@ -1,0 +1,6 @@
+version: '2'
+services:
+  web:
+    command: node_modules/.bin/npm-run-all -s build dev
+    volumes:
+      - ./:/usr/src/app
