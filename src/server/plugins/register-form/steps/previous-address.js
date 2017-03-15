@@ -1,7 +1,7 @@
 import JoiBase from 'joi';
 import JoiPostcodeExtension from 'joi-postcode';
 import {postHandlerFactory, getHandlerFactory, dependsOnBoolean} from './common';
-import alreadyRegisteredWithAGPStep from './current-gp';
+import previouslyRegisteredStep from './previously-registered';
 
 const Joi = JoiBase.extend(JoiPostcodeExtension);
 
@@ -18,7 +18,13 @@ const schema = Joi.object().keys({
   'address2': Joi.string().allow('').max(50),
   'address3': Joi.string().allow('').max(50),
   'locality': Joi.string().allow('').max(100).required(),
-  'postcode': Joi.postcode().uppercase(),
+  'postcode': Joi.postcode().uppercase().options({
+    language: {
+      string: {
+        regex: { base: 'must be a valid UK postcode' },
+      },
+    },
+  }).label('Post Code'),
   'submit': Joi.any().optional().strip(),
 })
   .or('address1', 'address2', 'address3');
@@ -31,8 +37,7 @@ const handlers = {
   POST: nextStep => postHandlerFactory(key, fields, title, schema, nextStep)
 };
 
-const checkApplies = dependsOnBoolean(
-  alreadyRegisteredWithAGPStep, 'alreadyRegisteredWithGP');
+const checkApplies = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered');
 
 /**
  * @type Step

@@ -3,7 +3,7 @@ import dateOfBirthStep from './date-of-birth';
 import homeAddressStep from './home-address';
 import contactEmailStep from './contact-email';
 import contactTelephoneStep from './contact-telephone';
-import alreadyRegisteredWithGPStep from './current-gp';
+import previouslyRegisteredStep from './previously-registered';
 import previousAddressStep from './previous-address';
 import previousNameStep from './previous-name';
 import nhsNumberStep from './nhs-number';
@@ -48,7 +48,7 @@ const steps = [
   contactEmailStep,
   contactTelephoneStep,
   // armed forces?
-  alreadyRegisteredWithGPStep,
+  previouslyRegisteredStep,
   previousAddressStep,
   previousNameStep,
   nhsNumberStep,

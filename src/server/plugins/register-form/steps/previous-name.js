@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import alreadyRegisteredWithAGPStep from './current-gp';
+import previouslyRegisteredStep from './previously-registered';
 import {
   postHandlerFactory,
   getHandlerFactory,
@@ -13,9 +13,9 @@ const fields = [
 ];
 
 const schema = Joi.object().keys({
-  'first-name': Joi.string(),
+  'first-name': Joi.string().label('First name'),
   'middle-names': Joi.string().allow('').optional(),
-  'last-name': Joi.string(),
+  'last-name': Joi.string().label('Last name'),
   'submit': Joi.any().optional().strip()
 }).or('first-name', 'middle-names', 'last-name');
 
@@ -27,8 +27,7 @@ const handlers = {
   POST: nextStep => postHandlerFactory(key, fields, title, schema, nextStep)
 };
 
-const checkApplies = dependsOnBoolean(
-  alreadyRegisteredWithAGPStep, 'alreadyRegisteredWithGP');
+const checkApplies = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered');
 
 /**
  * @type Step

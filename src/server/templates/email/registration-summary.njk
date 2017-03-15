@@ -33,7 +33,7 @@ Date of Birth:
 
 {{ render_multi_line('Telephone', data.telephone) }}
 
-{%- if data.alreadyRegisteredWithGP['alreadyRegisteredWithGP'] %}
+{%- if data.previouslyRegistered['previously-registered'] %}
   {{ render_multi_line('Previous registered dddress', data.previousAddress) }}
 
   {{ render_one_line('Previous registered name', data.previousName) }}
