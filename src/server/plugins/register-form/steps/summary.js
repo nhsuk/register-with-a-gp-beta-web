@@ -63,13 +63,15 @@ function summaryPostHandler(request, reply) {
 
 const handlers = {
   GET: summaryGetHandler,
-  POST: summaryPostHandler
+  POST: () => summaryPostHandler
 };
 
-exports.options = {
+/**
+ * @type Step
+ */
+export default {
+  key,
   title,
   schema,
   handlers
 };
-
-export default [key, exports.options];

@@ -15,14 +15,16 @@ const key = 'telephone';
 
 const handlers = {
   GET: getHandlerFactory(key, fields, title, schema),
-  POST: postHandlerFactory(key, fields, title, schema, 'alreadyRegisteredWithGP')
+  POST: nextStep => postHandlerFactory(key, fields, title, schema, nextStep)
 };
 
-exports.options = {
+/**
+ * @type Step
+ */
+export default {
+  key,
   title,
   fields,
   schema,
   handlers
 };
-
-export default [key, exports.options];

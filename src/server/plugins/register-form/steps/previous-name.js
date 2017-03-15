@@ -1,5 +1,10 @@
 import Joi from 'joi';
-import {postHandlerFactory, getHandlerFactory} from './common';
+import alreadyRegisteredWithAGPStep from './current-gp';
+import {
+  postHandlerFactory,
+  getHandlerFactory,
+  dependsOnBoolean
+} from './common';
 
 const fields = [
   {id: 'first-name', label: 'First name', type: 'textbox'},
@@ -16,19 +21,23 @@ const schema = Joi.object().keys({
 
 const title = 'Are you registered with a different name?';
 const key = 'previousName';
-const nextStep = 'nhsNumber';
-
 
 const handlers = {
   GET: getHandlerFactory(key, fields, title, schema),
-  POST: postHandlerFactory(key, fields, title, schema, nextStep)
+  POST: nextStep => postHandlerFactory(key, fields, title, schema, nextStep)
 };
 
-exports.options = {
+const checkApplies = dependsOnBoolean(
+  alreadyRegisteredWithAGPStep, 'alreadyRegisteredWithGP');
+
+/**
+ * @type Step
+ */
+export default {
+  key,
   title,
   fields,
   schema,
-  handlers
+  handlers,
+  checkApplies
 };
-
-export default [key, exports.options];

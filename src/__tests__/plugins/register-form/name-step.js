@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import {options} from '../../../server/plugins/register-form/steps/your-name';
+import yourName from '../../../server/plugins/register-form/steps/your-name';
 
 
 describe('name step schema', () => {
@@ -11,7 +11,7 @@ describe('name step schema', () => {
         'submit': 'submit'
       };
 
-      Joi.validate(validData, options.schema, (err, value) => {
+      Joi.validate(validData, yourName.schema, (err, value) => {
         if (err) reject(err);
         expect(value).toEqual({'first-name': 'a', 'last-name': 'b'});
         resolve();
