@@ -5,5 +5,7 @@ services:
     ports:
      - "3333:3333"
     volumes:
-     - ./:/usr/src/app
-     - /usr/src/app/node_modules
+     - reg-gp-node-modules:/usr/src/app/node_modules
+volumes:
+    reg-gp-node-modules:
+        driver: local
