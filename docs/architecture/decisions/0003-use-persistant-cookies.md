@@ -4,7 +4,7 @@ Date: 16/03/2017
 
 ## Status
 
-Draft
+Accepted
 
 ## Context
 
@@ -36,15 +36,11 @@ A persistent cookie is one that disappears after a set time, called its
 
 ## Decision
 
-### Use persistent cookies
+### Use session cookies
 
 Given that most people will be using their own devices, and most likely their
 phones it makes more sense to use persistent cookies with a short timeout rather
 than a session cookie which could lie around on their device for months.
-
-If you agree with this decision then merge [this](https://github.com/nhsuk/register-with-a-gp-beta-web/pull/28) pull request, if
-you would prefer to use session cookies and accept the risks then
-merge [this](https://github.com/nhsuk/register-with-a-gp-beta-web/pull/30).
 
 ## Consequences
 
