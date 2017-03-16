@@ -21,3 +21,9 @@ textarea.form-textbox {
   background-repeat: repeat-y;
   background-size: 100% $baseline-grid-unit * 8;
 }
+
+.form-textbox--short {
+  @include media(tablet) {
+    width: 8em;
+  }
+}

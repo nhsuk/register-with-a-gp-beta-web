@@ -7,7 +7,7 @@ import nhsNumberStep from './nhs-number';
 const Joi = JoiBase.extend(JoiNHSNumber);
 
 const schema = Joi.object().keys({
-  'nhs-number': Joi.string().nhsnumber().label('NHS number').meta({ componentType: 'textbox' }),
+  'nhs-number': Joi.string().nhsnumber().label('NHS number').meta({ componentType: 'textbox', variant: 'short' }),
   'submit': Joi.any().optional().strip(),
 });
 
