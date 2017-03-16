@@ -139,6 +139,16 @@ if (env === 'development') {
   ]);
 }
 
+if (env === 'production') {
+  Hoek.merge(manifest.registrations, [
+    {
+      plugin: {
+        register: './plugins/disable-http',
+        options: {}}
+    }
+  ]);
+}
+
 const options = {
   relativeTo: __dirname
 };
