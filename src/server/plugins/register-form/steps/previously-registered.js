@@ -21,6 +21,7 @@ const schema = Joi.object().keys({
 
 const title = 'Are you already registered with a GP?';
 const key = 'previouslyRegistered';
+const slug = 'previously-registered';
 
 const handlers = {
   GET: getHandlerFactory(key, title, schema),
@@ -32,6 +33,7 @@ const handlers = {
  */
 export default {
   key,
+  slug,
   title,
   schema,
   handlers

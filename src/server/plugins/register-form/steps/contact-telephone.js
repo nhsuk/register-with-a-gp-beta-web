@@ -9,6 +9,7 @@ const schema = Joi.object().keys({
 
 const title = 'What is your telephone number?';
 const key = 'telephone';
+const slug = 'contact-telephone';
 
 const handlers = {
   GET: getHandlerFactory(key, title, schema),
@@ -20,6 +21,7 @@ const handlers = {
  */
 export default {
   key,
+  slug,
   title,
   schema,
   handlers

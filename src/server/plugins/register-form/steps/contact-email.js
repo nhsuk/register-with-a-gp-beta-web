@@ -8,6 +8,7 @@ const schema = Joi.object().keys({
 
 const title = 'What is your email address?';
 const key = 'email';
+const slug = 'contact-email';
 
 const handlers = {
   GET: getHandlerFactory(key, title, schema),
@@ -19,6 +20,7 @@ const handlers = {
  */
 export default {
   key,
+  slug,
   title,
   schema,
   handlers

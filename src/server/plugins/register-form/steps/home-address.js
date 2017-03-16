@@ -22,6 +22,7 @@ const schema = Joi.object().keys({
 
 const title = 'What is your address?';
 const key = 'address';
+const slug = 'home-address-manual';
 
 const handlers = {
   GET: getHandlerFactory(key, title, schema),
@@ -33,6 +34,7 @@ const handlers = {
  */
 export default {
   key,
+  slug,
   title,
   schema,
   handlers

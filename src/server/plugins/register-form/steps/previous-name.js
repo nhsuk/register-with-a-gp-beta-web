@@ -15,6 +15,7 @@ const schema = Joi.object().keys({
 
 const title = 'Are you registered with a different name?';
 const key = 'previousName';
+const slug = 'registered-name';
 
 const handlers = {
   GET: getHandlerFactory(key, title, schema),
@@ -28,6 +29,7 @@ const checkApplies = dependsOnBoolean(previouslyRegisteredStep, 'previously-regi
  */
 export default {
   key,
+  slug,
   title,
   schema,
   handlers,
