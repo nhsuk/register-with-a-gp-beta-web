@@ -16,7 +16,7 @@ export default {
         encoding: 'iron',
         clearInvalid: true,
         password: process.env.SESSION_SECRET,
-        ttl: 1 * 60 * 60 * 1000 // one hour
+        ttl: 20 * 60 * 1000 // twenty minutes
       }
     };
   }
