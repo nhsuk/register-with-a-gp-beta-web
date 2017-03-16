@@ -10,7 +10,24 @@ const Joi = JoiBase
 
 export function validate(rawData, schemaDefinition) {
   return new Promise((resolve, reject) => {
-    Joi.validate(rawData, schemaDefinition, (err, value) => {
+    Joi.validate(rawData, schemaDefinition, {
+      abortEarly: false,
+      language: {
+        key: '{{!key}} ',
+        any: {
+          empty: 'cannot be blank',
+          required: '!!Please tell us {{!key}}',
+        },
+        base: {
+          number: 'must be a number',
+        },
+        string: {
+          min: 'must be at least {{limit}} characters',
+          max: 'must be less than {{limit}} characters',
+          length: 'must be {{limit}} characters',
+        },
+      },
+    }, (err, value) => {
       if (err) {
         reject(err);
       } else {
@@ -20,17 +37,39 @@ export function validate(rawData, schemaDefinition) {
   });
 }
 
+export function getFieldData(schema) {
+  const fields = [];
+
+  _.each(schema._inner.children, (field) => {
+    const fieldData = {
+      id: field.key,
+      label: field.schema._flags.label,
+    };
+
+    _.each(field.schema._meta[0], (value, key) => {
+      fieldData[key] = value;
+    });
+
+    fields.push(fieldData);
+  });
+
+  return fields;
+}
+
 export function getHandlerFactory(
   key,
-  fields,
   title,
   schema,
   template = 'register-form/step') {
   return (request, reply) => {
     request.log(['cookie'], request.state.data);
     const stepData = _.get(request, `state.data.${key}`, {});
-    return reply
-      .view(template, {fields, stepData, title});
+
+    return reply.view(template, {
+      fields: getFieldData(schema),
+      stepData,
+      title,
+    });
   };
 }
 
@@ -60,10 +99,10 @@ export function dependsOnBoolean(step, path, toBe = true) {
 
 export function postHandlerFactory(
   key,
-  fields,
   title,
   schema,
-  nextSteps) {
+  nextSteps,
+  template = 'register-form/step') {
   return (request, reply) => {
     // if form valid then redirect to next step
     validate(request.payload, schema)
@@ -76,8 +115,21 @@ export function postHandlerFactory(
       })
       .catch(err => {
         request.log(['error'], err);
-        return reply
-          .redirect(request.aka(`register-form:${key}`));
+        const stepErrors = {};
+
+        _.each(err.details, (error) => {
+          stepErrors[error.path] = {
+            message: error.message,
+            label: error.context.key,
+          };
+        });
+
+        return reply.view(template, {
+          fields: getFieldData(schema),
+          stepData: err._object,
+          title,
+          stepErrors,
+        });
       });
   };
 }

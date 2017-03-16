@@ -26,7 +26,7 @@
       {{ row('Address', data.address, true) }}
       {{ row('Email', data.email, true) }}
       {{ row('Telephone', data.telephone, true) }}
-      {% if data.alreadyRegisteredWithGP['alreadyRegisteredWithGP'] %}
+      {% if data.previouslyRegistered['previously-registered'] %}
         {{ row('Previous registered dddress', data.previousAddress, true) }}
         {{ row('Previous registered name', data.previousName) }}
       {% endif %}

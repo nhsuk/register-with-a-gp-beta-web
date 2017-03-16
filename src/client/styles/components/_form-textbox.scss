@@ -1,7 +1,7 @@
 .form-textbox {
   @include core-font(20);
   appearance: none;
-  border: ($baseline-grid-unit / 2) solid $grey-2;
+  border: ($baseline-grid-unit / 2) solid $blue;
   display: block;
   max-width: 540px;
   padding: $baseline-grid-unit;
@@ -10,4 +10,14 @@
   &:focus {
     outline: 3px solid $yellow;
   }
+
+  &.has-error {
+    border-color: $red;
+  }
+}
+
+textarea.form-textbox {
+  background-image: linear-gradient(to bottom, $grey-3 1px, transparent 1px);
+  background-repeat: repeat-y;
+  background-size: 100% $baseline-grid-unit * 8;
 }

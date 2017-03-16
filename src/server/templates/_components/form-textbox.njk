@@ -20,23 +20,26 @@
  #}
 {% set hintId = 'hint-' + name %}
 
-{% if label %}
+{% if label or error or hint %}
   <label for="input-{{ name }}" class="form-label">
     {{ label }} {% if optional %}(optional){% endif %}
     {% if hint %}
       <span class="form-label__hint" id="{{ hintId }}">{{ hint }}</span>
     {% endif %}
+    {% if error %}
+      <span class="form-label__error">{{ error | trim }}</span>
+    {% endif %}
   </label>
 {% endif %}
 
 {% if variant == 'large' %}
-  <textarea name="{{ name }}" id="input-{{ name }}" rows="4" class="form-textbox{{ ' error' if error }}">{{ value }}</textarea>
+  <textarea name="{{ name }}" id="input-{{ name }}" rows="6" class="form-textbox{{ ' has-error' if error }}">{{ value }}</textarea>
 {% else %}
   <input
     type="text"
     name="{{ name }}"
     id="input-{{ name }}"
-    class="form-textbox{{ ' error' if error }}"
+    class="form-textbox{{ ' has-error' if error }}"
     {% if value %}
       value="{{ value }}"
     {% endif %}

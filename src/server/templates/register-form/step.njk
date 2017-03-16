@@ -6,14 +6,20 @@
 
     <form method="post">
       <input type="hidden" name="csrf" value="{{csrf}}">
+
+      {% component 'error-summary', { children: stepErrors } %}
+
       {% for field in fields %}
-        {% component 'form-' + field.type, {
-          label: field.label,
-          name: field.id,
-          children: field.children,
-          error: '',
-          value: stepData[field.id]
-        } %}
+        {% if field.componentType in ['textbox', 'multiple-choice'] %}
+          {% component 'form-' + field.componentType, {
+            label: field.label,
+            name: field.id,
+            children: field.children,
+            variant: field.variant,
+            error: stepErrors[field.id].message | replace(stepErrors[field.id].label, ""),
+            value: stepData[field.id]
+          } %}
+        {% endif %}
       {% endfor %}
 
       <div class="form-group">
