@@ -24,6 +24,7 @@ import summaryStep from './summary';
  *
  * @typedef {object} Step
  * @property {string} key - a unique ID for url-helpers like request.aka.
+ * @property {string} slug - slug used to make up the last part of the url
  * @property {string} title - Title of the page and what is asked to the user,
  * this is also slugified into the url for the page.
  * @property {object} schema - a Joi schema to validate the supplied data

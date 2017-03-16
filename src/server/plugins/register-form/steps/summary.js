@@ -10,6 +10,7 @@ const schema = Joi.object().keys({
 
 const title = 'Check your details';
 const key = 'summary';
+const slug = 'confirm-details';
 const nextStep = 'end';
 
 
@@ -71,6 +72,7 @@ const handlers = {
  */
 export default {
   key,
+  slug,
   title,
   schema,
   handlers
