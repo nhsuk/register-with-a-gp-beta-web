@@ -3,17 +3,26 @@ import {postHandlerFactory, getHandlerFactory} from './common';
 
 
 const schema = Joi.object().keys({
-  'allergies': Joi.string().max(200).label('Allergies')
+  'any-allergies': Joi.boolean().required()
     .meta({
-      componentType: 'textbox',
-      variant: 'large',
+      componentType: 'multiple-choice',
+      children: [
+        { label: 'Yes', value: 'true' },
+        { label: 'No', value: 'false' },
+      ],
+      variant: 'radio',
+    })
+    .options({
+      language: {
+        any: { required: '!!Please tell us if you have any allergies' },
+      },
     }),
   'submit': Joi.any().optional().strip()
 });
 
 const title = 'Do you have any allergies?';
 const key = 'allergies';
-const slug = 'allergies-details';
+const slug = 'allergies';
 
 const handlers = {
   GET: getHandlerFactory(key, title, schema),

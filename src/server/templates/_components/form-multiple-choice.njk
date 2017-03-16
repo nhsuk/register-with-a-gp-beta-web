@@ -48,7 +48,7 @@
       {% if variant == 'checkbox' %}
         {% set isSelected = (value and (inputValue in value)) %}
       {% else %}
-        {% set isSelected = (inputValue == value) %}
+        {% set isSelected = (inputValue | string == value | string) %}
       {% endif %}
 
       <label

@@ -2,17 +2,26 @@ import Joi from 'joi';
 import {postHandlerFactory, getHandlerFactory} from './common';
 
 const schema = Joi.object().keys({
-  'medication': Joi.string().max(200).label('Current medication')
+  'current-medication': Joi.boolean().required()
     .meta({
-      componentType: 'textbox',
-      variant: 'large',
+      componentType: 'multiple-choice',
+      children: [
+        { label: 'Yes', value: 'true' },
+        { label: 'No', value: 'false' },
+      ],
+      variant: 'radio',
+    })
+    .options({
+      language: {
+        any: { required: '!!Please tell us if you’re currently taking any medication' },
+      },
     }),
   'submit': Joi.any().optional().strip()
 });
 
 const title = 'Are you taking any medication?';
-const key = 'medication';
-const slug = 'current-medication-details';
+const key = 'currentMedication';
+const slug = 'current-medication';
 
 const handlers = {
   GET: getHandlerFactory(key, title, schema),

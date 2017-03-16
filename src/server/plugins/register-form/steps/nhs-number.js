@@ -5,12 +5,25 @@ import {postHandlerFactory, getHandlerFactory} from './common';
 const Joi = JoiBase.extend(JoiNHSNumber);
 
 const schema = Joi.object().keys({
-  'nhs-number': Joi.string().nhsnumber().options({ language: { string: { nhsnumber: '!!Please enter a valid NHS number' } } }).meta({ componentType: 'textbox' }),
+  'nhs-number-known': Joi.boolean().required()
+    .meta({
+      componentType: 'multiple-choice',
+      children: [
+        { label: 'Yes', value: 'true' },
+        { label: 'No', value: 'false' },
+      ],
+      variant: 'radio',
+    })
+    .options({
+      language: {
+        any: { required: '!!Please tell us if you know your NHS number' },
+      },
+    }),
   'submit': Joi.any().optional().strip(),
 });
 
-const title = 'What is your NHS Number?';
-const key = 'nhs-number';
+const title = 'Do you know your NHS number?';
+const key = 'nhsNumber';
 const slug = 'nhs-number';
 
 const handlers = {

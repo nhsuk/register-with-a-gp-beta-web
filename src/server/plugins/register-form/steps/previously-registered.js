@@ -2,12 +2,12 @@ import Joi from 'joi';
 import {postHandlerFactory, getHandlerFactory} from './common';
 
 const schema = Joi.object().keys({
-  'previously-registered': Joi.boolean().truthy('Yes').falsy('No').required()
+  'previously-registered': Joi.boolean().required()
     .meta({
       componentType: 'multiple-choice',
       children: [
-        { label: 'Yes' },
-        { label: 'No' },
+        { label: 'Yes', value: 'true' },
+        { label: 'No', value: 'false' },
       ],
       variant: 'radio',
     })
