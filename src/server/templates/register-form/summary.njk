@@ -27,12 +27,18 @@
       {{ row('Email', data.email, true) }}
       {{ row('Telephone', data.telephone, true) }}
       {% if data.previouslyRegistered['previously-registered'] %}
-        {{ row('Previous registered dddress', data.previousAddress, true) }}
+        {{ row('Previous registered address', data.previousAddress, true) }}
         {{ row('Previous registered name', data.previousName) }}
       {% endif %}
-      {{ row('NHS number', data.nhsNumber, true) }}
-      {{ row('Medication', data.medication, true) }}
-      {{ row('Alergies', data.alergies, true) }}
+      {% if data.nhsNumber['nhs-number-known'] %}
+        {{ row('NHS number', data.nhsNumberDetails, true) }}
+      {% endif %}
+      {% if data.currentMedication['current-medication'] %}
+        {{ row('Medication', data.medicationDetails, true) }}
+      {% endif %}
+      {% if data.allergies['any-allergies'] %}
+        {{ row('Alergies', data.allergiesDetails, true) }}
+      {% endif %}
     </table>
 
     <form method="post">

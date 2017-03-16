@@ -7,8 +7,11 @@ import previouslyRegisteredStep from './previously-registered';
 import previousAddressStep from './previous-address';
 import previousNameStep from './previous-name';
 import nhsNumberStep from './nhs-number';
+import nhsNumberDetailsStep from './nhs-number-details';
 import currentMedicationStep from './current-medication';
+import currentMedicationDetailsStep from './current-medication-details';
 import allergiesStep from './allergies';
+import allergiesDetailsStep from './allergies-details';
 import summaryStep from './summary';
 /**
  * @typedef {object} InputField
@@ -51,8 +54,11 @@ const steps = [
   previousAddressStep,
   previousNameStep,
   nhsNumberStep,
+  nhsNumberDetailsStep,
   currentMedicationStep,
+  currentMedicationDetailsStep,
   allergiesStep,
+  allergiesDetailsStep,
   summaryStep
 ];
 
