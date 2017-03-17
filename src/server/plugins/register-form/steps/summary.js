@@ -63,7 +63,7 @@ function summaryPostHandler(request, reply) {
 }
 
 const handlers = {
-  GET: summaryGetHandler,
+  GET: () => summaryGetHandler,
   POST: () => summaryPostHandler
 };
 

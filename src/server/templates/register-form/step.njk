@@ -24,7 +24,9 @@
 
       <div class="form-group">
         <button type="submit" class="button">Continue</button>
-        <a href="" class="button button--back">Back</a>
+        {% if prevStep %}
+          <a href="{{ prevStep }}" class="button button--back">Back</a>
+        {% endif %}
       </div>
 
     </form>

@@ -13,8 +13,8 @@ const key = 'dateOfBirth';
 const slug = 'date-of-birth';
 
 const handlers = {
-  GET: getHandlerFactory(key, title, schema),
-  POST: nextStep => postHandlerFactory(key, title, schema, nextStep)
+  GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps),
+  POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps),
 };
 
 /**
