@@ -1,5 +1,19 @@
+.button--secondary {
+  @include button(#e6eff8);
+
+  &:link,
+  &:visited,
+  &:focus,
+  &:active,
+  &:hover {
+    border: 1px solid #ccdff1;
+  }
+}
+
 .button--back {
   @include core-font(16);
+  box-shadow: none;
+  display: block;
   float: left;
   line-height: 56px;
   padding: 0;
@@ -27,6 +41,7 @@
     height: 0;
     margin-left: -13px;
     margin-right: 8px;
+    position: relative;
     width: 0;
 
     @include media(tablet) {
@@ -39,17 +54,5 @@
   @include media(tablet) {
     margin-left: 0;
     margin-right: $default-spacing-unit * 2;
-  }
-}
-
-.button--secondary {
-  &:link,
-  &:visited,
-  &:focus,
-  &:active,
-  &:hover {
-    background-color: #e6eff8;
-    border: 1px solid #ccdff1;
-    color: $black;
   }
 }

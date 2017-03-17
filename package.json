@@ -27,7 +27,7 @@
     "jquery": "~1.12.4",
     "lodash": "^4.17.4",
     "nhs-number-validator": "^1.1.1",
-    "nhsuk-frontend": "nhsuk/frontend#0.1.0",
+    "nhsuk-frontend": "nhsuk/frontend#0.2.0",
     "node-ews": "^3.0.6",
     "node-sass": "^4.5.0",
     "npm-run-all": "^4.0.1",
