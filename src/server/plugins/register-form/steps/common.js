@@ -56,21 +56,17 @@ export function getFieldData(schema) {
   return fields;
 }
 
-export function getHandlerFactory(
-  key,
-  title,
-  schema,
-  template = 'register-form/step') {
-  return (request, reply) => {
-    request.log(['cookie'], request.state.data);
-    const stepData = _.get(request, `state.data.${key}`, {});
+export function getPrevStep(prevSteps, cookieData, request) {
+  // loop in reverse
+  for (let i = prevSteps.length - 1; i >= 0; i--) {
+    const step = prevSteps[i];
+    const check = _.get(step, 'checkApplies', () => true);
 
-    return reply.view(template, {
-      fields: getFieldData(schema),
-      stepData,
-      title,
-    });
-  };
+    if (check(cookieData)) {
+      return request.aka(`register-form:${step.key}`);
+    }
+  }
+  return;
 }
 
 export function getNextStep(nextSteps, cookieData) {
@@ -81,6 +77,26 @@ export function getNextStep(nextSteps, cookieData) {
     }
   }
   return 'end';
+}
+
+export function getHandlerFactory(
+  key,
+  title,
+  schema,
+  prevSteps,
+  template = 'register-form/step') {
+  return (request, reply) => {
+    request.log(['cookie'], request.state.data);
+    const stepData = _.get(request, `state.data.${key}`, {});
+    const prevStep = getPrevStep(prevSteps, request.state.data, request);
+
+    return reply.view(template, {
+      fields: getFieldData(schema),
+      stepData,
+      title,
+      prevStep,
+    });
+  };
 }
 
 /**
@@ -101,6 +117,7 @@ export function postHandlerFactory(
   key,
   title,
   schema,
+  prevSteps,
   nextSteps,
   template = 'register-form/step') {
   return (request, reply) => {
@@ -116,6 +133,7 @@ export function postHandlerFactory(
       .catch(err => {
         request.log(['error'], err);
         const stepErrors = {};
+        const prevStep = getPrevStep(prevSteps, request.state.data, request);
 
         _.each(err.details, (error) => {
           stepErrors[error.path] = {
@@ -129,6 +147,7 @@ export function postHandlerFactory(
           stepData: err._object,
           title,
           stepErrors,
+          prevStep,
         });
       });
   };
