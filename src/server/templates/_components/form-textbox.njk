@@ -39,7 +39,7 @@
     type="text"
     name="{{ name }}"
     id="input-{{ name }}"
-    class="form-textbox{{ ' has-error' if error }}"
+    class="form-textbox{{ ' form-textbox--short' if variant == 'short' }}{{ ' has-error' if error }}"
     {% if value %}
       value="{{ value }}"
     {% endif %}
