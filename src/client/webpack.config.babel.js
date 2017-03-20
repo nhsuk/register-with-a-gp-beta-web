@@ -7,6 +7,7 @@ import SassImportOnce from 'node-sass-import-once';
 export default {
   entry: {
     main: [
+      Path.join(__dirname, './js/vendor/polyfills/details.polyfill.js'),
       Path.join(__dirname, './js'),
       Path.join(__dirname, './styles')
     ],
