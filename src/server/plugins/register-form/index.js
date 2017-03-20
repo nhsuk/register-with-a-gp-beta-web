@@ -9,7 +9,7 @@ exports.register = function(server, options, next) {
   };
 
   const stateConfig = cookies.encryptedCookies(!server.settings.app.debug);
-  stateConfig.options.path = server.realm.modifiers.route.prefix || '/';
+  stateConfig.path = server.realm.modifiers.route.prefix || '/';
 
   const {assign} = Object;
 
@@ -19,7 +19,7 @@ exports.register = function(server, options, next) {
     {plugins: {crumb: true}}
   );
 
-  server.state(stateConfig.name, stateConfig.options);
+  server.state('data', stateConfig);
 
   steps.forEach((step, index, arr) => {
     const nextSteps = arr.slice(index + 1);

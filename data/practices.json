@@ -1,0 +1,65 @@
+[
+  {
+    "key": "ohoran-partners",
+    "name": "Dr P O’Horan and Partners",
+    "contact": {
+      "phone": ["0844 414 0726"],
+      "address": [
+        "4 Albion Place\nBennetthorpe\nDoncaster\nDN1 2EG"
+      ]
+    }
+  },
+  {
+    "key": "peel-croft-surgery",
+    "name": "Peel Croft Surgery",
+    "contact": {
+      "phone": ["01283 568 405"],
+      "address": [
+        "Lichfield Street\nBurton-on-Trent\nDE14 3RH"
+      ]
+    }
+  },
+  {
+    "key": "pioneer-medical-group",
+    "name": "Pioneer Medical Group",
+    "contact": {
+      "phone": ["0117 959 1919"],
+      "address": [
+        "Pioneer at Avonmouth\nCollins Street\nAvonmouth\nBS11 9JJ",
+        "Pioneer at Bradgate\nArdenton Walk\nBrentry\nBS10 6SP",
+        "Pioneer at Ridingleaze\nRidingleaze\nLawrence Weston\nBS11 0QE"
+      ]
+    }
+  },
+  {
+    "key": "rosebank-health",
+    "name": "Rosebank Health",
+    "contact": {
+      "phone": ["01452 543 000"],
+      "address": [
+        "Rosebank Surgery\n153b Stroud Road\nGloucester\nGL1 5JQ",
+        "Severnvale Surgery\nSt James\nQuedgeley\nGloucester\nGL2 4WD"
+      ]
+    }
+  },
+  {
+    "key": "the-wolds-practice",
+    "name": "The Wolds Practice",
+    "contact": {
+      "phone": ["01507 534903"],
+      "address": [
+        "West Road\nTetford\nLincolnshire\nLN9 6QP"
+      ]
+    }
+  },
+  {
+    "key": "wallington-family-practice",
+    "name": "Wallington Family Practice",
+    "contact": {
+      "phone": ["0208 669 6186"],
+      "address": [
+        "Jubilee Health Centre\nShotfield\nWallington\nSM6 0HY"
+      ]
+    }
+  }
+]
