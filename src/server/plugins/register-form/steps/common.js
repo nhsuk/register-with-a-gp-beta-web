@@ -84,14 +84,16 @@ export function getHandlerFactory(
   title,
   schema,
   prevSteps,
+  beforeTemplate,
   template = 'register-form/step') {
   return (request, reply) => {
-    request.log(['cookie'], request.state.data);
     const stepData = _.get(request, `state.data.${key}`, {});
     const prevStep = getPrevStep(prevSteps, request.state.data, request);
 
     return reply.view(template, {
       fields: getFieldData(schema),
+      data: request.state.data,
+      beforeTemplate,
       stepData,
       title,
       prevStep,
@@ -119,6 +121,7 @@ export function postHandlerFactory(
   schema,
   prevSteps,
   nextSteps,
+  beforeTemplate,
   template = 'register-form/step') {
   return (request, reply) => {
     // if form valid then redirect to next step
@@ -144,7 +147,9 @@ export function postHandlerFactory(
 
         return reply.view(template, {
           fields: getFieldData(schema),
+          data: request.state.data,
           stepData: err._object,
+          beforeTemplate,
           title,
           stepErrors,
           prevStep,

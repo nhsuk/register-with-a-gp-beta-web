@@ -1,0 +1,9 @@
+.panel {
+  border-left: $baseline-grid-unit / 2 solid $grey-3;
+  padding: $baseline-grid-unit $baseline-grid-unit * 4;
+
+  @include media(tablet) {
+    padding-left: $baseline-grid-unit * 8;
+    padding-right: $baseline-grid-unit * 8;
+  }
+}

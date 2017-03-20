@@ -1,0 +1,8 @@
+{% set space = joiner(' ') %}
+<div class="panel">
+  <p>
+    {%- for name, line in data.name -%}
+      {% if line -%}{{ space() | safe }}{{ line }}{%- endif %}
+    {%- endfor %}
+  </p>
+</div>
