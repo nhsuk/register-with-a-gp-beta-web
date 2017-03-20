@@ -26,6 +26,12 @@ function addGlobals(environment, isDebug = false) {
   Object.entries(globals).map(([name, value]) => environment.addGlobal(name, value));
 }
 
+function addFilters(env) {
+  env.addFilter('nl2br', function(str) {
+    return str.toString().replace(/\n/g, '<br>');
+  });
+}
+
 function ComponentExtension(env) {
   this.tags = ['component'];
 
@@ -88,6 +94,7 @@ exports.register = function(server, options, next) {
             noCache: debug
           });
           addGlobals(options.compileOptions.environment);
+          addFilters(options.compileOptions.environment);
           options.compileOptions.environment.addExtension('ComponentExtension', new ComponentExtension(options.compileOptions.environment));
           return next();
         }

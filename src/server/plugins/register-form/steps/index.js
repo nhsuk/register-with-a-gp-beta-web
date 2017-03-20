@@ -4,14 +4,18 @@ import homeAddressStep from './home-address';
 import contactEmailStep from './contact-email';
 import contactTelephoneStep from './contact-telephone';
 import previouslyRegisteredStep from './previously-registered';
-import previousAddressStep from './previous-address';
-import previousNameStep from './previous-name';
+import currentGP from './current-gp';
+import registeredAddressStep from './registered-address';
+import registeredAddressDetailsStep from './registered-address-details';
+import registeredNameStep from './registered-name';
+import registeredNameDetailsStep from './registered-name-details';
 import nhsNumberStep from './nhs-number';
 import nhsNumberDetailsStep from './nhs-number-details';
 import currentMedicationStep from './current-medication';
 import currentMedicationDetailsStep from './current-medication-details';
 import allergiesStep from './allergies';
 import allergiesDetailsStep from './allergies-details';
+import medicalHistoryStep from './medical-history';
 import summaryStep from './summary';
 /**
  * @typedef {object} InputField
@@ -30,6 +34,7 @@ import summaryStep from './summary';
  * @property {string} slug - slug used to make up the last part of the url
  * @property {string} title - Title of the page and what is asked to the user,
  * this is also slugified into the url for the page.
+ * @property {string} beforeTemplate - A template to include before the fields
  * @property {object} schema - a Joi schema to validate the supplied data
  * against.
  * @property {object} handlers - a GET and POST handler, typically created
@@ -51,14 +56,18 @@ const steps = [
   contactTelephoneStep,
   // armed forces?
   previouslyRegisteredStep,
-  previousAddressStep,
-  previousNameStep,
+  currentGP,
+  registeredAddressStep,
+  registeredAddressDetailsStep,
+  registeredNameStep,
+  registeredNameDetailsStep,
   nhsNumberStep,
   nhsNumberDetailsStep,
   currentMedicationStep,
   currentMedicationDetailsStep,
   allergiesStep,
   allergiesDetailsStep,
+  medicalHistoryStep,
   summaryStep
 ];
 

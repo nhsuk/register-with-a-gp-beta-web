@@ -1,21 +1,20 @@
 import Joi from 'joi';
+
 import previouslyRegisteredStep from './previously-registered';
-import {
-  postHandlerFactory,
-  getHandlerFactory,
-  dependsOnBoolean
-} from './common';
+import { postHandlerFactory, getHandlerFactory, dependsOnBoolean } from './common';
 
 const schema = Joi.object().keys({
-  'first-name': Joi.string().label('First name').meta({ componentType: 'textbox' }),
-  'middle-names': Joi.string().allow('').optional().label('Middle names').meta({ componentType: 'textbox' }),
-  'last-name': Joi.string().label('Last name').meta({ componentType: 'textbox' }),
+  'practice-details': Joi.string().max(200).label('Current GP')
+    .meta({
+      componentType: 'textbox',
+      variant: 'large',
+    }),
   'submit': Joi.any().optional().strip()
-}).or('first-name', 'middle-names', 'last-name');
+});
 
-const title = 'Are you registered with a different name?';
-const key = 'previousName';
-const slug = 'registered-name';
+const title = 'What is the name and address of your current GP practice?';
+const key = 'currentGP';
+const slug = 'current-gp';
 
 const handlers = {
   GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps),

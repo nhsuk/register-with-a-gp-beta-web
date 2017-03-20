@@ -1,7 +1,9 @@
 import JoiBase from 'joi';
 import JoiPostcodeExtension from 'joi-postcode';
-import {postHandlerFactory, getHandlerFactory, dependsOnBoolean} from './common';
+
+import { postHandlerFactory, getHandlerFactory, dependsOnBoolean } from './common';
 import previouslyRegisteredStep from './previously-registered';
+import registeredAddressStep from './registered-address';
 
 const Joi = JoiBase.extend(JoiPostcodeExtension);
 
@@ -21,8 +23,8 @@ const schema = Joi.object().keys({
 })
   .or('address1', 'address2', 'address3');
 
-const title = 'Are you registered with a different address?';
-const key = 'previousAddress';
+const title = 'What was your address?';
+const key = 'registeredAddressDetails';
 const slug = 'registered-address-manual';
 
 const handlers = {
@@ -30,7 +32,16 @@ const handlers = {
   POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps),
 };
 
-const checkApplies = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered');
+const checkApplies = (cookieData) => {
+  const registered = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered')(cookieData);
+  const incorrect = dependsOnBoolean(registeredAddressStep, 'registered-address-correct', false)(cookieData);
+
+  if (registered && incorrect) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 /**
  * @type Step
@@ -41,5 +52,5 @@ export default {
   title,
   schema,
   handlers,
-  checkApplies
+  checkApplies,
 };

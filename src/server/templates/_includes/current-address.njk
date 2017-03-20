@@ -1,0 +1,8 @@
+{% set linebreak = joiner('<br>') %}
+<div class="panel">
+  <p>
+    {%- for name, line in data.address -%}
+      {% if line -%}{{ linebreak() | safe }}{{ line }}{%- endif %}
+    {%- endfor %}
+  </p>
+</div>

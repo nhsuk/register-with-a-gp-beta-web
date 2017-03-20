@@ -7,7 +7,7 @@
     <th class="summary__title" scope="row">{{ title }}</th>
     <td class="summary__content">
       {%- for name, line in fields -%}
-        {% if line -%}{{ join() | safe }}{{ line }}{%- endif %}
+        {% if line -%}{{ join() | safe }}{{ line | nl2br | safe }}{%- endif %}
       {%- endfor %}
     </td>
     <td class="summary__control">
@@ -24,20 +24,59 @@
       {{ row('Name', data.name) }}
       {{ row('Date of birth', data.dateOfBirth, false, '/') }}
       {{ row('Address', data.address, true) }}
-      {{ row('Email', data.email, true) }}
-      {{ row('Telephone', data.telephone, true) }}
-      {% if data.previouslyRegistered['previously-registered'] %}
-        {{ row('Previous registered address', data.previousAddress, true) }}
-        {{ row('Previous registered name', data.previousName) }}
+      {% if data.email.email %}
+        {{ row('Email', data.email, true) }}
+      {% else %}
+        {{ row('Email', {'empty': 'I’m not providing an email address'}) }}
       {% endif %}
+      {{ row('Telephone', data.telephone, true) }}
       {% if data.nhsNumber['nhs-number-known'] %}
         {{ row('NHS number', data.nhsNumberDetails, true) }}
+      {% else %}
+        {{ row('NHS number', {'empty': 'I don’t know my NHS number'}) }}
       {% endif %}
+    </table>
+
+    <table class="summary">
+      <caption>Your current GP</caption>
+
+      {% if data.previouslyRegistered['previously-registered'] %}
+        {{ row('Current GP', data.currentGP, true) }}
+        {% if data.registedAddress['registered-address-correct'] %}
+          {{ row('Registered address', data.address, true) }}
+        {% else %}
+          {{ row('Registered address', data.registeredAddressDetails, true) }}
+        {% endif %}
+
+        {% if data.registeredName['registered-name-correct'] %}
+          {{ row('Registered name', data.name) }}
+        {% else %}
+          {{ row('Registered name', data.registeredNameDetails) }}
+        {% endif %}
+      {% else %}
+        {{ row('Current GP', {'empty': 'I’m not registered with a GP'}) }}
+      {% endif %}
+    </table>
+
+    <table class="summary">
+      <caption>Your health</caption>
+
       {% if data.currentMedication['current-medication'] %}
         {{ row('Medication', data.medicationDetails, true) }}
+      {% else %}
+        {{ row('Medication', {'empty': 'I’m not currently taking any medication'}) }}
       {% endif %}
+
       {% if data.allergies['any-allergies'] %}
         {{ row('Alergies', data.allergiesDetails, true) }}
+      {% else %}
+        {{ row('Alergies', {'empty': 'I don’t have any allergies'}) }}
+      {% endif %}
+
+      {% if data.medicalHistory['medical-history'] %}
+        {{ row('Health', data.allergiesDetails, true) }}
+      {% else %}
+        {{ row('Health', {'empty': 'I’m not supplying any health details'}) }}
       {% endif %}
     </table>
 
