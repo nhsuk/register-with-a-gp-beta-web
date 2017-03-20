@@ -1,0 +1,11 @@
+table {
+  caption {
+    @include core-font(24);
+    margin: 0 0 $baseline-grid-unit * 4;
+    text-align: left;
+
+    @include media(tablet) {
+      margin-bottom: $baseline-grid-unit * 8;
+    }
+  }
+}
