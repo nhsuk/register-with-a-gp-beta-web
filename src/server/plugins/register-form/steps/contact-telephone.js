@@ -3,7 +3,7 @@ import {postHandlerFactory, getHandlerFactory} from './common';
 
 
 const schema = Joi.object().keys({
-  'telephone': Joi.string().max(20).allow('').optional().label('Telephone').meta({ componentType: 'textbox' }),
+  'telephone': Joi.string().max(20).label('Telephone').meta({ componentType: 'textbox' }),
   'submit': Joi.any().optional().strip()
 });
 
