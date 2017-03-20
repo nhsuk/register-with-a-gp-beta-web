@@ -41,7 +41,7 @@ exports.register = function(server, options, next) {
   server.route({
     method: 'GET',
     config: _.merge({}, statelessConfig, {id: 'end'}),
-    path: '/end',
+    path: '/registration-submitted',
     handler: endHandler
   });
 
