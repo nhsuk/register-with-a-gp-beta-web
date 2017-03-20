@@ -12,6 +12,7 @@ import currentMedicationStep from './current-medication';
 import currentMedicationDetailsStep from './current-medication-details';
 import allergiesStep from './allergies';
 import allergiesDetailsStep from './allergies-details';
+import medicalHistoryStep from './medical-history';
 import summaryStep from './summary';
 /**
  * @typedef {object} InputField
@@ -59,6 +60,7 @@ const steps = [
   currentMedicationDetailsStep,
   allergiesStep,
   allergiesDetailsStep,
+  medicalHistoryStep,
   summaryStep
 ];
 
