@@ -8,3 +8,6 @@ script:
 - yarn build
 - yarn run lint
 - yarn test
+
+after_success:
+- ./ci-deploy/docker_ci.sh
