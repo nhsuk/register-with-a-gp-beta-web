@@ -26,7 +26,7 @@ function practiceHandler(request, reply) {
 
 function startHandler(request, reply) {
   if (request.state.practice) {
-    reply.view('index', {});
+    reply.view('start');
   } else {
     reply.redirect(request.aka('choose'));
   }
