@@ -95,5 +95,10 @@
   "pre-commit": [
     "test",
     "lint"
-  ]
+  ],
+  "greenkeeper": {
+    "ignore": [
+      "jquery"
+    ]
+  }
 }
