@@ -11,7 +11,11 @@ const LoadFile = {
       contents = null;
     }
 
-    return JSON.parse(contents);
+    if (contents !== null) {
+      return JSON.parse(contents);
+    } else {
+      return contents;
+    }
   },
 };
 
