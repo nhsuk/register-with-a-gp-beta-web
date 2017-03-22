@@ -74,7 +74,7 @@
       {% endif %}
 
       {% if data.medicalHistory['medical-history'] %}
-        {{ row('Health', data.allergiesDetails, true) }}
+        {{ row('Health', data.medicalHistory, true) }}
       {% else %}
         {{ row('Health', {'empty': 'I’m not supplying any health details'}) }}
       {% endif %}
@@ -86,7 +86,7 @@
     </form>
 
     <p>
-      Your details will be sent to {{ PRACTICE_NAME }} to begin your registration.
+      Your details will be sent to {{ CURRENT_PRACTICE.name | default('the GP practice') }} to begin your registration.
       {% if data.email.email %}
         A confirmation email will be sent to {{ data.email.email }}.
       {% endif %}

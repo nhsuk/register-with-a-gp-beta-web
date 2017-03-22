@@ -1,8 +1,10 @@
 {% extends 'layouts/base.njk' %}
 
+{% set serviceTitle = '' %}
+
 {% block body_main_content %}
   <div class="local-header">
-    <h1 class="local-header__title">Apply to register with a GP practice</h1>
+    <h1 class="local-header__title">Apply to register with {{ CURRENT_PRACTICE.name | default('a GP practice') }}</h1>
 
     <div class="local-header__intro">
       <p>It usually takes about 10 minutes.</p>
@@ -21,7 +23,7 @@
 
       <h3>Other things you’ll be asked</h3>
 
-      <p>It will help Field Way Practice find your medical records if you’re able to provide as much information as you can. This could include:</p>
+      <p>It will help {{ CURRENT_PRACTICE.name | default('the GP practice') }} find your medical records if you’re able to provide as much information as you can. This could include:</p>
 
       <ul>
         <li>the GP you’re currently registered with if you have one</li>

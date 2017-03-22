@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import https from 'https';
-import cache from '../../config/cache';
 import cookies from '../../config/cookies';
 import naturalSort from 'javascript-natural-sort';
 
@@ -57,14 +56,13 @@ function addressLookuptHandler(request, reply) {
 
 
 exports.register = function(server, options, next) {
-  const statelessConfig = {
+  const routeConfig = {
     state: cookies.disableCookies,
-    cache: cache.cacheable
   };
   if (options.exposeEndpoint) {
     server.route({
       method: 'POST',
-      config: _.merge({}, statelessConfig, {id: 'address'}),
+      config: _.merge({}, routeConfig, {id: 'address'}),
       path: '/address',
       handler: addressLookuptHandler
     });

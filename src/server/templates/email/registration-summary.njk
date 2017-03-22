@@ -73,7 +73,7 @@ Your health
 {% endif %}
 
 {% if data.medicalHistory['medical-history'] %}
-  {{ render_multi_line('Health', data.allergiesDetails, true) }}
+  {{ render_multi_line('Health', data.medicalHistory, true) }}
 {% else %}
   {{ render_one_line('Health', {'empty': 'I’m not supplying any health details'}) }}
 {% endif %}

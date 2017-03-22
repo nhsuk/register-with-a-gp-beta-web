@@ -1,12 +1,40 @@
 {% extends 'layouts/base.njk' %}
 
+{% if practice %}
+  {% set serviceTitle = 'Register with ' + practice.name %}
+{% endif %}
+
 {% block body_main_content %}
   <div class="page-section">
-    <h1 class="heading-medium">Thank you for applying to register</h1>
+    <h1 class="heading-medium">Thank you for applying to register with {{ practice.name | default('a GP practice') }}</h1>
 
     <div class="reading-width">
-      <p>They are dealing with your registration application. They will contact
+      <p>They are dealing with your registration application and will contact
         you about it when they have completed processing it.</p>
+
+      {% if practice %}
+        <p>
+          <strong>{{ practice.name }}</strong>
+          {% if practice.contact.address.length %}
+            {% set linebreak = joiner('<br>') %}
+            {% for address in practice.contact.address %}
+              <br>
+              {{ linebreak() | safe }}
+              {{ address | nl2br | safe }}
+            {% endfor %}
+          {% endif %}
+        </p>
+
+        {% if practice.contact.phone %}
+          {% set linebreak = joiner('<br>') %}
+          <p>
+            {% for phone in practice.contact.phone %}
+              {{ linebreak() | safe }}
+              Phone: {{ phone }}
+            {% endfor %}
+          </p>
+        {% endif %}
+      {% endif %}
 
       <div class="callout callout--attention">
         <p><strong>If you need to see a doctor sooner, contact the practice or <a href="http://www.nhs.uk/service-search">find

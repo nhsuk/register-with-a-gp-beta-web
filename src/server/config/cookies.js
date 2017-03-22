@@ -9,15 +9,12 @@ export default {
   },
   encryptedCookies (isSecure) {
     return {
-      name: 'data',
-      options: {
-        isSecure: isSecure,
-        isSameSite: 'Lax',
-        encoding: 'iron',
-        clearInvalid: true,
-        password: process.env.SESSION_SECRET,
-        ttl: null // session cookie
-      }
+      isSecure: isSecure,
+      isSameSite: 'Lax',
+      encoding: 'iron',
+      clearInvalid: true,
+      password: process.env.SESSION_SECRET,
+      ttl: null, // session cookie
     };
   }
 };

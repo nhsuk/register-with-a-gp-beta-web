@@ -38,7 +38,7 @@ export function emailGP(emailText) {
 
 function summaryPostHandler(request, reply) {
   validate(request.payload, schema)
-    .then(async value => {
+    .then(async () => {
       const data = _.get(request, 'state.data', {});
 
       const emailText = await renderTemplate(
@@ -48,8 +48,13 @@ function summaryPostHandler(request, reply) {
       emailGP(emailText)
         .then(() => {
           return reply
-            .redirect(request.aka(nextStep))
-            .state('data', _.merge({}, request.state.data, {[key]: value}));
+            .redirect(request.aka(nextStep, {
+              params: {
+                practice: request.state.practice || '',
+              },
+            }))
+            .unstate('data')
+            .unstate('practice');
         })
         .catch(err => {
           throw err;

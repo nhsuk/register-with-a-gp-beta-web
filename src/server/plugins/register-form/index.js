@@ -1,25 +1,19 @@
-import cache from '../../config/cache';
 import cookies from '../../config/cookies';
 import steps from './steps';
 
 exports.register = function(server, options, next) {
-  const cookiesNoCacheConfig = {
-    cache: cache.notCacheable,
-    state: cookies.enableCookies
-  };
-
   const stateConfig = cookies.encryptedCookies(!server.settings.app.debug);
-  stateConfig.options.path = server.realm.modifiers.route.prefix || '/';
+  stateConfig.path = server.realm.modifiers.route.prefix || '/';
 
-  const {assign} = Object;
+  const { assign } = Object;
 
   const routeConfig = assign(
     {},
-    cookiesNoCacheConfig,
-    {plugins: {crumb: true}}
+    { state: cookies.enableCookies },
+    { plugins: { crumb: true } }
   );
 
-  server.state(stateConfig.name, stateConfig.options);
+  server.state('data', stateConfig);
 
   steps.forEach((step, index, arr) => {
     const nextSteps = arr.slice(index + 1);

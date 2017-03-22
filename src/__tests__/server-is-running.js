@@ -1,5 +1,5 @@
-import http from 'http';
-import {startTestServer, stopTestServer} from './helpers';
+import request from 'request';
+import {startTestServer, stopTestServer, resolveUrl} from './helpers';
 
 const context = {};
 
@@ -10,9 +10,8 @@ beforeAll(() => {
 describe('http server', () => {
   it('should return a 200 status code', () => {
     return new Promise((resolve) => {
-      http.get(`http://localhost:${context.runningInstance.info.port}/`, res => {
-        expect(res.statusCode).toEqual(302);
-        expect(res.headers.location).toEqual('/start');
+      request(resolveUrl('choose'), (err, res) => {
+        expect(res.statusCode).toEqual(200);
         resolve();
       });
     });

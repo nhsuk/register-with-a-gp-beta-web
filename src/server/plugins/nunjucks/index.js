@@ -1,7 +1,10 @@
 import Path from 'path';
 import Nunjucks from 'nunjucks';
-import fs from 'fs';
-import {formatDate} from './functions';
+import _ from 'lodash';
+
+import { formatDate } from './functions';
+import PracticeLookup from '../../../shared/lib/practice-lookup';
+import LoadFile from '../../../shared/lib/load-file';
 
 const webpackAssetsPath = Path.resolve(__dirname, '../../../client/compiled/webpack-assets.json');
 const webpackAssets = require(webpackAssetsPath);
@@ -9,19 +12,14 @@ const webpackAssets = require(webpackAssetsPath);
 const COMPONENTS_PATH = '_components/';
 const COMPONENT_EXT = 'njk';
 
-function readJson(path) {
-  const text = fs.readFileSync(require.resolve(path), 'utf8');
-  return JSON.parse(text);
-}
-
 function addGlobals(environment, isDebug = false) {
-  const data = isDebug ? readJson(webpackAssetsPath) : webpackAssets;
+  const data = isDebug ? LoadFile.readJson(webpackAssetsPath) : webpackAssets;
 
   const globals = {
     jsBundle: data.main.js,
     cssBundle: data.main.css,
     asset_path: filename => `/${filename}`,
-    formatDate: formatDate
+    formatDate: formatDate,
   };
   Object.entries(globals).map(([name, value]) => environment.addGlobal(name, value));
 }
@@ -104,7 +102,21 @@ exports.register = function(server, options, next) {
       Path.join(server.settings.app.repo_root, 'src/server/templates/'),
       Path.join(server.settings.app.repo_root, 'node_modules/nhsuk-frontend/src/templates'),
     ],
-    isCached: !debug
+    isCached: !debug,
+    context: function (request) {
+      if (_.has(request, 'state')) {
+        const practice = PracticeLookup.getPractice(request.state.practice);
+
+        if (typeof practice !== 'undefined') {
+          return {
+            serviceTitle: `Register with ${practice.name}`,
+            CURRENT_PRACTICE: practice,
+          };
+        }
+      }
+
+      return {};
+    },
   };
   const nunjucksEnv = server.root.views(engineConfig);
   server.expose('nunjucksEnv', nunjucksEnv);
