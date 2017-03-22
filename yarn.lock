@@ -154,7 +154,7 @@ ajv-keywords@^1.0.0, ajv-keywords@^1.1.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-1.5.1.tgz#314dd0a4b3368fad3dfcdc54ede6171b886daf3c"
 
-ajv@^4.11.2, ajv@^4.7.0:
+ajv@^4.11.2, ajv@^4.7.0, ajv@^4.9.1:
   version "4.11.2"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.11.2.tgz#f166c3c11cbc6cb9dcc102a5bcfe5b72c95287e6"
   dependencies:
@@ -1449,6 +1449,10 @@ capture-stack-trace@^1.0.0:
 caseless@~0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.11.0.tgz#715b96ea9841593cc33067923f5ec60ebda4f7d7"
+
+caseless@~0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
 
 catbox-memory@2.x.x:
   version "2.0.4"
@@ -3440,6 +3444,10 @@ hapi-dev-error-page@^0.0.1:
     subtext "^4.3.x"
     topo "2.x.x"
 
+har-schema@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/har-schema/-/har-schema-1.0.5.tgz#d263135f43307c02c602afc8fe95970c0151369e"
+
 har-validator@~2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/har-validator/-/har-validator-2.0.6.tgz#cdcbc08188265ad119b6a5a7c8ab70eecfb5d27d"
@@ -3448,6 +3456,13 @@ har-validator@~2.0.6:
     commander "^2.9.0"
     is-my-json-valid "^2.12.4"
     pinkie-promise "^2.0.0"
+
+har-validator@~4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/har-validator/-/har-validator-4.2.1.tgz#33481d0f1bbff600dd203d75812a6a5fba002e2a"
+  dependencies:
+    ajv "^4.9.1"
+    har-schema "^1.0.5"
 
 has-ansi@^0.1.0:
   version "0.1.0"
@@ -3570,10 +3585,6 @@ http-errors@~1.5.0, http-errors@~1.5.1:
     inherits "2.0.3"
     setprototypeof "1.0.2"
     statuses ">= 1.3.1 < 2"
-
-http-post@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/http-post/-/http-post-0.1.1.tgz#b9dc73ca772932157be50fd469c76fa18e83c945"
 
 http-proxy@1.15.2:
   version "1.15.2"
@@ -5162,27 +5173,6 @@ nhs-number-validator@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/nhs-number-validator/-/nhs-number-validator-1.1.1.tgz#97592ad7d8a8ab66df1597cd953f33ad4fdacf41"
 
-nhsuk-frontend@nhsuk/frontend#0.1.0:
-  version "0.1.0"
-  resolved "https://codeload.github.com/nhsuk/frontend/tar.gz/267f943d96bae196cd8eb70c964a60f23dd5f084"
-  dependencies:
-    "@frctl/fractal" "^1.1.3"
-    "@frctl/mandelbrot" "^1.1.0"
-    "@frctl/nunjucks" "^1.0.3"
-    autoprefixer "^6.7.2"
-    del "^2.2.2"
-    gulp "^3.9.1"
-    gulp-flatten "^0.3.1"
-    gulp-inject "^4.2.0"
-    gulp-postcss "^6.3.0"
-    gulp-sass "^3.1.0"
-    jquery "1.12"
-    lodash "^4.17.4"
-    node-sass "^4.5.0"
-    node-sass-import-once "^1.2.0"
-    nunjucks "^3.0.0"
-    run-sequence "^1.2.2"
-
 nhsuk-frontend@nhsuk/frontend#0.2.0:
   version "0.2.0"
   resolved "https://codeload.github.com/nhsuk/frontend/tar.gz/ba1f1b5b118c092e53dcc4f19f307cd7813f8161"
@@ -5760,6 +5750,10 @@ pbkdf2@^3.0.3:
   dependencies:
     create-hmac "^1.1.2"
 
+performance-now@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-0.2.0.tgz#33ef30c5c77d4ea21c5a53869d91b56d8f2555e5"
+
 pez@2.x.x:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/pez/-/pez-2.1.4.tgz#73f822fa62d599d65c4606f490d54d345191bc7c"
@@ -6198,6 +6192,10 @@ qs@6.2.1:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.3.0.tgz#f403b264f23bc01228c74131b407f18d5ea5d442"
 
+qs@~6.4.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
+
 query-string@^4.1.0:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-4.3.1.tgz#54baada6713eafc92be75c47a731f2ebd09cd11d"
@@ -6492,6 +6490,33 @@ request@2.78.0:
     tough-cookie "~2.3.0"
     tunnel-agent "~0.4.1"
 
+request@^2.81.0:
+  version "2.81.0"
+  resolved "https://registry.yarnpkg.com/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
+  dependencies:
+    aws-sign2 "~0.6.0"
+    aws4 "^1.2.1"
+    caseless "~0.12.0"
+    combined-stream "~1.0.5"
+    extend "~3.0.0"
+    forever-agent "~0.6.1"
+    form-data "~2.1.1"
+    har-validator "~4.2.1"
+    hawk "~3.1.3"
+    http-signature "~1.1.0"
+    is-typedarray "~1.0.0"
+    isstream "~0.1.2"
+    json-stringify-safe "~5.0.1"
+    mime-types "~2.1.7"
+    oauth-sign "~0.8.1"
+    performance-now "^0.2.0"
+    qs "~6.4.0"
+    safe-buffer "^5.0.1"
+    stringstream "~0.0.4"
+    tough-cookie "~2.3.0"
+    tunnel-agent "^0.6.0"
+    uuid "^3.0.0"
+
 require-all@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/require-all/-/require-all-2.1.0.tgz#109e1c3dab8a5acab2312f552d5e8d27d8de9f77"
@@ -6623,6 +6648,10 @@ rx-lite@^3.1.2:
 rx@4.1.0, rx@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
+
+safe-buffer@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.0.1.tgz#d263ca54696cd8a306b5ca6551e92de57918fbe7"
 
 sane@~1.5.0:
   version "1.5.0"
@@ -7411,6 +7440,12 @@ tryit@^1.0.1:
 tty-browserify@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
+
+tunnel-agent@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/tunnel-agent/-/tunnel-agent-0.6.0.tgz#27a5dea06b36b04a0a9966774b290868f0fc40fd"
+  dependencies:
+    safe-buffer "^5.0.1"
 
 tunnel-agent@~0.4.1:
   version "0.4.3"

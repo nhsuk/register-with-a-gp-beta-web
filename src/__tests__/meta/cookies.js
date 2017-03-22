@@ -1,5 +1,4 @@
-import http from 'http';
-import post from 'http-post';
+import request from 'request';
 
 import {startTestServer, stopTestServer, resolveUrl} from '../helpers';
 
@@ -12,7 +11,7 @@ describe('cache headers', () => {
   it('should not return a cookie on start page', () => {
     // const server = context.runningInstance;
     return new Promise((resolve) => {
-      http.get(resolveUrl('start'), res => {
+      request(resolveUrl('start'), (err, res) => {
         expect(res.statusCode).toEqual(200);
         expect('set-cookie' in res.headers).toBe(false);
         resolve();
@@ -22,18 +21,27 @@ describe('cache headers', () => {
 
   it('should return a cookie after form post', () => {
     return new Promise((resolve) => {
-      const data = {
-        'first-name': 'a',
-        'middle-names': '',
-        'last-name': 'test'
-      };
-      post(
-        resolveUrl('register-form:name'),
-        data,
-        res => {
+      request(resolveUrl('register-form:name'), (err, res) => {
+        const csrf = /csrf=(.*?);/.exec(res.headers['set-cookie'])[1];
+        const data = {
+          'first-name': 'a',
+          'middle-names': '',
+          'last-name': 'test',
+          csrf
+        };
+
+        request.post({
+          url: resolveUrl('register-form:name'),
+          headers: {
+            Cookie: `csrf=${csrf}`
+          },
+          form: data
+        }, (err, res2) => {
+          expect(res2.statusCode).toBeLessThan(400);
           expect('set-cookie' in res.headers).toBe(true);
           resolve();
         });
+      });
     });
   });
 
