@@ -18,9 +18,7 @@ Hello,
 
 {{ render_one_line('Name', data.name) }}
 
-Date of Birth:
-    {{ formatDate(data.dateOfBirth['year'], data.dateOfBirth['month'],
-        data.dateOfBirth['day']) }}
+Date of Birth: {{ data.dateOfBirth['year'] }}/{{ data.dateOfBirth['month'] }}/{{ data.dateOfBirth['day'] }}
 
 {{ render_multi_line('Address', data.address) }}
 
