@@ -1,10 +1,10 @@
 import Path from 'path';
 import Nunjucks from 'nunjucks';
-import fs from 'fs';
 import _ from 'lodash';
 
 import { formatDate } from './functions';
-import practiceLookup from '../../../shared/lib/practice-lookup';
+import PracticeLookup from '../../../shared/lib/practice-lookup';
+import LoadFile from '../../../shared/lib/load-file';
 
 const webpackAssetsPath = Path.resolve(__dirname, '../../../client/compiled/webpack-assets.json');
 const webpackAssets = require(webpackAssetsPath);
@@ -12,13 +12,8 @@ const webpackAssets = require(webpackAssetsPath);
 const COMPONENTS_PATH = '_components/';
 const COMPONENT_EXT = 'njk';
 
-function readJson(path) {
-  const text = fs.readFileSync(require.resolve(path), 'utf8');
-  return JSON.parse(text);
-}
-
 function addGlobals(environment, isDebug = false) {
-  const data = isDebug ? readJson(webpackAssetsPath) : webpackAssets;
+  const data = isDebug ? LoadFile.readJson(webpackAssetsPath) : webpackAssets;
 
   const globals = {
     jsBundle: data.main.js,
@@ -110,7 +105,7 @@ exports.register = function(server, options, next) {
     isCached: !debug,
     context: function (request) {
       if (_.has(request, 'state')) {
-        const practice = practiceLookup.getPractice(request.state.practice);
+        const practice = PracticeLookup.getPractice(request.state.practice);
 
         if (typeof practice !== 'undefined') {
           return {
