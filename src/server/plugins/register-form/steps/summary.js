@@ -1,7 +1,10 @@
 import _ from 'lodash';
 import Joi from 'joi';
+import ChangeCase from 'change-case';
+
 import sendEmail from '../../../../shared/lib/send-exchange-email';
-import {validate} from './common';
+import practiceLookup from '../../../../shared/lib/practice-lookup';
+import { validate } from './common';
 
 const schema = Joi.object().keys({
   'submit': Joi.any().optional().strip()
@@ -30,29 +33,43 @@ async function renderTemplate(env, context) {
   );
 }
 
-export function emailGP(emailText) {
-  return sendEmail(
-    process.env.EMAIL_USERNAME,  //TODO - Get GP email from API
-    emailText,
-    'Patient registration'
-  );
+export function emailGP(practiceKey, emailText) {
+  return new Promise((resolve, reject) => {
+    const practice = practiceLookup.getPractice(practiceKey);
+
+    if (typeof practice !== 'undefined') {
+      const envKey = ChangeCase.constantCase(practice.key);
+      const emailAddress = process.env[`GP_EMAIL_${envKey}`];
+
+      if (emailAddress) {
+        sendEmail(emailAddress, emailText, 'Patient registration')
+          .then(resolve)
+          .catch(reject);
+      } else {
+        reject(`There is no environment variable set for '${practiceKey}'. It should have a key of '${envKey}'.`);
+      }
+    } else {
+      reject(`'${practiceKey}' was not found in the list of practices`);
+    }
+  });
 }
 
 function summaryPostHandler(request, reply) {
   validate(request.payload, schema)
     .then(async () => {
       const data = _.get(request, 'state.data', {});
+      const practice = request.state.practice || '';
 
       const emailText = await renderTemplate(
         request.server.plugins.NunjucksConfig.nunjucksEnv,
         {data: data});
 
-      emailGP(emailText)
+      emailGP(practice, emailText)
         .then(() => {
           return reply
             .redirect(request.aka(nextStep, {
               params: {
-                practice: request.state.practice || '',
+                practice,
               },
             }))
             .unstate('data')
