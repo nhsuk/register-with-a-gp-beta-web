@@ -16,9 +16,6 @@ const manifest = {
       env: env,
       debug: debug,
       repo_root: Path.join(__dirname, '../../'),
-    },
-    load: {
-      sampleInterval: 5
     }
   },
   connections: [
@@ -42,7 +39,7 @@ const manifest = {
               {
                 module: 'good-squeeze',
                 name: 'Squeeze',
-                args: [{log: '*', response: '*', error: '*', request: '*', ops: '*'}]
+                args: [{log: '*', response: '*', error: '*', request: '*'}]
               }, {
                 module: 'good-console',
               },
@@ -139,16 +136,6 @@ if (env === 'development') {
         register: './plugins/dev-error-page',
         options: {},
       }
-    }
-  ]);
-}
-
-if (env === 'production') {
-  Hoek.merge(manifest.registrations, [
-    {
-      plugin: {
-        register: './plugins/disable-http',
-        options: {}}
     }
   ]);
 }

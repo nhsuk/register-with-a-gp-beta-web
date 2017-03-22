@@ -72,14 +72,8 @@ the `bin` directory:
 | `bin/dev.sh` | `$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up` |
 | `bin/prod.sh` | `$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up` |
 
-To correctly test the production version
-you will need to browse it with a HTTPS connection.
-
-Trying to browse with plain HTTP will result in 403 HTTP error. Which will be
-logged. If you ever see this in production it means that the load balancer is
-misconfigured.
-
-I do this by installing
+To correctly test the production version (it sends cookies with the secure flag)
+you will need to browse it with a HTTPS connection. I do this by installing
 a local proxy that generates a self signed certificate and forwards all the
 traffic.
 
