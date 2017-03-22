@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import cache from '../../config/cache';
 import cookies from '../../config/cookies';
 import practiceLookup from '../../../shared/lib/practice-lookup';
 
@@ -48,9 +47,8 @@ function endHandler(request, reply) {
 }
 
 exports.register = function(server, options, next) {
-  const statelessConfig = {
+  const routeConfig = {
     state: cookies.enableCookies,
-    cache: cache.notCacheable,
   };
 
   const stateConfig = cookies.encryptedCookies(!server.settings.app.debug);
@@ -60,21 +58,21 @@ exports.register = function(server, options, next) {
 
   server.route({
     method: 'GET',
-    config: _.merge({}, statelessConfig, {id: 'choose'}),
+    config: _.merge({}, routeConfig, {id: 'choose'}),
     path: '/{practice?}',
     handler: practiceHandler,
   });
 
   server.route({
     method: 'GET',
-    config: _.merge({}, statelessConfig, {id: 'start'}),
+    config: _.merge({}, routeConfig, {id: 'start'}),
     path: '/start',
     handler: startHandler,
   });
 
   server.route({
     method: 'GET',
-    config: _.merge({}, statelessConfig, {id: 'end'}),
+    config: _.merge({}, routeConfig, {id: 'end'}),
     path: '/registration-submitted/{practice?}',
     handler: endHandler,
   });

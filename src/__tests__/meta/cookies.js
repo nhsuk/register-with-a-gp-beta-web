@@ -8,10 +8,10 @@ beforeAll(() => {
 
 describe('cache headers', () => {
 
-  it('should not return a cookie on start page', () => {
+  it('should not return a cookie on service start page', () => {
     // const server = context.runningInstance;
     return new Promise((resolve) => {
-      request(resolveUrl('start'), (err, res) => {
+      request(resolveUrl('choose'), (err, res) => {
         expect(res.statusCode).toEqual(200);
         expect('set-cookie' in res.headers).toBe(false);
         resolve();
