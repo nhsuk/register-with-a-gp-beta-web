@@ -2,7 +2,7 @@ import Joi from 'joi';
 import {postHandlerFactory, getHandlerFactory} from './common';
 
 const schema = Joi.object().keys({
-  'email': Joi.string().email().allow('').optional().label('Email').meta({ componentType: 'textbox' }),
+  'email': Joi.string().email().allow('').max(254).optional().label('Email').meta({ componentType: 'textbox' }),
   'submit': Joi.any().optional().strip()
 });
 
