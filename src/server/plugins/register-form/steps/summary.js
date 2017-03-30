@@ -15,7 +15,9 @@ const nextStep = 'end';
 
 
 function summaryGetHandler(request, reply) {
-  request.log(['cookie'], request.state.data);
+  if (process.env.NODE_ENV === 'development') {
+    request.log(['cookie'], request.state.data);
+  }
   const data = _.get(request, 'state.data', {});
   return reply
     .view('register-form/summary', {data, title});
