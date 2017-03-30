@@ -50,6 +50,14 @@ const manifest = {
     },
     {
       plugin: {
+        register: 'hapi-error',
+        options: {
+          templateName: 'error-page'
+        }
+      }
+    },
+    {
+      plugin: {
         register: 'vision',
         options: {}
       }

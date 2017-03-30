@@ -1,0 +1,16 @@
+{% extends "layouts/base.njk" %}
+
+{% set title = errorTitle %}
+
+{% block body_main_content %}
+    <div class="local-header">
+      <h1 class="local-header__title">{{ errorTitle }}</h1>
+      <p class="local-header__intro">
+        Server returned {{ statusCode }} error code
+      </p>
+    </div>
+
+    <div class="page-section">
+      <p>{{ errorMessage }}</p>
+    </div>
+{% endblock %}
