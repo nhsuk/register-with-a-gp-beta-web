@@ -12,6 +12,8 @@ const webpackAssets = require(webpackAssetsPath);
 const COMPONENTS_PATH = '_components/';
 const COMPONENT_EXT = 'njk';
 
+Nunjucks.installJinjaCompat();
+
 function addGlobals(environment, isDebug = false) {
   const data = isDebug ? LoadFile.readJson(webpackAssetsPath) : webpackAssets;
 
