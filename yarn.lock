@@ -3421,6 +3421,12 @@ hapi-dev-error-page@^0.0.1:
   dependencies:
     escape-html "^1.0.3"
 
+hapi-error@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/hapi-error/-/hapi-error-1.7.0.tgz#9015e8d49980bdb9550cfdce815cc010030e12dc"
+  dependencies:
+    hoek "^4.1.0"
+
 "hapi@11.x.x || 12.x.x || 13.x.x || 14.x.x || 15.x.x || 16.x.x", hapi@^16.1.0:
   version "16.1.0"
   resolved "https://registry.yarnpkg.com/hapi/-/hapi-16.1.0.tgz#419dd86347588821eb5a0a5f493bce019802d33b"

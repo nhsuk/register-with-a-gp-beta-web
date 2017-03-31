@@ -105,6 +105,8 @@ exports.register = function(server, options, next) {
     isCached: !debug,
     context: function (request) {
       if (_.has(request, 'state')) {
+        if (!request.state) { return {}; }
+
         const practice = PracticeLookup.getPractice(request.state.practice);
 
         if (typeof practice !== 'undefined') {
