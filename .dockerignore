@@ -51,3 +51,6 @@ node_modules
 /src/client/webpack-assets.json
 /docs/architecture/diagrams/*.sequence.svg
 /.env
+
+# git config
+.git/
