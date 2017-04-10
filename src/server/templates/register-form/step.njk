@@ -26,6 +26,20 @@
         {% endif %}
       {% endfor %}
 
+      {% if stepData.keys() == 'email' %}
+        <details>
+          <summary>
+            <span class="details__summary">Why should I provide an email address?</span>
+          </summary>
+
+          <div class="details__content">
+            <div class="callout callout--info">
+              <p>{{ CURRENT_PRACTICE.name }} may need to get in touch with you to complete your registration.</p>
+            </div>
+          </div>
+        </details>
+      {% endif %}
+
       <div class="form-group">
         <button type="submit" class="button">Continue</button>
         {% if prevStep %}
