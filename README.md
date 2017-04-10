@@ -59,12 +59,12 @@ $ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 > (live-reloading) server, we need to look at removing `devDependences` from the
 > runtime environment when we do start hosting in Rancher
 
-If you want to run in production mode then you should run: 
+If you want to run in production mode then you should run:
 ```bash
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
 ```
 
-Because these commands are annoying to type there are some helper scripts in 
+Because these commands are annoying to type there are some helper scripts in
 the `bin` directory:
 
 | Script | Command |
@@ -115,9 +115,23 @@ under the "babel" key.
 | `EMAIL_USERNAME` | Username for Exchange Webservice |  |
 | `EMAIL_PASSWORD` | Password for Exchange Webservice |  |
 | `EMAIL_HOST` | Exchange Webservice host (with `https://...`) |  |
+| `GP_EMAIL_[practice key]` | GP practice recipient email address. See [GP Email addresses](#gp-email-addresses) for more info. |  |
 | `POSTCODE_API_KEY` | Api key for getAddress.io |  |
 | `POSTCODE_API_HOST` | Api host for getAddress.io |  |
 
+##### GP Email addresses
+
+To keep the value of the recipient email address private they need to be stored
+in environment variables. Each GP email variable is made up of `GP_EMAIL_` and
+a constant case of the key stored in [practices.json](./data/practices.json).
+
+**Example:**
+
+peel-croft-surgery would be:
+
+```
+GP_EMAIL_PEEL_CROFT_SURGERY=email-address@domain.com
+```
 
 #### Tests
 
