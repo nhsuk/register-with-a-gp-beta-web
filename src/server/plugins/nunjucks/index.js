@@ -2,7 +2,7 @@ import Path from 'path';
 import Nunjucks from 'nunjucks';
 import _ from 'lodash';
 
-import { formatDate } from './functions';
+import Filters from './filters';
 import PracticeLookup from '../../../shared/lib/practice-lookup';
 import LoadFile from '../../../shared/lib/load-file';
 
@@ -21,14 +21,13 @@ function addGlobals(environment, isDebug = false) {
     jsBundle: data.main.js,
     cssBundle: data.main.css,
     asset_path: filename => `/${filename}`,
-    formatDate: formatDate,
   };
   Object.entries(globals).map(([name, value]) => environment.addGlobal(name, value));
 }
 
 function addFilters(env) {
-  env.addFilter('nl2br', function(str) {
-    return str.toString().replace(/\n/g, '<br>');
+  Object.entries(Filters).forEach(([name, value]) => {
+    env.addFilter(name, value);
   });
 }
 
@@ -106,20 +105,24 @@ exports.register = function(server, options, next) {
     ],
     isCached: !debug,
     context: function (request) {
+      const context = {
+        REQUEST_AKA: function(id) {
+          return request.aka(id);
+        },
+      };
+
       if (_.has(request, 'state')) {
         if (!request.state) { return {}; }
 
         const practice = PracticeLookup.getPractice(request.state.practice);
 
         if (typeof practice !== 'undefined') {
-          return {
-            serviceTitle: `Register with ${practice.name}`,
-            CURRENT_PRACTICE: practice,
-          };
+          context['serviceTitle'] = `Register with ${practice.name}`;
+          context['CURRENT_PRACTICE'] = practice;
         }
       }
 
-      return {};
+      return context;
     },
   };
   const nunjucksEnv = server.root.views(engineConfig);

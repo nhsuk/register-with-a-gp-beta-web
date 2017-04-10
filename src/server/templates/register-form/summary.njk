@@ -1,6 +1,6 @@
 {% extends 'layouts/base.njk' %}
 
-{% macro row(title, fields, multiline, separator=' ') -%}
+{% macro row(title, fields, editDestination, multiline, separator=' ') -%}
   {% set join = joiner('<br>') if multiline else joiner(separator) %}
 
   <tr>
@@ -11,7 +11,7 @@
       {%- endfor %}
     </td>
     <td class="summary__control">
-      <a href="" class="button button--secondary">Change <span class="util-visuallyhidden">{{ title }}</span></a>
+      <a href="{{ REQUEST_AKA(editDestination) | safe }}" class="button button--secondary">Change <span class="util-visuallyhidden">{{ title }}</span></a>
     </td>
   </tr>
 {%- endmacro %}
@@ -21,19 +21,19 @@
     <h1 class="form-title">{{ title }}</h1>
 
     <table class="summary">
-      {{ row('Name', data.name) }}
-      {{ row('Date of birth', data.dateOfBirth, false, '/') }}
-      {{ row('Address', data.address, true) }}
+      {{ row('Name', data.name, 'register-form:name') }}
+      {{ row('Date of birth', data.dateOfBirth, 'register-form:name', false, '/') }}
+      {{ row('Address', data.address, 'register-form:address', true) }}
       {% if data.email.email %}
-        {{ row('Email', data.email, true) }}
+        {{ row('Email', data.email, 'register-form:name', true) }}
       {% else %}
-        {{ row('Email', {'empty': 'I’m not providing an email address'}) }}
+        {{ row('Email', {'empty': 'I’m not providing an email address'}, 'register-form:email') }}
       {% endif %}
-      {{ row('Telephone', data.telephone, true) }}
+      {{ row('Telephone', data.telephone, 'register-form:telephone', true) }}
       {% if data.nhsNumber['nhs-number-known'] %}
-        {{ row('NHS number', data.nhsNumberDetails, true) }}
+        {{ row('NHS number', data.nhsNumberDetails, 'register-form:nhsNumber', true) }}
       {% else %}
-        {{ row('NHS number', {'empty': 'I don’t know my NHS number'}) }}
+        {{ row('NHS number', {'empty': 'I don’t know my NHS number'}, 'register-form:nhsNumber') }}
       {% endif %}
     </table>
 
@@ -41,20 +41,20 @@
       <caption>Your current GP</caption>
 
       {% if data.previouslyRegistered['previously-registered'] %}
-        {{ row('Current GP', data.currentGP, true) }}
+        {{ row('Current GP', data.currentGP, 'register-form:previouslyRegistered', true) }}
         {% if data.registedAddress['registered-address-correct'] %}
-          {{ row('Registered address', data.address, true) }}
+          {{ row('Registered address', data.address, 'register-form:registedAddress', true) }}
         {% else %}
-          {{ row('Registered address', data.registeredAddressDetails, true) }}
+          {{ row('Registered address', data.registeredAddressDetails, 'register-form:registedAddress', true) }}
         {% endif %}
 
         {% if data.registeredName['registered-name-correct'] %}
-          {{ row('Registered name', data.name) }}
+          {{ row('Registered name', data.name, 'register-form:registeredName') }}
         {% else %}
-          {{ row('Registered name', data.registeredNameDetails) }}
+          {{ row('Registered name', data.registeredNameDetails, 'register-form:registeredName') }}
         {% endif %}
       {% else %}
-        {{ row('Current GP', {'empty': 'I’m not registered with a GP'}) }}
+        {{ row('Current GP', {'empty': 'I’m not registered with a GP'}, 'register-form:previouslyRegistered') }}
       {% endif %}
     </table>
 
@@ -62,21 +62,21 @@
       <caption>Your health</caption>
 
       {% if data.currentMedication['current-medication'] %}
-        {{ row('Medication', data.medicationDetails, true) }}
+        {{ row('Medication', data.medicationDetails, 'register-form:currentMedication', true) }}
       {% else %}
-        {{ row('Medication', {'empty': 'I’m not currently taking any medication'}) }}
+        {{ row('Medication', {'empty': 'I’m not currently taking any medication'}, 'register-form:currentMedication') }}
       {% endif %}
 
       {% if data.allergies['any-allergies'] %}
-        {{ row('Alergies', data.allergiesDetails, true) }}
+        {{ row('Alergies', data.allergiesDetails, 'register-form:allergies', true) }}
       {% else %}
-        {{ row('Alergies', {'empty': 'I don’t have any allergies'}) }}
+        {{ row('Alergies', {'empty': 'I don’t have any allergies'}, 'register-form:allergies') }}
       {% endif %}
 
       {% if data.medicalHistory['medical-history'] %}
-        {{ row('Health', data.medicalHistory, true) }}
+        {{ row('Health', data.medicalHistory, 'register-form:medicalHistory', true) }}
       {% else %}
-        {{ row('Health', {'empty': 'I’m not supplying any health details'}) }}
+        {{ row('Health', {'empty': 'I’m not supplying any health details'}, 'register-form:medicalHistory') }}
       {% endif %}
     </table>
 
