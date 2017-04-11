@@ -80,6 +80,7 @@
   "jest": {
     "collectCoverage": true,
     "rootDir": "src",
+    "testEnvironment": "node",
     "coverageDirectory": "coverage",
     "testPathIgnorePatterns": [
       "/node_modules/",
