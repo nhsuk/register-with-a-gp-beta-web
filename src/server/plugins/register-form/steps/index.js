@@ -6,7 +6,6 @@ import contactTelephoneStep from './contact-telephone';
 import previouslyArmedStep from './previously-armed';
 import armedStaffNumberStep from './armed-staff-number';
 import armedEnlistDateStep from './armed-enlist-date';
-
 import previouslyRegisteredStep from './previously-registered';
 import currentGP from './current-gp';
 import registeredAddressStep from './registered-address';
