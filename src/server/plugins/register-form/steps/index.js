@@ -3,6 +3,9 @@ import dateOfBirthStep from './date-of-birth';
 import homeAddressStep from './home-address';
 import contactEmailStep from './contact-email';
 import contactTelephoneStep from './contact-telephone';
+import previouslyArmedStep from './previously-armed';
+import armedStaffNumberStep from './armed-staff-number';
+import armedEnlistDateStep from './armed-enlist-date';
 import previouslyRegisteredStep from './previously-registered';
 import currentGP from './current-gp';
 import registeredAddressStep from './registered-address';
@@ -54,7 +57,9 @@ const steps = [
   homeAddressStep,
   contactEmailStep,
   contactTelephoneStep,
-  // armed forces?
+  previouslyArmedStep,
+  armedStaffNumberStep,
+  armedEnlistDateStep,
   previouslyRegisteredStep,
   currentGP,
   registeredAddressStep,

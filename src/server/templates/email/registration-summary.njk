@@ -36,6 +36,14 @@ Date of Birth: {{ data.dateOfBirth['year'] }}/{{ data.dateOfBirth['month'] }}/{{
 
 {{ render_multi_line('Telephone', data.telephone) }}
 
+Armed force
+===========
+
+{% if data.previouslyArmed['previously-armed'] -%}
+{{ render_one_line('Staff number', data.armedStaffNumber) }}
+{{ render_one_line('Enlist date', data.armedEnlistDate) }}
+{%- endif %}
+
 Your current GP
 ===============
 
