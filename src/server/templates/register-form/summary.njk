@@ -36,7 +36,15 @@
         {{ row('NHS number', {'empty': 'I don’t know my NHS number'}, 'register-form:nhsNumber') }}
       {% endif %}
     </table>
-
+    <table class="summary">
+      <caption>Armed force</caption>
+		{% if data.previouslyArmed['previously-armed'] %}
+			{{ row('Staff number', data.armedStaffNumber, 'register-form:armedStaffNumber', true)}}
+			{{ row('Enlist date', data.armedEnlistDate, 'register-form:armedEnlistDate', false, '/')}}
+		{% else %}
+			{{ row('Armed force',{'empty': 'I haven’t served in the armed forces'}, 'register-form:previouslyArmed' )}}
+		{% endif %}
+	</table>
     <table class="summary">
       <caption>Your current GP</caption>
 
