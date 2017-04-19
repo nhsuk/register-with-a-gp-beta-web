@@ -1,0 +1,48 @@
+{##
+ # Family: Control
+ #
+ # @param {string} [label]    Label for the form element
+ # @param {string} [name]     Name for the form element
+ #
+ # @param {string} [value]    The current value - Used to prefill the field (optional)
+ # @param {string} [error]    Whether to display an error on the field (optional)
+ # @param {bool}   [optional] Whether the field is optional or not (optional)
+ # @param {array}  [options]  List values 
+ #
+ # @return {string} HTML for dropdown
+ #
+ # @example
+ #   {% component 'dropdown', {
+ #     label: 'Title',
+ #     name:  'name-title',
+ #     options: { text: 'Mr', value: 'Mr'},
+ #              { text: 'Mrs', value: 'Mrs'}
+ #   } %}
+ #}
+{% set hintId = 'hint-' + name %}
+<div id="inputdiv-{{ name }}" class="form-line">
+{% if label or error or hint %}
+  <label for="input-{{ name }}" class="form-label">
+    {{ label }} {% if optional %}(optional){% endif %}
+    {% if hint %}
+      <span class="form-label__hint" id="{{ hintId }}">{{ hint }}</span>
+    {% endif %}
+    {% if error %}
+      <span class="form-label__error">{{ error | trim }}</span>
+    {% endif %}
+  </label>
+{% endif %}
+
+  <select
+    name="{{ name }}"
+    id="input-{{ name }}"
+    class="form-dropdown{{ ' has-error' if error }}"
+  >
+  {% for c in children %}
+    <option value="{{ c.value }}">
+      {{ c.label }}
+    </option>
+  {% endfor %}
+
+  </select>
+</div>
