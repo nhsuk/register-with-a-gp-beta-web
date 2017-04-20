@@ -1,0 +1,19 @@
+.form-dropdown {
+  @include core-font(20);
+  appearance: none;
+  border: ($baseline-grid-unit / 2) solid $blue;
+  display: block;
+  max-width: 540px;
+  padding: $baseline-grid-unit;
+  width: 100%;
+  line-height: 32px;
+  font-size: 30px;
+
+  &:focus {
+    outline: 3px solid $yellow;
+  }
+
+  &.has-error {
+    border-color: $red;
+  }
+}
