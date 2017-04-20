@@ -22,9 +22,14 @@ const schema = Joi.object().keys({
 const title = 'Are you taking any medication?';
 const key = 'currentMedication';
 const slug = 'current-medication';
+const details = {
+  summary: 'Why am I being asked this?',
+  content: 'Letting your new GP know about your medication will help them while they wait for your medical records to transfer.',
+  position: 'below'
+};
 
 const handlers = {
-  GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps),
+  GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps, details),
   POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps),
 };
 

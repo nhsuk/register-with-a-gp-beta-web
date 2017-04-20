@@ -84,6 +84,7 @@ export function getHandlerFactory(
   title,
   schema,
   prevSteps,
+  details,
   beforeTemplate,
   template = 'register-form/step') {
   return (request, reply) => {
@@ -97,6 +98,7 @@ export function getHandlerFactory(
       stepData,
       title,
       prevStep,
+      details
     });
   };
 }

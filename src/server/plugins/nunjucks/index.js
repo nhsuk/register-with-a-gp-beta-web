@@ -2,7 +2,7 @@ import Path from 'path';
 import Nunjucks from 'nunjucks';
 import _ from 'lodash';
 
-import Filters from './filters';
+import getFilters from './filters';
 import PracticeLookup from '../../../shared/lib/practice-lookup';
 import LoadFile from '../../../shared/lib/load-file';
 
@@ -26,7 +26,7 @@ function addGlobals(environment, isDebug = false) {
 }
 
 function addFilters(env) {
-  Object.entries(Filters).forEach(([name, value]) => {
+  Object.entries(getFilters(env)).forEach(([name, value]) => {
     env.addFilter(name, value);
   });
 }

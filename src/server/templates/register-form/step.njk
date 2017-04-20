@@ -12,6 +12,21 @@
       {% if beforeTemplate %}
         {% include beforeTemplate %}
       {% endif %}
+      {% if details %}
+        {% if details.position =='above' %}
+          {% set content = details.content %}
+          <details>
+            <summary>
+              <span class="details__summary">{{ details.summary }}</span>
+            </summary>
+            <div class="details__content">
+              <div class="callout callout--info">
+                <p>{{ content | render() | safe }}</p>
+              </div>
+            </div>
+          </details>
+        {%endif %}
+      {% endif %}  
 
       {% for field in fields %}
         {% if field.componentType in ['textbox', 'multiple-choice'] %}
@@ -25,20 +40,21 @@
           } %}
         {% endif %}
       {% endfor %}
-
-      {% if stepData.keys() == 'email' %}
-        <details>
-          <summary>
-            <span class="details__summary">Why should I provide an email address?</span>
-          </summary>
-
-          <div class="details__content">
-            <div class="callout callout--info">
-              <p>{{ CURRENT_PRACTICE.name }} may need to get in touch with you to complete your registration.</p>
+      {% if details %}
+        {% if details.position == 'below' %}
+          {% set content = details.content %}
+          <details>
+            <summary>
+              <span class="details__summary">{{ details.summary }}</span>
+            </summary>
+            <div class="details__content">
+              <div class="callout callout--info">
+                <p>{{ content | render() | safe }}</p>
+              </div>
             </div>
-          </div>
-        </details>
-      {% endif %}
+          </details>
+        {% endif %}
+      {% endif %}  
 
       <div class="form-group">
         <button type="submit" class="button">Continue</button>
