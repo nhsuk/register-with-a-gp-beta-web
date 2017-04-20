@@ -19,7 +19,7 @@
  #   } %}
  #}
 {% set hintId = 'hint-' + name %}
-
+<div id="inputdiv-{{ name }}" class="form-line">
 {% if label or error or hint %}
   <label for="input-{{ name }}" class="form-label">
     {{ label }} {% if optional %}(optional){% endif %}
@@ -48,3 +48,4 @@
     {% endif %}
   >
 {% endif %}
+</div>
