@@ -1,11 +1,13 @@
 import JoiBase from 'joi';
 import JoiPostcode from 'joi-postcode';
 import JoiNHSNumber from '../../../../shared/lib/joi-nhs-number-validator';
+import JoiFullDate from '../../../../shared/lib/joi-full-date-validator';
 import _ from 'lodash';
 
 const Joi = JoiBase
   .extend(JoiPostcode)
-  .extend(JoiNHSNumber);
+  .extend(JoiNHSNumber)
+  .extend(JoiFullDate);
 
 
 export function validate(rawData, schemaDefinition) {
