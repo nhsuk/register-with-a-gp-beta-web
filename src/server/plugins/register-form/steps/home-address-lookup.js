@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import JoiBase from 'joi';
 import JoiPostcodeExtension from 'joi-postcode';
 import {postHandlerFactory, getHandlerFactory} from './common';
@@ -6,11 +5,10 @@ import {postHandlerFactory, getHandlerFactory} from './common';
 const Joi = JoiBase.extend(JoiPostcodeExtension);
 
 const schema = Joi.object().keys({
-  'address1': Joi.string().allow('').max(50).label('Address').meta({ componentType: 'textbox' }),
-  'address2': Joi.string().allow('').max(50).meta({ componentType: 'textbox' }),
-  'address3': Joi.string().allow('').max(50).meta({ componentType: 'textbox' }),
-  'locality': Joi.string().allow('').max(100).required().label('Town or City').meta({ componentType: 'textbox' }),
-  'postcode': Joi.postcode().uppercase().options({
+  'houseNumber': Joi.string().allow('').max(50)
+    .label('Flat or house number, or house name (optional)')
+    .meta({ componentType: 'textbox', variant: 'short' }),
+  'postcode': Joi.postcode().required().uppercase().options({
     language: {
       string: {
         regex: { base: 'must be a valid UK postcode' },
@@ -18,20 +16,15 @@ const schema = Joi.object().keys({
     },
   }).label('Post Code').meta({ componentType: 'textbox', variant: 'short' }),
   'submit': Joi.any().optional().strip(),
-})
-  .or('address1', 'address2', 'address3');
+});
 
 const title = 'What is your address?';
-const key = 'address';
-const slug = 'home-address-manual';
+const key = 'addressLookup';
+const slug = 'home-address-lookup';
 
 const handlers = {
   GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps),
   POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps),
-};
-
-const checkApplies = function(cookieData) {
-  return _.get(cookieData, 'addressLookupChoose.address') === undefined;
 };
 
 /**
@@ -42,6 +35,5 @@ export default {
   slug,
   title,
   schema,
-  handlers,
-  checkApplies
+  handlers
 };

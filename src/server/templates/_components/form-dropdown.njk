@@ -1,21 +1,22 @@
 {##
  # Family: Control
  #
- # @param {string} [variant]  Type of text box (default|large)
  # @param {string} [label]    Label for the form element
  # @param {string} [name]     Name for the form element
  #
  # @param {string} [value]    The current value - Used to prefill the field (optional)
  # @param {string} [error]    Whether to display an error on the field (optional)
  # @param {bool}   [optional] Whether the field is optional or not (optional)
+ # @param {array}  [options]  List values 
  #
- # @return {string} HTML for multiple choice options
+ # @return {string} HTML for dropdown
  #
  # @example
- #   {% component 'form-textbox', {
- #     variant:  'large',
- #     label: 'How old are you?',
- #     name:  'age'
+ #   {% component 'dropdown', {
+ #     label: 'Title',
+ #     name:  'name-title',
+ #     options: { text: 'Mr', value: 'Mr'},
+ #              { text: 'Mrs', value: 'Mrs'}
  #   } %}
  #}
 {% set hintId = 'hint-' + name %}
@@ -26,23 +27,22 @@
     {% if hint %}
       <span class="form-label__hint" id="{{ hintId }}">{{ hint }}</span>
     {% endif %}
+    {% if error %}
+      <span class="form-label__error">{{ error | trim }}</span>
+    {% endif %}
   </label>
 {% endif %}
 
-{% if variant == 'large' %}
-  <textarea name="{{ name }}" id="input-{{ name }}" rows="6" class="form-textbox{{ ' has-error' if error }}">{{ value }}</textarea>
-{% else %}
-  <input
-    type="text"
+  <select
     name="{{ name }}"
     id="input-{{ name }}"
-    class="form-textbox{{ ' form-textbox--short' if variant == 'short' }}{{ ' has-error' if error }}"
-    {% if value %}
-      value="{{ value }}"
-    {% endif %}
-    {% if hint %}
-      aria-describedby="{{ hintId }}"
-    {% endif %}
+    class="form-dropdown{{ ' has-error' if error }}"
   >
-{% endif %}
+  {% for c in children %}
+    <option value="{{ c.value }}">
+      {{ c.label }}
+    </option>
+  {% endfor %}
+
+  </select>
 </div>

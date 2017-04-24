@@ -15,9 +15,14 @@ const schema = Joi.object().keys({
 const title = 'Your health';
 const key = 'medicalHistory';
 const slug = 'medical-history';
+const details = {
+  summary: 'Examples of things to tell the GP',
+  content: '<ul><li>any hospital visits</li><li>any medical conditions like asthma or diabetes</li><li>any health issues you`ve talked to a doctor about',
+  position: 'above'
+};
 
 const handlers = {
-  GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps),
+  GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps, details),
   POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps),
 };
 

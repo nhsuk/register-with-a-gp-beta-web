@@ -62,7 +62,7 @@ export function getPrevStep(prevSteps, cookieData, request) {
     const step = prevSteps[i];
     const check = _.get(step, 'checkApplies', () => true);
 
-    if (check(cookieData)) {
+    if (check(cookieData, 'prev')) {
       return request.aka(`register-form:${step.key}`);
     }
   }
@@ -86,7 +86,7 @@ export function getPrevStepKey(prevSteps, cookieData) {
 export function getNextStep(nextSteps, cookieData) {
   for (let currentStep of nextSteps) {
     const check = _.get(currentStep, 'checkApplies', () => true);
-    if (check(cookieData)) {
+    if (check(cookieData, 'next')) {
       return currentStep.key;
     }
   }
@@ -113,6 +113,7 @@ export function getHandlerFactory(
   title,
   schema,
   prevSteps,
+  details,
   beforeTemplate,
   template = 'register-form/step') {
   return (request, reply) => {
@@ -120,7 +121,7 @@ export function getHandlerFactory(
     const validStep = getValidStep(key, prevSteps, request);
     if (!validStep && firstRegirsterFormStepKey != key){
       reply.redirect(request.aka(`register-form:${firstRegirsterFormStepKey}`));
-    }else{
+    }else {
       const stepData = _.get(request, `state.data.${key}`, {});
       const prevStep = getPrevStep(prevSteps, request.state.data, request);
 
@@ -130,7 +131,8 @@ export function getHandlerFactory(
         beforeTemplate,
         stepData,
         title,
-        prevStep
+        prevStep,
+        details
       });
     }
   };
@@ -149,6 +151,20 @@ export function dependsOnBoolean(step, path, toBe = true) {
     return _.get(cookieData, `${step.key}.${path}`, false) === toBe;
   };
 }
+/**
+ * default transformer for old state data and new submitted data
+ *
+ * will take old cookie data and the current step name and submitted
+ * value from the POST and merge them.
+ * @param key
+ * @param value
+ * @param stateData
+ * @param template
+ * @returns {*} - new cookie data which can then be saved to the state
+ */
+function dataTransformer(key, value, stateData, template = {}) {
+  return Object.assign(template, stateData, {[key]: value});
+}
 
 export function postHandlerFactory(
   key,
@@ -156,13 +172,17 @@ export function postHandlerFactory(
   schema,
   prevSteps,
   nextSteps,
-  beforeTemplate,
-  template = 'register-form/step') {
+  {
+    beforeTemplate = undefined,
+    template = 'register-form/step',
+    transformData = dataTransformer
+  } = {}
+) {
   return (request, reply) => {
     // if form valid then redirect to next step
     validate(request.payload, schema)
       .then(value => {
-        const newData = Object.assign({}, request.state.data, {[key]: value});
+        const newData = transformData(key, value, request.state.data);
         const nextStep = getNextStep(nextSteps, newData);
         return reply
           .redirect(request.aka(`register-form:${nextStep}`))
