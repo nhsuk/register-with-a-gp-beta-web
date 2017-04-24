@@ -2,7 +2,6 @@ import Joi from 'joi';
 import moment from 'moment';
 
 const validate = function(value){
-  console.log("datevalue === "+ value);
   return moment(value, 'DDMMYYYY').isValid();
 }
 let DateConcat = '';
@@ -15,7 +14,7 @@ const invalidFullDateRule = {
     if(validate(DateConcat)){
       return value;
     } else {
-      return this.createError('object.fulldate', { v: value }, state, options);
+      return this.createError('object.fulldate', { v: value.day }, state, options);
     }
   }
 };
@@ -24,7 +23,7 @@ export default {
   base: Joi.object(),
   name: 'object',
   language: {
-    fulldate: 'date is not valid',
+    fulldate: 'Fulldate error',
   },
   rules: [invalidFullDateRule]
 };
