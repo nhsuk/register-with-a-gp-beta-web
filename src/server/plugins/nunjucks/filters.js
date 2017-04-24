@@ -5,6 +5,14 @@ function getFilters(env) {
     },
     render(str){
       return env.renderString(str, this.getVariables());
+    },
+    fulldateerror(str){
+      if (str.includes('Fulldate error')){
+        return 'This is not a valid date';
+      }
+      else {
+        return str;
+      }
     }
   };
 } 
