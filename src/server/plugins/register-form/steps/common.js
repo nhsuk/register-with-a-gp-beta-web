@@ -96,16 +96,16 @@ export function getNextStep(nextSteps, cookieData) {
 export function getValidStep(requestedStepKey, prevSteps, request){
   const requestedStepData = _.get(request, `state.data.${requestedStepKey}`, false);
   if (requestedStepData){
-    return requestedStepKey
+    return requestedStepKey;
   }
 
   const prevStepKey = getPrevStepKey(prevSteps, request.state.data, request);
   const prevStepData = _.get(request, `state.data.${prevStepKey}`, false);
   if (prevStepData){
-    return requestedStepKey
+    return requestedStepKey;
   }
 
-  return
+  return;
 }
 
 export function getHandlerFactory(
@@ -119,7 +119,7 @@ export function getHandlerFactory(
     const firstRegirsterFormStepKey = "name";
     const validStep = getValidStep(key, prevSteps, request);
     if (!validStep && firstRegirsterFormStepKey != key){
-      reply.redirect(request.aka(`register-form:${firstRegirsterFormStepKey}`))
+      reply.redirect(request.aka(`register-form:${firstRegirsterFormStepKey}`));
     }else{
       const stepData = _.get(request, `state.data.${key}`, {});
       const prevStep = getPrevStep(prevSteps, request.state.data, request);
