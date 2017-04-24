@@ -3,7 +3,7 @@ import moment from 'moment';
 
 const validate = function(value){
   return moment(value, 'DDMMYYYY').isValid();
-}
+};
 let DateConcat = '';
 
 const invalidFullDateRule = {
