@@ -69,6 +69,20 @@ export function getPrevStep(prevSteps, cookieData, request) {
   return;
 }
 
+export function getPrevStepKey(prevSteps, cookieData) {
+  // loop in reverse
+  for (let i = prevSteps.length - 1; i >= 0; i--) {
+    const step = prevSteps[i];
+    const check = _.get(step, 'checkApplies', () => true);
+
+    if (check(cookieData)) {
+      return step.key;
+    }
+  }
+  return;
+}
+
+
 export function getNextStep(nextSteps, cookieData) {
   for (let currentStep of nextSteps) {
     const check = _.get(currentStep, 'checkApplies', () => true);
@@ -77,6 +91,21 @@ export function getNextStep(nextSteps, cookieData) {
     }
   }
   return 'end';
+}
+
+export function getValidStep(requestedStepKey, prevSteps, request){
+  const requestedStepData = _.get(request, `state.data.${requestedStepKey}`, false);
+  if (requestedStepData){
+    return requestedStepKey;
+  }
+
+  const prevStepKey = getPrevStepKey(prevSteps, request.state.data);
+  const prevStepData = _.get(request, `state.data.${prevStepKey}`, false);
+  if (prevStepData){
+    return requestedStepKey;
+  }
+
+  return;
 }
 
 export function getHandlerFactory(
@@ -88,18 +117,24 @@ export function getHandlerFactory(
   beforeTemplate,
   template = 'register-form/step') {
   return (request, reply) => {
-    const stepData = _.get(request, `state.data.${key}`, {});
-    const prevStep = getPrevStep(prevSteps, request.state.data, request);
+    const firstRegirsterFormStepKey = 'name';
+    const validStep = getValidStep(key, prevSteps, request);
+    if (!validStep && firstRegirsterFormStepKey != key){
+      reply.redirect(request.aka(`register-form:${firstRegirsterFormStepKey}`));
+    }else {
+      const stepData = _.get(request, `state.data.${key}`, {});
+      const prevStep = getPrevStep(prevSteps, request.state.data, request);
 
-    return reply.view(template, {
-      fields: getFieldData(schema),
-      data: request.state.data,
-      beforeTemplate,
-      stepData,
-      title,
-      prevStep,
-      details
-    });
+      return reply.view(template, {
+        fields: getFieldData(schema),
+        data: request.state.data,
+        beforeTemplate,
+        stepData,
+        title,
+        prevStep,
+        details
+      });
+    }
   };
 }
 
