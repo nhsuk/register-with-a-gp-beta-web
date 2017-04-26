@@ -48,14 +48,6 @@ const manifest = {
         }
       }
     },
-//    {
-//      plugin: {
-//        register: 'hapi-error',
-//        options: {
-//          templateName: 'error-page'
-//        }
-//      }
-//    },
     {
       plugin: {
         register: 'vision',
@@ -143,6 +135,19 @@ if (env === 'development') {
       plugin: {
         register: './plugins/dev-error-page',
         options: {},
+      }
+    }
+  ]);
+}
+else{
+  const webpackConfig = require('../client/webpack.config.babel.js').default;
+  Hoek.merge(manifest.registrations, [
+    {
+      plugin: {
+        register: 'hapi-error',
+        options: {
+          templateName: 'error-page'
+        }
       }
     }
   ]);
