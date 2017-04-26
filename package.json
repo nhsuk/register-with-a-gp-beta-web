@@ -35,6 +35,7 @@
     "nunjucks": "^3.0.0",
     "request": "^2.81.0",
     "vision": "^4.1.1",
+    "xss": "^0.3.3",
     "yar": "^8.1.2"
   },
   "devDependencies": {
