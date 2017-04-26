@@ -69,7 +69,6 @@ function callLookup(pcode,hnumber=''){
   return getAddresses(pcode, hnumber)
     .then(addressList => {
       if(addressList.length === 0){
-      console.log('empty');
        return [];
       }
       const addressOpts = _.map(addressList, item => {
