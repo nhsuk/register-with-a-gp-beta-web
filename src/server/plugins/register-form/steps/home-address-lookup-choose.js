@@ -29,39 +29,39 @@ function getHandlerFactory(prevSteps) {
     let inputValue = '';
     callLookup(postcodeData.postcode, postcodeData.houseNumber)
       .then(addressOptions => {
-      if(addressOptions.length ===0){
-        addressError = true;
-        callLookup(postcodeData.postcode)
-        .then(addressOptions => {
-           reply.view(template, {
+        if(addressOptions.length ===0){
+          addressError = true;
+          callLookup(postcodeData.postcode)
+          .then(addressOptions => {
+             reply.view(template, {
+              fields: getFieldData(schema),
+              data: request.state.data,
+              stepData,
+              title,
+              prevStep,
+              addressOptions,
+              error: addressError,
+              postcode: postcodeData.postcode,
+              housenumber: postcodeData.houseNumber
+            });
+          });
+        }
+        else{
+          if(addressOptions.length == 1){
+            inputValue = addressOptions[0].value;
+          }
+          reply.view(template, {
             fields: getFieldData(schema),
             data: request.state.data,
             stepData,
             title,
             prevStep,
             addressOptions,
-            error: addressError,
-            postcode: postcodeData.postcode,
-            housenumber: postcodeData.houseNumber
+            value: inputValue,
+            error: addressError
           });
-        });
-      }
-      else{
-        if(addressOptions.length == 1){
-          inputValue = addressOptions[0].value;
-        }
-        reply.view(template, {
-          fields: getFieldData(schema),
-          data: request.state.data,
-          stepData,
-          title,
-          prevStep,
-          addressOptions,
-          value: inputValue,
-          error: addressError
-        });
-      }      
-    });
+        }      
+      });
   };
 }
 
