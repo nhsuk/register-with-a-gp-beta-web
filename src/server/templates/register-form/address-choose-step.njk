@@ -1,10 +1,22 @@
 {% extends 'register-form/step.njk' %}
-
 {% block formFields %}
+  {% if error %}
+    <div class="signage measure">
+      <div class="message">
+        <div class="address-message">
+          <div class="address-message-elem"><p>House number: <strong>{{ housenumber }}</strong></p></div>
+          <div class="address-message-elem"><p>Postcode: <strong>{{ postcode }}</strong></p></div>
+        </div>
+        <p>No exact match has been found, showing all addresses for {{ postcode }} </p>
+      </div>
+    </div>
+  {% endif %}
+
   {% component 'form-multiple-choice', {
            type:  'radio',
            name:  'address',
            label: 'Select your address',
+           value: value,
            children: addressOptions
          } %}
   <p>

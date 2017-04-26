@@ -7,12 +7,12 @@ import naturalSort from 'javascript-natural-sort';
 const TIMEOUT = 10000;
 
 
-function getAddresses(postcode, timeout=TIMEOUT) {
+function getAddresses(postcode, housenumber='', timeout=TIMEOUT) {
   return new Promise((resolve, reject) => {
     const cleaned = postcode.replace(/\s+/g, '').toLowerCase();
     const request = https.get({
       host: process.env.POSTCODE_API_HOST,
-      path: `/v2/uk/${ cleaned }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`
+      path: `/v2/uk/${ cleaned }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`
     }, function(response) {
       if (response.statusCode === 200 && response.statusMessage === 'OK') {
         let body = '';
@@ -29,7 +29,7 @@ function getAddresses(postcode, timeout=TIMEOUT) {
           reject(err);
         });
       } else {
-        reject();
+        resolve([]);
       }
     });
     request.setTimeout(timeout, () => {
