@@ -188,8 +188,14 @@ $ yarn run lint:eslint
 #### Coverage
 
 We want to keep coverage high and our test suite does output a coverage
-summary. We don't fail the build if coverage is below a certain % but we will
-do that in the future.
+summary. The build will fail if coverage drops below:
+
+* 75% of statements
+* 75% of lines
+* 70% of functions
+* 75% of statements
+
+This is a low bar and we aim to increase it as we write more code.
 
 You can see the coverage summary by running:
 
