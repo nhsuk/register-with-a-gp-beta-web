@@ -1,3 +1,4 @@
 .reading-width {
   @include reading-width;
+  max-width: none !important;
 }
