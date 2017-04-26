@@ -50,14 +50,6 @@ const manifest = {
     },
     {
       plugin: {
-        register: 'hapi-error',
-        options: {
-          templateName: 'error-page'
-        }
-      }
-    },
-    {
-      plugin: {
         register: 'vision',
         options: {}
       }
@@ -143,6 +135,17 @@ if (env === 'development') {
       plugin: {
         register: './plugins/dev-error-page',
         options: {},
+      }
+    }
+  ]);
+} else {
+  Hoek.merge(manifest.registrations, [
+    {
+      plugin: {
+        register: 'hapi-error',
+        options: {
+          templateName: 'error-page'
+        }
       }
     }
   ]);
