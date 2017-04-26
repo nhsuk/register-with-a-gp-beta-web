@@ -140,7 +140,6 @@ if (env === 'development') {
   ]);
 }
 else{
-  const webpackConfig = require('../client/webpack.config.babel.js').default;
   Hoek.merge(manifest.registrations, [
     {
       plugin: {

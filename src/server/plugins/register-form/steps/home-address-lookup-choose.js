@@ -26,26 +26,25 @@ function getHandlerFactory(prevSteps) {
     const prevStep = getPrevStep(prevSteps, request.state.data, request);
     const template = 'register-form/address-choose-step';
     let addressError = false;
-    let addressOptions = [];
     let inputValue = '';
     callLookup(postcodeData.postcode, postcodeData.houseNumber)
       .then(addressOptions => {
       if(addressOptions.length ===0){
         addressError = true;
         callLookup(postcodeData.postcode)
-          .then(addressOptions => {
-            reply.view(template, {
-             fields: getFieldData(schema),
-             data: request.state.data,
-             stepData,
-             title,
-             prevStep,
-             addressOptions,
-             error: addressError,
-             postcode: postcodeData.postcode,
-             housenumber: postcodeData.houseNumber
-           });            
+        .then(addressOptions => {
+           reply.view(template, {
+            fields: getFieldData(schema),
+            data: request.state.data,
+            stepData,
+            title,
+            prevStep,
+            addressOptions,
+            error: addressError,
+            postcode: postcodeData.postcode,
+            housenumber: postcodeData.houseNumber
           });
+        });
       }
       else{
         if(addressOptions.length == 1){
