@@ -12,7 +12,9 @@ describe('name step schema', () => {
       };
 
       Joi.validate(validData, yourName.schema, (err, value) => {
-        if (err) reject(err);
+        if (err) {
+          reject(err);
+        }
         expect(value).toEqual({'first-name': 'a', 'last-name': 'b'});
         resolve();
       });

@@ -16,12 +16,11 @@ function getFilters(env) {
     fulldateerror(str){
       if (str.includes('Fulldate error')){
         return 'This is not a valid date';
-      }
-      else {
+      } else {
         return str;
       }
     }
   };
-} 
+}
 
 export default getFilters;

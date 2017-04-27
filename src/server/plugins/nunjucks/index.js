@@ -112,7 +112,9 @@ exports.register = function(server, options, next) {
       };
 
       if (_.has(request, 'state')) {
-        if (!request.state) { return {}; }
+        if (!request.state) {
+          return {};
+        }
 
         const practice = PracticeLookup.getPractice(request.state.practice);
 
