@@ -39,7 +39,9 @@ function getHandlerFactory(prevSteps) {
           addressOptions
         });
       })
-      .catch(err => {throw err;});
+      .catch(err => {
+        throw err;
+      });
   };
 }
 
