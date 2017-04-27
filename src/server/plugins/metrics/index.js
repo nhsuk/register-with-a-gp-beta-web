@@ -5,24 +5,23 @@ Plugin.register = function(server, options, next) {
       return reply.continue();
     });
   server.ext('onPreResponse', function (request, reply) {
-      var start = parseInt(request.headers['x-req-start']);
-      var end = (new Date()).getTime();
       if(!request.response.isBoom){
+        var start = parseInt(request.headers['x-req-start']);
+        var end = (new Date()).getTime();
         request.response
-        .header('x-req-start', start)
-        .header('x-res-end', end)
-        .header('x-response-time', end - start);
+          .header('x-req-start', start)
+          .header('x-res-end', end)
+          .header('x-response-time', end - start);
+        request.log(['response'],
+          JSON.stringify({
+            url: request.raw.req.url,
+            start: request.response.headers['x-req-start'],
+            end: request.response.headers['x-res-end'],
+           time: request.response.headers['x-response-time'],
+            status: request.response.statusCode
+          })
+        );
       }
-      // console.log(request);
-      request.log(['response'],JSON.stringify({
-        url: request.raw.req.url,
-        start: request.response.headers['x-req-start'],
-        end: request.response.headers['x-res-end'],
-        time: request.response.headers['x-response-time'],
-        status: request.response.statusCode
-      })
-      );
-      
       return reply.continue();
     });
   next();
