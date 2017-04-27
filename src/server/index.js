@@ -39,7 +39,7 @@ const manifest = {
               {
                 module: 'good-squeeze',
                 name: 'Squeeze',
-                args: [{log: '*', response: '*', error: '*', request: '*'}]
+                args: [{log: '*', error: '*', request: '*'}]
               }, {
                 module: 'good-console',
               },
@@ -115,6 +115,12 @@ const manifest = {
     {
       plugin: {
         register: 'blipp',
+        options: {}
+      }
+    },
+    {
+      plugin: {
+        register: './plugins/metrics',
         options: {}
       }
     }
