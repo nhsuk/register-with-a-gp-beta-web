@@ -23,7 +23,12 @@ function practiceHandler(request, reply) {
     });
 }
 
+export function InvalidCookie(reply) {
+  reply.unstate('data');
+}
+
 function startHandler(request, reply) {
+  InvalidCookie(reply);
   if (request.state.practice) {
     reply.view('start');
   } else {

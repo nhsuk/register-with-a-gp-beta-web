@@ -3,6 +3,7 @@ import JoiPostcode from 'joi-postcode';
 import JoiNHSNumber from '../../../../shared/lib/joi-nhs-number-validator';
 import JoiFullDate from '../../../../shared/lib/joi-full-date-validator';
 import _ from 'lodash';
+import steps from './index'
 
 const Joi = JoiBase
   .extend(JoiPostcode)
@@ -95,19 +96,39 @@ export function getNextStep(nextSteps, cookieData) {
   return 'end';
 }
 
-export function getValidStep(requestedStepKey, prevSteps, request){
-  const requestedStepData = _.get(request, `state.data.${requestedStepKey}`, false);
-  if (requestedStepData){
-    return requestedStepKey;
+export function getlastCompletedStep(request) {
+  const session = request.state.data;
+  if (session){
+    var lastCompletedStep = null;
+    _.each(steps, (s,i) => {
+      const stepData = _.get(session, `${s.key}`, false);
+      if (i > 0 && !stepData){
+        lastCompletedStep = steps[i-1];
+        return false;
+      }
+    });
+    return lastCompletedStep
   }
+}
 
-  const prevStepKey = getPrevStepKey(prevSteps, request.state.data);
-  const prevStepData = _.get(request, `state.data.${prevStepKey}`, false);
-  if (prevStepData){
-    return requestedStepKey;
+export function getNextStepByKey(previousStepKey) {
+  const previousStepIndex = _.findIndex(steps, (s) => {return s.key == previousStepKey});
+  return steps[previousStepIndex+1]
+}
+
+export function getLatestUncompletedStep(request) {
+  const lastCompletedStep = getlastCompletedStep(request);
+  if (lastCompletedStep){
+    return getNextStepByKey(lastCompletedStep.key)
+  }else{
+    return steps[0]
   }
+}
 
-  return;
+export function checkStepCompletedBefore(requestedStepKey, latestUncompletedStep){
+  const requestedStepIndex = _.findIndex(steps, (s) => {return s.key == requestedStepKey});
+  const latestUncompletedStepIndex = _.findIndex(steps, (s) => {return s.key == latestUncompletedStep.key});
+  return latestUncompletedStepIndex >= requestedStepIndex
 }
 
 export function getHandlerFactory(
@@ -119,11 +140,11 @@ export function getHandlerFactory(
   beforeTemplate,
   template = 'register-form/step') {
   return (request, reply) => {
-    const firstRegirsterFormStepKey = 'name';
-    const validStep = getValidStep(key, prevSteps, request);
-    if (!validStep && firstRegirsterFormStepKey != key){
-      reply.redirect(request.aka(`register-form:${firstRegirsterFormStepKey}`));
-    }else {
+    const latestUncompletedStep = getLatestUncompletedStep(request);
+
+    if (!checkStepCompletedBefore(key, latestUncompletedStep)){
+      return reply.redirect(request.aka(`register-form:${latestUncompletedStep.key}`));
+    }else{
       const stepData = _.get(request, `state.data.${key}`, {});
       const prevStep = getPrevStep(prevSteps, request.state.data, request);
 
