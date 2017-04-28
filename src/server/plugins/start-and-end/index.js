@@ -28,7 +28,7 @@ export function InvalidCookie(reply) {
 }
 
 function startHandler(request, reply) {
-  InvalidCookie(reply);
+  // InvalidCookie(reply);
   if (request.state.practice) {
     reply.view('start');
   } else {

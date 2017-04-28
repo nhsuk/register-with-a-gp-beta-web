@@ -3,7 +3,7 @@ import JoiPostcode from 'joi-postcode';
 import JoiNHSNumber from '../../../../shared/lib/joi-nhs-number-validator';
 import JoiFullDate from '../../../../shared/lib/joi-full-date-validator';
 import _ from 'lodash';
-import steps from './index'
+import steps from './index';
 
 const Joi = JoiBase
   .extend(JoiPostcode)
@@ -107,28 +107,36 @@ export function getlastCompletedStep(request) {
         return false;
       }
     });
-    return lastCompletedStep
+    return lastCompletedStep;
   }
 }
 
 export function getNextStepByKey(previousStepKey) {
-  const previousStepIndex = _.findIndex(steps, (s) => {return s.key == previousStepKey});
-  return steps[previousStepIndex+1]
+  const previousStepIndex = _.findIndex(steps, (s) => {
+    return s.key == previousStepKey;
+  });
+  return steps[previousStepIndex+1];
 }
 
 export function getLatestUncompletedStep(request) {
   const lastCompletedStep = getlastCompletedStep(request);
   if (lastCompletedStep){
-    return getNextStepByKey(lastCompletedStep.key)
+    return getNextStepByKey(lastCompletedStep.key);
   }else{
-    return steps[0]
+    return steps[0];
   }
 }
 
 export function checkStepCompletedBefore(requestedStepKey, latestUncompletedStep){
-  const requestedStepIndex = _.findIndex(steps, (s) => {return s.key == requestedStepKey});
-  const latestUncompletedStepIndex = _.findIndex(steps, (s) => {return s.key == latestUncompletedStep.key});
-  return latestUncompletedStepIndex >= requestedStepIndex
+  const requestedStepIndex = _.findIndex(steps, (s) => {
+    return s.key == requestedStepKey;
+  });
+
+  const latestUncompletedStepIndex = _.findIndex(steps, (s) => {
+    return s.key == latestUncompletedStep.key;
+  });
+
+  return latestUncompletedStepIndex >= requestedStepIndex;
 }
 
 export function getHandlerFactory(
