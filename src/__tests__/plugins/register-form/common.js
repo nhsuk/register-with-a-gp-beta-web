@@ -50,8 +50,8 @@ describe('Get next step', () => {
 
   it('should call getLatestUncompletedStep and return right step', () => {
     const cookieData = {
-      "name": {
-        "a": "b"
+      'name': {
+        'a': 'b'
       }
     };
 
@@ -60,11 +60,11 @@ describe('Get next step', () => {
 
   it('should call getlastCompletedStep and return right step', () => {
     const cookieData = {
-      "name": {
-        "a": "b"
+      'name': {
+        'a': 'b'
       },
-      "dateOfBirth": {
-        "c": "d"
+      'dateOfBirth': {
+        'c': 'd'
       }
     };
 
@@ -73,16 +73,16 @@ describe('Get next step', () => {
 
   it('should call checkStepCompletedBefore and return true', () => {
     const cookieData = {
-      "name": {
-        "a": "b"
+      'name': {
+        'a': 'b'
       },
-      "dateOfBirth": {
-        "c": "d"
+      'dateOfBirth': {
+        'c': 'd'
       }
     };
     const latestUncompletedStep = getLatestUncompletedStep(cookieData);
-    const requestedStepKey = "name";
-    expect(checkStepCompletedBefore(requestedStepKey, latestUncompletedStep)).toEqual(true)
+    const requestedStepKey = 'name';
+    expect(checkStepCompletedBefore(requestedStepKey, latestUncompletedStep)).toEqual(true);
   });
 
 });
