@@ -102,26 +102,26 @@ export function getlastCompletedStep(request) {
     var lastCompletedStep = null;
     _.each(steps, (s,i) => {
       const stepData = _.get(session, `${s.key}`, false);
-      if (i > 0 && !stepData){
-        lastCompletedStep = steps[i-1];
-        return false;
+      if (stepData){
+        lastCompletedStep = steps[i];
       }
     });
     return lastCompletedStep;
   }
 }
 
-export function getNextStepByKey(previousStepKey) {
-  const previousStepIndex = _.findIndex(steps, (s) => {
-    return s.key == previousStepKey;
-  });
-  return steps[previousStepIndex+1];
-}
-
 export function getLatestUncompletedStep(request) {
   const lastCompletedStep = getlastCompletedStep(request);
   if (lastCompletedStep){
-    return getNextStepByKey(lastCompletedStep.key);
+    const lastCompletedStepIndex = _.findIndex(steps, (s) => {
+      return s.key == lastCompletedStep.key;
+    });
+
+    const nextSteps = steps.slice(lastCompletedStepIndex + 1);
+    const nextStepKey = getNextStep(nextSteps, request.state.data);
+    return _.find(steps, (s) => {
+      return nextStepKey == s.key;
+    });
   }else{
     return steps[0];
   }
@@ -149,7 +149,6 @@ export function getHandlerFactory(
   template = 'register-form/step') {
   return (request, reply) => {
     const latestUncompletedStep = getLatestUncompletedStep(request);
-
     if (!checkStepCompletedBefore(key, latestUncompletedStep)){
       return reply.redirect(request.aka(`register-form:${latestUncompletedStep.key}`));
     }else{
