@@ -69,22 +69,7 @@ export function getPrevStep(prevSteps, cookieData, request) {
       return request.aka(`register-form:${step.key}`);
     }
   }
-  return;
 }
-
-export function getPrevStepKey(prevSteps, cookieData) {
-  // loop in reverse
-  for (let i = prevSteps.length - 1; i >= 0; i--) {
-    const step = prevSteps[i];
-    const check = _.get(step, 'checkApplies', () => true);
-
-    if (check(cookieData)) {
-      return step.key;
-    }
-  }
-  return;
-}
-
 
 export function getNextStep(nextSteps, cookieData) {
   for (let currentStep of nextSteps) {
