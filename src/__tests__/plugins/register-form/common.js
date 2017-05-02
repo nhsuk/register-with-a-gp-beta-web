@@ -1,5 +1,4 @@
-import {getNextStep} from '../../../server/plugins/register-form/steps/common';
-
+import {getNextStep, getLatestUncompletedStep, getlastCompletedStep, checkStepCompletedBefore} from '../../../server/plugins/register-form/steps/common';
 
 describe('Get next step', () => {
 
@@ -48,4 +47,42 @@ describe('Get next step', () => {
     ];
     expect(getNextStep(nextSteps, {})).toEqual('b');
   });
+
+  it('should call getLatestUncompletedStep and return right step', () => {
+    const cookieData = {
+      "name": {
+        "a": "b"
+      }
+    };
+
+    expect(getLatestUncompletedStep(cookieData).key).toEqual('dateOfBirth');
+  });
+
+  it('should call getlastCompletedStep and return right step', () => {
+    const cookieData = {
+      "name": {
+        "a": "b"
+      },
+      "dateOfBirth": {
+        "c": "d"
+      }
+    };
+
+    expect(getlastCompletedStep(cookieData).key).toEqual('dateOfBirth');
+  });
+
+  it('should call checkStepCompletedBefore and return true', () => {
+    const cookieData = {
+      "name": {
+        "a": "b"
+      },
+      "dateOfBirth": {
+        "c": "d"
+      }
+    };
+    const latestUncompletedStep = getLatestUncompletedStep(cookieData);
+    const requestedStepKey = "name";
+    expect(checkStepCompletedBefore(requestedStepKey, latestUncompletedStep)).toEqual(true)
+  });
+
 });

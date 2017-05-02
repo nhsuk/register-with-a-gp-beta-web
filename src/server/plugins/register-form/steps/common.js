@@ -81,12 +81,11 @@ export function getNextStep(nextSteps, cookieData) {
   return 'end';
 }
 
-export function getlastCompletedStep(request) {
-  const session = request.state.data;
-  if (session){
+export function getlastCompletedStep(cookieData) {
+  if (cookieData){
     var lastCompletedStep = null;
     _.each(steps, (s,i) => {
-      const stepData = _.get(session, `${s.key}`, false);
+      const stepData = _.get(cookieData, `${s.key}`, false);
       if (stepData){
         lastCompletedStep = steps[i];
       }
@@ -95,15 +94,15 @@ export function getlastCompletedStep(request) {
   }
 }
 
-export function getLatestUncompletedStep(request) {
-  const lastCompletedStep = getlastCompletedStep(request);
+export function getLatestUncompletedStep(cookieData) {
+  const lastCompletedStep = getlastCompletedStep(cookieData);
   if (lastCompletedStep){
     const lastCompletedStepIndex = _.findIndex(steps, (s) => {
       return s.key == lastCompletedStep.key;
     });
 
     const nextSteps = steps.slice(lastCompletedStepIndex + 1);
-    const nextStepKey = getNextStep(nextSteps, request.state.data);
+    const nextStepKey = getNextStep(nextSteps, cookieData);
     return _.find(steps, (s) => {
       return nextStepKey == s.key;
     });
@@ -133,7 +132,7 @@ export function getHandlerFactory(
   beforeTemplate,
   template = 'register-form/step') {
   return (request, reply) => {
-    const latestUncompletedStep = getLatestUncompletedStep(request);
+    const latestUncompletedStep = getLatestUncompletedStep(request.state.data);
     if (!checkStepCompletedBefore(key, latestUncompletedStep)){
       return reply.redirect(request.aka(`register-form:${latestUncompletedStep.key}`));
     }else{
