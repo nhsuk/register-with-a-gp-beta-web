@@ -1,6 +1,4 @@
-import _ from 'lodash';
 import {summaryGetHandler} from '../../../server/plugins/register-form/steps/summary';
-import {summaryPostHandler} from '../../../server/plugins/register-form/steps/summary';
 
 describe('gethandler', () =>{
   it('should give back a', () => {
@@ -9,9 +7,12 @@ describe('gethandler', () =>{
         state: {data: {name: 'dfdsfds'}}
     });
     const gReply = {
-      view: function(a,b){ return 'a'; }
+      view: function(a,b){
+        c=(a==b);
+        return 'a';
+      }
     };
     expect(summaryGetHandler(mockGet, gReply)).toBe('a');
   });
-  
+
 });
