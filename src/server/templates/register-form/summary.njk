@@ -21,6 +21,7 @@
     <h1 class="form-title">{{ title }}</h1>
 
     <table class="summary">
+      {{ row('Gender', data.gender, 'register-form:gender') }}
       {{ row('Name', data.name, 'register-form:name') }}
       {{ row('Date of birth', data.dateOfBirth, 'register-form:name', false, '/') }}
       {{ row('Address', data.address, 'register-form:address', true) }}
