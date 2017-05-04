@@ -24,7 +24,7 @@ describe('parsing address', () =>{
         'postcode': 'NW1 5AE',
       }
     };
-    expect(dataTransformer(key, value, stateData)).toEqual(expectedObj);    
+    expect(dataTransformer(key, value, stateData)).toEqual(expectedObj);
   });
 
 });

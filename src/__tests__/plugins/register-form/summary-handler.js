@@ -4,15 +4,14 @@ describe('gethandler', () =>{
   it('should give back a', () => {
     const mockGet = jest.fn();
     mockGet.mockReturnValueOnce({
-        state: {data: {name: 'dfdsfds'}}
+      state: {data: {name: 'dfdsfds'}}
     });
     const gReply = {
       view: function(a,b){
-        c=(a==b);
-        return 'a';
+        return a + JSON.stringify(b.data);
       }
     };
-    expect(summaryGetHandler(mockGet, gReply)).toBe('a');
+    expect(summaryGetHandler(mockGet, gReply)).toBe('register-form/summary{}');
   });
 
 });
