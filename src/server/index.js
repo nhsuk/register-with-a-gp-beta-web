@@ -138,6 +138,17 @@ if (env === 'development') {
       }
     }
   ]);
+} else {
+  Hoek.merge(manifest.registrations, [
+    {
+      plugin: {
+        register: 'hapi-error',
+        options: {
+          templateName: 'error-page'
+        }
+      }
+    }
+  ]);
 }
 else{
   Hoek.merge(manifest.registrations, [

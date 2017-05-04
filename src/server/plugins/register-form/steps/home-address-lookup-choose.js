@@ -33,7 +33,7 @@ function getHandlerFactory(prevSteps) {
           addressError = true;
           callLookup(postcodeData.postcode)
           .then(addressOptions => {
-             reply.view(template, {
+            reply.view(template, {
               fields: getFieldData(schema),
               data: request.state.data,
               stepData,
@@ -60,7 +60,7 @@ function getHandlerFactory(prevSteps) {
             value: inputValue,
             error: addressError
           });
-        }      
+        }
       });
   };
 }
@@ -76,7 +76,9 @@ function callLookup(pcode,hnumber=''){
       });
       return addressOpts;
     })
-    .catch(err => {throw err;});
+    .catch(err => {
+      throw err;
+    });
 }
 function joinStrStripEmpty(vals) {
   return _.join(_.compact(_.map(vals, x => _.trim(x))), ' ,');
