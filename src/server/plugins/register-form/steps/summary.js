@@ -17,7 +17,7 @@ const slug = 'confirm-details';
 const nextStep = 'end';
 
 
-function summaryGetHandler(request, reply) {
+export function summaryGetHandler(request, reply) {
   if (process.env.NODE_ENV === 'development') {
     request.log(['cookie'], request.state.data);
   }
@@ -54,7 +54,7 @@ export function emailGP(practiceKey, emailText) {
   });
 }
 
-function summaryPostHandler(request, reply) {
+export function summaryPostHandler(request, reply) {
   validate(request.payload, schema)
     .then(async () => {
       const data = _.get(request, 'state.data', {});
