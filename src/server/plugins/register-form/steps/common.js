@@ -3,6 +3,7 @@ import JoiPostcode from 'joi-postcode';
 import JoiNHSNumber from '../../../../shared/lib/joi-nhs-number-validator';
 import JoiFullDate from '../../../../shared/lib/joi-full-date-validator';
 import _ from 'lodash';
+import steps from './index';
 
 const Joi = JoiBase
   .extend(JoiPostcode)
@@ -68,22 +69,7 @@ export function getPrevStep(prevSteps, cookieData, request) {
       return request.aka(`register-form:${step.key}`);
     }
   }
-  return;
 }
-
-export function getPrevStepKey(prevSteps, cookieData) {
-  // loop in reverse
-  for (let i = prevSteps.length - 1; i >= 0; i--) {
-    const step = prevSteps[i];
-    const check = _.get(step, 'checkApplies', () => true);
-
-    if (check(cookieData)) {
-      return step.key;
-    }
-  }
-  return;
-}
-
 
 export function getNextStep(nextSteps, cookieData) {
   for (let currentStep of nextSteps) {
@@ -95,19 +81,46 @@ export function getNextStep(nextSteps, cookieData) {
   return 'end';
 }
 
-export function getValidStep(requestedStepKey, prevSteps, request){
-  const requestedStepData = _.get(request, `state.data.${requestedStepKey}`, false);
-  if (requestedStepData){
-    return requestedStepKey;
+export function getlastCompletedStep(cookieData) {
+  if (cookieData){
+    var lastCompletedStep = null;
+    _.each(steps, (s,i) => {
+      const stepData = _.get(cookieData, `${s.key}`, false);
+      if (stepData){
+        lastCompletedStep = steps[i];
+      }
+    });
+    return lastCompletedStep;
   }
+}
 
-  const prevStepKey = getPrevStepKey(prevSteps, request.state.data);
-  const prevStepData = _.get(request, `state.data.${prevStepKey}`, false);
-  if (prevStepData){
-    return requestedStepKey;
+export function getLatestUncompletedStep(cookieData) {
+  const lastCompletedStep = getlastCompletedStep(cookieData);
+  if (lastCompletedStep){
+    const lastCompletedStepIndex = _.findIndex(steps, (s) => {
+      return s.key == lastCompletedStep.key;
+    });
+
+    const nextSteps = steps.slice(lastCompletedStepIndex + 1);
+    const nextStepKey = getNextStep(nextSteps, cookieData);
+    return _.find(steps, (s) => {
+      return nextStepKey == s.key;
+    });
+  }else{
+    return steps[0];
   }
+}
 
-  return;
+export function checkStepCompletedBefore(requestedStepKey, latestUncompletedStep){
+  const requestedStepIndex = _.findIndex(steps, (s) => {
+    return s.key == requestedStepKey;
+  });
+
+  const latestUncompletedStepIndex = _.findIndex(steps, (s) => {
+    return s.key == latestUncompletedStep.key;
+  });
+
+  return latestUncompletedStepIndex >= requestedStepIndex;
 }
 
 export function getHandlerFactory(
@@ -119,11 +132,10 @@ export function getHandlerFactory(
   beforeTemplate,
   template = 'register-form/step') {
   return (request, reply) => {
-    const firstRegirsterFormStepKey = 'name';
-    const validStep = getValidStep(key, prevSteps, request);
-    if (!validStep && firstRegirsterFormStepKey != key){
-      reply.redirect(request.aka(`register-form:${firstRegirsterFormStepKey}`));
-    }else {
+    const latestUncompletedStep = getLatestUncompletedStep(request.state.data);
+    if (!checkStepCompletedBefore(key, latestUncompletedStep)){
+      return reply.redirect(request.aka(`register-form:${latestUncompletedStep.key}`));
+    }else{
       const stepData = _.get(request, `state.data.${key}`, {});
       const prevStep = getPrevStep(prevSteps, request.state.data, request);
 
