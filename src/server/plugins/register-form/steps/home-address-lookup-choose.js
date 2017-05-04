@@ -45,8 +45,7 @@ function getHandlerFactory(prevSteps) {
               housenumber: postcodeData.houseNumber
             });
           });
-        }
-        else{
+        } else {
           if(addressOptions.length == 1){
             inputValue = addressOptions[0].value;
           }
