@@ -8,4 +8,8 @@ describe('Nunjucks global filters', () => {
     expect(getFilters(env).nl2br('Line one\nline two')).toBe('Line one<br>line two');
   });
 
+  it('nl2br should return a string with line breaks', () => {
+    expect(getFilters(env).fulldateerror('Fulldate error')).toBe('This is not a valid date');
+  });
+
 });

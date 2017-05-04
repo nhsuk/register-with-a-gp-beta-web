@@ -69,7 +69,7 @@ function parseAddress(value, stateData) {
   };
 }
 
-function dataTransformer(key, value, stateData, template = {}) {
+export function dataTransformer(key, value, stateData, template = {}) {
   // save into our own key
   const newData = Object.assign(template, stateData, {[key]: value});
 
