@@ -10,7 +10,7 @@ const invalidFullDateRule = {
   name: 'fulldate',
   description: 'should be a valid Date',
   validate(params, value, state, options){
-    let mm = "0" + value.month.toString();
+    let mm = '0' + value.month.toString();
     mm.slice(-2);
     DateConcat = value.day.toString() + mm + value.year.toString();
     if(validate(DateConcat)){
