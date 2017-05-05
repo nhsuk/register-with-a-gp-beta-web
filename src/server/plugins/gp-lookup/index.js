@@ -8,7 +8,7 @@ const GPLookupAPIPort = process.env.GP_Lookup_API_Port || env == 'development' &
 const TIMEOUT = 10000;
 
 if (env == 'development'){
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 }
 
 function getGPList(keywords, timeout=TIMEOUT) {
@@ -19,13 +19,12 @@ function getGPList(keywords, timeout=TIMEOUT) {
       port: GPLookupAPIPort,
       method : 'GET'
     }, function(response) {
-      console.log(response);
       let body = '';
       response.on('data', (d) => {
         body += d;
       });
       response.on('end', () => {
-          resolve(body);
+        resolve(body);
       });
       response.on('error', (err) => {
         reject(err);
@@ -43,7 +42,6 @@ exports.getGPList = getGPList;
 
 
 function gpLookuptHandler(request, reply) {
-  console.log(request)
   getGPList(request.query.search)
     .then(gps => {
       reply(gps);
