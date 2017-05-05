@@ -25,19 +25,42 @@ function getHandlerFactory(prevSteps) {
     const stepData = _.get(request, `state.data.${key}`, {});
     const prevStep = getPrevStep(prevSteps, request.state.data, request);
     const template = 'register-form/address-choose-step';
-    getAddresses(postcodeData.postcode)
-      .then(addressList => {
-        const addressOptions = _.map(addressList, item => {
-          return {label: formatAddressForDisplay(item), value: item};
-        });
-        return reply.view(template, {
-          fields: getFieldData(schema),
-          data: request.state.data,
-          stepData,
-          title,
-          prevStep,
-          addressOptions
-        });
+    let addressError = false;
+    let addressOptions = [];
+    let inputValue = '';
+    callLookup(postcodeData.postcode, postcodeData.houseNumber)
+      .then(addressOptions => {
+        if(addressOptions.length ===0){
+          addressError = true;
+          callLookup(postcodeData.postcode)
+            .then(addressOptions => {
+              reply.view(template, {
+                fields: getFieldData(schema),
+                data: request.state.data,
+                stepData,
+                title,
+                prevStep,
+                addressOptions,
+                error: addressError,
+                postcode: postcodeData.postcode,
+                housenumber: postcodeData.houseNumber
+              });            
+            });
+        } else {
+          if(addressOptions.length == 1){
+            inputValue = addressOptions[0].value;
+          }
+          reply.view(template, {      
+            fields: getFieldData(schema),
+            data: request.state.data,
+            stepData,
+            title,
+            prevStep,
+            addressOptions,
+            value: inputValue,
+            error: addressError
+          });
+        }
       })
       .catch(err => {
         throw err;
@@ -45,7 +68,22 @@ function getHandlerFactory(prevSteps) {
   };
 }
 
-function joinStrStripEmpty(vals) {
+function callLookup(pcode,hnumber=''){
+  return getAddresses(pcode, hnumber)
+    .then(addressList => {
+      if(addressList.length === 0){
+        console.log('empty');
+        return [];
+      }
+      const addressOpts = _.map(addressList, item => {
+        return {label: formatAddressForDisplay(item), value: item};
+      });
+      return addressOpts;
+    })
+    .catch(err => {throw err;});
+}
+
+ function joinStrStripEmpty(vals) {
   return _.join(_.compact(_.map(vals, x => _.trim(x))), ' ,');
 }
 function parseAddress(value, stateData) {
