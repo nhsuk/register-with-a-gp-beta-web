@@ -55,6 +55,8 @@ import summaryStep from './summary';
  * @type {Array.<Step>}
  */
 const steps = [
+  nhsNumberStep,
+  nhsNumberDetailsStep,
   genderStep,
   nameStep,
   dateOfBirthStep,
@@ -72,8 +74,6 @@ const steps = [
   registeredAddressDetailsStep,
   registeredNameStep,
   registeredNameDetailsStep,
-  nhsNumberStep,
-  nhsNumberDetailsStep,
   currentMedicationStep,
   currentMedicationDetailsStep,
   allergiesStep,

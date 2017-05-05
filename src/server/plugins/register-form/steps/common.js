@@ -130,6 +130,7 @@ export function getHandlerFactory(
   prevSteps,
   details,
   beforeTemplate,
+  extraInfo = '',
   template = 'register-form/step') {
   return (request, reply) => {
     const latestUncompletedStep = getLatestUncompletedStep(request.state.data);
@@ -146,7 +147,8 @@ export function getHandlerFactory(
         stepData,
         title,
         prevStep,
-        details
+        details,
+        extraInfo
       });
     }
   };
