@@ -25,15 +25,16 @@ const schema = Joi.object().keys({
 const title = 'Do you know your NHS number?';
 const key = 'nhsNumber';
 const slug = 'nhs-number';
+const extraInfo = 'An NHS number is a 10 digit number, for example: <strong>943 476 5919</strong><br>It can help to provide your NHS number - this will help {{ CURRENT_PRACTICE.name }} find your medical records quickly.';
 
 const details = {
   summary: 'How to find your NHS number',
-  content: 'An NHS number is a 10 digit number, for example: <strong>943 476 5919</strong><br>You can find your NHS number:<ul><li><a href="javascript:return false;">online</a></li><li>on a printed prescription</li><li>on a letter from your GP or a hospital</li><li>on your NHS medical card if you have one</li></ul>',
+  content: 'You can find your NHS number:<ul><li>on a printed prescription</li><li>on a letter from your GP or a hospital</li><li>on your NHS medical card if you have one</li></ul>',
   position: 'below'
 };
 
 const handlers = {
-  GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps, details),
+  GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps, details, null,  extraInfo),
   POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps),
 };
 

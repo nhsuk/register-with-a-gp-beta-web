@@ -44,6 +44,11 @@
           {% endfor %}
         </div>
       {% endblock %}
+      {% if extraInfo %}
+        <div class="exraInfo">
+          <p>{{ extraInfo | render() | safe }}</p>
+        </div>
+      {% endif %}  
       {% if details %}
         {% if details.position == 'below' %}
           {% set content = details.content %}
