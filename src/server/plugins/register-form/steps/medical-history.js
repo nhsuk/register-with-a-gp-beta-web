@@ -17,7 +17,7 @@ const schema = Joi.object().keys({
         { label: 'High blood pressure', value: 'High blood pressure' },
         { label: 'Mental health issues, such as depression', value: 'Mental health issues, such as depression' },
         { label: 'Stroke or transient ischaemic attack (TIA)', value: 'Stroke or transient ischaemic attack (TIA)' },
-        { label: 'Thyroid problems', value: 'Thyroid problems' },   
+        { label: 'Thyroid problems', value: 'Thyroid problems' },
       ],
       variant: 'checkbox',
       hint: 'Select all that apply'
@@ -34,7 +34,7 @@ const schema = Joi.object().keys({
       componentType: 'textbox',
       variant: 'large',
     }),
-    
+
   'submit': Joi.any().optional().strip()
 });
 
