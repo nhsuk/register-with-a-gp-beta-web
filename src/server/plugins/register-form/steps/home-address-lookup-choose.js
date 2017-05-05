@@ -26,7 +26,6 @@ function getHandlerFactory(prevSteps) {
     const prevStep = getPrevStep(prevSteps, request.state.data, request);
     const template = 'register-form/address-choose-step';
     let addressError = false;
-    let addressOptions = [];
     let inputValue = '';
     callLookup(postcodeData.postcode, postcodeData.houseNumber)
       .then(addressOptions => {
@@ -44,13 +43,13 @@ function getHandlerFactory(prevSteps) {
                 error: addressError,
                 postcode: postcodeData.postcode,
                 housenumber: postcodeData.houseNumber
-              });            
+              });
             });
         } else {
           if(addressOptions.length == 1){
             inputValue = addressOptions[0].value;
           }
-          reply.view(template, {      
+          reply.view(template, {
             fields: getFieldData(schema),
             data: request.state.data,
             stepData,
@@ -72,7 +71,6 @@ function callLookup(pcode,hnumber=''){
   return getAddresses(pcode, hnumber)
     .then(addressList => {
       if(addressList.length === 0){
-        console.log('empty');
         return [];
       }
       const addressOpts = _.map(addressList, item => {
@@ -80,12 +78,15 @@ function callLookup(pcode,hnumber=''){
       });
       return addressOpts;
     })
-    .catch(err => {throw err;});
+    .catch(err => {
+      throw err;
+    });
 }
 
- function joinStrStripEmpty(vals) {
+function joinStrStripEmpty(vals) {
   return _.join(_.compact(_.map(vals, x => _.trim(x))), ' ,');
 }
+
 function parseAddress(value, stateData) {
   const postcode = _.get(stateData, 'addressLookup.postcode');
   const [
