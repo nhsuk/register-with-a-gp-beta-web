@@ -1,4 +1,5 @@
 import nameStep from './your-name';
+import genderStep from './gender';
 import dateOfBirthStep from './date-of-birth';
 import homeAddressLookupStep from './home-address-lookup';
 import homeAddressLookupPickStep from './home-address-lookup-choose';
@@ -54,6 +55,7 @@ import summaryStep from './summary';
  * @type {Array.<Step>}
  */
 const steps = [
+  genderStep,
   nameStep,
   dateOfBirthStep,
   homeAddressLookupStep,
