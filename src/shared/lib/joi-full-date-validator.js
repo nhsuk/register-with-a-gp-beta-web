@@ -13,7 +13,6 @@ const invalidFullDateRule = {
     let mm = "0" + value.month.toString();
     mm.slice(-2);
     DateConcat = value.day.toString() + mm + value.year.toString();
-    console.log(DateConcat);
     if(validate(DateConcat)){
       return value;
     } else {
