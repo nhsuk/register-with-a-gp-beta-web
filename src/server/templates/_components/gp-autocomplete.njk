@@ -1,0 +1,70 @@
+<div class="form-control">
+	<input type="text" name="gp-search" id="gp-search" class="form-textbox" placeholder="{{label}}">
+</div>
+<div class="gp-finder-results">
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+
+	function getResultTemplate(){
+	    return $.parseHTML('' +
+	          '<div class="result">' +
+	            '<h2 class="result-title"></h2>' +
+	            '<p class="address"></p>' +
+	            '<p class="person">' +
+	            '<span></span>' +
+	          '</div>'
+	        )
+	}
+
+	$("#gp-search").on("keyup", function (e) {
+		if (e.keyCode == 40 || e.keyCode == 38){
+			return false;
+		}
+
+		var value = $(e.target).val();
+		if (value){
+			$.ajax({
+                type: "get",
+                url: "/gp-lookup",
+                data: {"search": value},
+                dataType: "json",
+                cache: false,
+                success: function(data){
+                	$(".gp-finder-results").empty();
+                	var gp_list = data.slice(10)
+                	$.each(gp_list, function(i, d){
+                		var template = getResultTemplate();
+                		var item = $(template).clone();
+                		item.find(".result-title").text(d.name.value);
+                		item.find(".address").text(d.address.value);
+                		if (i==0){
+                			item.addClass("active")
+                		}
+                		$(".gp-finder-results").append(item);
+                		
+                	})
+                }.bind(this)
+            });
+		}else{
+			$(".gp-finder-results").empty();
+		}
+	});
+
+
+	$("#gp-search").on("keydown", function (e) {
+		var elem = $(".gp-finder-results");
+		if (elem.children().length > 0){
+			if (e.keyCode == 40){  // up
+				elem.find(".result.active").removeClass("active").next().addClass("active");
+			}
+
+			if (e.keyCode == 38){  //down
+				elem.find(".result.active").removeClass("active").prev().addClass("active");
+			}
+		}		
+
+	});
+
+</script>

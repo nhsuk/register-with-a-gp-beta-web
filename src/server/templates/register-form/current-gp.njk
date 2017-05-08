@@ -1,0 +1,11 @@
+{% extends 'register-form/step.njk' %}
+
+{% block formFields %}
+  {% component 'gp-autocomplete', {
+    label: 'Enter keywords',
+    value: value,
+  } %}
+{% endblock %}
+
+{% block submitRow %}
+{% endblock submitRow %}

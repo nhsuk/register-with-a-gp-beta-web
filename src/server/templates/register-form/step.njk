@@ -65,12 +65,14 @@
         {% endif %}
       {% endif %}
 
-      <div class="form-group">
-        <button type="submit" class="button">Continue</button>
-        {% if prevStep %}
-          <a href="{{ prevStep }}" class="button button--back">Back</a>
-        {% endif %}
-      </div>
+      {% block submitRow %}
+        <div class="form-group">
+          <button type="submit" class="button">Continue</button>
+          {% if prevStep %}
+            <a href="{{ prevStep }}" class="button button--back">Back</a>
+          {% endif %}
+        </div>
+      {% endblock submitRow %}
 
     </form>
   </div>

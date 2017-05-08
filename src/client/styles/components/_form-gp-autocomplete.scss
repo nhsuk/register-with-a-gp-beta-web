@@ -1,0 +1,104 @@
+@media (min-width: 980px) {
+  .gp-finder-results {
+    max-width: 75%;
+  }
+}
+
+.gp-finder-results .result {
+  cursor: pointer;
+  display: block;
+  margin: 9px 0;
+  padding: 12px 12px 6px 12px;
+  text-decoration: none;
+  color: #231f20;
+  background-color: #fff;
+  border: 1px solid #425563;
+  border-bottom-width: 2px;
+}
+
+@media (min-width: 980px) {
+  .gp-finder-results .result {
+    margin: 18px 0;
+  }
+}
+
+.gp-finder-results .result:hover, .gp-finder-results .result:focus, .gp-finder-results .result.active {
+  outline: 3px solid #ffb81c;
+}
+
+.gp-finder-results .result-title {
+  font-size: 20px;
+  font-weight: 400;
+  color: #005eb8;
+  text-decoration: underline;
+  margin: 0;
+}
+
+.gp-finder-results p {
+  margin: 6px 0;
+  font-size: 16px;
+}
+
+@media (min-width: 980px) {
+  .gp-finder-results p {
+    margin: 12px 0;
+    font-size: 18px;
+  }
+}
+
+.gp-finder-results .distance {
+  font-size: 14px;
+}
+
+@media (min-width: 980px) {
+  .gp-finder-results .distance {
+    font-size: 16px;
+  }
+}
+
+.gp-finder-results .person {
+  position: relative;
+  left: 6px;
+  padding-left: 18px;
+  border-left: 1px dotted #231f20;
+}
+
+.gp-finder-results .person img {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gp-finder-results .person:before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 48%;
+  bottom: 0;
+  display: block;
+  width: 12px;
+  background-color: #fff;
+  border-top: 1px dotted #231f20;
+}
+
+.gp-finder-results strong {
+  padding-left: 2px;
+  padding-right: 2px;
+  font-weight: 400;
+  background-color: #e6eff8;
+}
+
+.gp-finder-results a.start-of-page:not(:first-child) {
+  position: relative;
+  margin-top: 30px;
+}
+
+.gp-finder-results a.start-of-page:not(:first-child):before {
+  content: "";
+  display: block;
+  background: #ddd;
+  position: absolute;
+  top: -17px;
+  width: 100%;
+  height: 2px;
+  left: 0;
+}
