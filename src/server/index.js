@@ -114,6 +114,12 @@ const manifest = {
     },
     {
       plugin: {
+        register: './plugins/gp-lookup',
+        options: {exposeEndpoint: true}
+      }
+    },
+    {
+      plugin: {
         register: 'blipp',
         options: {}
       }
