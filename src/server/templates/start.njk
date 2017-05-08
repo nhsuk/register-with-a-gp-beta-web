@@ -6,57 +6,35 @@
   <div class="local-header">
     <h1 class="local-header__title">Apply to register with {{ CURRENT_PRACTICE.name | default('a GP practice') }}</h1>
 
-    <div class="local-header__intro">
-      <p>It usually takes about 10 minutes.</p>
-    </div>
   </div>
 
   <div class="page-section">
     <div class="reading-width">
-      <h2>You’ll need to provide:</h2>
-
-      <ul>
-        <li>your name and date of birth</li>
-        <li>contact details</li>
-        <li>your address</li>
-      </ul>
-
-      <h3>Other things you’ll be asked</h3>
-
-      <p>It will help {{ CURRENT_PRACTICE.name | default('the GP practice') }} find your medical records if you’re able to provide as much information as you can. This could include:</p>
-
-      <ul>
-        <li>the GP you’re currently registered with if you have one</li>
-        <li>the name or address under which you’re registered with your current GP (if they’re different)</li>
-        <li>details of any allergies, medication and your general health</li>
-        <li>your military service number (if you have one) and enlistment date</li>
-        <li>your NHS number if you know it</li>
-      </ul>
-
-      <details>
-        <summary>
-          <span class="details__summary">How to find your NHS number</span>
-        </summary>
-
-        <div class="details__content">
-          <div class="callout callout--info">
-            <p>
-              An NHS number is a 10 digit number, for example: <b>943 476 5919</b>
-            </p>
-
-            <p>You can find your NHS number:</p>
-
-            <ul>
-              <li>online</li>
-              <li>on a printed prescription</li>
-              <li>on a letter from your GP or a hospital</li>
-              <li>on your NHS medical card if you have one</li>
-            </ul>
+      <p>
+      You can apply online to start your registration with {{ CURRENT_PRACTICE.name | default('a GP practice') }}. You’ll need to complete your registration in person.
+      </p>
+      <section class="callout callout--info">
+        <div class="reading-with">
+          <p>
+          You can’t currently apply online for someone else, for example a child or a person you care for - register in person at {{ CURRENT_PRACTICE.name }}, {{ CURRENT_PRACTICE.address }}  instead.
+          </p>
           </div>
+      </section>
+      <p>Applying online takes about 10 minutes.</p>
+      <h3>Completing your registration</h3>
+      <p>
+        After you apply online, you’ll need to go in person to [practice name] with proof of your identity and address.
+      </p>
+      <p>
+        It then usually takes {{ CURRENT_PRACTICE.regdays }} days to be registered. {{ CURRENT_PRACTICE.name }} will contact you if there’s a problem.
+      </p>
+      <section class="callout callout--info">
+        <div class="reading-with">
+          <p>      
+            Some GP practices only register patients who live in the local area. Check with {{ CURRENT_PRACTICE.name }} if you’re unsure.
+          </p>
         </div>
-      </details>
-
-      <p>You can still register without this information.</p>
+      </section>
 
       <a href="/register/name" class="button">Start</a>
     </div>
