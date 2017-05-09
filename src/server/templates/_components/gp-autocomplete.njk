@@ -1,13 +1,11 @@
 <div class="form-control">
-	<input type="text" name="gp-search" id="gp-search" class="form-textbox" placeholder="{{ label }}" autocomplete="off">
+	<input type="text" id="gp-search" class="form-textbox" placeholder="{{ label }}" autocomplete="off">
 </div>
 <input type="hidden" name="gp-code" id="gp-code">
 <input type="hidden" name="gp-name" id="gp-name">
 <input type="hidden" name="gp-address" id="gp-address">
 <div class="gp-finder-results">
 </div>
-
-
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
@@ -37,11 +35,19 @@
 		$("#gp-address").val("");
 	}
 	
+	$('#register-step-form').on('keyup keypress', function(e) {
+		var keyCode = e.keyCode || e.which;
+		if (keyCode === 13) { 
+			e.preventDefault();
+    		return false;
+  		}
+	});
 
 	$("#gp-search").on("keyup", function (e) {
 		if (e.keyCode == 40 || e.keyCode == 38 || e.keyCode == 13){
 			return false;
 		}
+
 		cleanSelectedGP();
 		var value = $(e.target).val();
 		if (value){
@@ -53,7 +59,7 @@
                 cache: false,
                 success: function(data){
                 	$(".gp-finder-results").empty();
-                	var gpList = data.slice(0, 3);
+                	var gpList = data.slice(0, 5);
                 	console.log(gpList.length)
                 	$.each(gpList, function(i, d){
                 		var template = getResultTemplate();
@@ -82,7 +88,7 @@
 
 	$("#gp-search").on("keydown", function (e) {
 		var elem = $(".gp-finder-results");
-		if (elem.children().length){
+		if (elem.children().length > 0){
 			if (e.keyCode == 40){  // up
 				elem.find(".result.active").removeClass("active").next().addClass("active");
 				if (!elem.find(".result.active").length){
@@ -99,6 +105,7 @@
 			if (e.keyCode == 13){
 				var selectedElem = elem.find(".result.active");
 				selectGP(selectedElem);
+				return false
 			}
 		}		
 
