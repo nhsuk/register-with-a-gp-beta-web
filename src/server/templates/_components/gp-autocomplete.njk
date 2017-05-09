@@ -1,12 +1,17 @@
 <div class="form-control">
-	<input type="text" name="gp-search" id="gp-search" class="form-textbox" placeholder="{{label}}">
+	<input type="text" name="gp-search" id="gp-search" class="form-textbox" placeholder="{{ label }}" autocomplete="off">
 </div>
+<input type="hidden" name="gp-code" id="gp-code">
+<input type="hidden" name="gp-name" id="gp-name">
+<input type="hidden" name="gp-address" id="gp-address">
 <div class="gp-finder-results">
 </div>
 
+
+
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
-
+	
 	function getResultTemplate(){
 	    return $.parseHTML('' +
 	          '<div class="result">' +
@@ -18,11 +23,26 @@
 	        )
 	}
 
+	function selectGP(elem){
+		$("#gp-code").val(elem.data("code"));
+		$("#gp-name").val(elem.data("name"));
+		$("#gp-address").val(elem.data("address"));
+		$("#register-step-form").submit();
+
+	}
+
+	function cleanSelectedGP(){
+		$("#gp-code").val("");
+		$("#gp-name").val("");
+		$("#gp-address").val("");
+	}
+	
+
 	$("#gp-search").on("keyup", function (e) {
-		if (e.keyCode == 40 || e.keyCode == 38){
+		if (e.keyCode == 40 || e.keyCode == 38 || e.keyCode == 13){
 			return false;
 		}
-
+		cleanSelectedGP();
 		var value = $(e.target).val();
 		if (value){
 			$.ajax({
@@ -33,12 +53,20 @@
                 cache: false,
                 success: function(data){
                 	$(".gp-finder-results").empty();
-                	var gp_list = data.slice(10)
-                	$.each(gp_list, function(i, d){
+                	var gpList = data.slice(0, 3);
+                	console.log(gpList.length)
+                	$.each(gpList, function(i, d){
                 		var template = getResultTemplate();
                 		var item = $(template).clone();
                 		item.find(".result-title").text(d.name.value);
                 		item.find(".address").text(d.address.value);
+                		var gpData = {
+                			"code": d.code,
+                			"name": d.name.value || "",
+                			"address": d.address.value || ""
+                		}
+                		item.data(gpData);
+                		console.log(item.data("code"));
                 		if (i==0){
                 			item.addClass("active")
                 		}
@@ -52,19 +80,35 @@
 		}
 	});
 
-
 	$("#gp-search").on("keydown", function (e) {
 		var elem = $(".gp-finder-results");
-		if (elem.children().length > 0){
+		if (elem.children().length){
 			if (e.keyCode == 40){  // up
 				elem.find(".result.active").removeClass("active").next().addClass("active");
+				if (!elem.find(".result.active").length){
+					elem.find(".result").first().addClass("active");
+				}
 			}
 
 			if (e.keyCode == 38){  //down
 				elem.find(".result.active").removeClass("active").prev().addClass("active");
+				if (!elem.find(".result.active").length){
+					elem.find(".result").last().addClass("active");
+				}
+			}
+			if (e.keyCode == 13){
+				var selectedElem = elem.find(".result.active");
+				selectGP(selectedElem);
 			}
 		}		
 
+	});
+
+	$(".gp-finder-results").on("click", ".result", function(e){
+		$(".result", ".gp-finder-results").removeClass("active");
+		var selectedElem = $(e.target).closest(".result");
+		selectedElem.addClass("active");
+		selectGP(selectedElem);
 	});
 
 </script>
