@@ -7,7 +7,8 @@
       "address": [
         "4 Albion Place\nBennetthorpe\nDoncaster\nDN1 2EG"
       ]
-    }
+    },
+    "regdays": 6
   },
   {
     "key": "peel-croft-surgery",
@@ -17,7 +18,8 @@
       "address": [
         "Lichfield Street\nBurton-on-Trent\nDE14 3RH"
       ]
-    }
+    },
+    "regdays": 5    
   },
   {
     "key": "pioneer-medical-group",
@@ -29,7 +31,8 @@
         "Pioneer at Bradgate\nArdenton Walk\nBrentry\nBS10 6SP",
         "Pioneer at Ridingleaze\nRidingleaze\nLawrence Weston\nBS11 0QE"
       ]
-    }
+    },
+    "regdays": 8    
   },
   {
     "key": "rosebank-health",
@@ -40,7 +43,8 @@
         "Rosebank Surgery\n153b Stroud Road\nGloucester\nGL1 5JQ",
         "Severnvale Surgery\nSt James\nQuedgeley\nGloucester\nGL2 4WD"
       ]
-    }
+    },
+    "regdays": 3    
   },
   {
     "key": "the-wolds-practice",
@@ -50,7 +54,8 @@
       "address": [
         "West Road\nTetford\nLincolnshire\nLN9 6QP"
       ]
-    }
+    },
+    "regdays": 7    
   },
   {
     "key": "wallington-family-practice",
@@ -60,6 +65,7 @@
       "address": [
         "Jubilee Health Centre\nShotfield\nWallington\nSM6 0HY"
       ]
-    }
+    },
+    "regdays": 5    
   }
 ]
