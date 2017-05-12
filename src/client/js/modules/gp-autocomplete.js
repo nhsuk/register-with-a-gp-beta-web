@@ -1,19 +1,23 @@
-var autoCompleteWidget = Class.extend({
+const $ = require('jquery');
 
-    init: function(endpoint, queryParam="search"){
+
+class GPAutoComplete {
+    constructor(endpoint, queryParam="search"){
         this.endpoint = endpoint;
         this.queryParam = queryParam;
+    }
+
+    init(){
         this.formElem = $("#current-step-form");
         this.resultListContainerElem = $(".gp-finder-results");
         this.autoCompleteInput = $("#gp-search");
-        $('#register-step-form').on('keyup keypress', this.stepFormKeyPressHandler.bind(this));
-
-        this.autoCompleteInput.on('keyup', this.autoCompleteInputKeyUpHandler.bind(this));
-        this.autoCompleteInput.on('keydown', this.autoCompleteInputKeyDownHandler.bind(this));
+        this.formElem.on('keyup keypress', this.stepFormKeyPressHandler);
+        this.autoCompleteInput.on('keyup', this.autoCompleteInputKeyUpHandler);
+        this.autoCompleteInput.on('keydown', this.autoCompleteInputKeyDownHandler);
         this.resultListContainerElem.on("click", ".result", this.resultItemClickHandler.bind(this));
-    },
-
-    getResultTemplate: function() {
+    }
+    
+    getResultTemplate (){
         return $.parseHTML('' +
             '<div class="result">' +
             '<h2 class="result-title"></h2>' +
@@ -22,39 +26,38 @@ var autoCompleteWidget = Class.extend({
             '<span></span>' +
             '</div>'
         )
-    },
+    }
 
-    selectGP: function(elem){
+    selectGP (elem){
         $("#gp-code").val(elem.data("code"));
         $("#gp-name").val(elem.data("name"));
         $("#gp-address").val(elem.data("address"));
         this.formElem.submit();
-    },
+    }
 
-    cleanSelectedGP: function(){
+    cleanSelectedGP (){
         $("#gp-code").val("");
         $("#gp-name").val("");
         $("#gp-address").val("");
-    },
+    }
 
-    stepFormKeyPressHandler: function(e){
-        console.log("form keypress");
+    stepFormKeyPressHandler (e){
         var keyCode = e.keyCode || e.which;
+        console.log(keyCode);
         if (keyCode === 13) {
             e.preventDefault();
             return false;
         }
-    },
+    }
 
-    resultItemClickHandler: function (e) {
+    resultItemClickHandler (e){
         this.resultListContainerElem.find(".result").removeClass("active");
         var selectedElem = $(e.target).closest(".result");
         selectedElem.addClass("active");
         this.selectGP(selectedElem);
-    },
+    }
 
-    autoCompleteInputKeyUpHandler: function(e){
-        console.log("input keyup");
+    autoCompleteInputKeyUpHandler (e){
         var keyCode = e.keyCode || e.which;
         if (keyCode == 40 || keyCode == 38 || keyCode == 13){
             return false;
@@ -68,10 +71,12 @@ var autoCompleteWidget = Class.extend({
         }else{
             this.resultListContainerElem.empty();
         }
-    },
+    }
 
-    autoCompleteInputKeyDownHandler: function (e) {
+    autoCompleteInputKeyDownHandler (e){
         var elem = this.resultListContainerElem;
+        console.log(elem);
+        console.log($(".gp-finder-results"));
         if (elem.children().length > 0){
             if (e.keyCode == 40){  // up
                 elem.find(".result.active").removeClass("active").next().addClass("active");
@@ -92,9 +97,9 @@ var autoCompleteWidget = Class.extend({
                 return false
             }
         }
-    },
+    }
 
-    appendResultListItem: function (i, d) {
+    appendResultListItem (i, d){
         var template = this.getResultTemplate();
         var item = $(template).clone();
         item.find(".result-title").text(d.name.value);
@@ -114,9 +119,9 @@ var autoCompleteWidget = Class.extend({
         }
 
         this.resultListContainerElem.append(item);
-    },
+    }
 
-    fetchList: function (endpoint, queryParam, keywords) {
+    fetchList (endpoint, queryParam, keywords){
         var showFirstItemNumber = 4;
         var showTotalItemNumber = 20;
         var queryData = {};
@@ -133,4 +138,8 @@ var autoCompleteWidget = Class.extend({
             }.bind(this)
         });
     }
-});
+}
+
+
+
+module.exports = new GPAutoComplete("/gp-lookup");
