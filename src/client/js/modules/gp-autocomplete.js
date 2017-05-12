@@ -11,9 +11,9 @@ class GPAutoComplete {
         this.formElem = $("#current-step-form");
         this.resultListContainerElem = $(".gp-finder-results");
         this.autoCompleteInput = $("#gp-search");
-        this.formElem.on('keyup keypress', this.stepFormKeyPressHandler);
-        this.autoCompleteInput.on('keyup', this.autoCompleteInputKeyUpHandler);
-        this.autoCompleteInput.on('keydown', this.autoCompleteInputKeyDownHandler);
+        this.formElem.on('keyup keypress', this.stepFormKeyPressHandler.bind(this));
+        this.autoCompleteInput.on('keyup', this.autoCompleteInputKeyUpHandler.bind(this));
+        this.autoCompleteInput.on('keydown', this.autoCompleteInputKeyDownHandler.bind(this));
         this.resultListContainerElem.on("click", ".result", this.resultItemClickHandler.bind(this));
     }
     
@@ -43,7 +43,6 @@ class GPAutoComplete {
 
     stepFormKeyPressHandler (e){
         var keyCode = e.keyCode || e.which;
-        console.log(keyCode);
         if (keyCode === 13) {
             e.preventDefault();
             return false;
@@ -75,8 +74,6 @@ class GPAutoComplete {
 
     autoCompleteInputKeyDownHandler (e){
         var elem = this.resultListContainerElem;
-        console.log(elem);
-        console.log($(".gp-finder-results"));
         if (elem.children().length > 0){
             if (e.keyCode == 40){  // up
                 elem.find(".result.active").removeClass("active").next().addClass("active");

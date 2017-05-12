@@ -7,8 +7,9 @@ import title from './lib/title';
 labelFocus.init();
 labelSelect.init();
 errorSummary.init();
-GPAutoComplete.init();
 title.init();
+
+GPAutoComplete.init();
 
 
 if (module.hot) {
