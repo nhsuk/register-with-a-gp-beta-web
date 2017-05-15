@@ -8,7 +8,7 @@
   cursor: pointer;
   display: block;
   margin: 9px 0;
-  padding: 12px 12px 6px 12px;
+  padding: 5px 10px;
   text-decoration: none;
   color: #231f20;
   background-color: #fff;
@@ -26,8 +26,16 @@
   outline: 3px solid #ffb81c;
 }
 
+.gp-finder-results .see-more-results.active, .gp-finder-results .see-more-results:active{
+  outline: 2px solid #ffb81c
+}
+
+.gp-finder-results .see-more-results:hover{
+  cursor: pointer;
+}
+
 .gp-finder-results .result-title {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   color: #005eb8;
   text-decoration: underline;
@@ -35,8 +43,8 @@
 }
 
 .gp-finder-results p {
-  margin: 6px 0;
-  font-size: 16px;
+  margin: 0;
+  font-size: 12px;
 }
 
 @media (min-width: 980px) {
@@ -90,6 +98,10 @@
 .gp-finder-results a.start-of-page:not(:first-child) {
   position: relative;
   margin-top: 30px;
+}
+
+.gp-finder-results{
+  margin-top: 10px;
 }
 
 .gp-finder-results a.start-of-page:not(:first-child):before {

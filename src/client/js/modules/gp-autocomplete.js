@@ -2,29 +2,28 @@ const $ = require('jquery');
 
 
 class GPAutoComplete {
-    constructor(endpoint, queryParam="search"){
+    constructor(endpoint, queryParam="search", showFirstItemsNumber = 4, showTotalItemsNumber = 20){
         this.endpoint = endpoint;
         this.queryParam = queryParam;
+        this.showFirstItemsNumber = showFirstItemsNumber;
+        this.showTotalItemsNumber = showTotalItemsNumber;
     }
 
     init(){
         this.formElem = $("#current-step-form");
         this.resultListContainerElem = $(".gp-finder-results");
         this.autoCompleteInput = $("#gp-search");
-        this.formElem.on('keyup keypress', this.stepFormKeyPressHandler.bind(this));
         this.autoCompleteInput.on('keyup', this.autoCompleteInputKeyUpHandler.bind(this));
         this.autoCompleteInput.on('keydown', this.autoCompleteInputKeyDownHandler.bind(this));
         this.resultListContainerElem.on("click", ".result", this.resultItemClickHandler.bind(this));
+        this.resultListContainerElem.on("mouseover", ".result", this.resultItemHoverHandler.bind(this));
     }
     
-    getResultTemplate (){
+    static getResultTemplate (){
         return $.parseHTML('' +
             '<div class="result">' +
-            '<h2 class="result-title"></h2>' +
-            '<p class="address"></p>' +
-            '<p class="person">' +
-            '<span></span>' +
-            '</div>'
+            '<h4 class="result-title"></h4>' +
+            '<p class="address"></p>'
         )
     }
 
@@ -41,19 +40,34 @@ class GPAutoComplete {
         $("#gp-address").val("");
     }
 
-    stepFormKeyPressHandler (e){
-        var keyCode = e.keyCode || e.which;
-        if (keyCode === 13) {
-            e.preventDefault();
-            return false;
-        }
-    }
-
     resultItemClickHandler (e){
-        this.resultListContainerElem.find(".result").removeClass("active");
+        this.resultListContainerElem.find(".active").removeClass("active");
         var selectedElem = $(e.target).closest(".result");
         selectedElem.addClass("active");
         this.selectGP(selectedElem);
+    }
+
+    resultItemHoverHandler (e){
+        this.resultListContainerElem.find(".active").removeClass("active");
+        var selectedElem = $(e.target).closest(".result");
+        selectedElem.addClass("active");
+    }
+
+    cleanResults (){
+        this.resultListContainerElem.find(".result").remove();
+        this.resultListContainerElem.hide();
+    }
+
+    seeMoreResultClickHandler (){
+        this.resultListContainerElem.find(".result").show();
+        $(".see-more-results").remove();
+    }
+
+    createSeeMoreBtn (){
+        const seeMoreBtn = $("<a\>").text("See more").addClass("see-more-results btn-link");
+        seeMoreBtn.on("click", this.seeMoreResultClickHandler.bind(this));
+        this.resultListContainerElem.append(seeMoreBtn);
+        return false;
     }
 
     autoCompleteInputKeyUpHandler (e){
@@ -64,40 +78,53 @@ class GPAutoComplete {
 
         this.cleanSelectedGP();
         var keywords = $(e.target).val();
+        clearTimeout(this.timer);
         if (keywords){
-            clearTimeout(this.timer);
             this.timer = setTimeout(this.fetchList.bind(this, this.endpoint, this.queryParam, keywords), 400);
         }else{
-            this.resultListContainerElem.empty();
+            this.cleanResults();
         }
     }
 
     autoCompleteInputKeyDownHandler (e){
         var elem = this.resultListContainerElem;
         if (elem.children().length > 0){
-            if (e.keyCode == 40){  // up
-                elem.find(".result.active").removeClass("active").next().addClass("active");
-                if (!elem.find(".result.active").length){
+            if (e.keyCode == 40){  // down key
+
+                const nextElem = elem.find(".active").removeClass("active").nextAll(":visible").first();
+                nextElem.addClass("active");
+
+                if (!elem.find(".active").length){
                     elem.find(".result").first().addClass("active");
                 }
             }
 
-            if (e.keyCode == 38){  //down
-                elem.find(".result.active").removeClass("active").prev().addClass("active");
-                if (!elem.find(".result.active").length){
-                    elem.find(".result").last().addClass("active");
+            if (e.keyCode == 38){  // up key
+                const prevElem = elem.find(".active").removeClass("active").prevAll(":visible").first();
+                prevElem.addClass("active");
+                if (!elem.find(".active").length){
+                    if (elem.find(".see-more-results").length > 0){
+                        elem.find(".see-more-results").addClass("active");
+                    }else{
+                        elem.find(".result:visible").last().addClass("active");
+                    }
                 }
             }
             if (e.keyCode == 13){
-                var selectedElem = elem.find(".result.active");
-                this.selectGP(selectedElem);
-                return false
+                const isSeeMoreBtn = elem.find(".see-more-results.active").length > 0;
+                if (isSeeMoreBtn){
+                    this.seeMoreResultClickHandler();
+                }else{
+                    var selectedElem = elem.find(".result.active");
+                    this.selectGP(selectedElem);
+                }
+                return false;
             }
         }
     }
 
     appendResultListItem (i, d){
-        var template = this.getResultTemplate();
+        var template = GPAutoComplete.getResultTemplate();
         var item = $(template).clone();
         item.find(".result-title").text(d.name.value);
         item.find(".address").text(d.address.value);
@@ -111,7 +138,7 @@ class GPAutoComplete {
             item.addClass("active")
         }
 
-        if (i >= 4){
+        if (i >= this.showFirstItemsNumber){
             item.hide();
         }
 
@@ -119,9 +146,7 @@ class GPAutoComplete {
     }
 
     fetchList (endpoint, queryParam, keywords){
-        var showFirstItemNumber = 4;
-        var showTotalItemNumber = 20;
-        var queryData = {};
+        const queryData = {};
         queryData[queryParam] = keywords;
         $.ajax({
             type: "get",
@@ -130,8 +155,15 @@ class GPAutoComplete {
             dataType: "json",
             cache: false,
             success: function(data){
-                var gpList = data.slice(0, showTotalItemNumber);
-                $.each(gpList, this.appendResultListItem.bind(this));
+                this.cleanResults();
+                if (data.length > 0){
+                    var gpList = data.slice(0, this.showTotalItemsNumber);
+                    $.each(gpList, this.appendResultListItem.bind(this));
+                    if (data.length > this.showFirstItemsNumber){
+                        this.createSeeMoreBtn()
+                    }
+                    this.resultListContainerElem.show();
+                }
             }.bind(this)
         });
     }
