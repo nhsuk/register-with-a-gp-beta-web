@@ -199,7 +199,6 @@ export function postHandlerFactory(
     validate(request.payload, schema)
       .then(value => {
         const newData = transformData(key, value, request.state.data);
-        console.log(value);
         const nextStep = getNextStep(nextSteps, newData);
         return reply
           .redirect(request.aka(`register-form:${nextStep}`))

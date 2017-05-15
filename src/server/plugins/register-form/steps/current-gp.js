@@ -13,14 +13,14 @@ const schema = Joi.object().keys({
 const title = 'What is the name and address of your current GP practice?';
 const key = 'currentGP';
 const slug = 'current-gp';
-const template = "register-form/current-gp";
+const template = 'register-form/current-gp';
 
 const handlers = {
   GET: (prevSteps) => getHandlerFactory(
       key, title, schema, prevSteps, null, null, null, template
   ),
   POST: (prevSteps, nextSteps) => postHandlerFactory(
-      key, title, schema, prevSteps, nextSteps, {null, template, dataTransformer}
+      key, title, schema, prevSteps, nextSteps, {undefined, template, dataTransformer}
   ),
 };
 
