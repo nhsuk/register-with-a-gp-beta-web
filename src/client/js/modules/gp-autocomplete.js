@@ -2,7 +2,7 @@ const $ = require('jquery');
 
 
 class GPAutoComplete {
-  constructor(endpoint, queryParam='search', showFirstItemsNumber = 4, showTotalItemsNumber = 20){
+  constructor(endpoint, queryParam='search', showFirstItemsNumber = 4, showTotalItemsNumber = 10){
     this.endpoint = endpoint;
     this.queryParam = queryParam;
     this.showFirstItemsNumber = showFirstItemsNumber;

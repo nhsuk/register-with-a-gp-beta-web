@@ -5,9 +5,11 @@
     label: 'Enter keywords',
     value: value } %}
     <p>
-        <a href="{{ REQUEST_AKA('register-form:registedAddress') }}">Skip</a>
+      {% if prevStep %}
+        <a href="{{ prevStep }}" class="button button--back">Back</a>
+      {% endif %}
+      <a class="button button--secondary" href="{{ REQUEST_AKA('register-form:registedAddress') }}">Skip</a>
     </p>
 {% endblock %}
-
 {% block submitRow %}
 {% endblock submitRow %}
