@@ -21,9 +21,9 @@ class GPAutoComplete {
     
     static getResultTemplate (){
         return $.parseHTML('' +
-            '<div class="result">' +
-            '<h4 class="result-title"></h4>' +
-            '<p class="address"></p>'
+          '<div class="result">' +
+          '<h4 class="result-title"></h4>' +
+          '<p class="address"></p>'
         )
     }
 
@@ -54,8 +54,7 @@ class GPAutoComplete {
     }
 
     cleanResults (){
-        this.resultListContainerElem.find(".result").remove();
-        this.resultListContainerElem.hide();
+        this.resultListContainerElem.empty().hide();
     }
 
     seeMoreResultClickHandler (){

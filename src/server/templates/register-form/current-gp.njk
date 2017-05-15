@@ -4,6 +4,9 @@
   {% component 'gp-autocomplete', {
     label: 'Enter keywords',
     value: value } %}
+    <p>
+        <a href="{{ REQUEST_AKA('register-form:registedAddress') }}">Skip</a>
+    </p>
 {% endblock %}
 
 {% block submitRow %}
