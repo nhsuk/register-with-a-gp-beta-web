@@ -15,7 +15,18 @@ exports.register = function(server, options, next) {
       }
     }
   });
-
+  server.route({
+    method: 'GET',
+    path: '/static/{param*}',
+    handler: {
+      directory: {
+        path: [
+          Path.join(server.settings.app.repo_root, 'src/server/static/')
+        ],
+        listing: server.settings.app.debug
+      }
+    }
+  });
   next();
 };
 
