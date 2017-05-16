@@ -1,0 +1,15 @@
+{% extends 'register-form/step.njk' %}
+
+{% block formFields %}
+  {% component 'gp-autocomplete', {
+    label: 'Enter keywords',
+    value: value } %}
+    <p>
+      {% if prevStep %}
+        <a href="{{ prevStep }}" class="button button--back">Back</a>
+      {% endif %}
+      <a class="button button--secondary" href="{{ REQUEST_AKA('register-form:registedAddress') }}">Skip</a>
+    </p>
+{% endblock %}
+{% block submitRow %}
+{% endblock submitRow %}
