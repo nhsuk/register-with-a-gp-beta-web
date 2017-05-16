@@ -11,6 +11,7 @@ import armedStaffNumberStep from './armed-staff-number';
 import armedEnlistDateStep from './armed-enlist-date';
 import previouslyRegisteredStep from './previously-registered';
 import currentGP from './current-gp';
+import enterGpAddress from './current-gp-address';
 import registeredAddressStep from './registered-address';
 import registeredAddressDetailsStep from './registered-address-details';
 import registeredNameStep from './registered-name';
@@ -70,6 +71,7 @@ const steps = [
   armedEnlistDateStep,
   previouslyRegisteredStep,
   currentGP,
+  enterGpAddress,
   registeredAddressStep,
   registeredAddressDetailsStep,
   registeredNameStep,
