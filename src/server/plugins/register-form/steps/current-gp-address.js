@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import JoiBase from 'joi';
 import JoiPostcodeExtension from 'joi-postcode';
-import {postHandlerFactory, getHandlerFactory} from './common';
+import previouslyRegisteredStep from './previously-registered';
+import {postHandlerFactory, getHandlerFactory, dependsOnBoolean} from './common';
 
 const Joi = JoiBase.extend(JoiPostcodeExtension);
 
@@ -32,7 +33,9 @@ const handlers = {
 };
 
 const checkApplies = function(cookieData) {
-  return _.get(cookieData, 'currentGP.gp-code') === undefined;
+  const  gpCode = _.get(cookieData, 'currentGP.gp-code') === undefined;
+  const  registered = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered')(cookieData);
+  return gpCode && registered;
 };
 
 /**

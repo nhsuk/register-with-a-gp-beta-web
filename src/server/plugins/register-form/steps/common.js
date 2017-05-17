@@ -83,10 +83,11 @@ export function getNextStep(nextSteps, cookieData) {
 
 export function getlastCompletedStep(cookieData) {
   if (cookieData){
-    var lastCompletedStep = null;
+    let lastCompletedStep = null;
     _.each(steps, (s,i) => {
       const stepData = _.get(cookieData, `${s.key}`, false);
-      if (stepData){
+      const check = _.get(s, 'checkApplies', () => stepData);
+      if (check(cookieData, 'next')){
         lastCompletedStep = steps[i];
       }
     });
