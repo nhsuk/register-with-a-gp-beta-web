@@ -50,7 +50,11 @@
       <caption>Your current GP</caption>
 
       {% if data.previouslyRegistered['previously-registered'] %}
-        {{ row('Current GP', data.currentGP, 'register-form:previouslyRegistered', true) }}
+        {% if data.manualGPAddress['gp-name'] %}
+            {{ row('Current GP', data.manualGPAddress, 'register-form:manualGPAddress', true) }}
+        {% else %}
+            {{ row('Current GP', data.currentGP, 'register-form:currentGP', true) }}
+        {% endif %}
         {% if data.registedAddress['registered-address-correct'] %}
           {{ row('Registered address', data.address, 'register-form:registedAddress', true) }}
         {% else %}

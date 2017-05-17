@@ -83,10 +83,11 @@ export function getNextStep(nextSteps, cookieData) {
 
 export function getlastCompletedStep(cookieData) {
   if (cookieData){
-    var lastCompletedStep = null;
+    let lastCompletedStep = null;
     _.each(steps, (s,i) => {
       const stepData = _.get(cookieData, `${s.key}`, false);
-      if (stepData){
+      const check = _.get(s, 'checkApplies', () => stepData);
+      if (check(cookieData, 'next')){
         lastCompletedStep = steps[i];
       }
     });
@@ -145,6 +146,7 @@ export function getHandlerFactory(
         data: request.state.data,
         beforeTemplate,
         stepData,
+        key,
         title,
         prevStep,
         details,
@@ -221,6 +223,7 @@ export function postHandlerFactory(
           data: request.state.data,
           stepData: err._object,
           beforeTemplate,
+          key,
           title,
           stepErrors,
           prevStep,

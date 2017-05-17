@@ -132,7 +132,8 @@ const handlers = {
 };
 
 const checkApplies = function(cookieData, direction) {
-  return direction !== 'prev';
+  const hasPostCode = _.get(cookieData, 'addressLookup.postcode', false);
+  return direction !== 'prev' && hasPostCode;
 };
 
 /**
