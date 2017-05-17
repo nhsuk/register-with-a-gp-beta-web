@@ -8,6 +8,7 @@
       {% if prevStep %}
         <a href="{{ prevStep }}" class="button button--back">Back</a>
       {% endif %}
+      <a class="button button--secondary" href="{{ REQUEST_AKA('register-form:manualGPAddress') }}">I can't find my GP</a>
       <a class="button button--secondary" href="{{ REQUEST_AKA('register-form:registedAddress') }}">Skip</a>
     </p>
 {% endblock %}
