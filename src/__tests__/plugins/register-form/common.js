@@ -50,34 +50,33 @@ describe('Get next step', () => {
 
   it('should call getLatestUncompletedStep and return right step', () => {
     const cookieData = {
-      'name': {
-        'a': 'b'
-      }
+      'nhsNumber': {
+        'nhs-number-known': false
+      },
     };
-
-    expect(getLatestUncompletedStep(cookieData).key).toEqual('dateOfBirth');
+    expect(getLatestUncompletedStep(cookieData).key).toEqual('gender');
   });
 
   it('should call getlastCompletedStep and return right step', () => {
     const cookieData = {
-      'name': {
-        'a': 'b'
+      'nhsNumber': {
+        'nhs-number-known': false
       },
-      'dateOfBirth': {
-        'c': 'd'
+      'gender': {
+        'gender': 'Male'
       }
     };
 
-    expect(getlastCompletedStep(cookieData).key).toEqual('dateOfBirth');
+    expect(getlastCompletedStep(cookieData).key).toEqual('gender');
   });
 
   it('should call checkStepCompletedBefore and return true', () => {
     const cookieData = {
-      'name': {
-        'a': 'b'
+      'nhsNumber': {
+        'nhs-number-known': false
       },
-      'dateOfBirth': {
-        'c': 'd'
+      'gender': {
+        'gender': 'Male'
       }
     };
     const latestUncompletedStep = getLatestUncompletedStep(cookieData);
