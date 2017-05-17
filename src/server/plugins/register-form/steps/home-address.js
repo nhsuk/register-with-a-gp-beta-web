@@ -31,7 +31,9 @@ const handlers = {
 };
 
 const checkApplies = function(cookieData) {
-  return _.get(cookieData, 'addressLookupChoose.address') === undefined;
+  const hasPostCode = _.get(cookieData, 'addressLookup.postcode', false);
+  const addressChooseIsEmpty = _.get(cookieData, 'addressLookupChoose.address') === undefined;
+  return hasPostCode && addressChooseIsEmpty;
 };
 
 /**
