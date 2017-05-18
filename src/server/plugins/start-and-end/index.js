@@ -20,6 +20,7 @@ function practiceHandler(request, reply) {
   reply
     .view('practices', {
       practices: practiceLookup.getPractices(),
+      showNotifications: true
     });
 }
 
@@ -30,7 +31,7 @@ export function InvalidCookie(reply) {
 function startHandler(request, reply) {
   InvalidCookie(reply);
   if (request.state.practice) {
-    reply.view('start');
+    reply.view('start', {showNotifications: true});
   } else {
     reply.redirect(request.aka('choose'));
   }
