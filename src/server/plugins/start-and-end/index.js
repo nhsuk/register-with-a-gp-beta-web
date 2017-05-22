@@ -36,8 +36,8 @@ export function getPracticeTemplate(request) {
   if (practice){
     const practiceTemplateName = 'practices/' + practice;
     const appSettings = request.server.settings.app;
-    const templatePath = Path.join(appSettings.repo_root, 'src/server/templates/' + practiceTemplateName + '.njk');
-    if (fs.existsSync(templatePath)){
+    const practicetemplatePath = Path.join(appSettings.templatePath, practiceTemplateName + '.njk');
+    if (fs.existsSync(practicetemplatePath)){
       return practiceTemplateName;
     }
     return 'end';
