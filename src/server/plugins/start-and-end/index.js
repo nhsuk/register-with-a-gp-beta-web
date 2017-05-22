@@ -3,10 +3,11 @@ import cookies from '../../config/cookies';
 import practiceLookup from '../../../shared/lib/practice-lookup';
 
 function practiceHandler(request, reply) {
+/*
   if (request.state.practice) {
     return reply.redirect(request.aka('start'));
   }
-
+*/
   if (request.params.practice) {
     const practice = practiceLookup.getPractice(request.params.practice);
 
@@ -29,7 +30,8 @@ export function InvalidCookie(reply) {
 
 function startHandler(request, reply) {
   InvalidCookie(reply);
-  if (request.state.practice) {
+  const practice = practiceLookup.getPractice(request.params.practice);
+  if (typeof practice !== 'undefined') {
     reply.view('start');
   } else {
     reply.redirect(request.aka('choose'));
@@ -64,14 +66,14 @@ exports.register = function(server, options, next) {
   server.route({
     method: 'GET',
     config: _.merge({}, routeConfig, {id: 'choose'}),
-    path: '/{practice?}',
+    path: '/',
     handler: practiceHandler,
   });
 
   server.route({
     method: 'GET',
     config: _.merge({}, routeConfig, {id: 'start'}),
-    path: '/start',
+    path: '/{practice}/start',
     handler: startHandler,
   });
 

@@ -5,6 +5,7 @@ import _ from 'lodash';
 import getFilters from './filters';
 import PracticeLookup from '../../../shared/lib/practice-lookup';
 import LoadFile from '../../../shared/lib/load-file';
+import {getSlugById} from '../register-form/steps/common';
 
 const webpackAssetsPath = Path.resolve(__dirname, '../../../client/compiled/webpack-assets.json');
 const webpackAssets = require(webpackAssetsPath);
@@ -107,7 +108,7 @@ exports.register = function(server, options, next) {
     context: function (request) {
       const context = {
         REQUEST_AKA: function(id) {
-          return request.aka(id);
+          return '/' + request.params.practice + '/' + getSlugById(id);
         },
       };
 

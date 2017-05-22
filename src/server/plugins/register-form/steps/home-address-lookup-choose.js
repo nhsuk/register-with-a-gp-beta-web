@@ -24,6 +24,7 @@ function getHandlerFactory(prevSteps) {
     const postcodeData = _.get(request, 'state.data.addressLookup', {});
     const stepData = _.get(request, `state.data.${key}`, {});
     const prevStep = getPrevStep(prevSteps, request.state.data, request);
+    const practice = request.params.practice;
     const template = 'register-form/address-choose-step';
     let addressError = false;
     let inputValue = '';
