@@ -9,7 +9,7 @@ const schema = Joi.object().keys({
 });
 
 const title = 'How can {{ CURRENT_PRACTICE.name }} contact you?';
-const key = 'contact-details';
+const key = 'contactDetails';
 const slug = 'contact-details';
 
 const details = {

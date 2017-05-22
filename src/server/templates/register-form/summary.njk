@@ -25,7 +25,7 @@
       {{ row('Name', data.name, 'register-form:name') }}
       {{ row('Date of birth', data.dateOfBirth, 'register-form:name', false, '/') }}
       {{ row('Address', data.address, 'register-form:address', true) }}
-      {{ row('Contact Details', data.contactDetails, 'register-form:contact-details', true) }}
+      {{ row('Contact Details', data.contactDetails, 'register-form:contactDetails', true) }}
       {% if data.nhsNumber['nhs-number-known'] %}
         {{ row('NHS number', data.nhsNumberDetails, 'register-form:nhsNumber', true) }}
       {% else %}
