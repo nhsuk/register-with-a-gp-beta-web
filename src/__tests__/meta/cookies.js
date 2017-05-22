@@ -22,8 +22,7 @@ describe('cache headers', () => {
 
   it('should return a cookie after form post', () => {
     return new Promise((resolve) => {
-console.log(resolveUrl('register/nhs-number'));
-        request(resolveUrl('register/nhs-number'), (err, res) => {
+      request(resolveUrl('register/nhs-number'), (err, res) => {
         const csrf = /csrf=(.*?);/.exec(res.headers['set-cookie'])[1];
         const data = {
           'nhs-number-known': true,
