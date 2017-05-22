@@ -39,7 +39,7 @@ describe('parsing address', () =>{
         'address2': 'London',
         'address3': 'London',
         'locality': 'Greater London',
-        'postcode': 'SW170HG'  
+        'postcode': 'SW170HG'
       },
       'addressLookup': {
         'postcode': 'SW170HG'
