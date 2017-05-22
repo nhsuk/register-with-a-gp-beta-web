@@ -219,7 +219,6 @@ export function postHandlerFactory(
     validate(request.payload, schema)
       .then(value => {
         const newData = transformData(key, value, request.state.data);
-        const nextStep = getNextStep(nextSteps, newData);
         const nextSlug = getNextSlug(nextSteps, newData);
         const practice = request.params.practice;
         return reply
