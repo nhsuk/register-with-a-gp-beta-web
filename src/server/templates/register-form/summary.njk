@@ -21,16 +21,13 @@
     <h1 class="form-title">{{ title }}</h1>
 
     <table class="summary">
+
       {{ row('Gender', data.gender, 'gender') }}
       {{ row('Name', data.name, 'name') }}
       {{ row('Date of birth', data.dateOfBirth, 'name', false, '/') }}
       {{ row('Address', data.address, 'address', true) }}
-      {% if data.email.email %}
-        {{ row('Email', data.email, 'name', true) }}
-      {% else %}
-        {{ row('Email', {'empty': 'I’m not providing an email address'}, 'email') }}
-      {% endif %}
-      {{ row('Telephone', data.telephone, 'telephone', true) }}
+      {{ row('Contact Details', data.contactDetails, 'contactDetails', true) }}
+
       {% if data.nhsNumber['nhs-number-known'] %}
         {{ row('NHS number', data.nhsNumberDetails, 'nhsNumber', true) }}
       {% else %}
@@ -50,7 +47,13 @@
       <caption>Your current GP</caption>
 
       {% if data.previouslyRegistered['previously-registered'] %}
-        {{ row('Current GP', data.currentGP, 'previouslyRegistered', true) }}
+
+        {% if data.manualGPAddress['gp-name'] %}
+            {{ row('Current GP', data.manualGPAddress, 'manualGPAddress', true) }}
+        {% else %}
+            {{ row('Current GP', data.currentGP, 'currentGP', true) }}
+        {% endif %}
+
         {% if data.registedAddress['registered-address-correct'] %}
           {{ row('Registered address', data.address, 'registedAddress', true) }}
         {% else %}

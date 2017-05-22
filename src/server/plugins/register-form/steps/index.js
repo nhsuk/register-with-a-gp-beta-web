@@ -4,13 +4,13 @@ import dateOfBirthStep from './date-of-birth';
 import homeAddressLookupStep from './home-address-lookup';
 import homeAddressLookupPickStep from './home-address-lookup-choose';
 import homeAddressStep from './home-address';
-import contactEmailStep from './contact-email';
-import contactTelephoneStep from './contact-telephone';
+import contactDetailsStep from './contact-details';
 import previouslyArmedStep from './previously-armed';
 import armedStaffNumberStep from './armed-staff-number';
 import armedEnlistDateStep from './armed-enlist-date';
 import previouslyRegisteredStep from './previously-registered';
 import currentGP from './current-gp';
+import enterGpAddress from './current-gp-address';
 import registeredAddressStep from './registered-address';
 import registeredAddressDetailsStep from './registered-address-details';
 import registeredNameStep from './registered-name';
@@ -63,13 +63,13 @@ const steps = [
   homeAddressLookupStep,
   homeAddressLookupPickStep,
   homeAddressStep,
-  contactEmailStep,
-  contactTelephoneStep,
+  contactDetailsStep,
   previouslyArmedStep,
   armedStaffNumberStep,
   armedEnlistDateStep,
   previouslyRegisteredStep,
   currentGP,
+  enterGpAddress,
   registeredAddressStep,
   registeredAddressDetailsStep,
   registeredNameStep,
