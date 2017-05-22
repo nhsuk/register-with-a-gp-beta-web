@@ -108,7 +108,7 @@ exports.register = function(server, options, next) {
     context: function (request) {
       const context = {
         REQUEST_AKA: function(id) {
-          return '/' + request.params.practice + '/' + getSlugById(id);
+          return '/' + request.params.practice + '/register/' + getSlugById(id);
         },
       };
 
