@@ -1,6 +1,9 @@
+import Path from 'path';
 import _ from 'lodash';
 import cookies from '../../config/cookies';
 import practiceLookup from '../../../shared/lib/practice-lookup';
+
+const fs = require('fs');
 
 function practiceHandler(request, reply) {
   if (request.state.practice) {
@@ -28,6 +31,20 @@ export function InvalidCookie(reply) {
   reply.unstate('data');
 }
 
+export function getPracticeTemplate(request) {
+  const practice = request.state.practice;
+  if (practice){
+    const practiceTemplateName = 'practices/' + practice;
+    const appSettings = request.server.settings.app;
+    const templatePath = Path.join(appSettings.repo_root, 'src/server/templates/' + practiceTemplateName + '.njk');
+    if (fs.existsSync(templatePath)){
+      return practiceTemplateName;
+    }
+    return 'end';
+  }
+  return 'end';
+}
+
 function startHandler(request, reply) {
   InvalidCookie(reply);
   if (request.state.practice) {
@@ -38,18 +55,18 @@ function startHandler(request, reply) {
 }
 
 function endHandler(request, reply) {
+  const practiceTemplate = getPracticeTemplate(request);
   if (request.params.practice) {
     const practice = practiceLookup.getPractice(request.params.practice);
-
     if (typeof practice !== 'undefined') {
       return reply
-        .view('end', {
+        .view(practiceTemplate, {
           practice,
         });
     }
   }
 
-  return reply.view('end');
+  return reply.view(practiceTemplate);
 }
 
 exports.register = function(server, options, next) {
