@@ -25,12 +25,7 @@
       {{ row('Name', data.name, 'register-form:name') }}
       {{ row('Date of birth', data.dateOfBirth, 'register-form:name', false, '/') }}
       {{ row('Address', data.address, 'register-form:address', true) }}
-      {% if data.email.email %}
-        {{ row('Email', data.email, 'register-form:name', true) }}
-      {% else %}
-        {{ row('Email', {'empty': 'I’m not providing an email address'}, 'register-form:email') }}
-      {% endif %}
-      {{ row('Telephone', data.telephone, 'register-form:telephone', true) }}
+      {{ row('Contact Details', data.contactDetails, 'register-form:contact-details', true) }}
       {% if data.nhsNumber['nhs-number-known'] %}
         {{ row('NHS number', data.nhsNumberDetails, 'register-form:nhsNumber', true) }}
       {% else %}
