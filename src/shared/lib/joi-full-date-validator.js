@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import moment from 'moment';
 
-const validate = function(value){
+const dValidate = function(value){
   return moment(value, 'DDMMYYYY').isValid();
 };
 let DateConcat = '';
@@ -11,9 +11,11 @@ const invalidFullDateRule = {
   description: 'should be a valid Date',
   validate(params, value, state, options){
     let mm = '0' + value.month.toString();
-    mm.slice(-2);
-    DateConcat = value.day.toString() + mm + value.year.toString();
-    if(validate(DateConcat)){
+    let dd = '0' + value.day.toString();
+    mm = mm.slice(-2);
+    dd = dd.slice(-2);
+    DateConcat = dd + mm + value.year.toString();
+    if(dValidate(DateConcat)){
       return value;
     } else {
       return this.createError('object.fulldate', { v: value.day }, state, options);
