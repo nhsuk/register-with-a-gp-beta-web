@@ -58,7 +58,6 @@ function endHandler(request, reply) {
 function stepMissingHandler(request, reply) {
   const practice = request.params.practice;
   const latestUncompletedStep = getLatestUncompletedStep(request.state.data);
-  console.log(latestUncompletedStep);
   return reply.redirect('/' + practice + '/register/' + latestUncompletedStep.slug);
 }
 
@@ -92,7 +91,7 @@ exports.register = function(server, options, next) {
     path: '/registration-submitted/{practice?}',
     handler: endHandler,
   });
-  
+
   server.route({
     method: 'GET',
     path: '/{practice}',
