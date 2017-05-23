@@ -66,7 +66,7 @@ function startHandler(request, reply) {
   InvalidCookie(reply);
   const practiceStartTemplate = getPracticeStartTemplate(request);
   if (request.state.practice) {
-    reply.view(practiceStartTemplate, {showNotifications: true, firstStep: '/register/nhs-number/'});
+    reply.view(practiceStartTemplate, {showNotifications: true, firstStep: '/register/nhs-number'});
   } else {
     reply.redirect(request.aka('choose'));
   }
