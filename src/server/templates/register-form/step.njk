@@ -1,12 +1,14 @@
 {% extends 'layouts/base.njk' %}
 
+{% block head_title_content %}{{ title | render }} - NHS.UK{% endblock %}
+
 {% block body_main_content %}
   <div class="page-section">
     {% component 'error-summary', { children: stepErrors } %}
 
-    <h1 class="form-title">{{ title }}</h1>
+    <h1 class="form-title">{{ title | render }}</h1>
 
-    <form method="post" id="current-step-form">
+    <form method="post" id="current-step-form" class="{{key}}-form">
       <input type="hidden" name="csrf" value="{{csrf}}">
 
       {% if beforeTemplate %}
@@ -54,7 +56,7 @@
           {% set content = details.content %}
           <details>
             <summary>
-              <span class="details__summary">{{ details.summary }}</span>
+              <span class="details__summary">{{ details.summary | render }}</span>
             </summary>
             <div class="details__content">
               <div class="callout callout--info">

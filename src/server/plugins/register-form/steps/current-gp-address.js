@@ -1,11 +1,13 @@
 import _ from 'lodash';
 import JoiBase from 'joi';
 import JoiPostcodeExtension from 'joi-postcode';
-import {postHandlerFactory, getHandlerFactory} from './common';
+import previouslyRegisteredStep from './previously-registered';
+import {postHandlerFactory, getHandlerFactory, dependsOnBoolean} from './common';
 
 const Joi = JoiBase.extend(JoiPostcodeExtension);
 
 const schema = Joi.object().keys({
+  'gp-name': Joi.string().max(50).required().label('GP Name').meta({ componentType: 'textbox' }),
   'address1': Joi.string().allow('').max(50).label('Address').meta({ componentType: 'textbox' }),
   'address2': Joi.string().allow('').max(50).meta({ componentType: 'textbox' }),
   'address3': Joi.string().allow('').max(50).meta({ componentType: 'textbox' }),
@@ -21,9 +23,9 @@ const schema = Joi.object().keys({
 })
   .or('address1', 'address2', 'address3');
 
-const title = 'What is your address?';
-const key = 'address';
-const slug = 'home-address-manual';
+const title = 'What is your current GP address?';
+const key = 'manualGPAddress';
+const slug = 'enter-gp-address';
 
 const handlers = {
   GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps),
@@ -31,9 +33,9 @@ const handlers = {
 };
 
 const checkApplies = function(cookieData) {
-  const hasPostCode = _.get(cookieData, 'addressLookup.postcode', false);
-  const addressChooseIsEmpty = _.get(cookieData, 'addressLookupChoose.address') === undefined;
-  return hasPostCode && addressChooseIsEmpty;
+  const  gpCode = _.get(cookieData, 'currentGP.gp-code') === undefined;
+  const  registered = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered')(cookieData);
+  return gpCode && registered;
 };
 
 /**
