@@ -31,42 +31,60 @@ export function InvalidCookie(reply) {
   reply.unstate('data');
 }
 
-export function getPracticeTemplate(request) {
+const defaultPracticeStartTemplate = 'practices/start/default.njk';
+const defaultPracticeEndTemplate = 'practices/end/default.njk';
+
+export function getPracticeStartTemplate(request) {
   const practice = request.state.practice;
   if (practice){
-    const practiceTemplateName = 'practices/' + practice;
+    const practiceTemplateName = 'practices/start/' + practice;
     const appSettings = request.server.settings.app;
-    const practicetemplatePath = Path.join(appSettings.templatePath, practiceTemplateName + '.njk');
-    if (fs.existsSync(practicetemplatePath)){
+    const practiceTemplate = Path.join(appSettings.templatePath, practiceTemplateName + '.njk');
+    if (fs.existsSync(practiceTemplate)){
       return practiceTemplateName;
     }
-    return 'end';
   }
-  return 'end';
+
+  return defaultPracticeStartTemplate;
+}
+
+export function getPracticeEndTemplate(request) {
+  const practice = request.state.practice;
+  if (practice){
+    const practiceTemplateName = 'practices/end/' + practice;
+    const appSettings = request.server.settings.app;
+    const practiceTemplate = Path.join(appSettings.templatePath, practiceTemplateName + '.njk');
+    if (fs.existsSync(practiceTemplate)){
+      return practiceTemplateName;
+    }
+  }
+
+  return defaultPracticeEndTemplate;
 }
 
 function startHandler(request, reply) {
   InvalidCookie(reply);
+  const practiceStartTemplate = getPracticeStartTemplate(request);
   if (request.state.practice) {
-    reply.view('start', {showNotifications: true});
+    reply.view(practiceStartTemplate, {showNotifications: true, firstStep: '/register/nhs-number/'});
   } else {
     reply.redirect(request.aka('choose'));
   }
 }
 
 function endHandler(request, reply) {
-  const practiceTemplate = getPracticeTemplate(request);
+  const practiceEndTemplate = getPracticeEndTemplate(request);
   if (request.params.practice) {
     const practice = practiceLookup.getPractice(request.params.practice);
     if (typeof practice !== 'undefined') {
       return reply
-        .view(practiceTemplate, {
+        .view(practiceEndTemplate, {
           practice,
         });
     }
   }
 
-  return reply.view(practiceTemplate);
+  return reply.view(practiceEndTemplate);
 }
 
 exports.register = function(server, options, next) {
