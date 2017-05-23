@@ -61,7 +61,7 @@
   <h2 class="heading-medium">After you complete your registration</h2>
 
     <div class="reading-width">
-      <p>Wait [X days] before making appointments at {{ practice.name | default('your GP practice') }} - this is how long it usually takes to be registered. {{ practice.name | default('your GP practice') }} will contact you if they need anything else from you.
+      <p>Wait {{ CURRENT_PRACTICE.regdays }} days before making appointments at {{ practice.name | default('your GP practice') }} - this is how long it usually takes to be registered. {{ practice.name | default('your GP practice') }} will contact you if they need anything else from you.
       Also tell them if you don’t have an NHS number or you can’t find it.
       </p>
       
