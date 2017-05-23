@@ -117,7 +117,7 @@ exports.register = function(server, options, next) {
           return {};
         }
 
-        const practice = PracticeLookup.getPractice(request.state.practice);
+        const practice = PracticeLookup.getPractice(request.params.practice);
 
         if (typeof practice !== 'undefined') {
           context['serviceTitle'] = `Register with ${practice.name}`;

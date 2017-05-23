@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import cookies from '../../config/cookies';
 import practiceLookup from '../../../shared/lib/practice-lookup';
+import {getLatestUncompletedStep} from '../register-form/steps/common.js';
 
 function practiceHandler(request, reply) {
 /*
@@ -30,8 +31,9 @@ export function InvalidCookie(reply) {
 
 function startHandler(request, reply) {
   InvalidCookie(reply);
-  const practice = practiceLookup.getPractice(request.params.practice);
-  if (typeof practice !== 'undefined') {
+  const practice = request.params.practice;
+  const practiceData = practiceLookup.getPractice(practice);
+  if (typeof practiceData !== 'undefined') {
     reply.view('start');
   } else {
     reply.redirect(request.aka(''));
@@ -51,6 +53,13 @@ function endHandler(request, reply) {
   }
 
   return reply.view('end');
+}
+
+function stepMissingHandler(request, reply) {
+  const practice = request.params.practice;
+  const latestUncompletedStep = getLatestUncompletedStep(request.state.data);
+  console.log(latestUncompletedStep);
+  return reply.redirect('/' + practice + '/register/' + latestUncompletedStep.slug);
 }
 
 exports.register = function(server, options, next) {
@@ -82,6 +91,30 @@ exports.register = function(server, options, next) {
     config: _.merge({}, routeConfig, {id: 'end'}),
     path: '/registration-submitted/{practice?}',
     handler: endHandler,
+  });
+  
+  server.route({
+    method: 'GET',
+    path: '/{practice}',
+    handler: stepMissingHandler
+  });
+
+  server.route({
+    method: 'GET',
+    path: '/{practice}/',
+    handler: stepMissingHandler
+  });
+
+  server.route({
+    method: 'GET',
+    path: '/{practice}/register',
+    handler: stepMissingHandler
+  });
+
+  server.route({
+    method: 'GET',
+    path: '/{practice}/register/',
+    handler: stepMissingHandler
   });
 
   next();
