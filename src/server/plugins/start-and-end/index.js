@@ -34,7 +34,7 @@ function startHandler(request, reply) {
   if (typeof practice !== 'undefined') {
     reply.view('start');
   } else {
-    reply.redirect(request.aka('choose'));
+    reply.redirect(request.aka(''));
   }
 }
 
