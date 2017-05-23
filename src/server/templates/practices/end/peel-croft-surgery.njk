@@ -8,20 +8,26 @@
   <div class="page-section">
     <h1 class="heading-medium">Thank you for applying. Your application has been sent to {{ practice.name | default('a GP practice') }}</h1>
 
-    <div class="reading-width">
-      <p>Contact {{ practice.name | default('your GP practice') }} to tell them your NHS number if you haven’t already provided it.</p>
-      <p>Also tell them if you don’t have an NHS number or you can’t find it.</p>
-    </div>
-
-
-    <h2 class="heading-medium">You now need to complete your registration in person</h2>  
+    <h2 class="heading-medium">You now need to complete your registration in person</h2>
     <div class="reading-width">
       <p>Go to <strong>{{ practice.name | default('your GP practice') }}</strong> to:</p>
       <ul>
-        <li>sign a copy of your application</li>
-        <li>tell them your NHS number if you haven’t already provided it</li>
-        <li>tell them if you don’t have an NHS number or you can’t find it.</li>      
+        <li>your NHS number if you haven’t already provided it</li>
+        <li>your photo ID (for example photocard driving licence, passport, EU identity card) or birth certificate</li>
+        <li>proof of your current address - this can be your council tax bill, mortgage or tenancy agreement</li>
       </ul>
+    </div>
+
+    <div class="reading-width">
+        <p>If you don’t have a council tax bill, mortgage or tenancy agreement, you’ll need 2 documents with your current address. These must be dated in the past 3 months - they can include:</p>
+        <ul>
+            <li>gas, electricity or water bills</li>
+            <li>mobile phone bills or contracts</li>
+            <li>bank statements</li>
+            <li>official documents, for example letters from a government department</li>
+        </ul>
+
+        <p>Tell {{ practice.name }} if you don’t have any of these things.</p>
     </div>
 
     <h2 class="heading-medium">How to find your NHS number</h2>

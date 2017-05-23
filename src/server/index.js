@@ -8,6 +8,7 @@ Dotenv.config();
 const env = process.env.NODE_ENV || 'development';
 const port = process.env.PORT || 3333;
 const debug = env === 'development';
+const templatePath = Path.join(__dirname, 'templates');
 
 const manifest = {
   server: {
@@ -15,6 +16,7 @@ const manifest = {
       slogan: 'Register with a GP Beta',
       env: env,
       debug: debug,
+      templatePath:templatePath,
       repo_root: Path.join(__dirname, '../../'),
     }
   },

@@ -8,19 +8,13 @@
   <div class="page-section">
     <h1 class="heading-medium">Thank you for applying. Your application has been sent to {{ practice.name | default('a GP practice') }}</h1>
 
-    <div class="reading-width">
-      <p>Contact {{ practice.name | default('your GP practice') }} to tell them your NHS number if you haven’t already provided it.</p>
-      <p>Also tell them if you don’t have an NHS number or you can’t find it.</p>
-    </div>
-
-
-    <h2 class="heading-medium">You now need to complete your registration in person</h2>  
+    <h2 class="heading-medium">You now need to complete your registration in person</h2>
     <div class="reading-width">
       <p>Go to <strong>{{ practice.name | default('your GP practice') }}</strong> to:</p>
       <ul>
-        <li>sign a copy of your application</li>
-        <li>tell them your NHS number if you haven’t already provided it</li>
-        <li>tell them if you don’t have an NHS number or you can’t find it.</li>      
+        <li>your NHS number if you haven’t already provided it</li>
+        <li>proof of your current address - for example a recent gas, electricity or council tax bill</li>
+        <li>Tell {{ practice.name }} if you don’t have any of these things.</li>
       </ul>
     </div>
 
