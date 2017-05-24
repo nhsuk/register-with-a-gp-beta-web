@@ -28,7 +28,7 @@ export function summaryGetHandler(request, reply) {
 
 async function renderTemplate(env, context) {
   return await env.render(
-    'email/registration-summary.njk',
+    'email/registration-summary-html.njk',
     context
   );
 }
