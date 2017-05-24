@@ -3,7 +3,7 @@ import Joi from 'joi';
 import { postHandlerFactory, getHandlerFactory } from './common';
 
 const schema = Joi.object().keys({
-  'history-chosen': Joi.array().items(Joi.string())
+  'history-chosen': Joi.array().items(Joi.string()).single()
     .meta({
       componentType: 'multiple-choice',
       children: [
