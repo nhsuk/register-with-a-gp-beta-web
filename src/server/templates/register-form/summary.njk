@@ -22,7 +22,7 @@
 
     <table class="summary">
       {{ row('Gender', data.gender, 'register-form:gender') }}
-      {{ row('Name', data.name, 'register-form:name') }}
+      {{ row('Name',  data.name, 'register-form:name') }}
       {{ row('Date of birth', data.dateOfBirth, 'register-form:name', false, '/') }}
       {{ row('Address', data.address, 'register-form:address', true) }}
       {{ row('Contact Details', data.contactDetails, 'register-form:contactDetails', true) }}
@@ -76,12 +76,12 @@
       {% endif %}
 
       {% if data.allergies['any-allergies'] %}
-        {{ row('Alergies', data.allergiesDetails, 'register-form:allergies', true) }}
+        {{ row('Allergies', data.allergiesDetails, 'register-form:allergies', true) }}
       {% else %}
-        {{ row('Alergies', {'empty': 'I don’t have any allergies'}, 'register-form:allergies') }}
+        {{ row('Allergies', {'empty': 'I don’t have any allergies'}, 'register-form:allergies') }}
       {% endif %}
 
-      {% if data.medicalHistory['medical-history'] %}
+      {% if (data.medicalHistory['medical-history']) or (data.medicalHistory['history-chosen']) or (data.medicalHistory['medical-history-details']) %}
         {{ row('Health', data.medicalHistory, 'register-form:medicalHistory', true) }}
       {% else %}
         {{ row('Health', {'empty': 'I’m not supplying any health details'}, 'register-form:medicalHistory') }}
