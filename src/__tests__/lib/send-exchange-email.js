@@ -18,7 +18,7 @@ const expectedEwsArgs = {
       'Subject' : 'Test Email Subject',
       'Body' : {
         'attributes': {
-          'BodyType' : 'Text'
+          'BodyType' : 'HTML'
         },
         '$value': 'Test email'
       },
