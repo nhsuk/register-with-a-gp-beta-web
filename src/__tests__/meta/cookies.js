@@ -24,9 +24,9 @@ describe('cache headers', () => {
       request(resolveUrl('register-form:name'), (err, res) => {
         const csrf = /csrf=(.*?);/.exec(res.headers['set-cookie'])[1];
         const data = {
-          'first-name': 'a',
-          'middle-names': '',
-          'last-name': 'test',
+          'firstName': 'a',
+          'middleNames': '',
+          'lastName': 'test',
           csrf
         };
 

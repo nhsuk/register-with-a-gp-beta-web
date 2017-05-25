@@ -44,7 +44,7 @@ Your current GP
 ===============
 
 {% if data.previouslyRegistered['previously-registered'] %}
-  {% if data.manualGPAddress['gp-name'] %}
+  {% if data.manualGPAddress['gpName'] %}
     {{ render_one_line('Current GP', data.manualGPAddress) }}
   {% else %}
     {{ render_one_line('Current GP', data.currentGP) }}
