@@ -5,7 +5,7 @@ import cookies from '../../config/cookies';
 
 const env = process.env.NODE_ENV || 'development';
 const GPLookupAPIURL = process.env.GP_LOOKUP_API_URL || env === 'development' && 'localhost';
-const GPLookupAPIPort = process.env.GP_LOOKUP_API_PORT || env === 'development' && 9393;
+const GPLookupAPIPort = process.env.GP_LOOKUP_API_PORT || env === 'development' && 9292;
 const GPLookupAPISSL = process.env.GP_LOOKUP_API_SSL === '1';
 const TIMEOUT = 10000;
 

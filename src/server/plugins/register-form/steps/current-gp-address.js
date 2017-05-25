@@ -7,7 +7,7 @@ import {postHandlerFactory, getHandlerFactory, dependsOnBoolean} from './common'
 const Joi = JoiBase.extend(JoiPostcodeExtension);
 
 const schema = Joi.object().keys({
-  'gp-name': Joi.string().max(50).required().label('GP Name').meta({ componentType: 'textbox' }),
+  'gpName': Joi.string().max(50).required().label('GP Name').meta({ componentType: 'textbox' }),
   'address1': Joi.string().allow('').max(50).label('Address').meta({ componentType: 'textbox' }),
   'address2': Joi.string().allow('').max(50).meta({ componentType: 'textbox' }),
   'address3': Joi.string().allow('').max(50).meta({ componentType: 'textbox' }),
@@ -33,7 +33,7 @@ const handlers = {
 };
 
 const checkApplies = function(cookieData) {
-  const  gpCode = _.get(cookieData, 'currentGP.gp-code') === undefined;
+  const  gpCode = _.get(cookieData, 'currentGP.gpCode') === undefined;
   const  registered = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered')(cookieData);
   return gpCode && registered;
 };

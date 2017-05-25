@@ -4,9 +4,9 @@ import previouslyRegisteredStep from './previously-registered';
 import { postHandlerFactory, getHandlerFactory, dependsOnBoolean, dataTransformer } from './common';
 
 const schema = Joi.object().keys({
-  'gp-code': Joi.string().required(),
-  'gp-name': Joi.string().required(),
-  'gp-address': Joi.string().allow('').optional(),
+  'gpCode': Joi.string().required(),
+  'gpName': Joi.string().required(),
+  'gpAddress': Joi.string().allow('').optional(),
   'submit': Joi.any().optional().strip()
 });
 
