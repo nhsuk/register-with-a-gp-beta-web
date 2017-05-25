@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import { postHandlerFactory, getHandlerFactory, dependsOnBoolean } from './common';
+import { postHandlerFactory, getHandlerFactory, dependsOnBoolean, dataTransformer } from './common';
 import previouslyRegisteredStep from './previously-registered';
 
 const schema = Joi.object().keys({
@@ -25,10 +25,15 @@ const title = 'Are you registered at {{ data.currentGP.gpName | default(data.man
 const key = 'registedAddress';
 const slug = 'registered-address';
 const beforeTemplate = '_includes/current-address.njk';
+const template = 'register-form/registered-address.njk';
 
 const handlers = {
-  GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps, beforeTemplate),
-  POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps, beforeTemplate),
+  GET: (prevSteps) => getHandlerFactory(
+      key, title, schema, prevSteps, undefined, undefined, undefined, template
+  ),
+  POST: (prevSteps, nextSteps) => postHandlerFactory(
+      key, title, schema, prevSteps, nextSteps, {beforeTemplate, template, dataTransformer}
+  ),
 };
 
 const checkApplies = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered');

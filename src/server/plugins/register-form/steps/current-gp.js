@@ -17,7 +17,7 @@ const template = 'register-form/current-gp';
 
 const handlers = {
   GET: (prevSteps) => getHandlerFactory(
-      key, title, schema, prevSteps, null, null, null, template
+      key, title, schema, prevSteps, undefined, undefined, undefined, template
   ),
   POST: (prevSteps, nextSteps) => postHandlerFactory(
       key, title, schema, prevSteps, nextSteps, {undefined, template, dataTransformer}
