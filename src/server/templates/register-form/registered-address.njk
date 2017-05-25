@@ -6,7 +6,7 @@
   <div class="page-section">
     {% component 'error-summary', { children: stepErrors } %}
 
-    <h1 class="form-title">{{ title | render }}</h1>
+    <h1 class="form-title">{{ title | render | safe }}</h1>
     <p>
         <span class="block">{{ data.address.address1 | default("") }}</<span>
         {% if data.address.address2 %}

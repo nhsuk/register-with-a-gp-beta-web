@@ -6,7 +6,7 @@
   <div class="page-section">
     {% component 'error-summary', { children: stepErrors } %}
 
-    <h1 class="form-title">{{ title | render }}</h1>
+    <h1 class="form-title">{{ title | render | safe }}</h1>
 
     <form method="post" id="current-step-form" class="{{key}}-form">
       <input type="hidden" name="csrf" value="{{csrf}}">
