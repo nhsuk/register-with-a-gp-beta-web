@@ -21,7 +21,7 @@ const schema = Joi.object().keys({
   'submit': Joi.any().optional().strip()
 });
 
-const title = 'Are you registered at {{ data.currentGP.gpName | default(data.manualGPAddress.gpName) }}  with this address?';
+const title = 'Are you registered at {{ data.currentGP.gpName | default(data.manualGPAddress.gpName) }} with this address?';
 const key = 'registedAddress';
 const slug = 'registered-address';
 const beforeTemplate = '_includes/current-address.njk';
