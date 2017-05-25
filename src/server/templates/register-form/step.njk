@@ -40,7 +40,8 @@
             hint: field.hint,
             variant: field.variant,
             error: stepErrors[field.id].message | replace(stepErrors[field.id].label, ""),
-            value: stepData[field.id]
+            value: stepData[field.id],
+            componentText: field.text
           } %}
             {% endif %}
           {% endfor %}

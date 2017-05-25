@@ -27,6 +27,7 @@ const schema = Joi.object().keys({
     .meta({
       componentType: 'disclosure',
       variant: 'large',
+      text: 'What other serious illnesses or medical conditions have you had?'
     }),
   'medical-history-details': Joi.string().max(200).allow('').optional()
     .label('Is there anything else you need to tell the GP about your health?')
@@ -38,7 +39,7 @@ const schema = Joi.object().keys({
   'submit': Joi.any().optional().strip()
 });
 
-const title = 'Have you had any medical conditions?';
+const title = 'Have you ever had any of these conditions?';
 const key = 'medicalHistory';
 const slug = 'medical-history';
 
