@@ -67,7 +67,7 @@ function getHandlerFactory(prevSteps) {
   };
 }
 
-function callLookup(pcode,hnumber=''){
+export function callLookup(pcode,hnumber=''){
   return getAddresses(pcode, hnumber)
     .then(addressList => {
       if(addressList.length === 0){

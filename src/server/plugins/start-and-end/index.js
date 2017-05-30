@@ -2,14 +2,16 @@ import Path from 'path';
 import _ from 'lodash';
 import cookies from '../../config/cookies';
 import practiceLookup from '../../../shared/lib/practice-lookup';
+import {getLatestUncompletedStep} from '../register-form/steps/common.js';
 
 const fs = require('fs');
 
 function practiceHandler(request, reply) {
+/*
   if (request.state.practice) {
     return reply.redirect(request.aka('start'));
   }
-
+*/
   if (request.params.practice) {
     const practice = practiceLookup.getPractice(request.params.practice);
 
@@ -64,11 +66,13 @@ export function getPracticeEndTemplate(request) {
 
 function startHandler(request, reply) {
   InvalidCookie(reply);
+  const practice = request.params.practice;
+  const practiceData = practiceLookup.getPractice(practice);
   const practiceStartTemplate = getPracticeStartTemplate(request);
-  if (request.state.practice) {
-    reply.view(practiceStartTemplate, {showNotifications: true, firstStep: '/register/nhs-number'});
+  if (typeof practiceData !== 'undefined') {
+    reply.view(practiceStartTemplate, {showNotifications: true, firstStep: '/' + practice + '/register/nhs-number'});
   } else {
-    reply.redirect(request.aka('choose'));
+    reply.redirect(request.aka(''));
   }
 }
 
@@ -87,6 +91,12 @@ function endHandler(request, reply) {
   return reply.view(practiceEndTemplate);
 }
 
+function stepMissingHandler(request, reply) {
+  const practice = request.params.practice;
+  const latestUncompletedStep = getLatestUncompletedStep(request.state.data);
+  return reply.redirect('/' + practice + '/register/' + latestUncompletedStep.slug);
+}
+
 exports.register = function(server, options, next) {
   const routeConfig = {
     state: cookies.enableCookies,
@@ -100,14 +110,14 @@ exports.register = function(server, options, next) {
   server.route({
     method: 'GET',
     config: _.merge({}, routeConfig, {id: 'choose'}),
-    path: '/{practice?}',
+    path: '/',
     handler: practiceHandler,
   });
 
   server.route({
     method: 'GET',
     config: _.merge({}, routeConfig, {id: 'start'}),
-    path: '/start',
+    path: '/{practice}/start',
     handler: startHandler,
   });
 
@@ -116,6 +126,30 @@ exports.register = function(server, options, next) {
     config: _.merge({}, routeConfig, {id: 'end'}),
     path: '/registration-submitted/{practice?}',
     handler: endHandler,
+  });
+
+  server.route({
+    method: 'GET',
+    path: '/{practice}',
+    handler: stepMissingHandler
+  });
+
+  server.route({
+    method: 'GET',
+    path: '/{practice}/',
+    handler: stepMissingHandler
+  });
+
+  server.route({
+    method: 'GET',
+    path: '/{practice}/register',
+    handler: stepMissingHandler
+  });
+
+  server.route({
+    method: 'GET',
+    path: '/{practice}/register/',
+    handler: stepMissingHandler
   });
 
   next();

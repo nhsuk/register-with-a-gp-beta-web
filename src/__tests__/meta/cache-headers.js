@@ -9,7 +9,7 @@ describe('cache headers', () => {
 
   it('should return cache-control no-cache on non-cacheable page', () => {
     return new Promise((resolve) => {
-      http.get(resolveUrl('register-form:nhsNumber'), res => {
+      http.get(resolveUrl('start'), res => {
         expect(res.statusCode).toEqual(200);
         expect(res.headers['cache-control']).toMatch(/no\-cache/);
         resolve();

@@ -82,7 +82,7 @@ export function summaryPostHandler(request, reply) {
     .catch(err => {
       request.log(['error'], err);
       return reply
-        .redirect(request.aka(`register-form:${key}`));
+        .redirect(request.aka(key));
     });
 }
 
