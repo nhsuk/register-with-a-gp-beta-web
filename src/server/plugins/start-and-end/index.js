@@ -70,7 +70,7 @@ function startHandler(request, reply) {
   const practiceData = practiceLookup.getPractice(practice);
   const practiceStartTemplate = getPracticeStartTemplate(request);
   if (typeof practiceData !== 'undefined') {
-    reply.view(practiceStartTemplate, {showNotifications: true, firstStep: practice + '/register/nhs-number'});
+    reply.view(practiceStartTemplate, {showNotifications: true, firstStep: '/' + practice + '/register/nhs-number'});
   } else {
     reply.redirect(request.aka(''));
   }
