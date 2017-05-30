@@ -34,6 +34,9 @@
     <div class="details__content">
       <div class="callout callout--info">
         {% if variant == 'large' %}
+          {% if componentText %}
+            <p>{{ componentText }}</p>
+          {% endif %}
           <textarea name="{{ name }}" id="input-{{ name }}" rows="6" class="form-textbox{{ ' has-error' if error }}">{{ value }}</textarea>
         {% else %}
           <input

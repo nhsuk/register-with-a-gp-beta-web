@@ -13,7 +13,7 @@ const key = 'contactDetails';
 const slug = 'contact-details';
 
 const details = {
-  summary: 'How can {{ CURRENT_PRACTICE.name }} contact you?',
+  summary: 'Why am I being asked this question?',
   content: '{{ CURRENT_PRACTICE.name }} may need to get in touch with you to complete your registration.',
   position: 'below'
 };

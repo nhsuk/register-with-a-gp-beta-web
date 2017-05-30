@@ -21,12 +21,12 @@
     <h1 class="form-title">{{ title }}</h1>
 
     <table class="summary">
-
       {{ row('Gender', data.gender, 'gender') }}
       {{ row('Name', data.name, 'name') }}
       {{ row('Date of birth', data.dateOfBirth, 'name', false, '/') }}
       {{ row('Address', data.address, 'address', true) }}
       {{ row('Contact Details', data.contactDetails, 'contactDetails', true) }}
+
 
       {% if data.nhsNumber['nhs-number-known'] %}
         {{ row('NHS number', data.nhsNumberDetails, 'nhsNumber', true) }}
@@ -48,8 +48,9 @@
 
       {% if data.previouslyRegistered['previously-registered'] %}
 
-        {% if data.manualGPAddress['gp-name'] %}
+        {% if data.manualGPAddress['gpName'] %}
             {{ row('Current GP', data.manualGPAddress, 'manualGPAddress', true) }}
+
         {% else %}
             {{ row('Current GP', data.currentGP, 'currentGP', true) }}
         {% endif %}
@@ -80,21 +81,23 @@
       {% endif %}
 
       {% if data.allergies['any-allergies'] %}
-        {{ row('Alergies', data.allergiesDetails, 'allergies', true) }}
+
+        {{ row('Allergies', data.allergiesDetails, 'allergies', true) }}
       {% else %}
-        {{ row('Alergies', {'empty': 'I don’t have any allergies'}, 'allergies') }}
+        {{ row('Allergies', {'empty': 'I don’t have any allergies'}, 'allergies') }}
       {% endif %}
 
-      {% if data.medicalHistory['medical-history'] %}
+      {% if (data.medicalHistory['medical-history']) or (data.medicalHistory['history-chosen']) or (data.medicalHistory['medical-history-details']) %}
         {{ row('Health', data.medicalHistory, 'medicalHistory', true) }}
+
       {% else %}
         {{ row('Health', {'empty': 'I’m not supplying any health details'}, 'medicalHistory') }}
       {% endif %}
     </table>
 
-    <form method="post">
+    <form id="sendForm" name="sendForm" method="post">
       <input type="hidden" name="csrf" value="{{csrf}}">
-      <button type="submit" class="button">Send my details</button>
+      <button type="submit" id="sendBtn" class="button">Send my details</button>
     </form>
 
     <p>

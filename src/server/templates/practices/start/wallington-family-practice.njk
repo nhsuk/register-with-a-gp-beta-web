@@ -1,0 +1,47 @@
+{% extends 'layouts/base.njk' %}
+
+{% set serviceTitle = '' %}
+
+{% block body_main_content %}
+  <div class="local-header">
+
+    {% block body_main_content_title %}
+         <h1 class="local-header__title">You can apply online to start your registration with {{ CURRENT_PRACTICE.name | default('a GP practice') }}. You’ll need to complete your registration in person.</h1>
+    {% endblock %}
+
+  </div>
+
+  <div class="page-section">
+    {% block body_main_content_main %}
+    <div class="reading-width">
+      <section class="callout callout--info">
+        <div class="reading-with">
+          <p>
+          You can’t apply online for someone else, for example a child or a person you care for - register in person at {{ CURRENT_PRACTICE.name }}, {{ CURRENT_PRACTICE.address }} instead.
+          </p>
+          </div>
+      </section>
+      <p>Applying online takes about 10 minutes.</p>
+
+      <h4>How your personal information is handled</h4>
+      <p>Only {{ CURRENT_PRACTICE.name }} sees the personal information you put in this application. It’s sent securely to them so they can add it to your medical record. It’s not stored for any other purpose.</p>
+
+      <h3>Completing your registration</h3>
+      <p>
+        After you apply online, you’ll need to go in person to {{ CURRENT_PRACTICE.name }} with proof of your identity and address.
+      </p>
+
+      <p>It usually takes {{ CURRENT_PRACTICE.regdays }} days to be registered. {{ CURRENT_PRACTICE.name }} will contact you if there’s a problem.</p>
+      <section class="callout callout--info">
+        <div class="reading-with">
+          <p>
+            Some GP practices only register patients who live in the local area. Check with {{ CURRENT_PRACTICE.name }} if you’re unsure.
+          </p>
+        </div>
+      </section>
+      {% endblock %}
+
+      <a href="{{ firstStep }}" class="button">Start</a>
+    </div>
+  </div>
+{% endblock %}
