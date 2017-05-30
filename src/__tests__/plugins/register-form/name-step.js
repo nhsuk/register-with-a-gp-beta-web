@@ -6,8 +6,8 @@ describe('name step schema', () => {
   it('should be valid', () => {
     return new Promise((resolve, reject) => {
       const validData = {
-        'first-name': 'a',
-        'last-name': 'b',
+        'firstName': 'a',
+        'lastName': 'b',
         'submit': 'submit'
       };
 
@@ -15,7 +15,7 @@ describe('name step schema', () => {
         if (err) {
           reject(err);
         }
-        expect(value).toEqual({'first-name': 'a', 'last-name': 'b'});
+        expect(value).toEqual({'firstName': 'a', 'lastName': 'b'});
         resolve();
       });
     });
