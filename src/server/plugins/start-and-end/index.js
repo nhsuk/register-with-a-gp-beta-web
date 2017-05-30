@@ -3,6 +3,7 @@ import _ from 'lodash';
 import cookies from '../../config/cookies';
 import practiceLookup from '../../../shared/lib/practice-lookup';
 import {getLatestUncompletedStep} from '../register-form/steps/common.js';
+import ua from 'universal-analytics';
 
 const fs = require('fs');
 
@@ -69,8 +70,11 @@ function startHandler(request, reply) {
   const practice = request.params.practice;
   const practiceData = practiceLookup.getPractice(practice);
   const practiceStartTemplate = getPracticeStartTemplate(request);
+  const visitor = ua('UA-67365892-10');
   if (typeof practiceData !== 'undefined') {
-    reply.view(practiceStartTemplate, {showNotifications: true, firstStep: '/' + practice + '/register/nhs-number'});
+    reply
+      .view(practiceStartTemplate, {showNotifications: true, firstStep: '/' + practice + '/register/nhs-number'})
+      .state('cid', visitor.cid);      
   } else {
     reply.redirect(request.aka(''));
   }
