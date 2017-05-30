@@ -4,6 +4,7 @@ import JoiNHSNumber from '../../../../shared/lib/joi-nhs-number-validator';
 import JoiFullDate from '../../../../shared/lib/joi-full-date-validator';
 import _ from 'lodash';
 import steps from './index';
+import ua from 'universal-analytics';
 
 const Joi = JoiBase
   .extend(JoiPostcode)
@@ -217,6 +218,15 @@ export function postHandlerFactory(
             label: error.context.key,
           };
         });
+        const visitor = ua('UA-67365892-10', request.state.cid );
+        const params = {
+          ec: "Validation Error",
+          ea: "",
+          el: "Éand a label",
+          ev: 42,
+          dp: "/contact"
+        };
+        visitor.event(params).send();        
 
         return reply.view(template, {
           fields: getFieldData(schema),

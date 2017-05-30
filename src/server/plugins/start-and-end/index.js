@@ -2,6 +2,7 @@ import Path from 'path';
 import _ from 'lodash';
 import cookies from '../../config/cookies';
 import practiceLookup from '../../../shared/lib/practice-lookup';
+import ua from 'universal-analytics';
 
 const fs = require('fs');
 
@@ -65,8 +66,11 @@ export function getPracticeEndTemplate(request) {
 function startHandler(request, reply) {
   InvalidCookie(reply);
   const practiceStartTemplate = getPracticeStartTemplate(request);
+  const visitor = ua('UA-67365892-10');
   if (request.state.practice) {
-    reply.view(practiceStartTemplate, {showNotifications: true, firstStep: '/register/nhs-number'});
+    reply
+      .view(practiceStartTemplate, {showNotifications: true, firstStep: '/register/nhs-number'})
+      .state('cid', visitor.cid);
   } else {
     reply.redirect(request.aka('choose'));
   }

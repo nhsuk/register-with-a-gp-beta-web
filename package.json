@@ -34,6 +34,7 @@
     "npm-run-all": "^4.0.1",
     "nunjucks": "^3.0.0",
     "request": "^2.81.0",
+    "universal-analytics": "^0.4.13",
     "vision": "^4.1.1",
     "xss": "^0.3.3",
     "yar": "^8.1.2"
