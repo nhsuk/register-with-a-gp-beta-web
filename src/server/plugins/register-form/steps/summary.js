@@ -58,7 +58,7 @@ export function summaryPostHandler(request, reply) {
   validate(request.payload, schema)
     .then(async () => {
       const data = _.get(request, 'state.data', {});
-      const practice = request.state.practice || '';
+      const practice = request.params.practice || '';
 
       const emailText = await renderTemplate(
         request.server.plugins.NunjucksConfig.nunjucksEnv,
