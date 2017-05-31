@@ -55,8 +55,5 @@ function ewsEmail(toEmail, text, subject) {
 
 
 export default function(toEmail, text, subject) {
-  if (process.env.NODE_ENV === 'development') {
-    return consoleEmail(toEmail, text, subject);
-  }
-  return ewsEmail(toEmail, text, subject);
+  return consoleEmail(toEmail, text, subject);
 }
