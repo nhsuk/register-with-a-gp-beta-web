@@ -250,14 +250,6 @@ export function postHandlerFactory(
           };
           visitor.event(params).send();        
         });
-        const params = {
-          ec: "Validation Error",
-          ea: "",
-          el: "Éand a label",
-          ev: 42,
-          dp: "/contact"
-        };
-        visitor.event(params).send();        
         return reply.view(template, {
           fields: getFieldData(schema),
           data: request.state.data,
