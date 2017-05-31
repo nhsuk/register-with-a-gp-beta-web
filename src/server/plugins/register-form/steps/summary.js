@@ -55,35 +55,35 @@ export function emailGP(practiceKey, emailText) {
 }
 
 export function summaryPostHandler(request, reply) {
-  const data = _.get(request, 'state.data', {});
-  const practice = request.params.practice || '';
-  return reply
-    .redirect(request.aka(nextStep, {
-      params: {
-        practice,
-      },
-    }))
-    .unstate('data')
-    .unstate('practice');
-  // validate(request.payload, schema)
-  //   .then(async () => {
-  //
-  //     const emailText = await renderTemplate(
-  //       request.server.plugins.NunjucksConfig.nunjucksEnv,
-  //       {data: data});
-  //
-  //     emailGP(practice, emailText)
-  //       .then(() => {
-  //       })
-  //       .catch(err => {
-  //         throw err;
-  //       });
-  //   })
-  //   .catch(err => {
-  //     request.log(['error'], err);
-  //     return reply
-  //       .redirect(request.aka(key));
-  //   });
+  validate(request.payload, schema)
+    .then(async () => {
+      const data = _.get(request, 'state.data', {});
+      const practice = request.params.practice || '';
+
+      const emailText = await renderTemplate(
+        request.server.plugins.NunjucksConfig.nunjucksEnv,
+        {data: data});
+
+      emailGP(practice, emailText)
+        .then(() => {
+          return reply
+            .redirect(request.aka(nextStep, {
+              params: {
+                practice,
+              },
+            }))
+            .unstate('data')
+            .unstate('practice');
+        })
+        .catch(err => {
+          throw err;
+        });
+    })
+    .catch(err => {
+      request.log(['error'], err);
+      return reply
+        .redirect(request.aka(key));
+    });
 }
 
 const handlers = {
