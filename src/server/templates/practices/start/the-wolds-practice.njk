@@ -6,13 +6,14 @@
   <div class="local-header">
 
     {% block body_main_content_title %}
-         <h1 class="local-header__title">You can apply online to start your registration with {{ CURRENT_PRACTICE.name | default('a GP practice') }}. You’ll need to complete your registration in person.</h1>
+         <h1 class="local-header__title">Register with {{ CURRENT_PRACTICE.name | default('a GP practice') }}</h1>
     {% endblock %}
 
   </div>
 
   <div class="page-section">
     {% block body_main_content_main %}
+    <p>You can apply online if you’re registering for yourself.</p>
     <div class="reading-width">
       <section class="callout callout--info">
         <div class="reading-with">
