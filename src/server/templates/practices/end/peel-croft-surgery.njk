@@ -1,99 +1,15 @@
-{% extends 'layouts/base.njk' %}
-
-{% if practice %}
-  {% set serviceTitle = 'Register with ' + practice.name %}
-{% endif %}
-
-{% block body_main_content %}
-  <div class="page-section">
-    <h1 class="heading-medium">Thank you for applying. Your application has been sent to {{ practice.name | default('a GP practice') }}</h1>
-
-    <h2 class="heading-medium">You now need to complete your registration in person</h2>
-    <div class="reading-width">
-      <p>Go to <strong>{{ practice.name | default('your GP practice') }}</strong> to:</p>
-      <ul>
-        <li>your NHS number if you haven’t already provided it</li>
-        <li>your photo ID (for example photocard driving licence, passport, EU identity card) or birth certificate</li>
-        <li>proof of your current address - this can be your council tax bill, mortgage or tenancy agreement</li>
-      </ul>
-    </div>
-
-    <div class="reading-width">
-        <p>If you don’t have a council tax bill, mortgage or tenancy agreement, you’ll need 2 documents with your current address. These must be dated in the past 3 months - they can include:</p>
-        <ul>
-            <li>gas, electricity or water bills</li>
-            <li>mobile phone bills or contracts</li>
-            <li>bank statements</li>
-            <li>official documents, for example letters from a government department</li>
-        </ul>
-
-        <p>Tell {{ practice.name }} if you don’t have any of these things.</p>
-    </div>
-
-    <details>
-      <summary>
-        <span class="details__summary">How to find your NHS number</span>
-      </summary>
-      <div class="details__content">
-        <div class="callout callout--info">
-          <p>You can usually find your NHS number:</p>
-          <ul>
-            <li>on a printed prescription</li>
-            <li>on a GP or hospital letter</li>
-            <li>by asking your current GP</li>      
-          </ul>
-        </div>
-      </div>
-    </details>
-    <div class="reading-width">
-     {% if practice %}
-        <p>
-          <strong>{{ practice.name }}</strong>
-          {% if practice.contact.address.length %}
-            {% set linebreak = joiner('<br>') %}
-            {% for address in practice.contact.address %}
-              <br>
-              {{ linebreak() | safe }}
-              {{ address | nl2br | safe }}
-            {% endfor %}
-          {% endif %}
-        </p>
-
-        {% if practice.contact.phone %}
-          {% set linebreak = joiner('<br>') %}
-          <p>
-            {% for phone in practice.contact.phone %}
-              {{ linebreak() | safe }}
-              Phone: {{ phone }}
-            {% endfor %}
-          </p>
-        {% endif %}
-      {% endif %}
-    </div>  
-  
-
-  <h2 class="heading-medium">After you complete your registration</h2>
-
-    <div class="reading-width">
-      <p>Wait {{ CURRENT_PRACTICE.regdays }} days before making appointments at {{ practice.name | default('your GP practice') }} - this is how long it usually takes to be registered. {{ practice.name | default('your GP practice') }} will contact you if they need anything else from you.
-      Also tell them if you don’t have an NHS number or you can’t find it.
-      </p>
-    </div>  
-    <h2 class="heading-medium">If you need an urgent appointment</h2>
-    <div class="reading-width">  
-      <p>Call {{ practice.name | default('your GP practice') }} to ask about urgent appointments before you’re registered. If they’re closed, call 111 or go to a walk-in centre.</p>
-    </div>
-    <h2 class="heading-medium">If you’re on repeat medication</h2>
-    <div class="reading-width"> 
-      <p>Take your repeat prescription or medication to [practice name] as soon as you can. If you’re worried about running out, ask your current GP for a prescription for one month’s supply.</p>
-    </div>
-    <h2 class="heading-medium"> If you’re having hospital treatment</h5>
-    <div class="reading-width"> 
-      <p>Tell the hospital that you’ve changed GP. Take a hospital letter or other information about your treatment to {{ practice.name | default('your GP practice') }} as soon as you can.</p>
-   </div>
-
-  </div>
+{% extends 'practices/end/default.njk' %}
 
 
+{% block section_B %}
+    <h2>You now need to go to reception at {{ practice.name | default('the GP practice') }} with:</h2>
 
+    <ul>
+      <li>your NHS number if you haven’t already provided it</li>
+      <li>your photo ID (for example photocard driving licence, passport, EU identity card) or birth certificate</li>
+      <li>proof of your current address - for example a gas, electricity or council tax bill from the past 3 months</li>
+    </ul>
+
+    <p>Tell {{ practice.name | default('the GP practice') }} if you don’t have any of these things.</p>
 {% endblock %}
+

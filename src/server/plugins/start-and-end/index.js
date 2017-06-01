@@ -7,11 +7,6 @@ import {getLatestUncompletedStep} from '../register-form/steps/common.js';
 const fs = require('fs');
 
 function practiceHandler(request, reply) {
-/*
-  if (request.state.practice) {
-    return reply.redirect(request.aka('start'));
-  }
-*/
   if (request.params.practice) {
     const practice = practiceLookup.getPractice(request.params.practice);
 
