@@ -1,5 +1,40 @@
 [
   {
+    "key": "hampton-wick-surgery",
+    "name": "Hampton Wick Surgery",
+    "contact": {
+      "address": [
+        "Hampton Wick Surgery, 26 Upper Teddington Road, Hampton Wick, Kingston Upon Thames KT1 4DY"
+      ],
+      "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=41081"
+    },
+    "regdays": 6
+  },
+
+  {
+    "key": "the-worlds-practice",
+    "name": "The Wolds Practice",
+    "contact": {
+      "address": [
+        "The Wolds Practice, West Road, Tetford, Horncastle, Lincolnshire, LN9 6QP "
+      ],
+      "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=41370"
+    },
+    "regdays": 6
+  },
+
+  {
+    "key": "burns-practice",
+    "name": "The Burns Practice",
+    "contact": {
+      "address": [
+        "The Burns Practice, 4 Albion Place, Bennetthorpe, Doncaster,DN1 2EG"
+      ],
+      "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=42092"
+    },
+    "regdays": 6
+  },
+  {
     "key": "ohoran-partners",
     "name": "Dr P O’Horan and Partners",
     "contact": {
@@ -17,7 +52,8 @@
       "phone": ["01283 568 405"],
       "address": [
         "Lichfield Street\nBurton-on-Trent\nDE14 3RH"
-      ]
+      ],
+      "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=44221"
     },
     "regdays": 5    
   },
@@ -30,7 +66,8 @@
         "Pioneer at Avonmouth\nCollins Street\nAvonmouth\nBS11 9JJ",
         "Pioneer at Bradgate\nArdenton Walk\nBrentry\nBS10 6SP",
         "Pioneer at Ridingleaze\nRidingleaze\nLawrence Weston\nBS11 0QE"
-      ]
+      ],
+      "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=40115"
     },
     "regdays": 8    
   },
@@ -64,7 +101,8 @@
       "phone": ["0208 669 6186"],
       "address": [
         "Jubilee Health Centre\nShotfield\nWallington\nSM6 0HY"
-      ]
+      ],
+      "link": "http://www.nhs.uk/Services/gp/Overview/DefaultView.aspx?id=39142"
     },
     "regdays": 5    
   },

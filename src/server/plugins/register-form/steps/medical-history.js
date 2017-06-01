@@ -23,7 +23,7 @@ const schema = Joi.object().keys({
       hint: 'Select all that apply'
     }),
   'medical-history': Joi.string().max(200).allow('').optional()
-    .label('I`ve had a serious condition or illness that isn`t listed')
+    .label('I’ve had a serious condition or illness that isn’t listed')
     .meta({
       componentType: 'disclosure',
       variant: 'large',
