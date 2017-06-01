@@ -21,48 +21,53 @@
     <h1 class="form-title">{{ title }}</h1>
 
     <table class="summary">
-      {{ row('Gender', data.gender, 'register-form:gender') }}
-      {{ row('Name', data.name, 'register-form:name') }}
-      {{ row('Date of birth', data.dateOfBirth, 'register-form:name', false, '/') }}
-      {{ row('Address', data.address, 'register-form:address', true) }}
-      {{ row('Contact Details', data.contactDetails, 'register-form:contactDetails', true) }}
+      {{ row('Gender', data.gender, 'gender') }}
+      {{ row('Name', data.name, 'name') }}
+      {{ row('Date of birth', data.dateOfBirth, 'name', false, '/') }}
+      {{ row('Address', data.address, 'address', true) }}
+      {{ row('Contact Details', data.contactDetails, 'contactDetails', true) }}
+
+
       {% if data.nhsNumber['nhs-number-known'] %}
-        {{ row('NHS number', data.nhsNumberDetails, 'register-form:nhsNumber', true) }}
+        {{ row('NHS number', data.nhsNumberDetails, 'nhsNumber', true) }}
       {% else %}
-        {{ row('NHS number', {'empty': 'I don’t know my NHS number'}, 'register-form:nhsNumber') }}
+        {{ row('NHS number', {'empty': 'I don’t know my NHS number'}, 'nhsNumber') }}
       {% endif %}
     </table>
     <table class="summary">
       <caption>Armed forces</caption>
       {% if data.previouslyArmed['previously-armed'] %}
-        {{ row('Staff number', data.armedStaffNumber, 'register-form:armedStaffNumber', true)}}
-        {{ row('Enlist date', data.armedEnlistDate, 'register-form:armedEnlistDate', false, '/')}}
+        {{ row('Staff number', data.armedStaffNumber, 'armedStaffNumber', true)}}
+        {{ row('Enlist date', data.armedEnlistDate, 'armedEnlistDate', false, '/')}}
       {% else %}
-        {{ row('Armed forces',{'empty': 'I haven’t served in the armed forces'}, 'register-form:previouslyArmed' )}}
+        {{ row('Armed forces',{'empty': 'I haven’t served in the armed forces'}, 'previouslyArmed' )}}
       {% endif %}
   </table>
     <table class="summary">
       <caption>Your current GP</caption>
 
       {% if data.previouslyRegistered['previously-registered'] %}
-        {% if data.manualGPAddress['gp-name'] %}
-            {{ row('Current GP', data.manualGPAddress, 'register-form:manualGPAddress', true) }}
+
+        {% if data.manualGPAddress['gpName'] %}
+            {{ row('Current GP', data.manualGPAddress, 'manualGPAddress', true) }}
+
         {% else %}
-            {{ row('Current GP', data.currentGP, 'register-form:currentGP', true) }}
+            {{ row('Current GP', data.currentGP, 'currentGP', true) }}
         {% endif %}
+
         {% if data.registedAddress['registered-address-correct'] %}
-          {{ row('Registered address', data.address, 'register-form:registedAddress', true) }}
+          {{ row('Registered address', data.address, 'registedAddress', true) }}
         {% else %}
-          {{ row('Registered address', data.registeredAddressDetails, 'register-form:registedAddress', true) }}
+          {{ row('Registered address', data.registeredAddressDetails, 'registedAddress', true) }}
         {% endif %}
 
         {% if data.registeredName['registered-name-correct'] %}
-          {{ row('Registered name', data.name, 'register-form:registeredName') }}
+          {{ row('Registered name', data.name, 'registeredName') }}
         {% else %}
-          {{ row('Registered name', data.registeredNameDetails, 'register-form:registeredName') }}
+          {{ row('Registered name', data.registeredNameDetails, 'registeredName') }}
         {% endif %}
       {% else %}
-        {{ row('Current GP', {'empty': 'I’m not registered with a GP'}, 'register-form:previouslyRegistered') }}
+        {{ row('Current GP', {'empty': 'I’m not registered with a GP'}, 'previouslyRegistered') }}
       {% endif %}
     </table>
 
@@ -70,27 +75,29 @@
       <caption>Your health</caption>
 
       {% if data.currentMedication['current-medication'] %}
-        {{ row('Medication', data.medicationDetails, 'register-form:currentMedication', true) }}
+        {{ row('Medication', data.medicationDetails, 'currentMedication', true) }}
       {% else %}
-        {{ row('Medication', {'empty': 'I’m not currently taking any medication'}, 'register-form:currentMedication') }}
+        {{ row('Medication', {'empty': 'I’m not currently taking any medication'}, 'currentMedication') }}
       {% endif %}
 
       {% if data.allergies['any-allergies'] %}
-        {{ row('Alergies', data.allergiesDetails, 'register-form:allergies', true) }}
+
+        {{ row('Allergies', data.allergiesDetails, 'allergies', true) }}
       {% else %}
-        {{ row('Alergies', {'empty': 'I don’t have any allergies'}, 'register-form:allergies') }}
+        {{ row('Allergies', {'empty': 'I don’t have any allergies'}, 'allergies') }}
       {% endif %}
 
-      {% if data.medicalHistory['medical-history'] %}
-        {{ row('Health', data.medicalHistory, 'register-form:medicalHistory', true) }}
+      {% if (data.medicalHistory['medical-history']) or (data.medicalHistory['history-chosen']) or (data.medicalHistory['medical-history-details']) %}
+        {{ row('Health', data.medicalHistory, 'medicalHistory', true) }}
+
       {% else %}
-        {{ row('Health', {'empty': 'I’m not supplying any health details'}, 'register-form:medicalHistory') }}
+        {{ row('Health', {'empty': 'I’m not supplying any health details'}, 'medicalHistory') }}
       {% endif %}
     </table>
 
-    <form method="post">
+    <form id="sendForm" name="sendForm" method="post">
       <input type="hidden" name="csrf" value="{{csrf}}">
-      <button type="submit" class="button">Send my details</button>
+      <button type="submit" id="sendBtn" class="button">Send my details</button>
     </form>
 
     <p>

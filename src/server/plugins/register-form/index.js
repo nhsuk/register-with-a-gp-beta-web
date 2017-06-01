@@ -19,18 +19,18 @@ exports.register = function(server, options, next) {
     const nextSteps = arr.slice(index + 1);
     const prevSteps = arr.slice(0, index);
 
-    server.log(step.key);
     server.route({
       config: assign({}, routeConfig, {id: `register-form:${step.key}`}),
       method: 'GET',
-      path: `/${step.slug}`,
+      path: '/{practice}/register/'+`${step.slug}`,
       handler: step.handlers.GET(prevSteps)
     });
 
     server.route({
       config: routeConfig,
+//      config: assign({}, routeConfig, {id: `register-form:${step.key}`}),
       method: 'POST',
-      path: `/${step.slug}`,
+      path: '/{practice}/register/'+`${step.slug}`,
       handler: step.handlers.POST(prevSteps, nextSteps)
     });
 

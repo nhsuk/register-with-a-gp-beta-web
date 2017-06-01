@@ -93,7 +93,7 @@ const manifest = {
           key: 'csrf',
           autoGenerate: false,
           cookieOptions: {
-            path: '/register',
+            path: '/',
             isSecure: !debug
           }
         }
@@ -103,9 +103,6 @@ const manifest = {
       plugin: {
         register: './plugins/register-form',
         options: {},
-        routes: {
-          prefix: '/register'
-        }
       }
     },
     {

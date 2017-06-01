@@ -70,5 +70,17 @@
       "link": "http://www.nhs.uk/Services/gp/Overview/DefaultView.aspx?id=39142"
     },
     "regdays": 5    
+  },
+  {
+    "key": "register-gp-test",
+    "name": "Test Practice",
+    "contact": {
+      "phone": ["0208 123 45678"],
+      "address": [
+        "151 Buckingham Palace road\nLondon\nSW1W 9SZ"
+      ]
+    },
+    "regdays": 5    
   }
+  
 ]

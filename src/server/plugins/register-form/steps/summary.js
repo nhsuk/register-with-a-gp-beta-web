@@ -28,17 +28,17 @@ export function summaryGetHandler(request, reply) {
 
 async function renderTemplate(env, context) {
   return await env.render(
-    'email/registration-summary.njk',
+    'email/registration-summary-html.njk',
     context
   );
 }
 
 export function emailGP(practiceKey, emailText) {
   return new Promise((resolve, reject) => {
-    const practice = practiceLookup.getPractice(practiceKey);
+    const practiceData = practiceLookup.getPractice(practiceKey);
 
-    if (typeof practice !== 'undefined') {
-      const envKey = ChangeCase.constantCase(practice.key);
+    if (typeof practiceData !== 'undefined') {
+      const envKey = ChangeCase.constantCase(practiceData.key);
       const emailAddress = process.env[`GP_EMAIL_${envKey}`];
 
       if (emailAddress) {
@@ -58,7 +58,7 @@ export function summaryPostHandler(request, reply) {
   validate(request.payload, schema)
     .then(async () => {
       const data = _.get(request, 'state.data', {});
-      const practice = request.state.practice || '';
+      const practice = request.params.practice || '';
 
       const emailText = await renderTemplate(
         request.server.plugins.NunjucksConfig.nunjucksEnv,
@@ -82,7 +82,7 @@ export function summaryPostHandler(request, reply) {
     .catch(err => {
       request.log(['error'], err);
       return reply
-        .redirect(request.aka(`register-form:${key}`));
+        .redirect(request.aka(key));
     });
 }
 

@@ -5,11 +5,11 @@ import previouslyRegisteredStep from './previously-registered';
 import registeredNameStep from './registered-name';
 
 const schema = Joi.object().keys({
-  'first-name': Joi.string().max(100).label('First name').meta({ componentType: 'textbox' }),
-  'middle-names': Joi.string().allow('').max(100).optional().label('Middle names').meta({ componentType: 'textbox' }),
-  'last-name': Joi.string().max(100).label('Last name').meta({ componentType: 'textbox' }),
+  'firstName': Joi.string().max(100).label('First name').meta({ componentType: 'textbox' }),
+  'middleNames': Joi.string().allow('').max(100).optional().label('Middle names').meta({ componentType: 'textbox' }),
+  'lastName': Joi.string().max(100).label('Last name').meta({ componentType: 'textbox' }),
   'submit': Joi.any().optional().strip()
-}).or('first-name', 'middle-names', 'last-name');
+}).or('firstName', 'middleNames', 'lastName');
 
 const title = 'What was your previous name?';
 const key = 'registeredNameDetails';

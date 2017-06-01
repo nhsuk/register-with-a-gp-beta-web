@@ -17,52 +17,52 @@
 Hello,
 
 {{ render_one_line('Name', data.name) }}
+{{ render_one_line('Gender', data.gender) }}
 
 Date of Birth: {{ data.dateOfBirth['year'] }}/{{ data.dateOfBirth['month'] }}/{{ data.dateOfBirth['day'] }}
 
 {{ render_multi_line('Address', data.address) }}
 
-{% if data.email.email -%}
-{{ render_multi_line('Email', data.email) }}
-{% else -%}
-{{ render_one_line('Email', {'empty': 'I’m not providing an email address'}) }}
-{%- endif %}
+{{ render_multi_line('Contact Details', data.contactDetails) }}
 
 {% if data.nhsNumber['nhs-number-known'] -%}
-{{ render_multi_line('NHS number', data.nhsNumber) }}
+  {{ render_one_line('NHS number', data.nhsNumberDetails) }}
 {% else -%}
-{{ render_one_line('NHS number', {'empty': 'I don’t know my NHS number'}) }}
+  {{ render_one_line('NHS number', {'empty': 'I don’t know my NHS number'}) }}
 {%- endif %}
-
-{{ render_multi_line('Telephone', data.telephone) }}
 
 Armed force
 ===========
 
 {% if data.previouslyArmed['previously-armed'] -%}
-{{ render_one_line('Staff number', data.armedStaffNumber) }}
-{{ render_one_line('Enlist date', data.armedEnlistDate) }}
+  {{ render_one_line('Staff number', data.armedStaffNumber) }}
+  {{ render_one_line('Enlist date', data.armedEnlistDate) }}
+  Enlist date: {{ data.armedEnlistDate['year'] }}/{{ data.armedEnlistDate['month'] }}/{{ data.armedEnlistDate['day'] }}
 {%- endif %}
 
 Your current GP
 ===============
 
-{% if data.previouslyRegistered['previously-registered'] -%}
-{{ render_one_line('Current GP', data.currentGP) }}
-{% if data.registedAddress['registered-address-correct'] -%}
-{{ render_multi_line('Registered address', data.address) }}
-{% else -%}
-{{ render_multi_line('Registered address', data.registeredAddressDetails) }}
-{%- endif %}
-{% if data.registeredName['registered-name-correct'] -%}
-{{ render_one_line('Registered name', data.name) }}
-{% else -%}
-{{ render_one_line('Registered name', data.registeredNameDetails) }}
-{%- endif %}
-{% else -%}
+{% if data.previouslyRegistered['previously-registered'] %}
+  {% if data.manualGPAddress['gpName'] %}
+    {{ render_one_line('Current GP', data.manualGPAddress) }}
+  {% else %}
+    {{ render_one_line('Current GP', data.currentGP) }}
+  {% endif %}
+  {% if data.registedAddress['registered-address-correct'] %}
+    {{ render_one_line('Registered address', data.address) }}
+  {% else %}
+    {{ render_one_line('Registered address', data.registeredAddressDetails) }}
+  {% endif %}
+  {% if data.registeredName['registered-name-correct'] %}
+    {{ render_one_line('Registered name', data.name) }}
+  {% else %}
+    {{ render_one_line('Registered name', data.registeredNameDetails) }}
+  {% endif %}
+{% else %}
   {{ render_one_line('Current GP', {'empty': 'I’m not registered with a GP'}) }}
-{%- endif %}
-
+{% endif %}
+    
 Your health
 ===========
 
@@ -73,12 +73,12 @@ Your health
 {% endif %}
 
 {% if data.allergies['any-allergies'] %}
-  {{ render_multi_line('Alergies', data.allergiesDetails, true) }}
+  {{ render_multi_line('Allergies', data.allergiesDetails, true) }}
 {% else %}
-  {{ render_one_line('Alergies', {'empty': 'I don’t have any allergies'}) }}
+  {{ render_one_line('Allergies', {'empty': 'I don’t have any allergies'}) }}
 {% endif %}
 
-{% if data.medicalHistory['medical-history'] %}
+{% if (data.medicalHistory['medical-history']) or (data.medicalHistory['history-chosen']) or (data.medicalHistory['medical-history-details']) %}
   {{ render_multi_line('Health', data.medicalHistory, true) }}
 {% else %}
   {{ render_one_line('Health', {'empty': 'I’m not supplying any health details'}) }}

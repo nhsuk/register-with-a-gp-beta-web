@@ -36,7 +36,7 @@ function ewsEmail(toEmail, text, subject) {
         'Subject' : subject,
         'Body' : {
           'attributes': {
-            'BodyType' : 'Text'
+            'BodyType' : 'HTML'
           },
           '$value': text
         },

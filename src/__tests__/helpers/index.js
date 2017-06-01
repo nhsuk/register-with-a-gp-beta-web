@@ -29,9 +29,11 @@ function stopTestServer(instance = _runningInstance) {
 
 function resolveUrl(
   id,
-  instance = _runningInstance,
-  params = {}) {
-  const relativeUrl = instance.aka(id, params);
+  instance = _runningInstance) {
+  let relativeUrl = '/';
+  if(id.length > 0){
+    relativeUrl = '/peel-croft-surgery/'+ id;
+  }
   return `http://localhost:${instance.info.port}${relativeUrl}`;
 }
 

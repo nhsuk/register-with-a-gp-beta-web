@@ -64,9 +64,10 @@ export function getPrevStep(prevSteps, cookieData, request) {
   for (let i = prevSteps.length - 1; i >= 0; i--) {
     const step = prevSteps[i];
     const check = _.get(step, 'checkApplies', () => true);
+    const practice = request.params.practice;
 
     if (check(cookieData, 'prev')) {
-      return request.aka(`register-form:${step.key}`);
+      return '/' + practice + '/register/' + step.slug;
     }
   }
 }
@@ -79,6 +80,24 @@ export function getNextStep(nextSteps, cookieData) {
     }
   }
   return 'end';
+}
+
+export function getNextSlug(nextSteps, cookieData) {
+  for (let currentStep of nextSteps) {
+    const check = _.get(currentStep, 'checkApplies', () => true);
+    if (check(cookieData, 'next')) {
+      return currentStep.slug;
+    }
+  }
+  return 'end';
+}
+
+export function getSlugById(id){
+  for (let step of steps) {
+    if(step.key == id) {
+      return step.slug;
+    }
+  }
 }
 
 export function getlastCompletedStep(cookieData) {
@@ -135,8 +154,9 @@ export function getHandlerFactory(
   template = 'register-form/step') {
   return (request, reply) => {
     const latestUncompletedStep = getLatestUncompletedStep(request.state.data);
+    const practice = request.params.practice;
     if (!checkStepCompletedBefore(key, latestUncompletedStep)){
-      return reply.redirect(request.aka(`register-form:${latestUncompletedStep.key}`));
+      return reply.redirect('/' + practice + '/register/' + latestUncompletedStep.slug);
     }else{
       const stepData = _.get(request, `state.data.${key}`, {});
       const prevStep = getPrevStep(prevSteps, request.state.data, request);
@@ -201,9 +221,11 @@ export function postHandlerFactory(
     validate(request.payload, schema)
       .then(value => {
         const newData = transformData(key, value, request.state.data);
-        const nextStep = getNextStep(nextSteps, newData);
+        const nextSlug = getNextSlug(nextSteps, newData);
+        const practice = request.params.practice;
         return reply
-          .redirect(request.aka(`register-form:${nextStep}`))
+//          .redirect(request.aka(`register-form:${nextStep}`))
+          .redirect('/' + practice + '/register/' + nextSlug)
           .state('data', newData);
       })
       .catch(err => {
@@ -217,7 +239,6 @@ export function postHandlerFactory(
             label: error.context.key,
           };
         });
-
         return reply.view(template, {
           fields: getFieldData(schema),
           data: request.state.data,
@@ -226,7 +247,7 @@ export function postHandlerFactory(
           key,
           title,
           stepErrors,
-          prevStep,
+          prevStep
         });
       });
   };
