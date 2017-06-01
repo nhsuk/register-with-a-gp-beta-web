@@ -37,7 +37,7 @@ const defaultPracticeStartTemplate = 'practices/start/default.njk';
 const defaultPracticeEndTemplate = 'practices/end/default.njk';
 
 export function getPracticeStartTemplate(request) {
-  const practice = request.state.practice;
+  const practice = request.params.practice;
   if (practice){
     const practiceTemplateName = 'practices/start/' + practice;
     const appSettings = request.server.settings.app;
@@ -51,7 +51,7 @@ export function getPracticeStartTemplate(request) {
 }
 
 export function getPracticeEndTemplate(request) {
-  const practice = request.state.practice;
+  const practice = request.params.practice;
   if (practice){
     const practiceTemplateName = 'practices/end/' + practice;
     const appSettings = request.server.settings.app;
@@ -93,6 +93,10 @@ function endHandler(request, reply) {
 
 function stepMissingHandler(request, reply) {
   const practice = request.params.practice;
+  const practiceData = practiceLookup.getPractice(practice);
+  if(typeof practiceData === 'undefined'){
+    return reply.redirect('/');
+  }
   const latestUncompletedStep = getLatestUncompletedStep(request.state.data);
   return reply.redirect('/' + practice + '/register/' + latestUncompletedStep.slug);
 }
