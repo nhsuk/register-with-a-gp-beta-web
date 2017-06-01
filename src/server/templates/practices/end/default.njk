@@ -6,7 +6,7 @@
 
 {% block body_main_content %}
   <div class="page-section">
-    <h1 class="heading-medium">Thank you for applying. Your application has been sent to {{ practice.name | default('a GP practice') }}</h1>
+    <h1 class="heading-medium">Your application has been sent to {{ practice.name | default('the GP practice') }}</h1>
 
     <div class="reading-width">
       <p>Contact {{ practice.name | default('your GP practice') }} to tell them your NHS number if you haven’t already provided it.</p>
@@ -14,23 +14,21 @@
     </div>
 
 
-    <h2 class="heading-medium">You now need to complete your registration in person</h2>  
-    <div class="reading-width">
-      <p>Go to <strong>{{ practice.name | default('your GP practice') }}</strong> to:</p>
-      <ul>
-        <li>sign a copy of your application</li>
-        <li>tell them your NHS number if you haven’t already provided it</li>
-        <li>tell them if you don’t have an NHS number or you can’t find it.</li>      
-      </ul>
-    </div>
+    <details>
+      <summary>
+        <span class="details__summary">How to find your NHS number</span>
+      </summary>
+      <div class="details__content">
+        <p>You can usually find your NHS number:</p>
 
-    <h2 class="heading-medium">How to find your NHS number</h2>
-    <p>You can usually find your NHS number:</p>
-    <ul>
-      <li>on a printed prescription</li>
-      <li>on a GP or hospital letter</li>
-      <li>by asking your current GP</li>      
-    </ul>
+        <ul>
+          <li>on a printed prescription</li>
+          <li>on a GP or hospital letter</li>
+          <li>by asking your current GP</li>
+        </ul>
+      </div>
+    </details>
+
     <div class="reading-width">
      {% if practice %}
         <p>
