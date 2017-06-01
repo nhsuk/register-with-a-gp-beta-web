@@ -1,5 +1,40 @@
 [
   {
+    "key": "hampton-wick-surgery",
+    "name": "Hampton Wick Surgery",
+    "contact": {
+      "address": [
+        "Hampton Wick Surgery, 26 Upper Teddington Road, Hampton Wick, Kingston Upon Thames KT1 4DY"
+      ],
+      "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=41081"
+    },
+    "regdays": 6
+  },
+
+  {
+    "key": "worlds-practice",
+    "name": "The Wolds Practice",
+    "contact": {
+      "address": [
+        "The Wolds Practice, West Road, Tetford, Horncastle, Lincolnshire, LN9 6QP "
+      ],
+      "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=41370"
+    },
+    "regdays": 6
+  },
+
+  {
+    "key": "burns-practice",
+    "name": "The Burns Practice",
+    "contact": {
+      "address": [
+        "The Burns Practice, 4 Albion Place, Bennetthorpe, Doncaster,DN1 2EG"
+      ],
+      "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=42092"
+    },
+    "regdays": 6
+  },
+  {
     "key": "ohoran-partners",
     "name": "Dr P O’Horan and Partners",
     "contact": {
