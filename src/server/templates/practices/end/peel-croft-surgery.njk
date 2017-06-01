@@ -10,6 +10,20 @@
       <li>proof of your current address - for example a gas, electricity or council tax bill from the past 3 months</li>
     </ul>
 
-    <p>Tell {{ practice.name | default('the GP practice') }} if you don’t have any of these things.</p>
-{% endblock %}
+    <details>
+      <summary>
+        <span class="details__summary"><strong>If you don’t have a council tax bill, mortgage or tenancy agreement</strong></span>
+      </summary>
+      <div class="details__content">
+        <p>Take 2 documents with your current address. These must be dated in the past 3 months - they can include:</p>
+        <ul>
+          <li>gas, electricity or water bills</li>
+          <li>mobile phone bills or contracts</li>
+          <li>bank statements</li>
+          <li>official documents, for example letters from a government department</li>
+        </ul>
+        <p>Tell {{ practice.name | default('the GP practice') }} if you don’t have any of these things.</p>
+      </div>
+    </details>
 
+{% endblock %}
