@@ -6,9 +6,9 @@ import practiceLookup from '../../../shared/lib/practice-lookup';
 const fs = require('fs');
 
 function practiceHandler(request, reply) {
-  if (request.state.practice) {
-    return reply.redirect(request.aka('start'));
-  }
+  // if (request.state.practice) {
+  //   return reply.redirect(request.aka('start'));
+  // }
 
   if (request.params.practice) {
     const practice = practiceLookup.getPractice(request.params.practice);
