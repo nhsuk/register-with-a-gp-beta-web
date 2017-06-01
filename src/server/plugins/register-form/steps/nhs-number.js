@@ -25,7 +25,7 @@ const schema = Joi.object().keys({
 const title = 'Do you know your NHS number?';
 const key = 'nhsNumber';
 const slug = 'nhs-number';
-const extraInfo = 'An NHS number is a 10 digit number, for example: <strong>943 476 5919</strong><br>It can help to provide your NHS number - this will help {{ CURRENT_PRACTICE.name }} find your medical records quickly.';
+const extraInfo = 'An NHS number is a 10 digit number, for example: <strong>943 476 5919</strong><br>Providing your NHS number will help {{ CURRENT_PRACTICE.name | default("the GP practice") }} find your medical records quickly.';
 
 const details = {
   summary: 'How to find your NHS number',

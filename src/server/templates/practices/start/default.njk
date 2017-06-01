@@ -27,7 +27,7 @@
       <h3>How long it takes</h3>
       <p>
         {% block how_long_takes_paragraph %}
-          Applying online takes about 10 minutes. You’ll then need to go to {{ CURRENT_PRACTICE.name }} with proof of your identity and address. It usually takes {{ CURRENT_PRACTICE.regdays }} days after that before you’re registered.
+          Applying online takes about 10 minutes. You’ll then need to go to {{ CURRENT_PRACTICE.name }} with proof of your identity and address. It usually takes {{ CURRENT_PRACTICE.regdays | default(7) }} days after that before you’re registered.
         {% endblock %}
       </p>
 
