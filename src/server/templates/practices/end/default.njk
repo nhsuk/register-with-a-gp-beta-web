@@ -6,8 +6,8 @@
 
 {% block body_main_content %}
   <div class="page-section">
+    <h1 class="heading-medium">Your application has been sent to {{ practice.name | default('the GP practice') }}</h1>
     {% block section_B %}
-      <h1 class="heading-medium">Your application has been sent to {{ practice.name | default('the GP practice') }}</h1>
 
       <div class="reading-width">
         <p>Contact {{ practice.name | default('your GP practice') }} to tell them your NHS number if you haven’t already provided it.</p>
