@@ -3,8 +3,9 @@
     "key": "hampton-wick-surgery",
     "name": "Hampton Wick Surgery",
     "contact": {
+      "phone": ["020 8977 2638"],
       "address": [
-        "Hampton Wick Surgery, 26 Upper Teddington Road, Hampton Wick, Kingston Upon Thames KT1 4DY"
+        "26 Upper Teddington Road\nHampton Wick\nKingston Upon Thames\nKT1 4DY"
       ],
       "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=41081"
     },
@@ -27,8 +28,9 @@
     "key": "burns-practice",
     "name": "The Burns Practice",
     "contact": {
+      "phone": ["01302 534 487"],
       "address": [
-        "The Burns Practice, 4 Albion Place, Bennetthorpe, Doncaster,DN1 2EG"
+        "4 Albion Place\nBennetthorpe\nDoncaster\nDN1 2EG"
       ],
       "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=42092"
     },
@@ -108,7 +110,7 @@
   },
   {
     "key": "register-gp-test",
-    "name": "Test Practice",
+    "name": "Test Practice 2",
     "contact": {
       "phone": ["0208 123 45678"],
       "address": [

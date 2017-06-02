@@ -29,7 +29,7 @@ const extraInfo = 'An NHS number is a 10 digit number, for example: <strong>943 
 
 const details = {
   summary: 'How to find your NHS number',
-  content: 'You can find your NHS number:<ul><li>on a printed prescription</li><li>on a letter from your GP or a hospital</li><li>on your NHS medical card if you have one</li></ul>',
+  content: 'You can find your NHS number:<ul><li>on a printed prescription</li><li>on a GP or hospital letter</li><li>by asking your current GP</li></ul>',
   position: 'below'
 };
 

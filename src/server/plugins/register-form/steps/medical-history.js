@@ -34,7 +34,7 @@ const schema = Joi.object().keys({
     .meta({
       componentType: 'textbox',
       variant: 'large',
-      hint: 'For example, you`ve had a major operation, surgery or treatment after an accident.'
+      hint: 'For example, you’ve had a major operation, surgery or treatment after an accident.'
     }),
 
   'submit': Joi.any().optional().strip()
