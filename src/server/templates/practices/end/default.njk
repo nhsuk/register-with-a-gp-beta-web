@@ -10,7 +10,7 @@
       <h1 class="heading-medium">Your application has been sent to {{ practice.name | default('the GP practice') }}</h1>
 
       <div class="reading-width">
-        <p>Contact {{ practice.name | default('your GP practice') }} to tell them your NHS number if you haven’t already provided it.</p>
+        <p>Contact {{ practice.name | default('the GP practice') }} to tell them your NHS number if you haven’t already provided it.</p>
         <p>Also tell them if you don’t have an NHS number or you can’t find it.</p>
       </div>
     {% endblock %}
@@ -61,14 +61,14 @@
   <h2 class="heading-medium">After you show your documents</h2>
 
     <div class="reading-width">
-      <p>Wait {{ CURRENT_PRACTICE.regdays }} before making appointments at {{ practice.name | default('the GP practice') }} - this is how long it usually takes to be registered. {{ practice.name | default('The GP practice') }} will contact you if they need anything else from you.
+      <p>Wait {{ CURRENT_PRACTICE.regdays }} days before making appointments at {{ practice.name | default('the GP practice') }} - this is how long it usually takes to be registered. {{ practice.name | default('The GP practice') }} will contact you if they need anything else from you.
       </p>
       
       <h3>If you need an urgent appointment</h3>
-      <p>Call {{ practice.name | default('your GP practice') }} to ask about urgent appointments before you’re registered. If they’re closed, call 111 or go to a walk-in centre.</p>
+      <p>Call {{ practice.name | default('the GP practice') }} to ask about urgent appointments before you’re registered. If they’re closed, call 111 or go to a walk-in centre.</p>
     
       <h3>If you’re on repeat medication</h3>
-      <p>Take your repeat prescription or medication to [practice name] as soon as you can. If you’re worried about running out, ask your current GP for a prescription for one month’s supply.</p>
+      <p>Take your repeat prescription or medication to {{ practice.name | default('the GP practice') }} as soon as you can. If you’re worried about running out, ask your current GP for a prescription for one month’s supply.</p>
 
       <h3>If you’re having hospital treatment</h3>
       <p>Tell the hospital that you’ve changed GP. Take a hospital letter or other information about your treatment to {{ practice.name | default('the GP practice') }} as soon as you can.</p>
