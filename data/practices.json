@@ -13,7 +13,7 @@
   },
 
   {
-    "key": "the-worlds-practice",
+    "key": "the-wolds-practice",
     "name": "The Wolds Practice",
     "contact": {
       "address": [
@@ -33,17 +33,6 @@
         "4 Albion Place\nBennetthorpe\nDoncaster\nDN1 2EG"
       ],
       "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=42092"
-    },
-    "regdays": 6
-  },
-  {
-    "key": "ohoran-partners",
-    "name": "Dr P O’Horan and Partners",
-    "contact": {
-      "phone": ["0844 414 0726"],
-      "address": [
-        "4 Albion Place\nBennetthorpe\nDoncaster\nDN1 2EG"
-      ]
     },
     "regdays": 6
   },
@@ -72,29 +61,6 @@
       "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=40115"
     },
     "regdays": 8    
-  },
-  {
-    "key": "rosebank-health",
-    "name": "Rosebank Health",
-    "contact": {
-      "phone": ["01452 543 000"],
-      "address": [
-        "Rosebank Surgery\n153b Stroud Road\nGloucester\nGL1 5JQ",
-        "Severnvale Surgery\nSt James\nQuedgeley\nGloucester\nGL2 4WD"
-      ]
-    },
-    "regdays": 3    
-  },
-  {
-    "key": "the-wolds-practice",
-    "name": "The Wolds Practice",
-    "contact": {
-      "phone": ["01507 534903"],
-      "address": [
-        "West Road\nTetford\nLincolnshire\nLN9 6QP"
-      ]
-    },
-    "regdays": 7    
   },
   {
     "key": "wallington-family-practice",
