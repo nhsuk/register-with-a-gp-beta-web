@@ -20,6 +20,22 @@
         </p>
     </div>
 {% endblock %}
+{% block body_site_header %}
+  <header role="banner">
+    <div class="global-header">
+      <div class="global-header__inner">
+        <a href="/{{ CURRENT_PRACTICE.key }}/start" class="global-header__link">
+          <img src="{{ asset_path('assets/images/logotype-nhs-mono.png') }}" alt="NHS">
+        </a>
+        {% block header_service_title %}
+          {% if serviceTitle %}
+            <span class="global-header__service-name">{{ serviceTitle }}</span>
+          {% endif %}
+        {% endblock %}
+      </div>
+    </div>
+  </header>
+{% endblock %}
 
 {% block body_footer %}
   {{ super() }}
