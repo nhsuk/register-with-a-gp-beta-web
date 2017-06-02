@@ -60,6 +60,8 @@ class GPAutoComplete {
   seeMoreResultClickHandler (){
     this.resultListContainerElem.find('.result').show();
     $('.see-more-results').remove();
+    // ga event
+    ga_event('GP Lookup', 'More results click');
   }
 
   createSeeMoreBtn (){
