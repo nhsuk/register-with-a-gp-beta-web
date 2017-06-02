@@ -21,7 +21,7 @@
       ],
       "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=41370"
     },
-    "regdays": 6
+    "regdays": 3
   },
 
   {
@@ -46,7 +46,7 @@
       ],
       "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=44221"
     },
-    "regdays": 5    
+    "regdays": 2
   },
   {
     "key": "pioneer-medical-group",
