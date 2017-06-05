@@ -26,7 +26,7 @@ export function summaryGetHandler(request, reply) {
   const practice = request.params.practice;
   if (!checkStepCompletedBefore(key, latestUncompletedStep)){
     return reply.redirect('/' + practice + '/register/' + latestUncompletedStep.slug);
-  }else{  
+  } else {
     return reply
       .view('register-form/summary', {data, title});
   }
