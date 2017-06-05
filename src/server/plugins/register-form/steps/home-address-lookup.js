@@ -14,7 +14,7 @@ const schema = Joi.object().keys({
         regex: { base: 'must be a valid UK postcode' },
       },
     },
-  }).label('Post Code').meta({ componentType: 'textbox', variant: 'short' }),
+  }).label('Postcode').meta({ componentType: 'textbox', variant: 'short' }),
   'submit': Joi.any().optional().strip(),
 });
 
