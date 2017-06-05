@@ -20,7 +20,7 @@ const nextStep = 'end';
 export function summaryGetHandler(request, reply) {
   if (process.env.NODE_ENV === 'development') {
     request.log(['cookie'], request.state.data);
-  }  
+  }
   const data = _.get(request, 'state.data', {});
   const latestUncompletedStep = getLatestUncompletedStep(request.state.data);
   const practice = request.params.practice;
