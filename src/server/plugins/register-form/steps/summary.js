@@ -4,7 +4,7 @@ import ChangeCase from 'change-case';
 
 import sendEmail from '../../../../shared/lib/send-exchange-email';
 import practiceLookup from '../../../../shared/lib/practice-lookup';
-import { validate } from './common';
+import { validate, getLatestUncompletedStep, checkStepCompletedBefore } from './common';
 
 const schema = Joi.object().keys({
   'submit': Joi.any().optional().strip()
@@ -20,10 +20,16 @@ const nextStep = 'end';
 export function summaryGetHandler(request, reply) {
   if (process.env.NODE_ENV === 'development') {
     request.log(['cookie'], request.state.data);
-  }
+  }  
   const data = _.get(request, 'state.data', {});
-  return reply
-    .view('register-form/summary', {data, title});
+  const latestUncompletedStep = getLatestUncompletedStep(request.state.data);
+  const practice = request.params.practice;
+  if (!checkStepCompletedBefore(key, latestUncompletedStep)){
+    return reply.redirect('/' + practice + '/register/' + latestUncompletedStep.slug);
+  }else{  
+    return reply
+      .view('register-form/summary', {data, title});
+  }
 }
 
 async function renderTemplate(env, context) {
