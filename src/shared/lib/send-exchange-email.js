@@ -50,7 +50,13 @@ function ewsEmail(toEmail, text, subject) {
     }
   };
 
-  return ews.run(ewsFunction, ewsArgs);
+  ews.run(ewsFunction, ewsArgs)
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
 }
 
 
