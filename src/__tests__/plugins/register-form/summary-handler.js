@@ -9,6 +9,9 @@ describe('gethandler', () =>{
     const gReply = {
       view: function(a,b){
         return a + JSON.stringify(b.data);
+      },
+      redirect: function(a,b){
+        return a+JSON.stringify(b.data);
       }
     };
     expect(summaryGetHandler(mockGet, gReply)).toBe('register-form/summary{}');
