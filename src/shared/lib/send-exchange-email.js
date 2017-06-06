@@ -55,7 +55,9 @@ function ewsEmail(toEmail, text, subject) {
       return result;
     })
     .catch(err => {
+      /* eslint-disable no-console */
       console.log(err.message);
+      /* eslint-enable no-console */
     });
 }
 
