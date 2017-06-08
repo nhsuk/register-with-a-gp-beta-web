@@ -4,12 +4,12 @@ class gaEvents{
   init(){
     $('.details__summary').each(function(){
       $(this).click( function() {
-        ga_event('Disclosure', $(this).html());
+        ga_event('Disclosure', 'Opened', $(this).html());
       });
   
     });
     $('#cookieLink').click( function() {
-      ga_event('Cookies', 'link clicked');
+      ga_event('Cookies', 'Cookies link clicked', 'Cookies link clicked');
     });
   }
 

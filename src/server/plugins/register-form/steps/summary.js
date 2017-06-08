@@ -5,6 +5,7 @@ import ChangeCase from 'change-case';
 import sendEmail from '../../../../shared/lib/send-exchange-email';
 import practiceLookup from '../../../../shared/lib/practice-lookup';
 import { validate } from './common';
+import ua from 'universal-analytics';
 
 const schema = Joi.object().keys({
   'submit': Joi.any().optional().strip()
@@ -58,12 +59,14 @@ export function summaryPostHandler(request, reply) {
   validate(request.payload, schema)
     .then(async () => {
       const data = _.get(request, 'state.data', {});
-      const practice = request.state.practice || '';
+      const practice = request.params.practice || '';
 
       const emailText = await renderTemplate(
         request.server.plugins.NunjucksConfig.nunjucksEnv,
         {data: data});
-
+      
+      GACharacterCounts(request);
+      
       emailGP(practice, emailText)
         .then(() => {
           return reply
@@ -84,6 +87,25 @@ export function summaryPostHandler(request, reply) {
       return reply
         .redirect(request.aka(key));
     });
+}
+
+function GACharacterCounts(request){
+  const visitor = ua('UA-67365892-10', request.state.cid );
+  let openText = ['allergies', 'medication', 'medical-history', 'medical-history-details'];
+  let params = {};
+  for(let i=0; i<openText.length; i++) {
+    let key = openText[i];
+    let ev = _.get(request.state.data, `${key}`, '');
+    console.log(key, ev);
+    params = {
+      ec: "Character Counts",
+      ea: key,
+      el: key,
+      ev: ev.length,
+      dp: key
+    };
+    visitor.event(params).send();        
+  };
 }
 
 const handlers = {

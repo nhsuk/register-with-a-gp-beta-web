@@ -237,6 +237,7 @@ export function postHandlerFactory(
         const visitor = ua('UA-67365892-10', request.state.cid );
         let params = {};
         _.each(err.details, (error) => {
+        console.log(error);
           stepErrors[error.path] = {
             message: error.message,
             label: error.context.key,

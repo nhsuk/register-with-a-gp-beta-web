@@ -52,7 +52,7 @@ export function getPracticeStartTemplate(request) {
 }
 
 export function getPracticeEndTemplate(request) {
-  const practice = request.state.practice;
+  const practice = request.params.practice;
   if (practice){
     const practiceTemplateName = 'practices/end/' + practice;
     const appSettings = request.server.settings.app;
