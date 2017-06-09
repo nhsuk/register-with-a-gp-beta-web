@@ -1,10 +1,26 @@
-version: '2'
+version: '2.1'
 services:
   web:
-    command: node_modules/.bin/npm-run-all -s build dev
-    volumes:
-      - ./:/usr/src/app
     environment:
+      ES_HOST: ${ES_HOST}
+      ES_PORT: ${ES_PORT}
       NODE_ENV: 'development'
       SESSION_SECRET: 'put_in_a_random_string_here_thats_longer_than_thirty_two_chars'
       GP_EMAIL_OHORAN_PARTNERS: 'sdfhj@kjkk.jjj'
+
+    build:
+      context: .
+      args:
+        NODE_ENV: ${NODE_ENV-development}
+
+    command: yarn run dev
+    ports:
+      - 3333:3333
+    links:
+      - gp-reg-db:es
+
+    volumes:
+      - .:/code
+
+  gp-reg-db:
+    image: "nhsuk/profiles-db-elastic:${profiles_db_elastic_docker_image_tag-0.2.0}"
