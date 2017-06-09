@@ -18,6 +18,7 @@ USER root
 RUN find /code -user 0 -print0 | xargs -0 chown $USERNAME:$USERNAME
 USER $USERNAME
 
+# install dev dependences because they're used by yarn build
 RUN NODE_ENV=development && yarn
 EXPOSE 3333
 
@@ -32,6 +33,3 @@ RUN cd node_modules/nhsuk-frontend && npm run postinstall
 RUN npm run build
 
 CMD [ "/bin/sh", "-c", "npm run start" ]
-
-
-

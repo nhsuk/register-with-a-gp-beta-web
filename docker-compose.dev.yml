@@ -13,7 +13,7 @@ services:
       args:
         NODE_ENV: ${NODE_ENV-development}
 
-    command: yarn run dev
+    command: node_modules/.bin/npm-run-all -s build dev
     ports:
       - 3333:3333
     links:
