@@ -19,8 +19,5 @@ services:
     links:
       - gp-reg-db:es
 
-    volumes:
-      - .:/code
-
   gp-reg-db:
     image: "nhsuk/profiles-db-elastic:${profiles_db_elastic_docker_image_tag-0.2.0}"
