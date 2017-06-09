@@ -31,5 +31,3 @@ USER $USERNAME
 RUN npm rebuild node-sass
 RUN cd node_modules/nhsuk-frontend && npm run postinstall
 RUN npm run build
-
-CMD [ "/bin/sh", "-c", "npm run start" ]
