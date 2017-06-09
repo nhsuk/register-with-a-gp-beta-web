@@ -11,7 +11,6 @@ WORKDIR /code
 
 ARG NODE_ENV=development
 ENV NODE_ENV=${NODE_ENV}
-ENV PORT = 3333
 
 COPY yarn.lock package.json /code/
 
@@ -32,7 +31,7 @@ RUN npm rebuild node-sass
 RUN cd node_modules/nhsuk-frontend && npm run postinstall
 RUN npm run build
 
-RUN ["yarn"]
+CMD [ "/bin/sh", "-c", "npm run start" ]
 
 
 
