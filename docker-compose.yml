@@ -18,6 +18,12 @@ services:
       - 3333:3333
     links:
       - gp-reg-db:es
+    volumes:
+      - .:/code
+      - register-with-a-gp-node_modules:/code/node_modules
 
   gp-reg-db:
     image: "nhsuk/profiles-db-elastic:${profiles_db_elastic_docker_image_tag-0.2.0}"
+
+volumes:
+  register-with-a-gp-node_modules:
