@@ -1,12 +1,38 @@
 [
   {
-    "key": "ohoran-partners",
-    "name": "Dr P O’Horan and Partners",
+    "key": "hampton-wick-surgery",
+    "name": "Hampton Wick Surgery",
     "contact": {
-      "phone": ["0844 414 0726"],
+      "phone": ["020 8977 2638"],
+      "address": [
+        "26 Upper Teddington Road\nHampton Wick\nKingston Upon Thames\nKT1 4DY"
+      ],
+      "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=41081"
+    },
+    "regdays": 6
+  },
+
+  {
+    "key": "the-wolds-practice",
+    "name": "The Wolds Practice",
+    "contact": {
+      "address": [
+        "The Wolds Practice, West Road, Tetford, Horncastle, Lincolnshire, LN9 6QP "
+      ],
+      "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=41370"
+    },
+    "regdays": 3
+  },
+
+  {
+    "key": "burns-practice",
+    "name": "The Burns Practice",
+    "contact": {
+      "phone": ["01302 534 487"],
       "address": [
         "4 Albion Place\nBennetthorpe\nDoncaster\nDN1 2EG"
-      ]
+      ],
+      "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=42092"
     },
     "regdays": 6
   },
@@ -17,9 +43,10 @@
       "phone": ["01283 568 405"],
       "address": [
         "Lichfield Street\nBurton-on-Trent\nDE14 3RH"
-      ]
+      ],
+      "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=44221"
     },
-    "regdays": 5    
+    "regdays": 2
   },
   {
     "key": "pioneer-medical-group",
@@ -30,47 +57,26 @@
         "Pioneer at Avonmouth\nCollins Street\nAvonmouth\nBS11 9JJ",
         "Pioneer at Bradgate\nArdenton Walk\nBrentry\nBS10 6SP",
         "Pioneer at Ridingleaze\nRidingleaze\nLawrence Weston\nBS11 0QE"
-      ]
+      ],
+      "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=40115"
     },
     "regdays": 8    
-  },
-  {
-    "key": "rosebank-health",
-    "name": "Rosebank Health",
-    "contact": {
-      "phone": ["01452 543 000"],
-      "address": [
-        "Rosebank Surgery\n153b Stroud Road\nGloucester\nGL1 5JQ",
-        "Severnvale Surgery\nSt James\nQuedgeley\nGloucester\nGL2 4WD"
-      ]
-    },
-    "regdays": 3    
-  },
-  {
-    "key": "the-wolds-practice",
-    "name": "The Wolds Practice",
-    "contact": {
-      "phone": ["01507 534903"],
-      "address": [
-        "West Road\nTetford\nLincolnshire\nLN9 6QP"
-      ]
-    },
-    "regdays": 7    
   },
   {
     "key": "wallington-family-practice",
     "name": "Wallington Family Practice",
     "contact": {
-      "phone": ["0208 669 6186"],
+      "phone": ["020 8669 6186"],
       "address": [
         "Jubilee Health Centre\nShotfield\nWallington\nSM6 0HY"
-      ]
+      ],
+      "link": "http://www.nhs.uk/Services/gp/Overview/DefaultView.aspx?id=39142"
     },
     "regdays": 5    
   },
   {
     "key": "register-gp-test",
-    "name": "Test Practice",
+    "name": "Test Practice 2",
     "contact": {
       "phone": ["0208 123 45678"],
       "address": [

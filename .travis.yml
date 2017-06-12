@@ -11,5 +11,4 @@ script:
 - yarn run lint
 - yarn test
 after_success:
-  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - ./ci-deployment/docker_ci.sh
+  - bash ./scripts/ci-deployment/deploy.sh

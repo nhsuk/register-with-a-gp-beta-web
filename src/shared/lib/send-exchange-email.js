@@ -50,7 +50,18 @@ function ewsEmail(toEmail, text, subject) {
     }
   };
 
-  return ews.run(ewsFunction, ewsArgs);
+  return Promise.resolve(
+    ews.run(ewsFunction, ewsArgs)
+      .then(result => {
+        return result;
+      })
+      .catch(err => {
+        /* eslint-disable no-console */
+        console.log(err.message);
+        /* eslint-enable no-console */
+        return err;
+      })
+    );
 }
 
 

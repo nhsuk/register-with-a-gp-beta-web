@@ -6,12 +6,10 @@
 
     <ul>
       <li>your NHS number if you haven’t already provided it</li>
-      <li>proof of your current address - for example a recent gas, electricity or council tax bill</li>
+      <li>your photo ID (for example photocard driving licence, passport, EU identity card) or birth certificate</li>
+      <li>proof of your current address - for example a gas, electricity or council tax bill from the past 3 months</li>
     </ul>
 
     <p>Tell {{ practice.name | default('the GP practice') }} if you don’t have any of these things.</p>
-{% component 'analytics', {
-  ga_client_ID: cid
-} %}
-
 {% endblock %}
+

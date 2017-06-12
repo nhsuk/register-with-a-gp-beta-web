@@ -9,7 +9,7 @@ const schema = Joi.object().keys({
       children: [
         { label: 'Female', value: 'Female' },
         { label: 'Male', value: 'Male' },
-        { label: 'Unspecified', value: 'Unspecified' },
+        { label: 'Other', value: 'Unspecified' },
       ],
       variant: 'radio',
     })

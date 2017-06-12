@@ -7,7 +7,7 @@ import {postHandlerFactory, getHandlerFactory, dependsOnBoolean} from './common'
 const Joi = JoiBase.extend(JoiPostcodeExtension);
 
 const schema = Joi.object().keys({
-  'gpName': Joi.string().max(50).required().label('GP Name').meta({ componentType: 'textbox' }),
+  'gpName': Joi.string().max(50).required().label('GP practice name').meta({ componentType: 'textbox' }),
   'address1': Joi.string().allow('').max(50).label('Address').meta({ componentType: 'textbox' }),
   'address2': Joi.string().allow('').max(50).meta({ componentType: 'textbox' }),
   'address3': Joi.string().allow('').max(50).meta({ componentType: 'textbox' }),
@@ -18,12 +18,12 @@ const schema = Joi.object().keys({
         regex: { base: 'must be a valid UK postcode' },
       },
     },
-  }).label('Post Code').meta({ componentType: 'textbox', variant: 'short' }),
+  }).label('Postcode').meta({ componentType: 'textbox', variant: 'short' }),
   'submit': Joi.any().optional().strip(),
 })
   .or('address1', 'address2', 'address3');
 
-const title = 'What is your current GP address?';
+const title = 'What is the address of your current GP practice?';
 const key = 'manualGPAddress';
 const slug = 'enter-gp-address';
 

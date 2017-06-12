@@ -36,10 +36,10 @@ async function renderTemplate(env, context) {
 
 export function emailGP(practiceKey, emailText) {
   return new Promise((resolve, reject) => {
-    const practice = practiceLookup.getPractice(practiceKey);
+    const practiceData = practiceLookup.getPractice(practiceKey);
 
-    if (typeof practice !== 'undefined') {
-      const envKey = ChangeCase.constantCase(practice.key);
+    if (typeof practiceData !== 'undefined') {
+      const envKey = ChangeCase.constantCase(practiceData.key);
       const emailAddress = process.env[`GP_EMAIL_${envKey}`];
 
       if (emailAddress) {
