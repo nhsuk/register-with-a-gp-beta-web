@@ -3,6 +3,7 @@ const labelSelect = require('./modules/label-select');
 const errorSummary = require('./modules/error-summary');
 const GPAutoComplete = require('./modules/gp-autocomplete');
 const btnDisable = require('./modules/disable-button');
+const gaEvents = require('./modules/ga-events');
 import title from './lib/title';
 
 labelFocus.init();
@@ -16,3 +17,5 @@ btnDisable.init();
 if (module.hot) {
   module.hot.accept();
 }
+
+gaEvents.init();
