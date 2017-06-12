@@ -9,6 +9,7 @@ services:
       GP_EMAIL_OHORAN_PARTNERS: 'sdfhj@kjkk.jjj'
 
     build:
+      dockerfile: Dockerfile-dev
       context: .
       args:
         NODE_ENV: ${NODE_ENV-development}

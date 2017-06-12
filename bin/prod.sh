@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up "$@"
+docker-compose -p gp-reg -f docker-compose.yml -f docker-compose.prod.yml down -v
+docker-compose -p gp-reg -f docker-compose.yml -f docker-compose.prod.yml up --build --force-recreate "$@"
