@@ -220,6 +220,7 @@ export function postHandlerFactory(
 ) {
   return (request, reply) => {
     // if form valid then redirect to next step
+    let params = {};
     validate(request.payload, schema)
       .then(value => {
         const newData = transformData(key, value, request.state.data);
@@ -235,7 +236,6 @@ export function postHandlerFactory(
         const stepErrors = {};
         const prevStep = getPrevStep(prevSteps, request.state.data, request);
         const visitor = ua('UA-67365892-10', request.state.cid );
-        let params = {};
         _.each(err.details, (error) => {
         console.log(error);
           stepErrors[error.path] = {
@@ -243,13 +243,13 @@ export function postHandlerFactory(
             label: error.context.key,
           };
           params = {
-            ec: "Validation Error",
+            ec: 'Validation Error',
             ea: error.context.key,
             el: error.message,
             ev: 1,
             dp: error.path
           };
-          visitor.event(params).send();        
+          visitor.event(params).send();
         });
         return reply.view(template, {
           fields: getFieldData(schema),

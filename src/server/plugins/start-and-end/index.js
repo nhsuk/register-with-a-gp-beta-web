@@ -74,7 +74,7 @@ function startHandler(request, reply) {
   if (typeof practiceData !== 'undefined') {
     reply
       .view(practiceStartTemplate, {showNotifications: true, firstStep: '/' + practice + '/register/nhs-number'})
-      .state('cid', visitor.cid);      
+      .state('cid', visitor.cid);
   } else {
     reply.redirect(request.aka(''));
   }
