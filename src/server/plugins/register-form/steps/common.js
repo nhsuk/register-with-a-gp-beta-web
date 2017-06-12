@@ -237,7 +237,6 @@ export function postHandlerFactory(
         const prevStep = getPrevStep(prevSteps, request.state.data, request);
         const visitor = ua('UA-67365892-10', request.state.cid );
         _.each(err.details, (error) => {
-        console.log(error);
           stepErrors[error.path] = {
             message: error.message,
             label: error.context.key,

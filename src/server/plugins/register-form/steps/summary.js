@@ -64,9 +64,7 @@ export function summaryPostHandler(request, reply) {
       const emailText = await renderTemplate(
         request.server.plugins.NunjucksConfig.nunjucksEnv,
         {data: data});
-      
       GACharacterCounts(request);
-      
       emailGP(practice, emailText)
         .then(() => {
           return reply
@@ -83,7 +81,7 @@ export function summaryPostHandler(request, reply) {
         });
     })
     .catch(err => {
-      request.log(['error'], err);
+      (['error'], err);
       return reply
         .redirect(request.aka(key));
     });
@@ -96,16 +94,15 @@ function GACharacterCounts(request){
   for(let i=0; i<openText.length; i++) {
     let key = openText[i];
     let ev = _.get(request.state.data, `${key}`, '');
-    console.log(key, ev);
     params = {
-      ec: "Character Counts",
+      ec: 'Character Counts',
       ea: key,
       el: key,
       ev: ev.length,
       dp: key
     };
-    visitor.event(params).send();        
-  };
+    visitor.event(params).send();
+  }
 }
 
 const handlers = {
