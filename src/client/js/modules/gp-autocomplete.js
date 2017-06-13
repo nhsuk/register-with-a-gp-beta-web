@@ -1,5 +1,5 @@
 const $ = require('jquery');
-
+/*global ga_event*/
 
 class GPAutoComplete {
   constructor(endpoint, queryParam='search', showFirstItemsNumber = 4, showTotalItemsNumber = 10){
@@ -60,6 +60,7 @@ class GPAutoComplete {
   seeMoreResultClickHandler (){
     this.resultListContainerElem.find('.result').show();
     $('.see-more-results').remove();
+    ga_event('GP Lookup', 'More results click');
   }
 
   createSeeMoreBtn (){

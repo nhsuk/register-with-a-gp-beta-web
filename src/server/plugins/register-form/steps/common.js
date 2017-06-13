@@ -4,6 +4,8 @@ import JoiNHSNumber from '../../../../shared/lib/joi-nhs-number-validator';
 import JoiFullDate from '../../../../shared/lib/joi-full-date-validator';
 import _ from 'lodash';
 import steps from './index';
+import ua from 'universal-analytics';
+let params = {};
 
 const Joi = JoiBase
   .extend(JoiPostcode)
@@ -164,6 +166,7 @@ export function getHandlerFactory(
       return reply.view(template, {
         fields: getFieldData(schema),
         data: request.state.data,
+        cid: request.state.cid,
         beforeTemplate,
         stepData,
         key,
@@ -232,16 +235,25 @@ export function postHandlerFactory(
         request.log(['error'], err);
         const stepErrors = {};
         const prevStep = getPrevStep(prevSteps, request.state.data, request);
-
+        const visitor = ua('UA-67365892-10', request.state.cid );
         _.each(err.details, (error) => {
           stepErrors[error.path] = {
             message: error.message,
             label: error.context.key,
           };
+          params = {
+            ec: 'Validation Error',
+            ea: error.context.key,
+            el: error.message,
+            ev: 1,
+            dp: error.path
+          };
+          visitor.event(params).send();
         });
         return reply.view(template, {
           fields: getFieldData(schema),
           data: request.state.data,
+          cid: request.state.cid,
           stepData: err._object,
           beforeTemplate,
           key,
