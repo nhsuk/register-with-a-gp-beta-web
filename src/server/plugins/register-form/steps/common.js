@@ -5,6 +5,7 @@ import JoiFullDate from '../../../../shared/lib/joi-full-date-validator';
 import _ from 'lodash';
 import steps from './index';
 import ua from 'universal-analytics';
+let params = {};
 
 const Joi = JoiBase
   .extend(JoiPostcode)
@@ -247,7 +248,7 @@ export function postHandlerFactory(
             ev: 1,
             dp: error.path
           };
-          visitor.event(params).send();          
+          visitor.event(params).send();     
         });
         return reply.view(template, {
           fields: getFieldData(schema),
