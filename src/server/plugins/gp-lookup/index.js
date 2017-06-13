@@ -52,7 +52,7 @@ function getGPList(keywords, timeout=TIMEOUT) {
 exports.getGPList = getGPList;
 
 
-function gpLookuptHandler(request, reply) {
+function gpLookupHandler(request, reply) {
   getGPList(request.query.search)
     .then(gps => {
       reply(gps);
@@ -73,7 +73,7 @@ exports.register = function(server, options, next) {
       method: 'GET',
       config: _.merge({}, routeConfig, {id: 'gp-lookup-api'}),
       path: '/gp-lookup',
-      handler: gpLookuptHandler
+      handler: gpLookupHandler
     });
   }
 
