@@ -4,6 +4,7 @@ const errorSummary = require('./modules/error-summary');
 const GPAutoComplete = require('./modules/gp-autocomplete');
 const btnDisable = require('./modules/disable-button');
 import title from './lib/title';
+const gaEvents = require('./modules/ga-events');
 
 labelFocus.init();
 labelSelect.init();
@@ -16,3 +17,4 @@ btnDisable.init();
 if (module.hot) {
   module.hot.accept();
 }
+gaEvents.init();
