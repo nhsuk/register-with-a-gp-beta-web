@@ -248,7 +248,7 @@ export function postHandlerFactory(
             ev: 1,
             dp: error.path
           };
-          visitor.event(params).send();     
+          visitor.event(params).send();
         });
         return reply.view(template, {
           fields: getFieldData(schema),

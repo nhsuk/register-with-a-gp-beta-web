@@ -13,4 +13,3 @@ class gaEvents{
   }
 }
 module.exports = new gaEvents();
- 
