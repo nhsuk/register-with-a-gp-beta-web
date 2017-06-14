@@ -1,4 +1,4 @@
-FROM node:7.8-alpine
+FROM node:7.9-alpine
 
 ENV USERNAME nodeuser
 
@@ -29,4 +29,4 @@ COPY . /code
 USER root
 RUN find /code -user 0 -print0 | xargs -0 chown $USERNAME:$USERNAME
 USER $USERNAME
-RUN /bin/sh -c "yarn build"
+RUN yarn build
