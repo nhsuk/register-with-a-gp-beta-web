@@ -1,9 +1,30 @@
 version: '2.1'
 services:
   web:
-    command: yarn start
-    build:
-      args:
-        NODE_ENV: ${NODE_ENV-production}
     environment:
-      NODE_ENV: 'production'
+      ES_HOST: ${ES_HOST}
+      ES_PORT: ${ES_PORT}
+      NODE_ENV: 'development'
+      SESSION_SECRET: 'put_in_a_random_string_here_thats_longer_than_thirty_two_chars'
+      GP_EMAIL_OHORAN_PARTNERS: 'sdfhj@kjkk.jjj'
+
+    build:
+      dockerfile: Dockerfile
+      context: .
+      args:
+        NODE_ENV: ${NODE_ENV-development}
+
+    command: yarn start
+    ports:
+      - 3333:3333
+    links:
+      - gp-reg-db:es
+    volumes:
+      - .:/code
+      - register-with-a-gp-node_modules:/code/node_modules
+
+  gp-reg-db:
+    image: "nhsuk/profiles-db-elastic:${profiles_db_elastic_docker_image_tag-0.2.0}"
+
+volumes:
+  register-with-a-gp-node_modules:

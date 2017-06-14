@@ -50,3 +50,4 @@ node_modules
 /src/client/compiled/
 /docs/architecture/diagrams/*.sequence.svg
 /.env
+.DS_Store
