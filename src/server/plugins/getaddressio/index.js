@@ -10,9 +10,10 @@ const TIMEOUT = 10000;
 function getAddresses(postcode, housenumber = '', timeout=TIMEOUT) {
   return new Promise((resolve, reject) => {
     const cleaned = postcode.replace(/\s+/g, '').toLowerCase();
+    const cleanedhousenumber = housenumber.replace(' ', '%20');
     const request = https.get({
       host: process.env.POSTCODE_API_HOST,
-      path: `/v2/uk/${ cleaned }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`
+      path: `/v2/uk/${ cleaned }/${ cleanedhousenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`
     }, function(response) {
       if (response.statusCode === 200 && response.statusMessage === 'OK') {
         let body = '';
