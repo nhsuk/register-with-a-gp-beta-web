@@ -16,8 +16,9 @@
     "key": "the-wolds-practice",
     "name": "The Wolds Practice",
     "contact": {
+      "phone": ["01507 534 903"],
       "address": [
-        "The Wolds Practice, West Road, Tetford, Horncastle, Lincolnshire, LN9 6QP "
+        "West Road\nTetford\nHorncastle\nLincolnshire\nLN9 6QP"
       ],
       "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=41370"
     },
