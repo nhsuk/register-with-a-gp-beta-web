@@ -54,4 +54,9 @@
       <a href="{{ firstStep }}" class="button">Start</a>
     </div>
   </div>
+  
+{% component 'analytics', {
+  ga_client_ID: cid
+  } %}
+  
 {% endblock %}

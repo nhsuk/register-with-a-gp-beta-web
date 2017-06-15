@@ -12,6 +12,9 @@
       <a class="button button--secondary" href="{{ REQUEST_AKA('manualGPAddress') }}">I can't find my GP</a>
 
     </p>
+{% component 'analytics', {
+  ga_client_ID: cid
+  } %}        
 {% endblock %}
 {% block submitRow %}
 {% endblock submitRow %}
