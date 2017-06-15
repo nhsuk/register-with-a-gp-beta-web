@@ -5,14 +5,11 @@ services:
       ES_HOST: ${ES_HOST}
       ES_PORT: ${ES_PORT}
       NODE_ENV: 'development'
-      SESSION_SECRET: 'put_in_a_random_string_here_thats_longer_than_thirty_two_chars'
-      GP_EMAIL_OHORAN_PARTNERS: 'sdfhj@kjkk.jjj'
 
     build:
-      dockerfile: Dockerfile
       context: .
       args:
-        NODE_ENV: ${NODE_ENV-development}
+        NODE_ENV: 'development'
 
     command: yarn run dev
     ports:
