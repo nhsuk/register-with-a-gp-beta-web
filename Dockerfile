@@ -14,10 +14,6 @@ ENV NODE_ENV=${NODE_ENV}
 
 COPY yarn.lock package.json /code/
 
-USER root
-RUN find /code -user 0 -print0 | xargs -0 chown $USERNAME:$USERNAME
-USER $USERNAME
-
 # install dev dependences because they're used by yarn build
 RUN NODE_ENV=development && yarn --pure-lockfile --ignore-optional
 EXPOSE 3333
