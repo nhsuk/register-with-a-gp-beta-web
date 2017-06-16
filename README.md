@@ -34,6 +34,26 @@ good options for managing installed Node versions:
 * [n](https://github.com/tj/n)
 * [nvm](https://github.com/creationix/nvm)
 
+##### Environment Variables
+
+Create your `.env` file on your local project directory and define these variables.
+
+```
+NODE_ENV=development
+SESSION_SECRET=put_in_a_random_string_here_thats_longer_than_thirty_two_chars
+
+POSTCODE_API_HOST=api.getAddress.io
+POSTCODE_API_KEY=<getAddress.io API KEY>
+
+GP_LOOKUP_API_URL = http://localhost
+GP_LOOKUP_API_PORT = 9292
+GPLookupAPISSL = "0"
+
+GP_EMAIL_ROSEBANK_HEALTH=test@test.com
+GP_EMAIL_PEEL_CROFT_SURGERY=test@test.com
+```
+> The GP emails variable name template is `GP_EMAIL_<THE_GP_KEY>` in upper case form.
+
 #### Dependency Management: Yarn
 
 Once you have `node` installed, you need
