@@ -52,6 +52,12 @@ const manifest = {
     },
     {
       plugin: {
+        register: 'hapi-cors',
+        options: {}
+      }
+    }
+    {
+      plugin: {
         register: 'vision',
         options: {}
       }
