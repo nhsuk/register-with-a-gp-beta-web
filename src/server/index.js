@@ -52,6 +52,17 @@ const manifest = {
     },
     {
       plugin: {
+        register: 'hapi-cors',
+        options: {
+          origins: ['*'],
+          allowCredentials: 'true',
+          methods: ['POST, GET, OPTIONS'],
+          headers: ['Accept', 'Content-Type', 'Authorization']
+        }
+      }
+    },
+    {
+      plugin: {
         register: 'vision',
         options: {}
       }
