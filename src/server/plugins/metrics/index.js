@@ -12,6 +12,8 @@ Plugin.register = function(server, options, next) {
         .header('x-req-start', start)
         .header('x-res-end', end)
         .header('x-response-time', end - start);
+      request.response
+        .header('Content-Security-Policy', 'default-src \'self\' *.fonts.net');            
       request.log(['response'],
         JSON.stringify({
           url: request.raw.req.url,
