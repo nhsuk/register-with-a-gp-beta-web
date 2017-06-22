@@ -13,7 +13,7 @@ Plugin.register = function(server, options, next) {
         .header('x-res-end', end)
         .header('x-response-time', end - start);
       request.response
-        .header('Content-Security-Policy', 'default-src \'self\' *.fonts.net');
+        .header('Content-Security-Policy', 'default-src \'self\'; child-src https://*.fonts.net');
       request.log(['response'],
         JSON.stringify({
           url: request.raw.req.url,
