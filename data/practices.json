@@ -7,9 +7,11 @@
       "address": [
         "26 Upper Teddington Road\nHampton Wick\nKingston Upon Thames\nKT1 4DY"
       ],
+      "location": "Hampton Wick",
       "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=41081"
     },
-    "regdays": 6
+    "regdays": 6,
+    "production": "true"
   },
 
   {
@@ -20,11 +22,12 @@
 	     "address": [
 	       "West Road\nTetford\nHorncastle\nLincolnshire\nLN9 6QP"
 	     ],
+      "location": "Tetford",       
       "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=41370"
     },
-    "regdays": 3
+    "regdays": 3,
+    "production": "true"    
   },
-
   {
     "key": "burns-practice",
     "name": "The Burns Practice",
@@ -33,9 +36,11 @@
       "address": [
         "4 Albion Place\nBennetthorpe\nDoncaster\nDN1 2EG"
       ],
+      "location": "Cantley",       
       "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=42092"
     },
-    "regdays": 6
+    "regdays": 6,
+    "production": "true"    
   },
   {
     "key": "peel-croft-surgery",
@@ -45,9 +50,11 @@
       "address": [
         "Lichfield Street\nBurton-on-Trent\nDE14 3RH"
       ],
+      "location": "Burton-on-Trent",       
       "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=44221"
     },
-    "regdays": 2
+    "regdays": 2,
+    "production": "true"    
   },
   {
     "key": "pioneer-medical-group",
@@ -59,9 +66,11 @@
         "Pioneer at Bradgate\nArdenton Walk\nBrentry\nBS10 6SP",
         "Pioneer at Ridingleaze\nRidingleaze\nLawrence Weston\nBS11 0QE"
       ],
+      "location": "Brentry",       
       "link": "http://www.nhs.uk/Services/GP/Overview/DefaultView.aspx?id=40115"
     },
-    "regdays": 8    
+    "regdays": 8,
+    "production": "true"    
   },
   {
     "key": "wallington-family-practice",
@@ -71,9 +80,11 @@
       "address": [
         "Jubilee Health Centre\nShotfield\nWallington\nSM6 0HY"
       ],
+      "location": "Wallington",       
       "link": "http://www.nhs.uk/Services/gp/Overview/DefaultView.aspx?id=39142"
     },
-    "regdays": 5    
+    "regdays": 5,
+    "production": "true"    
   },
   {
     "key": "register-gp-test",
@@ -84,7 +95,8 @@
         "151 Buckingham Palace road\nLondon\nSW1W 9SZ"
       ]
     },
-    "regdays": 5    
+    "regdays": 5,
+    "production": "false"    
   }
   
 ]
