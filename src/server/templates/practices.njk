@@ -8,12 +8,14 @@
   <div class="page-section">
     <div class="reading-width">
       <p>This is a trial service. It's currently only available for these GP practices:</p>
-
       <ul>
         {% for practice in practices %}
-          <li>
-            <a href="/{{ practice.key }}/start">{{ practice.name }}</a>
-          </li>
+            {% if (ENV_VALUE('APP_ENV') != 'development') and (practice.production == 'false')  %}
+            {% else %}
+              <li>
+                <a href="/{{ practice.key }}/start">{{ practice.name }}</a>, {{ practice.contact.location }}
+              </li>
+            {% endif %}
         {% endfor %}
       </ul>
     </div>

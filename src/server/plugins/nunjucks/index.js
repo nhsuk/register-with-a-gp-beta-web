@@ -110,6 +110,14 @@ exports.register = function(server, options, next) {
         REQUEST_AKA: function(id) {
           return '/' + request.params.practice + '/register/' + getSlugById(id);
         },
+        ENV_VALUE: function(name) {
+          if(process.env[name] === 'undefined'){
+            return '';
+          }
+          else {
+            return process.env[name];
+          }
+        }
       };
 
       if (_.has(request, 'state')) {
