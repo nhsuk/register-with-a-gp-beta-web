@@ -13,7 +13,7 @@ Plugin.register = function(server, options, next) {
         .header('x-res-end', end)
         .header('x-response-time', end - start);
       request.response
-        .header('Content-Security-Policy', 'default-src \'self\'; child-src https://*.fonts.net; style-src \'self\' \'unsafe-inline\' fast.fonts.net; font-src fast.fonts.net');
+        .header('Content-Security-Policy', 'default-src \'self\'; child-src https://*.hotjar.com:*; script-src \'self\' \'unsafe-inline\' \'unsafe-eval\' data: www.google-analytics.com s.webtrends.com statse.webtrendslive.com static.hotjar.com script.hotjar.com cdn.jsdelivr.net; img-src \'self\' data: static.hotjar.com www.google-analytics.com statse.webtrendslive.com hm.webtrends.com; style-src \'self\' \'unsafe-inline\' fast.fonts.net https://dhrlmnmyf2njb.cloudfront.net/; font-src fast.fonts.net https://dhrlmnmyf2njb.cloudfront.net/; connect-src \'self\' https://*.hotjar.com:* wss://*.hotjar.com');
       request.log(['response'],
         JSON.stringify({
           url: request.raw.req.url,
