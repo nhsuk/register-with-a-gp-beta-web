@@ -1,6 +1,11 @@
-version: '2'
+version: '2.1'
 services:
   web:
-    command: yarn start
     environment:
       NODE_ENV: 'production'
+
+    build:
+      args:
+        NODE_ENV: 'production'
+
+    command: yarn start

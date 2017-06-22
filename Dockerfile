@@ -1,35 +1,32 @@
-FROM node:7.8-alpine
-
-ENV NODE_ENV ${NODE_ENV:-development}
-ENV PORT ${PORT:-3333}
+FROM node:7.10-alpine
 
 ENV USERNAME nodeuser
 
-# create user and change code dir perms
 RUN adduser -D $USERNAME && \
-    mkdir -p /usr/src/app/node_modules && \
-    chown $USERNAME:$USERNAME /usr/src/app/node_modules
-
-RUN npm set progress=false
+    mkdir /code && \
+    chown $USERNAME:$USERNAME /code
 
 USER $USERNAME
-WORKDIR /usr/src/app
+WORKDIR /code
 
-COPY package.json yarn.lock ./
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+
+COPY yarn.lock package.json /code/
 
 # install dev dependences because they're used by yarn build
-RUN /bin/sh -c "NODE_ENV=development yarn"
-
+RUN NODE_ENV=development && yarn --pure-lockfile --ignore-optional
+EXPOSE 3333
 RUN npm rebuild node-sass
-RUN cd /usr/src/app/node_modules/nhsuk-frontend && npm run postinstall
+RUN cd node_modules/nhsuk-frontend && npm run postinstall
 
-COPY ./ ./
 
-# change copied files uid to normal user
+COPY . /code
+
 USER root
-RUN find /usr/src/app -user 0 -exec chown $USERNAME:$USERNAME {} \;
+RUN find /code -user 0 -print0 | xargs -0 chown $USERNAME:$USERNAME
 USER $USERNAME
 
-RUN npm run build
+RUN yarn build
 
-CMD [ "/bin/sh", "-c", "npm run start" ]
+CMD yarn start

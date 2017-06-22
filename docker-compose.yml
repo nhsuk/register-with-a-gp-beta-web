@@ -1,11 +1,27 @@
-version: '2'
+version: '2.1'
 services:
   web:
-    build: .
+    environment:
+      ES_HOST: ${ES_HOST}
+      ES_PORT: ${ES_PORT}
+      NODE_ENV: 'development'
+
+    build:
+      context: .
+      args:
+        NODE_ENV: 'development'
+
+    command: yarn run dev
     ports:
-     - "3333:3333"
+      - 3333:3333
+    links:
+      - gp-reg-db:es
     volumes:
-     - reg-gp-node-modules:/usr/src/app/node_modules
+      - .:/code
+      - register-with-a-gp-node_modules:/code/node_modules
+
+  gp-reg-db:
+    image: "nhsuk/profiles-db-elastic:${profiles_db_elastic_docker_image_tag-0.2.0}"
+
 volumes:
-    reg-gp-node-modules:
-        driver: local
+  register-with-a-gp-node_modules:
