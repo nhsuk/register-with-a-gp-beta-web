@@ -113,8 +113,7 @@ exports.register = function(server, options, next) {
         ENV_VALUE: function(name) {
           if(process.env[name] === 'undefined'){
             return '';
-          }
-          else {
+          } else {
             return process.env[name];
           }
         }
