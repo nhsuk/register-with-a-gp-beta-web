@@ -3,11 +3,11 @@ const GPlookupIndexName = process.env.GPlookupIndexName || 'gp-lookup';
 
 let elasticsearch = {};
 
-elasticsearch.add = (type, document, next) => {
+elasticsearch.add = (id, type, document, next) => {
   elasticsearchClient.create({
     index: GPlookupIndexName,
     type: type,
-    id: document.id,
+    id: id,
     timestamp: new Date().getTime(),
     body: document
   }, (error, response) => {

@@ -1,52 +1,26 @@
-import https from 'https';
-import http from 'http';
+const request = require('request');
+const elasticsearch = require('../src/server/plugins/gp-lookup/elasticsearch');
 
-const GPMedicalPracticesSourceURL = process.env.GPMedicalPracticesHost || "https://raw.githubusercontent.com/nhsuk/general-medical-practices/master/output/general-medical-practices.json";
-const GPMedicalPractitionersSourceURL = process.env.GPMedicalPracticesHost || "https://raw.githubusercontent.com/nhsuk/general-medical-practitioners/master/output/general-medical-practitioners.json";
+const GPMedicalPracticesSourceURL = process.env.GPMedicalPracticesHost || 'https://raw.githubusercontent.com/nhsuk/general-medical-practices/master/output/general-medical-practices.json';
+const GPMedicalPractitionersSourceURL = process.env.GPMedicalPracticesHost || 'https://raw.githubusercontent.com/nhsuk/general-medical-practitioners/master/output/general-medical-practitioners.json';
 
-const GPLookupAPISSL = true;
-const TIMEOUT = 10000;
+request(GPMedicalPracticesSourceURL, (error, response, body) => {
+  if (!error && response.statusCode === 200) {
+    const importedJSON = JSON.parse(body);
+    updateGPMedicalPractices(importedJSON);
+  }
+});
 
-let httpOrHttps;
-if (GPLookupAPISSL) {
-	httpOrHttps = https;
-} else {
-	httpOrHttps = http;
+function ESResponse(error, reponse){
+  console.log(error);
+  console.log(reponse);
 }
 
-function getJsonResponse(host, path, timeout=TIMEOUT) {
-	return new Promise((resolve, reject) => {
-		const request = httpOrHttps.get({
-			host: host,
-			path: path,
-			method: 'GET'
-		}, function (response) {
-			console.log(response.body);
-			console.log(response.headers);
-			let body = '';
-			response.on('data', (d) => {
-				console.log(d);
-				body += d;
-			});
-			response.on('end', () => {
-				resolve(body);
-			});
-			response.on('error', (err) => {
-				console.log(err);
-				reject(err);
-			});
-		});
-		request.setTimeout(timeout, () => {
-			request.abort();
-			reject();
-		});
-	});
+function updateGPMedicalPractices(data) {
+  for(let i = 0; i < data.length; i++){
+    let pratice = data[i];
+    setTimeout(function () {
+      elasticsearch.add(i, 'string', pratice.name, ESResponse);
+    },1000);
+  }
 }
-
-getJsonResponse(GPMedicalPracticesHost, GPMedicalPracticesPath)
-	.then(function (body) {
-		console.log(e);
-	})
-	.catch(err => {
-		console.log(err);
-	});
