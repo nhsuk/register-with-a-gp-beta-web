@@ -1,10 +1,11 @@
 const elasticsearchClient = require('./elasticsearchClient');
+const GPlookupIndexName = process.env.GPlookupIndexName || 'gp-lookup';
 
 let elasticsearch = {};
 
 elasticsearch.add = (type, document, next) => {
   elasticsearchClient.create({
-    index: process.env.MAIN_INDICE,
+    index: GPlookupIndexName,
     type: type,
     id: document.id,
     timestamp: new Date().getTime(),
@@ -16,7 +17,7 @@ elasticsearch.add = (type, document, next) => {
 
 elasticsearch.update = (type, document, next) => {
   elasticsearchClient.index({
-    index: process.env.MAIN_INDICE,
+    index: GPlookupIndexName,
     type: type,
     id: document.id,
     timestamp: new Date().getTime(),
@@ -28,7 +29,7 @@ elasticsearch.update = (type, document, next) => {
 
 elasticsearch.delete = (type, id, next) => {
   elasticsearchClient.delete({
-    index: process.env.MAIN_INDICE,
+    index: GPlookupIndexName,
     type: type,
     id: id.toString()
   }, (error, response) => {
@@ -38,7 +39,7 @@ elasticsearch.delete = (type, id, next) => {
 
 elasticsearch.get = (type, id, next) => {
   elasticsearchClient.get({
-    index: process.env.MAIN_INDICE,
+    index: GPlookupIndexName,
     type: type,
     id: id.toString()
   }, (error, response) => {
@@ -48,7 +49,7 @@ elasticsearch.get = (type, id, next) => {
 
 elasticsearch.getAll = (type, next) => {
   elasticsearchClient.search({
-    index: process.env.MAIN_INDICE,
+    index: GPlookupIndexName,
     type: type,
     body: {
       query: {
