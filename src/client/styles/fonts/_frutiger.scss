@@ -2,6 +2,9 @@
 body p, h1, h2, h3, details summary, ul {
   font-family: Frutiger W01;
 }
-.local_header, .error-summary__heading, .form-label, .form-title {
-    font-family: Frutiger W01;
+a .global-footer, .summary__control .button {
+  font-family: Frutiger W01;
+}
+.local-header__title, .error-summary__heading, .form-label, .form-title, .button, .multiple-choice, .global-header__service-name, .summary, .summary__title, .summary__content  {
+  font-family: Frutiger W01;
 }
