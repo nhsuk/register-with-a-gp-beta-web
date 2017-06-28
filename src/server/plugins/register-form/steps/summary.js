@@ -22,9 +22,20 @@ export function summaryGetHandler(request, reply) {
   if (process.env.NODE_ENV === 'development') {
     request.log(['cookie'], request.state.data);
   }
-  const data = _.get(request, 'state.data', {});
-  return reply
-    .view('register-form/summary', {data, title});
+  const practice = request.params.practice;
+  if(request.state.hasOwnProperty('data')){
+    const data = _.get(request, 'state.data', {});
+    if(data.hasOwnProperty('medicalHistory')){
+      return reply
+        .view('register-form/summary', {data, title});
+    } else {
+      return reply
+        .redirect('/' + practice + '/register/nhs-number');
+    }
+  } else {
+    return reply
+      .redirect('/' + practice + '/register/nhs-number');
+  }
 }
 
 async function renderTemplate(env, context) {
