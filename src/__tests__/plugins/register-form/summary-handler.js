@@ -19,13 +19,12 @@ describe('gethandler', () =>{
       return a + JSON.stringify(b.data);
     },
     redirect: function(a){
-      return a;  
+      return a;
     }
   };
   it('should give back register-form/summary{\"medicalHistory\":\"c\"}', () => {
     expect(summaryGetHandler(mockGet(), gReply)).toBe('register-form/summary{\"medicalHistory\":\"c\"}');
   });
-  
   it('should give back a redirect to nhs-number', () => {
     expect(summaryGetHandler(mockGet(), gReply)).toBe('/b/register/nhs-number');
   });
