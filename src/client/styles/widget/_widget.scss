@@ -1,0 +1,32 @@
+.widget-section {
+  @include core-font(14);
+}
+.widget-header, .widget-section, .widget-width {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.widget-width {
+  padding-left: 15px;
+  width: 380px;
+  @include core-font(14);
+}
+.button {
+  font-family: Arial, sans-serif;
+  max-width: 340px;
+}
+.widget-section {
+  text-align: left;
+}
+.widget-header {
+  @include bold-font(14);
+  background-color: #005eb8;
+  color: #fff;
+}
+.button:link {
+  @include core-font(14);
+}
+.widget-body {
+  width: 400px;
+  height: 100%;
+  border: solid 10px #005eb8;
+}
