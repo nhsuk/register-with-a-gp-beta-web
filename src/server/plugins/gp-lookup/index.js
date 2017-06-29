@@ -2,6 +2,7 @@ import _ from 'lodash';
 import https from 'https';
 import http from 'http';
 import cookies from '../../config/cookies';
+import elasticsearch from './elasticsearch';
 
 const env = process.env.NODE_ENV || 'development';
 const GPLookupAPIURL = process.env.GP_LOOKUP_API_URL || env === 'development' && 'localhost';
@@ -24,27 +25,22 @@ if (GPLookupAPISSL) {
 
 function getGPList(keywords, timeout=TIMEOUT) {
   return new Promise((resolve, reject) => {
-    const request = httpOrHttps.get({
-      host: GPLookupAPIURL,
-      path: `/practices?search=${keywords.toLowerCase()}`,
-      port: GPLookupAPIPort,
-      method : 'GET'
-    }, function(response) {
-      let body = '';
-      response.on('data', (d) => {
-        body += d;
-      });
-      response.on('end', () => {
-        resolve(body);
-      });
-      response.on('error', (err) => {
-        reject(err);
-      });
-    });
-    request.setTimeout(timeout, () => {
-      request.abort();
-      reject();
-    });
+    const query = {
+      query: {
+        match: {
+          name: keywords
+        }
+      }
+    };
+
+    elasticsearch.search(
+      'practice',
+      query,
+      (error, response) =>{
+        const hits = response.hits.hits;
+        resolve(hits);
+      }
+    );
   });
 }
 

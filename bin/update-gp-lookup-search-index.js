@@ -60,22 +60,32 @@ updatePracticesSearchIndex(data);
 
 function updatePracticesSearchIndex(data) {
   let items = [];
+  elasticsearch.deleteIndex('gp-lookup', function (err, res) {
 
-  elasticsearch.deleteIndex(elasticsearch.practiceIndexName, function (err, res) {
-    console.log('Deleted practice search index');
-
-    for(let i = 0; i < data.length; i++){
-      let practice = data[i];
-      items.push({index: {_index: elasticsearch.practiceIndexName,  _type: 'practice', _id: practice.organisation_code}});
-      items.push(practice);
-    }
-
-    elasticsearch.bulkUpdate(items, function (err, res) {
+    elasticsearch.createGPLookupSearchIndex(function (err, res) {
       if (err) {
         throw err;
       }
-      console.log(res);
-      console.log('All practice data indexed.');
+
+      console.log('Created practice search index.');
+      const practitionersData = JSON.parse(data)
+      for(let i = 0; i < practitionersData.length; i++){
+        let practice = practitionersData[i];
+        items.push({index: {_index: elasticsearch.practiceIndexName,  _type: 'practice', _id: practice.organisation_code}});
+        items.push(practice);
+        console.log(practice.name);
+        if (i > 1000){
+          break;
+        }
+      }
+
+      elasticsearch.bulkUpdate(items, function (err, res) {
+        if (err) {
+          throw err;
+        }
+        console.log(res);
+        console.log('All practice data indexed.');
+      });
     });
   });
 }

@@ -6,44 +6,48 @@ let elasticsearch = {};
 
 elasticsearch.practiceIndexName = GPlookupIndexName;
 
-elasticsearch.createGPLookupSearchIndex = () => {
+elasticsearch.createGPLookupSearchIndex = (next) => {
   return elasticsearchClient.indices.create({
     index: GPlookupIndexName,
-    mapping: {
-      practice: {
-        name: {
-          type: 'string'
-        },
-        organisation_code: {
-          type: 'string',
-          index: 'no'
-        },
-        address: {
-          type: 'string'
-        },
-        contact_telephone_number: {
-          type: 'string',
-          index: 'no'
-        },
-        practitioners: {
-          type: 'nested',
+    body: {
+      mappings: {
+        practice: {
           properties: {
-            general_medical_practitioner_code: {
+            name: {
+              type: 'string'
+            },
+            organisation_code: {
               type: 'string',
               index: 'no'
             },
-            name: {
-              type: 'string',
+            address: {
+              type: 'string'
             },
-            practice: {
+            contact_telephone_number: {
               type: 'string',
-              index: 'no',
+              index: 'no'
+            },
+            practitioners: {
+              type: 'nested',
+              properties: {
+                general_medical_practitioner_code: {
+                  type: 'string',
+                  index: 'no'
+                },
+                name: {
+                  type: 'string',
+                },
+                practice: {
+                  type: 'string',
+                  index: 'no',
+                }
+              }
             }
           }
         }
       }
     }
-  });
+  }, next);
 };
 
 elasticsearch.addToIndex = (id, type, document, next) => {
