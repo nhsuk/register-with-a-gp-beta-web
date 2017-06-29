@@ -1,27 +1,42 @@
 const elasticsearchClient = require('./elasticsearchClient');
 const GPlookupIndexName = process.env.GPlookupIndexName || 'gp-lookup';
 
+
 let elasticsearch = {};
 
-elasticsearch.add = (id, type, document, next) => {
-  elasticsearchClient.create({
+elasticsearch.indexName = GPlookupIndexName;
+
+elasticsearch.createGPLookupSearchIndex = () => {
+  return elasticsearchClient.indices.create({
+    index: GPlookupIndexName,
+    mapping: {
+      practice: {
+        name: {
+          type: 'string'
+        },
+        organisation_code: {
+          type: 'string'
+        }
+      }
+    }
+  });
+};
+
+elasticsearch.addToIndex = (id, type, document, next) => {
+  elasticsearchClient.index({
     index: GPlookupIndexName,
     type: type,
     id: id,
-    timestamp: new Date().getTime(),
-    body: document
+    body: document,
+    timestamp: new Date().getTime()
   }, (error, response) => {
     next(error, response);
   });
 };
 
-elasticsearch.update = (type, document, next) => {
-  elasticsearchClient.index({
-    index: GPlookupIndexName,
-    type: type,
-    id: document.id,
-    timestamp: new Date().getTime(),
-    body: document
+elasticsearch.bulkUpdate = (items, next) => {
+  elasticsearchClient.bulk({
+    body: items
   }, (error, response) => {
     next(error, response);
   });
@@ -56,6 +71,24 @@ elasticsearch.getAll = (type, next) => {
         match_all: {}
       }
     }
+  }, (error, response) => {
+    next(error, response);
+  });
+};
+
+elasticsearch.search = (type, query, next) => {
+  elasticsearchClient.search({
+    index: GPlookupIndexName,
+    type: type,
+    body: query
+  }, (error, response) => {
+    next(error, response);
+  });
+};
+
+elasticsearch.deleteIndex = (name, next) => {
+  elasticsearchClient.indices.delete({
+    index: name
   }, (error, response) => {
     next(error, response);
   });

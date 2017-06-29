@@ -1,26 +1,44 @@
 const request = require('request');
+const fs = require('fs');
 const elasticsearch = require('../src/server/plugins/gp-lookup/elasticsearch');
 
 const GPMedicalPracticesSourceURL = process.env.GPMedicalPracticesHost || 'https://raw.githubusercontent.com/nhsuk/general-medical-practices/master/output/general-medical-practices.json';
+
+
 const GPMedicalPractitionersSourceURL = process.env.GPMedicalPracticesHost || 'https://raw.githubusercontent.com/nhsuk/general-medical-practitioners/master/output/general-medical-practitioners.json';
 
+
 request(GPMedicalPracticesSourceURL, (error, response, body) => {
-  if (!error && response.statusCode === 200) {
-    const importedJSON = JSON.parse(body);
-    updateGPMedicalPractices(importedJSON);
+  if (response.statusCode === 200) {
+    const practicesData = JSON.parse(body);
+    request(GPMedicalPractitionersSourceURL, (error, response, body) => {
+      const practitionersData = JSON.parse(body);
+      transformPracticeData(practicesData, practitionersData);
+    });
   }
 });
 
-function ESResponse(error, reponse){
-  console.log(error);
-  console.log(reponse);
+
+function transformPracticeData(practicesData, practitionersData) {
+  let practiceList = [];
+  for(let i = 0; i < practicesData.length; i++){
+    let practice = practicesData[i];
+
+    let gpPractitioners = [];
+    for(let c = 0; c < practitionersData.length; c++){
+      let practitioner = practitionersData[c];
+      let practiceCode = `general-medical-practice:${practice.organisation_code}`;
+
+      if (practitioner.practice === practiceCode){
+        gpPractitioners.push(practitioner);
+      }
+    }
+    practice['practitioners'] = gpPractitioners;
+    practiceList.push(practice);
+  }
+  savePracticeData(practiceList);
 }
 
-function updateGPMedicalPractices(data) {
-  for(let i = 0; i < data.length; i++){
-    let pratice = data[i];
-    setTimeout(function () {
-      elasticsearch.add(i, 'string', pratice.name, ESResponse);
-    },1000);
-  }
+function savePracticeData(practiceList) {
+  fs.writeFileAsync('data/practiceData.json', JSON.stringify(practiceList, null, 2));
 }

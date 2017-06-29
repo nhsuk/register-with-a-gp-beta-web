@@ -51,3 +51,4 @@ node_modules
 /docs/architecture/diagrams/*.sequence.svg
 /.env
 .DS_Store
+/data/practiceData.json
