@@ -11,7 +11,7 @@ services:
       args:
         NODE_ENV: 'development'
 
-    command: yarn run dev
+    command: tail -f /bin/sh
     ports:
       - 3333:3333
     links:

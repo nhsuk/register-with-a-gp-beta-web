@@ -1,23 +1,26 @@
 const request = require('request');
+const path = require('path');
 const fs = require('fs');
+
 const elasticsearch = require('../src/server/plugins/gp-lookup/elasticsearch');
 
 const GPMedicalPracticesSourceURL = process.env.GPMedicalPracticesHost || 'https://raw.githubusercontent.com/nhsuk/general-medical-practices/master/output/general-medical-practices.json';
 
-
 const GPMedicalPractitionersSourceURL = process.env.GPMedicalPracticesHost || 'https://raw.githubusercontent.com/nhsuk/general-medical-practitioners/master/output/general-medical-practitioners.json';
 
+const appRootPath = path.dirname(__dirname);
+const practiceDataPath = path.join(appRootPath, 'data/practiceData.json');
 
-request(GPMedicalPracticesSourceURL, (error, response, body) => {
-  if (response.statusCode === 200) {
-    const practicesData = JSON.parse(body);
-    request(GPMedicalPractitionersSourceURL, (error, response, body) => {
-      const practitionersData = JSON.parse(body);
-      transformPracticeData(practicesData, practitionersData);
-    });
-  }
-});
-
+// request(GPMedicalPracticesSourceURL, (error, response, body) => {
+//   if (response.statusCode === 200) {
+//     const practicesData = JSON.parse(body);
+//     request(GPMedicalPractitionersSourceURL, (error, response, body) => {
+//       const practitionersData = JSON.parse(body);
+//       transformPracticeData(practicesData, practitionersData);
+//     });
+//   }
+// });
+//
 
 function transformPracticeData(practicesData, practitionersData) {
   let practiceList = [];
@@ -40,5 +43,39 @@ function transformPracticeData(practicesData, practitionersData) {
 }
 
 function savePracticeData(practiceList) {
-  fs.writeFileAsync('data/practiceData.json', JSON.stringify(practiceList, null, 2));
+  fs.writeFile(practiceDataPath, JSON.stringify(practiceList, null, 2), function (err) {
+    if (err) {
+      throw err;
+    }
+    console.log(`${practiceDataPath} file saved`);
+  });
+}
+
+function loadDataFromFile() {
+  return fs.readFileSync(practiceDataPath,'utf8');
+}
+
+let data = loadDataFromFile();
+updatePracticesSearchIndex(data);
+
+function updatePracticesSearchIndex(data) {
+  let items = [];
+
+  elasticsearch.deleteIndex(elasticsearch.practiceIndexName, function (err, res) {
+    console.log('Deleted practice search index');
+
+    for(let i = 0; i < data.length; i++){
+      let practice = data[i];
+      items.push({index: {_index: elasticsearch.practiceIndexName,  _type: 'practice', _id: practice.organisation_code}});
+      items.push(practice);
+    }
+
+    elasticsearch.bulkUpdate(items, function (err, res) {
+      if (err) {
+        throw err;
+      }
+      console.log(res);
+      console.log('All practice data indexed.');
+    });
+  });
 }
