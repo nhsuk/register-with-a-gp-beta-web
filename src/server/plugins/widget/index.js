@@ -11,11 +11,7 @@ function widgetHandler(request, reply) {
         .view('layouts/widget', {
           practiceData,
         });
-    } else {
-      reject('Not a valid Practice name');
     }
-  } else {
-    reject('No Practice name');
   }
 }
 exports.register = function(server, options, next) {

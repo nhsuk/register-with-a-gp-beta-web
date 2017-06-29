@@ -1,7 +1,5 @@
-.widget-section, .widget-width {
+.widget-section, .widget-width, .widget-header {
   font-size: 14px;
-}
-.widget-header, .widget-section, .widget-width {
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -14,16 +12,13 @@
   font-family: Arial, sans-serif;
   max-width: 340px;
 }
-.widget-section {
-  text-align: left;
-}
 .widget-header {
-  @include bold-font(14);
+  font-weight: 700;
   background-color: #005eb8;
   color: #fff;
 }
 .button:link {
-  @include core-font(14);
+  font-size: 14px;
 }
 .widget-body {
   width: 400px;
