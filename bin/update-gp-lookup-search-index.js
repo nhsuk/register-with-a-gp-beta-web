@@ -93,6 +93,6 @@ function updateSearchIndexitems(data) {
     if (err) {
       throw err;
     }
-    console.log('All practice data are indexed.');
+    console.log(`${items.length} practices indexed.`);
   });
 }

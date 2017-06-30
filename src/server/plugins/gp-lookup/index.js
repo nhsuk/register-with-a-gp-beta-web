@@ -27,8 +27,9 @@ function getGPList(keywords, timeout=TIMEOUT) {
   return new Promise((resolve, reject) => {
     const query = {
       query: {
-        match: {
-          name: keywords
+        multi_match: {
+          query: keywords,
+          fields: ['name^3', 'address^2', 'practitioners.name']
         }
       }
     };

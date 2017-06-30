@@ -79,6 +79,7 @@
     "lint:eslint": "DEBUG=eslint:cli-engine eslint .",
     "lint:editorconfig": "eclint check src/** README.md",
     "lint": "npm-run-all --parallel lint:*",
+    "updateGPIndex": "node ./bin/update-gp-lookup-search-index.js",
     "clean": "rimraf dist/ coverage/ src/client/compiled",
     "start": "NODE_ENV=production node ./dist/server/"
   },
