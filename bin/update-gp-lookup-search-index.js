@@ -1,5 +1,6 @@
 const request = require('request');
 const path = require('path');
+const Promise = require('bluebird');
 const fs = require('fs');
 
 const elasticsearch = require('../src/server/plugins/gp-lookup/elasticsearch');
@@ -11,16 +12,14 @@ const GPMedicalPractitionersSourceURL = process.env.GPMedicalPracticesHost || 'h
 const appRootPath = path.dirname(__dirname);
 const practiceDataPath = path.join(appRootPath, 'data/practiceData.json');
 
-// request(GPMedicalPracticesSourceURL, (error, response, body) => {
-//   if (response.statusCode === 200) {
-//     const practicesData = JSON.parse(body);
-//     request(GPMedicalPractitionersSourceURL, (error, response, body) => {
-//       const practitionersData = JSON.parse(body);
-//       transformPracticeData(practicesData, practitionersData);
-//     });
-//   }
-// });
-//
+const requestAsync = Promise.promisify(request);
+
+Promise.all([requestAsync(GPMedicalPracticesSourceURL), requestAsync(GPMedicalPractitionersSourceURL)])
+    .then(function(allData) {
+      const practicesData = JSON.parse(allData[0].body);
+      const practitionersData = JSON.parse(allData[1].body);
+      transformPracticeData(practicesData, practitionersData);
+    });
 
 function transformPracticeData(practicesData, practitionersData) {
   let practiceList = [];
@@ -47,7 +46,8 @@ function savePracticeData(practiceList) {
     if (err) {
       throw err;
     }
-    console.log(`${practiceDataPath} file saved`);
+    let data = loadDataFromFile();
+    updatePracticesSearchIndex(data);
   });
 }
 
@@ -55,36 +55,26 @@ function loadDataFromFile() {
   return fs.readFileSync(practiceDataPath,'utf8');
 }
 
-let data = loadDataFromFile();
-updatePracticesSearchIndex(data);
-
 function updatePracticesSearchIndex(data) {
   let items = [];
-  elasticsearch.deleteIndex('gp-lookup', function (err, res) {
-
+  elasticsearch.deleteIndex(elasticsearch.GPlookupIndexName, function (err, res) {
     elasticsearch.createGPLookupSearchIndex(function (err, res) {
       if (err) {
         throw err;
       }
 
-      console.log('Created practice search index.');
-      const practitionersData = JSON.parse(data)
+      const practitionersData = JSON.parse(data);
       for(let i = 0; i < practitionersData.length; i++){
         let practice = practitionersData[i];
-        items.push({index: {_index: elasticsearch.practiceIndexName,  _type: 'practice', _id: practice.organisation_code}});
+        items.push({index: {_index: elasticsearch.GPlookupIndexName,  _type: 'practice', _id: practice.organisation_code}});
         items.push(practice);
-        console.log(practice.name);
-        if (i > 1000){
-          break;
-        }
       }
 
       elasticsearch.bulkUpdate(items, function (err, res) {
         if (err) {
           throw err;
         }
-        console.log(res);
-        console.log('All practice data indexed.');
+        console.log('All practice data are indexed.');
       });
     });
   });
