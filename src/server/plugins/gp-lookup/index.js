@@ -2,13 +2,6 @@ import _ from 'lodash';
 import cookies from '../../config/cookies';
 import elasticsearch from './elasticsearch';
 
-const env = process.env.NODE_ENV || 'development';
-
-if (env === 'development'){
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-}
-
-
 function getGPList(keywords) {
   return new Promise((resolve) => {
     const query = {

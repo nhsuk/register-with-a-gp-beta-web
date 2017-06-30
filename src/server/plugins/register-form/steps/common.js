@@ -120,13 +120,13 @@ export function getLatestUncompletedStep(cookieData) {
   const lastCompletedStep = getlastCompletedStep(cookieData);
   if (lastCompletedStep){
     const lastCompletedStepIndex = _.findIndex(steps, (s) => {
-      return s.key == lastCompletedStep.key;
+      return s.key === lastCompletedStep.key;
     });
 
     const nextSteps = steps.slice(lastCompletedStepIndex + 1);
     const nextStepKey = getNextStep(nextSteps, cookieData);
     return _.find(steps, (s) => {
-      return nextStepKey == s.key;
+      return nextStepKey === s.key;
     });
   }else{
     return steps[0];
@@ -135,11 +135,11 @@ export function getLatestUncompletedStep(cookieData) {
 
 export function checkStepCompletedBefore(requestedStepKey, latestUncompletedStep){
   const requestedStepIndex = _.findIndex(steps, (s) => {
-    return s.key == requestedStepKey;
+    return s.key === requestedStepKey;
   });
 
   const latestUncompletedStepIndex = _.findIndex(steps, (s) => {
-    return s.key == latestUncompletedStep.key;
+    return s.key === latestUncompletedStep.key;
   });
 
   return latestUncompletedStepIndex >= requestedStepIndex;
