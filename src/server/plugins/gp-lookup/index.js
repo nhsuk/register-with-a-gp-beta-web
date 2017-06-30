@@ -17,8 +17,11 @@ function getGPList(keywords) {
       'practice',
       query,
       (error, response) =>{
-        const hits = response.hits.hits;
-        resolve(hits);
+        let results = [];
+        if (response.hits){
+          results = response.hits.hits;
+        }
+        resolve(results);
       }
     );
   });
