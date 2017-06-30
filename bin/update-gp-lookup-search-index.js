@@ -1,3 +1,6 @@
+/*eslint no-console: ["error", { allow: ["log"] }] */
+/*eslint no-unused-vars: ["error", { "args": "none" }]*/
+
 const request = require('request');
 const path = require('path');
 const Promise = require('bluebird');

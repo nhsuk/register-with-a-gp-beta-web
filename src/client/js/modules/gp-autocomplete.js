@@ -124,7 +124,6 @@ class GPAutoComplete {
   }
 
   appendResultListItem (i, d){
-    console.log(d);
     var template = GPAutoComplete.getResultTemplate();
     var item = $(template).clone();
     item.find('.result-title').text(d._source.name);
