@@ -134,7 +134,7 @@ const manifest = {
         register: './plugins/service',
         options: {}
       }
-    }    
+    }
   ]
 
 };
