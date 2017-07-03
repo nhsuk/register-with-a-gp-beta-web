@@ -1,0 +1,27 @@
+.widget-section, .widget-width, .widget-header {
+  font-size: 14px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.widget-width {
+  padding-left: 15px;
+  width: 380px;
+  font-weight: 700;
+}
+.button {
+  font-family: Arial, sans-serif;
+  max-width: 340px;
+}
+.widget-header {
+  font-weight: 700;
+  background-color: #005eb8;
+  color: #fff;
+}
+.button:link {
+  font-size: 14px;
+}
+.widget-body {
+  width: 400px;
+  height: 100%;
+  border: solid 10px #005eb8;
+}

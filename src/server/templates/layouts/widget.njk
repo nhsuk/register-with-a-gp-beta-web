@@ -1,0 +1,33 @@
+
+{% block head_stylesheets %}
+  <link rel="stylesheet" href="{{ cssBundle }}" media="screen" type="text/css">
+  <script src="{{ jsBundle }}" type="application/javascript"></script>
+{% endblock %}
+<body class="widget-body">
+{% block body_site_header %}
+  <header role="banner">
+    <div class="widget-header">
+      <div class="widget-header__inner">
+        <img src="{{ asset_path('assets/73c85feeafe587ae63c47da59da81f0c.png') }}" alt="NHS">
+        Register online (Beta)
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+
+{% block body_main_content %}
+  <div class="widget-section">
+    <div class="widget-width">
+      You can register for {{ practiceData.name }} online lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </div>
+    <div class="widget-width">
+      <a href="https://register-with-a-gp-beta.service.nhs.uk/{{ practiceData.key }}/start" id="openRegister" class="button">Go to online registration</a>
+    </div>
+  </div>
+{% endblock %}
+<script>
+  var b = document.getElementById('openRegister');
+  b.setAttribute('target','_blank');
+</script>
+</body>

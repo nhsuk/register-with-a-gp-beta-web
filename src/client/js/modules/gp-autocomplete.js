@@ -126,15 +126,15 @@ class GPAutoComplete {
   appendResultListItem (i, d){
     var template = GPAutoComplete.getResultTemplate();
     var item = $(template).clone();
-    item.find('.result-title').text(d.name.value);
-    item.find('.address').text(d.address.value);
+    item.find('.result-title').text(d._source.name);
+    item.find('.address').text(d._source.address);
     var gpData = {
-      'code': d.code,
-      'name': d.name.value || '',
-      'address': d.address.value || ''
+      'code': d._source.organisation_code,
+      'name': d._source.name || '',
+      'address': d._source.address || ''
     };
     item.data(gpData);
-    if (i==0){
+    if (i===0){
       item.addClass('active');
     }
 

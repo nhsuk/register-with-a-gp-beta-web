@@ -1,50 +1,29 @@
 import _ from 'lodash';
-import https from 'https';
-import http from 'http';
 import cookies from '../../config/cookies';
+import elasticsearch from './elasticsearch';
 
-const env = process.env.NODE_ENV || 'development';
-const GPLookupAPIURL = process.env.GP_LOOKUP_API_URL || env === 'development' && 'localhost';
-const GPLookupAPIPort = process.env.GP_LOOKUP_API_PORT || env === 'development' && 9292;
-const GPLookupAPISSL = process.env.GP_LOOKUP_API_SSL === '1';
-const TIMEOUT = 10000;
+function getGPList(keywords) {
+  return new Promise((resolve) => {
+    const query = {
+      query: {
+        multi_match: {
+          query: keywords,
+          fields: ['name^3', 'address^2', 'practitioners.name']
+        }
+      }
+    };
 
-if (env === 'development'){
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-}
-
-
-let httpOrHttps;
-if (GPLookupAPISSL) {
-  httpOrHttps = https;
-} else {
-  httpOrHttps = http;
-}
-
-
-function getGPList(keywords, timeout=TIMEOUT) {
-  return new Promise((resolve, reject) => {
-    const request = httpOrHttps.get({
-      host: GPLookupAPIURL,
-      path: `/practices?search=${keywords.toLowerCase()}`,
-      port: GPLookupAPIPort,
-      method : 'GET'
-    }, function(response) {
-      let body = '';
-      response.on('data', (d) => {
-        body += d;
-      });
-      response.on('end', () => {
-        resolve(body);
-      });
-      response.on('error', (err) => {
-        reject(err);
-      });
-    });
-    request.setTimeout(timeout, () => {
-      request.abort();
-      reject();
-    });
+    elasticsearch.search(
+      'practice',
+      query,
+      (error, response) =>{
+        let results = [];
+        if (response.hits){
+          results = response.hits.hits;
+        }
+        resolve(results);
+      }
+    );
   });
 }
 
