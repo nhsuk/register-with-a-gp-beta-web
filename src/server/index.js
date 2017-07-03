@@ -128,7 +128,13 @@ const manifest = {
         register: './plugins/metrics',
         options: {}
       }
-    }
+    },
+    {
+      plugin: {
+        register: './plugins/service',
+        options: {}
+      }
+    }    
   ]
 
 };
