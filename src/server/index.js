@@ -133,7 +133,8 @@ const manifest = {
       plugin: {
         register: './plugins/service',
         options: {}
-      },
+      }
+    },
     {
       plugin: {
         register: './plugins/widget',
