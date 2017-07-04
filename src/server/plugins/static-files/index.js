@@ -12,7 +12,7 @@ const allowAll = {
   '*': []
 };
 
-const robotOptions = {
+export const robotTextOptions = {
   verbose: true,
   envs: {
     production: allowAll,
@@ -22,51 +22,59 @@ const robotOptions = {
 };
 
 
+// get the appropriate robot environment for an incoming HTTP request:
+const getEnv = (request, options) => {
+	// if they defined a set of 'hosts', try to find a match for the host that sent this request:
+  if (options.hosts !== undefined) {
+    if (options.hosts[request.info.host] !== undefined) {
+      return options.hosts[request.info.host];
+    }
+  }
+	// if no envs list was defined or this env doesn't exist, use the '*' wildcard env:
+  if (options.envs === undefined || options.envs[options.env] === undefined) {
+    return options.envs['*'];
+  }
+	// return the env we found:
+  return options.envs[options.env];
+};
+
+
+export function robotTextHandler(request, reply, options) {
+  // render the robot.txt:
+  let first = true;
+  let robotText = _.reduce(getEnv(request, options), (memo, disallowList, userAgent) => {
+    memo += `${first ? '' : os.EOL}User-agent: ${userAgent}`;
+    first = false;
+    if (typeof disallowList === 'string') {
+      memo += `${os.EOL}Disallow: ${disallowList}`;
+      return memo;
+    }
+    if (disallowList.length === 0) {
+      memo += `${os.EOL}Disallow:`;
+      return memo;
+    }
+    _.each(disallowList, (disallowPath) => {
+      memo += `${os.EOL}Disallow: ${disallowPath}`;
+    });
+    return memo;
+  }, '');
+  robotText += os.EOL;
+  return reply(robotText).type('text/plain');
+}
+
+
 exports.register = function(server, options, next) {
-  const pluginOptions = _.defaultsDeep(options, robotOptions);
-  // get the appropriate robot environment for an incoming HTTP request:
-  const getEnv = (request) => {
-    // if they defined a set of 'hosts', try to find a match for the host that sent this request:
-    if (pluginOptions.hosts !== undefined) {
-      if (pluginOptions.hosts[request.info.host] !== undefined) {
-        return pluginOptions.hosts[request.info.host];
-      }
-    }
-    // if no envs list was defined or this env doesn't exist, use the '*' wildcard env:
-    if (pluginOptions.envs === undefined || pluginOptions.envs[pluginOptions.env] === undefined) {
-      return pluginOptions.envs['*'];
-    }
-    // return the env we found:
-    return pluginOptions.envs[pluginOptions.env];
-  };
+  const robotTextpluginOptions = _.defaultsDeep(options, robotTextOptions);
 
   server.route({
     path: '/robots.txt',
     method: 'GET',
     config: {
-      auth: false
+      auth: false,
+      id: 'robot.txt',
     },
-    handler: (request, reply) => {
-      // render the robot.txt:
-      let first = true;
-      let robotText = _.reduce(getEnv(request), (memo, disallowList, userAgent) => {
-        memo += `${first ? '' : os.EOL}User-agent: ${userAgent}`;
-        first = false;
-        if (typeof disallowList === 'string') {
-          memo += `${os.EOL}Disallow: ${disallowList}`;
-          return memo;
-        }
-        if (disallowList.length === 0) {
-          memo += `${os.EOL}Disallow:`;
-          return memo;
-        }
-        _.each(disallowList, (disallowPath) => {
-          memo += `${os.EOL}Disallow: ${disallowPath}`;
-        });
-        return memo;
-      }, '');
-      robotText += os.EOL;
-      reply(robotText).type('text/plain');
+    handler: (request, reply) =>{
+      robotTextHandler(request, reply, robotTextpluginOptions);
     }
   });
   next();
