@@ -1,8 +1,5 @@
 const elasticsearchClient = require('./elasticsearchClient');
 
-const GPlookupIndexName = process.env.GPlookupIndexName || 'gp-lookup';
-
-
 const ES_MAPPINGS = {
   mappings: {
     practice: {
@@ -44,11 +41,11 @@ const ES_MAPPINGS = {
 
 let elasticsearch = {};
 
-elasticsearch.GPlookupIndexName = GPlookupIndexName;
+elasticsearch.GPlookupIndexName = process.env.GPlookupIndexName || 'gp-lookup';
 
 elasticsearch.createGPLookupSearchIndex = (next) => {
   return elasticsearchClient.indices.create({
-    index: GPlookupIndexName,
+    index: elasticsearch.GPlookupIndexName,
     body: ES_MAPPINGS
   }, next);
 };
@@ -61,23 +58,11 @@ elasticsearch.indexIsExists = (name, next) => {
 
 elasticsearch.addToIndex = (id, type, document, next) => {
   elasticsearchClient.index({
-    index: GPlookupIndexName,
+    index: elasticsearch.GPlookupIndexName,
     type: type,
     id: id,
     body: document,
     timestamp: new Date().getTime()
-  }, (error, response) => {
-    next(error, response);
-  });
-};
-
-elasticsearch.update = (type, document, next) => {
-  elasticsearchClient.index({
-    index: process.env.MAIN_INDICE,
-    type: type,
-    id: document.id,
-    timestamp: new Date().getTime(),
-    body: document
   }, (error, response) => {
     next(error, response);
   });
@@ -93,7 +78,7 @@ elasticsearch.bulkUpdate = (items, next) => {
 
 elasticsearch.delete = (type, id, next) => {
   elasticsearchClient.delete({
-    index: GPlookupIndexName,
+    index: elasticsearch.GPlookupIndexName,
     type: type,
     id: id.toString()
   }, (error, response) => {
@@ -103,7 +88,7 @@ elasticsearch.delete = (type, id, next) => {
 
 elasticsearch.get = (type, id, next) => {
   elasticsearchClient.get({
-    index: GPlookupIndexName,
+    index: elasticsearch.GPlookupIndexName,
     type: type,
     id: id.toString()
   }, (error, response) => {
@@ -113,7 +98,7 @@ elasticsearch.get = (type, id, next) => {
 
 elasticsearch.getAll = (type, next) => {
   elasticsearchClient.search({
-    index: GPlookupIndexName,
+    index: elasticsearch.GPlookupIndexName,
     type: type,
     body: {
       query: {
@@ -127,7 +112,7 @@ elasticsearch.getAll = (type, next) => {
 
 elasticsearch.search = (type, query, next) => {
   elasticsearchClient.search({
-    index: GPlookupIndexName,
+    index: elasticsearch.GPlookupIndexName,
     type: type,
     body: query
   }, (error, response) => {
@@ -138,6 +123,14 @@ elasticsearch.search = (type, query, next) => {
 elasticsearch.deleteIndex = (name, next) => {
   elasticsearchClient.indices.delete({
     index: name
+  }, (error, response) => {
+    next(error, response);
+  });
+};
+
+elasticsearch.deleteAllIndexes = (next) => {
+  elasticsearchClient.indices.delete({
+    index: '_all'
   }, (error, response) => {
     next(error, response);
   });

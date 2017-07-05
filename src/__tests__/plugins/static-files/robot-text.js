@@ -1,6 +1,6 @@
 import {robotTextHandler, robotTextOptions} from '../../../server/plugins/static-files';
 
-describe('gethandler', () =>{
+describe('Test robotTextHandler', () =>{
   const mockGet = jest.fn();
   const gReply = {
     view: function(){
@@ -12,7 +12,7 @@ describe('gethandler', () =>{
     }
   };
 
-  it('check robotTextHandler response content type ', () => {
+  it('Check robotTextHandler response content type is correct', () => {
     expect(robotTextHandler(mockGet(), gReply.view, robotTextOptions).contentType).toBe('text/plain');
   });
 });
