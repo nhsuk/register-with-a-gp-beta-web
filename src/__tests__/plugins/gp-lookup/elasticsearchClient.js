@@ -45,9 +45,9 @@ describe('Test ElasticSearch wrapper', () =>{
 
   it('Should update and search on the ES search index', () => {
 
-    elasticsearch.deleteAllIndexes((err, res) => {
+    elasticsearch.deleteAllIndexes(() => {
 
-      elasticsearch.createGPLookupSearchIndex((err, res) => {
+      elasticsearch.createGPLookupSearchIndex((err) => {
         if (err) {
           throw err;
         }
