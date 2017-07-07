@@ -3,7 +3,7 @@ import ServiceLookup from '../../../shared/lib/service-lookup';
 var Plugin = {};
 Plugin.register = function(server, options, next) {
   server.ext('onPreResponse', function (request, reply) {
-    if((ServiceLookup.getService() == 'true') && !(request.url.path.startsWith('/assets/'))){
+    if((ServiceLookup.getService() !== 'true') && !(request.url.path.startsWith('/assets/'))){
       return reply.view('service-down');
     } else {
       reply.continue();
