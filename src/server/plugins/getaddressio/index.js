@@ -4,7 +4,7 @@ import cookies from '../../config/cookies';
 import naturalSort from 'javascript-natural-sort';
 
 
-const TIMEOUT = 10000;
+const TIMEOUT = 1;
 
 
 function getAddresses(postcode, housenumber = '', timeout=TIMEOUT) {
@@ -27,7 +27,9 @@ function getAddresses(postcode, housenumber = '', timeout=TIMEOUT) {
           resolve(body);
         });
         response.on('error', (err) => {
-          request.log({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ cleaned }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`, 'message': err }});
+         /* eslint-disable no-console */
+          console.log({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ cleaned }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`, 'message': err }});
+           /* eslint-enable no-console */
           reject(err);
         });
       } else {
@@ -35,7 +37,9 @@ function getAddresses(postcode, housenumber = '', timeout=TIMEOUT) {
       }
     });
     request.setTimeout(timeout, () => {
-      request.log({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ cleaned }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`, 'message': 'timeout'}});
+     /* eslint-disable no-console */
+      console.log({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ cleaned }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`, 'message': 'timeout'}});
+       /* eslint-enable no-console */
       request.abort();
       reject();
     });
