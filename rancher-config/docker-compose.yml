@@ -26,8 +26,8 @@ services:
       GP_EMAIL_WORLDS_PRACTICE: ${GP_EMAIL_WORLDS_PRACTICE}
       GP_EMAIL_HAMPTON_WICK_SURGERY: ${GP_EMAIL_HAMPTON_WICK_SURGERY}
     labels:
-      traefik.enable: stack
-      traefik.domain: ${TRAEFIK_DOMAIN}
+      traefik.enable: true
+      traefik.frontend.rule: $TRAEFIK_RULE
       traefik.port: 3333
       map-public-http: 3333
       io.rancher.container.pull_image: always
