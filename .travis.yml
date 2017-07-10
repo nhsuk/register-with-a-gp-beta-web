@@ -11,4 +11,4 @@ script:
 - yarn run lint
 - yarn test
 after_success:
-  - bash ./scripts/ci-deployment/deploy.sh
+  - bash ./scripts/deploy.sh
