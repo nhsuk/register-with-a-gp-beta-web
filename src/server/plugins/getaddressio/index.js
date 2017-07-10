@@ -27,7 +27,7 @@ function getAddresses(postcode, housenumber = '', timeout=TIMEOUT) {
           resolve(body);
         });
         response.on('error', (err) => {
-          request.log({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ cleaned }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`, 'message': err }});
+          console.log({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ cleaned }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`, 'message': err }});
           reject(err);
         });
       } else {
@@ -35,7 +35,7 @@ function getAddresses(postcode, housenumber = '', timeout=TIMEOUT) {
       }
     });
     request.setTimeout(timeout, () => {
-      request.log({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ cleaned }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`, 'message': 'timeout'}});
+      console.log({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ cleaned }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`, 'message': 'timeout'}});
       request.abort();
       reject();
     });
