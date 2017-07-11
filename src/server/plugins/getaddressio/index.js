@@ -39,7 +39,7 @@ function getAddresses(postcode, housenumber = '', timeout=TIMEOUT) {
     request.setTimeout(timeout, () => {
       /* eslint-disable no-console */
       request.log({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ cleaned }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`, 'message': 'timeout'}});
-      /* eslint-enable no-console */      
+      /* eslint-enable no-console */    
       request.abort();
       reject();
     });
