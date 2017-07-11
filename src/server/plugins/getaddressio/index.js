@@ -4,7 +4,7 @@ import cookies from '../../config/cookies';
 import naturalSort from 'javascript-natural-sort';
 
 
-const TIMEOUT = 10000;
+const TIMEOUT = 1;
 
 
 function getAddresses(postcode, housenumber = '', timeout=TIMEOUT) {
