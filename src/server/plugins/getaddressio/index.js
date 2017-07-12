@@ -57,7 +57,7 @@ function addressLookuptHandler(request, reply) {
     })
     .catch(err => {
       /* eslint-disable no-console */
-      console.error({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ cleaned }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`, 'message': err}});
+      console.error({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+'/v2/uk/', 'postcode': request.payload.postcode, 'api-key':  process.env.POSTCODE_API_KEY, 'message': err}});
       /* eslint-enable no-console */
       reply([]);
     });
