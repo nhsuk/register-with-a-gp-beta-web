@@ -6,6 +6,7 @@ import {getLatestUncompletedStep} from '../register-form/steps/common.js';
 import ua from 'universal-analytics';
 
 const fs = require('fs');
+const googleAnalyticsKey = process.env.GOOGLEANALYTICSKEY;
 
 function practiceHandler(request, reply) {
   if (request.params.practice) {
@@ -65,7 +66,7 @@ function startHandler(request, reply) {
   const practice = request.params.practice;
   const practiceData = practiceLookup.getPractice(practice);
   const practiceStartTemplate = getPracticeStartTemplate(request);
-  const visitor = ua('UA-67365892-10');
+  const visitor = ua(googleAnalyticsKey);
   if (typeof practiceData !== 'undefined') {
     reply
       .view(practiceStartTemplate, {showNotifications: true, firstStep: '/' + practice + '/register/nhs-number'})
