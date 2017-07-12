@@ -58,6 +58,7 @@ function addressLookuptHandler(request, reply) {
     .catch(err => {
       /* eslint-disable no-console */
       console.error(['error'], err);
+
       /* eslint-enable no-console */
       reply([]);
     });
