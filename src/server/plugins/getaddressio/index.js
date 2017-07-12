@@ -57,7 +57,7 @@ function addressLookuptHandler(request, reply) {
     })
     .catch(err => {
       /* eslint-disable no-console */
-      console.error(['error'], err);
+      console.error({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ cleaned }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`, 'message': err}});
       /* eslint-enable no-console */
       reply([]);
     });
