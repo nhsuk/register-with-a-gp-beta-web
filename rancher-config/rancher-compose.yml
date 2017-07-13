@@ -3,42 +3,15 @@ version: '2'
 services:
 
   register-with-a-gp:
-    image: nhsuk/register-with-a-gp-beta-web:${DOCKER_IMAGE_TAG}
-    environment:
-      NODE_ENV: production
-      SESSION_SECRET: ${SESSION_SECRET}
-      EMAIL_USERNAME: ${EMAIL_USERNAME}
-      EMAIL_PASSWORD: ${EMAIL_PASSWORD}
-      EMAIL_HOST: ${EMAIL_HOST}
-      POSTCODE_API_KEY: ${POSTCODE_API_KEY}
-      POSTCODE_API_HOST: ${POSTCODE_API_HOST}
-      GP_LOOKUP_API_URL: ${GP_LOOKUP_API_URL}
-      GP_LOOKUP_API_PORT: ${GP_LOOKUP_API_PORT}
-      GPLOOKUPAPISSL: ${GPLOOKUPAPISSL}
-      GP_EMAIL_REGISTER_GP_TEST: ${GP_EMAIL_REGISTER_GP_TEST}
-      GP_EMAIL_OHORAN_PARTNERS: ${GP_EMAIL_OHORAN_PARTNERS}
-      GP_EMAIL_PEEL_CROFT_SURGERY: ${GP_EMAIL_PEEL_CROFT_SURGERY}
-      GP_EMAIL_PIONEER_MEDICAL_GROUP: ${GP_EMAIL_PIONEER_MEDICAL_GROUP}
-      GP_EMAIL_ROSEBANK_HEALTH: ${GP_EMAIL_ROSEBANK_HEALTH}
-      GP_EMAIL_THE_WOLDS_PRACTICE: ${GP_EMAIL_THE_WOLDS_PRACTICE}
-      GP_EMAIL_WALLINGTON_FAMILY_PRACTICE: ${GP_EMAIL_WALLINGTON_FAMILY_PRACTICE}
-      GP_EMAIL_BURNS_PRACTICE: ${GP_EMAIL_BURNS_PRACTICE}
-      GP_EMAIL_WORLDS_PRACTICE: ${GP_EMAIL_WORLDS_PRACTICE}
-      GP_EMAIL_HAMPTON_WICK_SURGERY: ${GP_EMAIL_HAMPTON_WICK_SURGERY}
-    labels:
-      traefik.enable: true
-      traefik.frontend.rule: $TRAEFIK_RULE
-      traefik.port: 3333
-      map-public-http: 3333
-      io.rancher.container.pull_image: always
-    logging:
-      driver: splunk
-      options:
-        splunk-url: ${SPLUNK_HEC_URL}
-        splunk-token: ${SPLUNK_HEC_TOKEN}
-        splunk-insecureskipverify: "true"
-        splunk-sourcetype: docker
-        splunk-source: register-with-a-gp
-        splunk-verify-connection: "false"
-        tag: "{{`{{.ImageName}} {{.Name}} {{.FullID}}`}}"
-        splunk-format: json
+    scale: 1
+    start_on_create: true
+    health_check:
+      response_timeout: 5000
+      healthy_threshold: 2
+      port: 3333
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 20000
+      strategy: recreate
+      request_line: GET "/" "HTTP/1.0"
+      reinitializing_timeout: 60000
