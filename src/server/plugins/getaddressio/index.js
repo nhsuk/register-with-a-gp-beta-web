@@ -28,7 +28,7 @@ function getAddresses(postcode, housenumber = '', timeout=TIMEOUT) {
         });
         response.on('error', (err) => {
           /* eslint-disable no-console */
-          console.error({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ cleaned }/${ housenumber }`, 'statusCode':500, 'message': err }});
+          console.error(JSON.stringify({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ cleaned }/${ housenumber }`, 'statusCode':500, 'message': err }}));
           /* eslint-enable no-console */
           reject(err);
         });
@@ -38,7 +38,7 @@ function getAddresses(postcode, housenumber = '', timeout=TIMEOUT) {
     });
     request.setTimeout(timeout, () => {
       /* eslint-disable no-console */
-      console.error({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ cleaned }/${ housenumber }`, 'statusCode':500, 'message': 'timeout'}});
+      console.error(JSON.stringify({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ cleaned }/${ housenumber }`, 'statusCode':500, 'message': 'timeout'}}));
       /* eslint-enable no-console */
       request.abort();
       reject();
@@ -57,7 +57,7 @@ function addressLookuptHandler(request, reply) {
     })
     .catch(err => {
       /* eslint-disable no-console */
-      console.error({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+'/v2/uk/', 'statusCode':500, 'postcode': request.payload.postcode, 'message': err}});
+      console.error(JSON.stringify({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+'/v2/uk/', 'statusCode':500, 'postcode': request.payload.postcode, 'message': err}}));
       /* eslint-enable no-console */
       reply([]);
     });
