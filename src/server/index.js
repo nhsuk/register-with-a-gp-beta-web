@@ -41,7 +41,7 @@ const manifest = {
               {
                 module: 'good-squeeze',
                 name: 'Squeeze',
-                args: [{log: '*', error: '*', request: '*'}]
+                args: [{log: '*', request: '*'}]
               }, {
                 module: 'good-console',
               },
