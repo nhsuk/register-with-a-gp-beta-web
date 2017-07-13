@@ -40,7 +40,7 @@ const manifest = {
             console: [
               {
                 module: 'good-squeeze',
-                name: 'Squeeze',
+                name: 'SafeJson',
                 args: [{log: '*', error: '*', request: '*'}]
               }, {
                 module: 'good-console',
