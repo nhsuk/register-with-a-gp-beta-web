@@ -1,3 +1,4 @@
+/*global $*/
 const ContentPage = require('../pageobjects/content.page');
 const config = require('../config');
 
@@ -130,22 +131,22 @@ describe('a content page', () => {
     browser.setValue('#input-month', '01');
     browser.setValue('#input-year', '2010');
     ContentPage.nextStep();
-    
+
     if (!config.skipGPAutoCompleteTests){
       /*Are you already registered with a GP?*/
       $('label=Yes').click();
       ContentPage.nextStep();
-  
+
       /*What is the name and address of your current GP practice?*/
       browser.setValue('#gp-search', 'peelcroft');
       browser.waitForVisible('.result', 5000);
       browser.click('.result');
       ContentPage.nextStep();
-  
+
       /*Are you registered at Lifton Surgery with this address?*/
       $('label=Yes').click();
       ContentPage.nextStep();
-  
+
       /*Are you registered at the GP with this name?*/
       $('label=Yes').click();
       ContentPage.nextStep();
