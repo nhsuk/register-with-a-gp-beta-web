@@ -36,9 +36,12 @@
     "node-sass": "^4.5.0",
     "npm-run-all": "^4.0.1",
     "nunjucks": "^3.0.0",
+    "phantomjs": "^2.1.7",
     "request": "^2.81.0",
     "universal-analytics": "^0.4.13",
     "vision": "^4.1.1",
+    "wdio-mocha-framework": "^0.5.10",
+    "webdriverio": "^4.8.0",
     "xss": "^0.3.3",
     "yar": "^8.1.2"
   },
@@ -66,12 +69,11 @@
     "style-loader": "^0.18.0",
     "url-loader": "^0.5.7",
     "v8flags": "^2.0.11",
-    "webpack": "3.0.0",
+    "webpack": "3.2.0",
     "webpack-dev-middleware": "^1.9.0",
     "webpack-hot-middleware": "^2.15.0"
   },
   "scripts": {
-    "test": "jest",
     "dev": "nodemon --exec babel-node --watch src/server/ src/server/index.js",
     "build:babel": "babel src -d dist --ignore-files src/client --ignore src/__tests__/plugins/node_modules --copy-files --source-maps",
     "build:webpack": "webpack -p --config src/client/webpack.config.babel.js",
@@ -81,7 +83,11 @@
     "lint": "npm-run-all --parallel lint:*",
     "updateGPIndex": "node ./bin/update-gp-lookup-search-index.js",
     "clean": "rimraf dist/ coverage/ src/client/compiled",
-    "start": "NODE_ENV=production node ./dist/server/"
+    "start": "NODE_ENV=production node ./dist/server/",
+    "test": "jest",
+    "test:acceptance_local": "./node_modules/.bin/wdio src/__tests__/plugins/register-form/acceptance/wdio.conf.js",
+    "test:acceptance_headless": "./node_modules/.bin/wdio src/__tests__/plugins/register-form/acceptance/wdio.headless.conf.js",
+    "test:acceptance_bs": "./node_modules/.bin/wdio src/__tests__/plugins/register-form/acceptance/wdio.cloud.conf.js"
   },
   "jest": {
     "collectCoverage": true,
@@ -98,7 +104,8 @@
     "coverageDirectory": "coverage",
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "/__tests__/helpers/"
+      "/__tests__/helpers/",
+      "/__tests__/plugins/register-form/acceptance/"
     ]
   },
   "babel": {
