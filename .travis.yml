@@ -10,20 +10,10 @@ script:
 - yarn build
 - yarn run lint
 - yarn test
-- yarn test:acceptance_headless
+- yarn test:acceptance_karma
 after_success:
   - bash ./scripts/deploy.sh
 before_install:
-  - mkdir travis-phantomjs
-  - wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 -O $PWD/travis-phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
-  - tar -xvf $PWD/travis-phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2 -C $PWD/travis-phantomjs
-  - export PATH=$PWD/travis-phantomjs:$PATH
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3 # give xvfb some time to start
-  - sudo apt-get update
-  - sudo apt-get install -y libappindicator1 fonts-liberation
-  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - sudo dpkg -i google-chrome*.deb
-  - npm install --dev
-  - npm run run & # to run my web server in the background
-  - sleep 5 # give web server some time to start
+  - export CHROME_BIN=chromium-browser
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
