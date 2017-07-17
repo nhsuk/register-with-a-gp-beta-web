@@ -1,6 +1,5 @@
-/*global $*/
 const ContentPage = require('../pageobjects/content.page');
-const config = require('../config');
+// const config = require('../config');
 
 describe('a content page', () => {
   it('should contain a local header', () => {

@@ -1,6 +1,8 @@
-var configuration = {
-    // other things
+/*global config*/
 
+
+const configuration = {
+	// other things
   customLaunchers: {
     Chrome_travis_ci: {
       base: 'Chrome',
