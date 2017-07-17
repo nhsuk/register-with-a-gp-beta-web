@@ -10,7 +10,7 @@ script:
 - yarn build
 - yarn run lint
 - yarn test
-- yarn test:acceptance_karma
+- yarn test:acceptance_headless
 after_success:
   - bash ./scripts/deploy.sh
 before_install:
