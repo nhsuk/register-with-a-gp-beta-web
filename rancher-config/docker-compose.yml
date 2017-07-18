@@ -25,6 +25,9 @@ services:
       GP_EMAIL_BURNS_PRACTICE: ${GP_EMAIL_BURNS_PRACTICE}
       GP_EMAIL_WORLDS_PRACTICE: ${GP_EMAIL_WORLDS_PRACTICE}
       GP_EMAIL_HAMPTON_WICK_SURGERY: ${GP_EMAIL_HAMPTON_WICK_SURGERY}
+      GOOGLEANALYTICSKEY: ${GOOGLEANALYTICSKEY}
+      GPMedicalPractitionersSourceURL: ${GPMedicalPractitionersSourceURL}
+      GPMedicalPracticesSourceURL: ${GPMedicalPracticesSourceURL}      
     labels:
       traefik.enable: true
       traefik.frontend.rule: $TRAEFIK_RULE
