@@ -5,7 +5,7 @@ import {postHandlerFactory, getHandlerFactory} from './common';
 const Joi = JoiBase.extend(JoiPostcodeExtension);
 
 
-const countries = [
+const COUNTRIES = [
 	{ label: 'United Kingdom', value: 'United Kingdom' },
 	{ label: 'Czechia', value: 'Czechia' },
 	{ label: 'Lebanon', value: 'Lebanon' },
@@ -114,7 +114,7 @@ const schema = Joi.object().keys({
   'country': Joi.string().max(50).label('Country')
 		.meta({
   componentType: 'dropdown' ,
-  children: countries,
+  children: COUNTRIES,
 }),
   'town': Joi.string().max(50).label('Town or City').meta({ componentType: 'textbox' }),
   'submit': Joi.any().optional().strip()
