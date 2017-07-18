@@ -118,7 +118,7 @@ const schema = Joi.object().keys({
   'submit': Joi.any().optional().strip()
 });
 
-const title = 'What is your Country and Town?';
+const title = 'Where were you born?';
 const key = 'countryAndTown';
 const slug = 'country-and-town';
 
