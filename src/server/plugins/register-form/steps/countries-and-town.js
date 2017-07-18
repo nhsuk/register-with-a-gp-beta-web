@@ -109,12 +109,12 @@ const countries = [
 ];
 
 const schema = Joi.object().keys({
-  'Country': Joi.string().max(50).label('Country')
+  'country': Joi.string().max(50).label('Country')
     .meta({
       componentType: 'dropdown' ,
       children: countries,
     }),
-  'Town': Joi.string().max(50).label('Town').meta({ componentType: 'textbox' }),
+  'town': Joi.string().max(50).label('Town or City').meta({ componentType: 'textbox' }),
   'submit': Joi.any().optional().strip()
 });
 
