@@ -32,7 +32,7 @@
       {% block formFields %}
         <div class="form-fields">
           {% for field in fields %}
-            {% if field.componentType in ['textbox', 'multiple-choice', 'disclosure', 'dropdown', 'numeric'] %}
+            {% if field.componentType in ['textbox', 'multiple-choice', 'disclosure', 'dropdown', 'numeric', 'tel'] %}
               {% component 'form-' + field.componentType, {
             label: field.label,
             name: field.id,
