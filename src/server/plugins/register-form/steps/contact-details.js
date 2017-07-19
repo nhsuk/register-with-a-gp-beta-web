@@ -2,8 +2,8 @@ import Joi from 'joi';
 import {postHandlerFactory, getHandlerFactory} from './common';
 
 const schema = Joi.object().keys({
-  'bestPhone': Joi.string().required().max(20).label('Best phone number').meta({ componentType: 'textbox' }),
-  'backUpPhone': Joi.string().allow('').max(20).label('Back-up phone number (optional)').meta({ componentType: 'textbox' }),
+  'bestPhone': Joi.string().required().max(20).label('Best phone number').meta({ componentType: 'numeric' }),
+  'backUpPhone': Joi.string().allow('').max(20).label('Back-up phone number (optional)').meta({ componentType: 'numeric' }),
   'email': Joi.string().email().allow('').max(254).optional().label('Email address (optional)').meta({ componentType: 'textbox' }),
   'submit': Joi.any().optional().strip()
 });
