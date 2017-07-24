@@ -22,6 +22,7 @@ import currentMedicationDetailsStep from './current-medication-details';
 import allergiesStep from './allergies';
 import allergiesDetailsStep from './allergies-details';
 import medicalHistoryStep from './medical-history';
+import countryAndTown from './countries-and-town';
 import summaryStep from './summary';
 /**
  * @typedef {object} InputField
@@ -63,6 +64,7 @@ const steps = [
   homeAddressLookupStep,
   homeAddressLookupPickStep,
   homeAddressStep,
+  countryAndTown,
   contactDetailsStep,
   previouslyArmedStep,
   armedStaffNumberStep,
