@@ -4,7 +4,7 @@ const config = require('./wdio.conf.js').config;
 
 exports.config = (function headlessConfig(globalConfig) {
   globalConfig.capabilities = [{
-    browserName: 'phantomjs',
+    browserName: 'Chrome_travis_ci',
   }];
 
   globalConfig.afterTest = () => {};
