@@ -27,7 +27,9 @@ services:
       GP_EMAIL_HAMPTON_WICK_SURGERY: ${GP_EMAIL_HAMPTON_WICK_SURGERY}
       GOOGLEANALYTICSKEY: ${GOOGLEANALYTICSKEY}
       GPMedicalPractitionersSourceURL: ${GPMedicalPractitionersSourceURL}
-      GPMedicalPracticesSourceURL: ${GPMedicalPracticesSourceURL}      
+      GPMedicalPracticesSourceURL: ${GPMedicalPracticesSourceURL}
+      ES_HOST: gp-reg-db
+      ES_PORT: 9200
     labels:
       traefik.enable: true
       traefik.frontend.rule: $TRAEFIK_RULE
@@ -45,3 +47,6 @@ services:
         splunk-verify-connection: "false"
         tag: "{{`{{.ImageName}} {{.Name}} {{.FullID}}`}}"
         splunk-format: json
+
+  gp-reg-db:
+    image: nhsuk/profiles-db-elastic:0.3.0
