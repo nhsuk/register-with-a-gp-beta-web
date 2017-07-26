@@ -4,7 +4,10 @@ services:
   - docker
 node_js:
   - '7.10'
+cache:
+  yarn: true
 script:
+  - yarn test
   - yarn build
   - yarn run lint
   - yarn test:acceptance_local
@@ -14,5 +17,4 @@ before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 5
-  - "./node_modules/.bin/selenium-standalone install"
   - "./node_modules/.bin/selenium-standalone start &"
