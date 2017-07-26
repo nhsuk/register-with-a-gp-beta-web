@@ -27,24 +27,19 @@
 <p>GP registration application</p>
 <br>
 <p>{{ render_one_line('Name', data.name) }}</p>
+<p>{{ render_one_line('Sex', data.gender) }}</p>
 <hr>
 <p>Date of Birth: {{ data.dateOfBirth['day'] }}/{{ data.dateOfBirth['month'] }}/{{ data.dateOfBirth['year'] }}</p>
+{{ render_one_lie('Place of birth', data.countryAndTown) }}
 <hr>
 {{ render_multi_line('Address', data.address) }}
+{{ render_multi_line('Contact Details', data.contactDetails) }}
 <hr>
-{% if data.email.email -%}
-<p>{{ render_multi_line('Email', data.email) }}</p>
-{% else -%}
-<p>{{ render_one_line('Email', {'empty': 'I’m not providing an email address'}) }}</p>
-{%- endif %}
-
 {% if data.nhsNumber['nhs-number-known'] -%}
 {{ render_multi_line('NHS number', data.nhsNumber) }}
 {% else -%}
 {{ render_one_line('NHS number', {'empty': 'I don’t know my NHS number'}) }}
 {%- endif %}
-
-{{ render_multi_line('Telephone', data.telephone) }}
 <hr>
 {% if data.previouslyArmed['previously-armed'] -%}
 Armed force
@@ -56,40 +51,49 @@ Armed force
 Your current GP
 
 {% if data.previouslyRegistered['previously-registered'] -%}
-<p>{{ render_one_line('Current GP', data.currentGP) }}</p>
-{% if data.registedAddress['registered-address-correct'] -%}
-<p>{{ render_multi_line('Registered address', data.address) }}</p>
-{% else -%}
-<p>{{ render_multi_line('Registered address', data.registeredAddressDetails) }}</p>
-{%- endif %}
-{% if data.registeredName['registered-name-correct'] -%}
-<p>{{ render_one_line('Registered name', data.name) }}</p>
-{% else -%}
-<p>{{ render_one_line('Registered name', data.registeredNameDetails) }}</p>
-{%- endif %}
-{% else -%}
-<p>{{ render_one_line('Current GP', {'empty': 'I’m not registered with a GP'}) }}</p>
-{%- endif %}
+  {% if data.manualGPAddress['gpName'] %}
+      <p>{{ render_multi_line('Current GP', data.manualGPAddress) }}</p>
+  {% else %}
+      <p>{{ render_multi_line('Current GP', data.currentGP) }}</p>
+  {% endif %}
+
+  {% if data.registedAddress['registered-address-correct'] %}
+    <p>{{ render_multi_line('Registered address', data.address) }}</p>
+  {% else %}
+    <p>{{ render_multi_line('Registered address', data.registeredAddressDetails) }}</p>
+  {% endif %}
+
+  {% if data.registeredName['registered-name-correct'] %}
+    <p>{{ render_one_line('Registered name', data.name) }}</p>
+  {% else %}
+    {{ row('Registered name', data.registeredNameDetails, 'registeredName') }}
+  {% endif %}
+{% else %}
+  <p>{{ render_one_line('Current GP', {'empty': 'I’m not registered with a GP'}) }}</p>
+{% endif %}
+
 <hr>
 Your health
 
 {% if data.currentMedication['current-medication'] %}
-<p>{{ render_multi_line('Medication', data.medicationDetails, true) }}</p>
+  <p>{{ render_multi_line('Medication', data.medicationDetails) }}</p>
 {% else %}
-<p>{{ render_one_line('Medication', {'empty': 'I’m not currently taking any medication'}) }}</p>
+  <p>{{ render_one_line('Medication', {'empty': 'I’m not currently taking any medication'}) }}</p>
 {% endif %}
 
 {% if data.allergies['any-allergies'] %}
-<p>{{ render_multi_line('Alergies', data.allergiesDetails, true) }}</p>
+  <p>{{ render_multi_line('Allergies', data.allergiesDetails) }}</p>
 {% else %}
-<p>{{ render_one_line('Alergies', {'empty': 'I don’t have any allergies'}) }}</p>
+  <p>{{ render_one_line('Allergies', {'empty': 'I don’t have any allergies'}) }}</p>
 {% endif %}
 
-{% if data.medicalHistory['medical-history'] %}
-<p>{{ render_multi_line('Health', data.medicalHistory, true) }}</p>
+{% if (data.medicalHistory['medical-history']) or (data.medicalHistory['history-chosen']) or (data.medicalHistory['medical-history-details']) %}
+  <p>{{ render_multi_line('Health', data.medicalHistory) }}</p>
+
 {% else %}
-<p>{{ render_one_line('Health', {'empty': 'I’m not supplying any health details'}) }}</p>
+  <p>{{ render_one_line('Health', {'empty': 'I’m not supplying any health details'}) }}
 {% endif %}
+
 
 Thank you.
 </body>
