@@ -7,13 +7,6 @@ node_js:
 cache:
   yarn: true
 env: DISPLAY=':99.0'
-dist: trusty
-addons:
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
 script:
   - yarn build
   - yarn run lint
@@ -24,4 +17,5 @@ after_success:
 before_script:
   - sh -e /etc/init.d/xvfb start
   - sleep 5
+  - ./node_modules/.bin/selenium-standalone install
   - ./node_modules/.bin/selenium-standalone start &
