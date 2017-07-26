@@ -7,11 +7,11 @@ node_js:
 script:
   - yarn build
   - yarn run lint
-  - yarn test
   - yarn test:acceptance_local
 after_success:
   - bash ./scripts/deploy.sh
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-  - "./node_modules/.bin/selenium-standalone &"
+  - sleep 3
+  - "./node_modules/.bin/selenium-standalone start"
