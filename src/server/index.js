@@ -23,7 +23,7 @@ const manifest = {
   },
   connections: [
     {
-      port: process.env.PORT || 3333,
+      port: port,
       host: host,
       routes: {
         security: !debug,

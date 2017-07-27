@@ -1,4 +1,4 @@
-import * as server from "../../../../server/index";
+import * as server from '../../../../server/index';
 const event = require('codeceptjs').event;
 
 
