@@ -1,47 +1,47 @@
 version: '2'
-
 services:
-
   register-with-a-gp:
-    image: nhsuk/register-with-a-gp-beta-web:${DOCKER_IMAGE_TAG}
+    image: nhsuk/register-with-a-gp-beta-web:v1.0.20
     environment:
+      EMAIL_HOST: https://email.nhs.net
+      EMAIL_PASSWORD: GPRegister2!
+      EMAIL_USERNAME: NHS-UK@nhs.net
+      GPLOOKUPAPISSL: '1'
+      GP_EMAIL_BURNS_PRACTICE: register.withagp@nhs.net
+      GP_EMAIL_HAMPTON_WICK_SURGERY: register.withagp@nhs.net
+      GP_EMAIL_OHORAN_PARTNERS: register.withagp@nhs.net
+      GP_EMAIL_PEEL_CROFT_SURGERY: peel.croft@nhs.net
+      GP_EMAIL_PIONEER_MEDICAL_GROUP: register.withagp@nhs.net
+      GP_EMAIL_REGISTER_GP_TEST: register.withagp@nhs.net
+      GP_EMAIL_ROSEBANK_HEALTH: register.withagp@nhs.net
+      GP_EMAIL_THE_WOLDS_PRACTICE: LECCG.C83605@nhs.net
+      GP_EMAIL_WALLINGTON_FAMILY_PRACTICE: sutccg.newpatientregwallingtonfp@nhs.net
+      GP_LOOKUP_API_PORT: '80'
+      GP_LOOKUP_API_URL: gp-lookup.dev.beta.nhschoices.net
       NODE_ENV: production
-      SESSION_SECRET: ${SESSION_SECRET}
-      EMAIL_USERNAME: ${EMAIL_USERNAME}
-      EMAIL_PASSWORD: ${EMAIL_PASSWORD}
-      EMAIL_HOST: ${EMAIL_HOST}
-      POSTCODE_API_KEY: ${POSTCODE_API_KEY}
-      POSTCODE_API_HOST: ${POSTCODE_API_HOST}
-      GP_LOOKUP_API_URL: ${GP_LOOKUP_API_URL}
-      GP_LOOKUP_API_PORT: ${GP_LOOKUP_API_PORT}
-      GPLOOKUPAPISSL: ${GPLOOKUPAPISSL}
-      GP_EMAIL_REGISTER_GP_TEST: ${GP_EMAIL_REGISTER_GP_TEST}
-      GP_EMAIL_OHORAN_PARTNERS: ${GP_EMAIL_OHORAN_PARTNERS}
-      GP_EMAIL_PEEL_CROFT_SURGERY: ${GP_EMAIL_PEEL_CROFT_SURGERY}
-      GP_EMAIL_PIONEER_MEDICAL_GROUP: ${GP_EMAIL_PIONEER_MEDICAL_GROUP}
-      GP_EMAIL_ROSEBANK_HEALTH: ${GP_EMAIL_ROSEBANK_HEALTH}
-      GP_EMAIL_THE_WOLDS_PRACTICE: ${GP_EMAIL_THE_WOLDS_PRACTICE}
-      GP_EMAIL_WALLINGTON_FAMILY_PRACTICE: ${GP_EMAIL_WALLINGTON_FAMILY_PRACTICE}
-      GP_EMAIL_BURNS_PRACTICE: ${GP_EMAIL_BURNS_PRACTICE}
-      GP_EMAIL_WORLDS_PRACTICE: ${GP_EMAIL_WORLDS_PRACTICE}
-      GP_EMAIL_HAMPTON_WICK_SURGERY: ${GP_EMAIL_HAMPTON_WICK_SURGERY}
-      GOOGLEANALYTICSKEY: ${GOOGLEANALYTICSKEY}
-      GPMedicalPractitionersSourceURL: ${GPMedicalPractitionersSourceURL}
-      GPMedicalPracticesSourceURL: ${GPMedicalPracticesSourceURL}      
-    labels:
-      traefik.enable: true
-      traefik.frontend.rule: $TRAEFIK_RULE
-      traefik.port: 3333
-      map-public-http: 3333
-      io.rancher.container.pull_image: always
+      POSTCODE_API_HOST: api.getAddress.io
+      POSTCODE_API_KEY: 8oXFJEsvFkSGVAg9iSyOgw9278
+      SESSION_SECRET: Bqi4Gnm0qI}1JK%doq5gcKtU*]jkpB47cswwvKtnhm514:r2qK
+      APP_ENV: production
+      GOOGLEANALYTICSKEY: UA-67365892-10
+      GPMedicalPracticesSourceURL: https://raw.githubusercontent.com/nhsuk/general-medical-practices/master/output/general-medical-practices.json
+      GPMedicalPractitionersSourceURL: https://raw.githubusercontent.com/nhsuk/general-medical-practitioners/master/output/general-medical-practitioners.json
+      ES_HOST: profiles-db-elastic.profiles-db-elastic-gp-reg
+      ES_PORT: '9200'
     logging:
       driver: splunk
       options:
-        splunk-url: ${SPLUNK_HEC_URL}
-        splunk-token: ${SPLUNK_HEC_TOKEN}
-        splunk-insecureskipverify: "true"
+        splunk-url: https://splunk-collector.cloudapp.net:8088
+        splunk-token: FECAE526-8A5B-45C3-86AB-6993CA8824BD
+        splunk-insecureskipverify: 'true'
         splunk-sourcetype: docker
         splunk-source: register-with-a-gp
-        splunk-verify-connection: "false"
-        tag: "{{`{{.ImageName}} {{.Name}} {{.FullID}}`}}"
+        splunk-verify-connection: 'false'
+        tag: '{{.ImageName}} {{.Name}} {{.FullID}}'
         splunk-format: json
+    labels:
+      traefik.port: '3333'
+      traefik.domain: register-with-a-gp.beta.nhschoices.net
+      traefik.enable: stack
+      io.rancher.container.pull_image: always
+      map-public-http: '3333'
