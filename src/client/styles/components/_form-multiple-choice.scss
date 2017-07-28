@@ -17,8 +17,9 @@ $_radio-spacing: ($_element-size - $_radio-size) / 2;
   position: relative;
 
   .js-enabled & {
-    padding-left: 50px;
+    padding-left: 52px;
     width: auto;
+    padding-top:2px;
 
     @include ie-lte(8) {
       padding-left: 0;
@@ -139,4 +140,15 @@ $_radio-spacing: ($_element-size - $_radio-size) / 2;
       }
     }
   }
+}
+
+.multiple-choice-radio-horizontal{
+
+ @include media(desktop){
+   display: inline;
+   clear: none;
+   float : none;
+   padding-right:40px;
+  
+   }
 }

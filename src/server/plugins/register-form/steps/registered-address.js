@@ -6,7 +6,7 @@ import previouslyRegisteredStep from './previously-registered';
 const schema = Joi.object().keys({
   'registered-address-correct': Joi.boolean().required()
     .meta({
-      componentType: 'multiple-choice',
+      componentType: 'radio-horizontal',
       children: [
         { label: 'Yes', value: 'true' },
         { label: 'No', value: 'false' },
