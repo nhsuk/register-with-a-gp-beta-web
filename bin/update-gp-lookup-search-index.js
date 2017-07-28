@@ -8,9 +8,9 @@ const fs = require('fs');
 
 const elasticsearch = require('../src/server/plugins/gp-lookup/elasticsearch');
 
-const GPMedicalPracticesSourceURL = process.env.GPMedicalPracticesSourceURL;
+const GPMedicalPracticesSourceURL = process.env.GPMEDICALPRACTICESSOURCEURL;
 
-const GPMedicalPractitionersSourceURL = process.env.GPMedicalPractitionersSourceURL;
+const GPMedicalPractitionersSourceURL = process.env.GPMEDICALPRACTITIONERSSOURCEURL;
 
 const appRootPath = path.dirname(__dirname);
 const practiceDataPath = path.join(appRootPath, 'data/practiceData.json');
