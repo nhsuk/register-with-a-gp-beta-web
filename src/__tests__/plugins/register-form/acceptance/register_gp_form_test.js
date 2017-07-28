@@ -15,5 +15,6 @@ Scenario('Test Start Page', (I) => {
   I.click('#start-button');
 
   /*Do you know your NHS number?*/
-  I.seeElement({css: '.xxxxxxxx'});
+  I.click('label[for=input--nhs-number-known--2]');
+  I.click('Continue');
 });
