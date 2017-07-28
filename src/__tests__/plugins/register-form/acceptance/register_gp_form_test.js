@@ -13,4 +13,7 @@ Scenario('Test Start Page', (I) => {
   I.click(firstPractice.name);
   I.seeElement({css: '#start-button'});
   I.click('#start-button');
+
+  /*Do you know your NHS number?*/
+  I.seeElement({css: '.xxxxxxxx'});
 });
