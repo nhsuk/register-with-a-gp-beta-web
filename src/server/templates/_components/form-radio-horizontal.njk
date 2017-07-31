@@ -54,6 +54,7 @@
       <label
         for="{{ inputId }}"
         class="multiple-choice multiple-choice--{{ variant | default('radio') }}{{ ' multiple-choice--inline' if inline }}{{ ' has-error' if error }} multiple-choice-radio-horizontal"
+        data-label="{{ option.label }}"
       >
         {{ option.label }}
         <input
