@@ -143,12 +143,8 @@ $_radio-spacing: ($_element-size - $_radio-size) / 2;
 }
 
 .multiple-choice-radio-horizontal{
-
- @include media(desktop){
    display: inline;
    clear: none;
    float : none;
    padding-right:40px;
-  
-   }
 }
