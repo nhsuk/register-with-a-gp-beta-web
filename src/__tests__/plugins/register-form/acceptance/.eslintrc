@@ -1,0 +1,13 @@
+{
+  "env": {
+    "mocha": true
+  },
+  "globals": {
+    "browser": true,
+    "window": true,
+    "expect": true
+  },
+  "rules": {
+    "no-unused-expressions": 0
+  }
+}
