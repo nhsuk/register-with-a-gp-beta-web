@@ -3,12 +3,19 @@ sudo: false
 services:
   - docker
 node_js:
-- '7'
+  - '7.10'
 cache:
   yarn: true
+env: DISPLAY=':99.0'
 script:
-- yarn build
-- yarn run lint
-- yarn test
+  - yarn build
+  - yarn run lint
+  - yarn test
+  - yarn test:acceptance_local
 after_success:
   - bash ./scripts/deploy.sh
+before_script:
+  - sh -e /etc/init.d/xvfb start
+  - sleep 5
+  - ./node_modules/.bin/selenium-standalone install
+  - ./node_modules/.bin/selenium-standalone start &

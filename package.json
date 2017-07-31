@@ -13,6 +13,7 @@
     "babel-runtime": "^6.23.0",
     "blipp": "^2.3.0",
     "change-case": "^3.0.1",
+    "codeceptjs": "^1.0.0",
     "crumb": "^6.0.3",
     "dotenv": "^4.0.0",
     "eclint": "^2.0.1",
@@ -63,9 +64,11 @@
     "resolve-url-loader": "^2.0.0",
     "rimraf": "^2.5.4",
     "sass-loader": "6.0.6",
+    "selenium-standalone": "^6.5.0",
     "style-loader": "^0.18.0",
     "url-loader": "^0.5.7",
     "v8flags": "^2.0.11",
+    "webdriverio": "^4.8.0",
     "webpack": "3.2.0",
     "webpack-dev-middleware": "^1.9.0",
     "webpack-hot-middleware": "^2.15.0"
@@ -76,6 +79,7 @@
     "build:babel": "babel src -d dist --ignore-files src/client --ignore src/__tests__/plugins/node_modules --copy-files --source-maps",
     "build:webpack": "webpack -p --config src/client/webpack.config.babel.js",
     "build": "./node_modules/.bin/npm-run-all clean --parallel build:* && cp -r src/client/compiled/ dist/client/",
+    "test:acceptance_local": "babel-node ./node_modules/.bin/codeceptjs run --steps",
     "lint:eslint": "DEBUG=eslint:cli-engine eslint .",
     "lint:editorconfig": "eclint check src/** README.md",
     "lint": "npm-run-all --parallel lint:*",
@@ -98,7 +102,8 @@
     "coverageDirectory": "coverage",
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "/__tests__/helpers/"
+      "/__tests__/helpers/",
+      "__tests__/plugins/register-form/acceptance/"
     ]
   },
   "babel": {
