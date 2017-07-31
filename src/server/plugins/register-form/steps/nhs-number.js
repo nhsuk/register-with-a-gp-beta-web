@@ -7,7 +7,7 @@ const Joi = JoiBase.extend(JoiNHSNumber);
 const schema = Joi.object().keys({
   'nhs-number-known': Joi.boolean().required()
     .meta({
-      componentType: 'multiple-choice',
+      componentType: 'radio-horizontal',
       children: [
         { label: 'Yes', value: 'true' },
         { label: 'No', value: 'false' },
