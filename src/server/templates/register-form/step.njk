@@ -4,12 +4,12 @@
 
 {% block body_main_content %}
   <div class="page-section">
-        <div class="form-group">
-          
-          {% if prevStep %}
-            <a href="{{ prevStep }}"  class="button button--back">Back</a>
-          {% endif %}
-        </div>
+    {% if prevStep %}
+      <div class="form-group">
+        <a href="{{ prevStep }}"  class="button button--back">Back</a>
+      </div>
+    {% endif %}
+        
 
     {% component 'error-summary', { children: stepErrors } %}
 
