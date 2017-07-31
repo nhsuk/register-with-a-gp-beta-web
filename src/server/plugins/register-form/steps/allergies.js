@@ -5,7 +5,7 @@ import {postHandlerFactory, getHandlerFactory} from './common';
 const schema = Joi.object().keys({
   'any-allergies': Joi.boolean().required()
     .meta({
-      componentType: 'multiple-choice',
+      componentType: 'radio-horizontal',
       children: [
         { label: 'Yes', value: 'true' },
         { label: 'No', value: 'false' },
