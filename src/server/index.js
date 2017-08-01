@@ -7,7 +7,6 @@ Dotenv.config();
 
 const env = process.env.NODE_ENV || 'development';
 const port = process.env.PORT || 3333;
-const host = process.env.HOST || 'localhost';
 const debug = env === 'development';
 const templatePath = Path.join(__dirname, 'templates');
 
@@ -24,7 +23,6 @@ const manifest = {
   connections: [
     {
       port: port,
-      host: host,
       routes: {
         security: !debug,
         files: {
