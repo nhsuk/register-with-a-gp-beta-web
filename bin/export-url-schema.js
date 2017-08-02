@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* This command print the full registration journey URLs
 as a schema for all practices, require by analysis team. */
 
@@ -12,11 +13,10 @@ const practices = practiceLookup.getPractices();
 
 _.each(practices, (p) => {
   console.log(p.name);
-  console.log("\n");
+  console.log('\n');
   _.each(steps, (m) => {
     const check = _.get(m, 'checkApplies');
     const slug = _.get(m, 'slug');
-    const title = _.get(m, 'title');
     const url = `${baseDomain}/${p.key}/${slug}`;
     if (check){
       if (!subStepContinue){
@@ -30,5 +30,5 @@ _.each(practices, (p) => {
       subStepContinue = false;
     }
   });
-  console.log("\n\n\n\n\n\n\n")
+  console.log('\n\n\n\n\n\n\n');
 });
