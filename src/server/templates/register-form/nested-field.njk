@@ -51,19 +51,19 @@
             componentText: field.text
           } %}
             {% endif %}
-
-
-            {% if field.componentType === 'nested' %}
-                <label for"{{ field.id }}" id="items" style="display:none">
-                    {{ field.label }}
-                    <div class="input-row first" style="margin:20px 0;overflow:hidden">
-                        <input type='text' id="{{ field.id }}" name="{{ field.id }}">
-                    </div>
-                <label>
-                <a href="#" id="add-row">Add row</a>
-            {% endif %}
           {% endfor %}
+            <label id="items" style="display:none">
+                {{ field.label }}
+                <div class="input-row first" style="margin:20px 0;overflow:hidden">
+                    <input type='text'  name="items">
+                </div>
+            <label>
+            <a href="#" id="add-row">Add row</a>
         </div>
+            {% if showLog %}
+                <p>Is Valid : {{ is_valid }}</p>
+                <pre>{{ validation_response }}</pre>
+            {% endif %}
       {% endblock %}
       {% if extraInfo %}
         <div class="callout callout--info callout--compact">

@@ -3,11 +3,11 @@ const $ = require('jquery');
 
 function nestedFieldgenerator($) {
   $('#add-row').on('click', (e) => {
-    $(e.target).before($('.input-row.first').clone().attr('class', 'input-row'));
+    $(e.target).before($('.input-row.first').eq(0).clone().attr('class', 'input-row'));
     return false;
   });
 
-  $('input[name=has-item]').on('click', (e) => {
+  $('label.multiple-choice').on('click', (e) => {
     if ($(e.target).val() === 'true'){
       $('#items').show();
     }else{
