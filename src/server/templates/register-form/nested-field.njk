@@ -51,6 +51,17 @@
             componentText: field.text
           } %}
             {% endif %}
+
+
+            {% if field.componentType === 'nested' %}
+                <label for"{{ field.id }}" id="items" style="display:none">
+                    {{ field.label }}
+                    <div class="input-row first" style="margin:20px 0;overflow:hidden">
+                        <input type='text' id="{{ field.id }}" name="{{ field.id }}">
+                    </div>
+                <label>
+                <a href="#" id="add-row">Add row</a>
+            {% endif %}
           {% endfor %}
         </div>
       {% endblock %}

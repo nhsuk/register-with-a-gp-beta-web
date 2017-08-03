@@ -1,5 +1,21 @@
 const $ = require('jquery');
 
+
+function nestedFieldgenerator($) {
+  $('#add-row').on('click', (e) => {
+    $(e.target).before($('.input-row.first').clone().attr('class', 'input-row'));
+    return false;
+  });
+
+  $('input[name=has-item]').on('click', (e) => {
+    if ($(e.target).val() === 'true'){
+      $('#items').show();
+    }else{
+      $('#items').hide();
+    }
+  });
+}
+
 class GPAutoComplete {
   constructor(endpoint, queryParam='search', showTotalItemsNumber = 10){
     this.endpoint = endpoint;
@@ -13,6 +29,8 @@ class GPAutoComplete {
     this.autoCompleteInput = $('#gp-search');
     this.autoCompleteInput.on('keyup', this.autoCompleteInputKeyUpHandler.bind(this));
     this.resultListContainerElem.on('click', '.select-link', this.resultItemClickHandler.bind(this));
+
+    nestedFieldgenerator($);
   }
 
   static getResultTemplate (){
@@ -101,7 +119,5 @@ class GPAutoComplete {
     });
   }
 }
-
-
 
 module.exports = new GPAutoComplete('/gp-lookup');
