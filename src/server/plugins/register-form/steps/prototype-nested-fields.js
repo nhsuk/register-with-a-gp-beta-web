@@ -66,7 +66,6 @@ export function postNestedHandler(
       validation_response = JSON.stringify(value);
     }).catch(err => {
       is_valid = false;
-      console.log(err);
       validation_response = JSON.stringify(err);
     });
     return reply.view(template, {
@@ -85,7 +84,7 @@ export function postNestedHandler(
 
 const handlers = {
   GET: (prevSteps) => getNestedHandler(key, title, schema, prevSteps, details, null),
-  POST: (prevSteps, nextSteps) => postNestedHandler(key, title, schema),
+  POST: () => postNestedHandler(key, title, schema),
 };
 
 export default {
