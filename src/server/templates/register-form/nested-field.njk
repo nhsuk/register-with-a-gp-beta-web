@@ -1,0 +1,89 @@
+{% extends 'layouts/base.njk' %}
+
+{% block head_title_content %}{{ title | render }} - NHS.UK{% endblock %}
+
+{% block body_main_content %}
+  <div class="page-section">
+    {% if prevStep %}
+      <div class="form-group">
+        <a href="{{ prevStep }}"  class="button button--back">Back</a>
+      </div>
+    {% endif %}
+        
+
+    {% component 'error-summary', { children: stepErrors } %}
+
+    <h1 class="form-title">{{ title | render | safe }}</h1>
+
+    <form method="post" id="current-step-form" class="{{key}}-form">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+
+      {% if beforeTemplate %}
+        {% include beforeTemplate %}
+      {% endif %}
+      {% if details %}
+        {% if details.position =='above' %}
+          {% set content = details.content %}
+          <details>
+            <summary>
+              <span class="details__summary">{{ details.summary }}</span>
+            </summary>
+            <div class="details__content">
+              <div class="callout callout--info">
+                <p>{{ content | render() | safe }}</p>
+              </div>
+            </div>
+          </details>
+        {%endif %}
+      {% endif %}
+      {% block formFields %}
+        <div class="form-fields">
+          {% for field in fields %}
+            {% if field.componentType in ['textbox', 'multiple-choice', 'disclosure', 'dropdown', 'numeric', 'tel','radio-horizontal'] %}
+              {% component 'form-' + field.componentType, {
+            label: field.label,
+            name: field.id,
+            children: field.children,
+            hint: field.hint,
+            variant: field.variant,
+            error: stepErrors[field.id].message | replace(stepErrors[field.id].label, ""),
+            value: stepData[field.id],
+            componentText: field.text
+          } %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endblock %}
+      {% if extraInfo %}
+        <div class="callout callout--info callout--compact">
+          <p>{{ extraInfo | render() | safe }}</p>
+        </div>
+      {% endif %}  
+      {% if details %}
+        {% if details.position == 'below' %}
+          {% set content = details.content %}
+          <details>
+            <summary>
+              <span class="details__summary">{{ details.summary | render }}</span>
+            </summary>
+            <div class="details__content">
+              <div class="callout callout--info">
+                <p>{{ content | render() | safe }}</p>
+              </div>
+            </div>
+          </details>
+        {% endif %}
+      {% endif %}
+
+      {% block submitRow %}
+        <div class="form-group">
+          <button type="submit" class="button">Continue</button>
+        </div>
+      {% endblock submitRow %}
+
+    </form>
+  </div>
+{% component 'analytics', {
+  ga_client_ID: cid
+  } %}      
+{% endblock body_main_content %}

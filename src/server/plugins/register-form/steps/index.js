@@ -24,6 +24,8 @@ import allergiesDetailsStep from './allergies-details';
 import medicalHistoryStep from './medical-history';
 import countryAndTown from './countries-and-town';
 import summaryStep from './summary';
+import prototypeNestedFields from './prototype-nested-fields';
+
 /**
  * @typedef {object} InputField
  * @property {string} ID - maps to HTML element ID
@@ -56,6 +58,7 @@ import summaryStep from './summary';
  * @type {Array.<Step>}
  */
 const steps = [
+  prototypeNestedFields,
   nhsNumberStep,
   nhsNumberDetailsStep,
   genderStep,
