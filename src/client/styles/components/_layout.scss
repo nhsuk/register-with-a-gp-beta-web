@@ -1,9 +1,10 @@
-fieldset {
-   padding-top: 5px;
-    padding-left: 5px;
-    padding-bottom: 12px;
+.form-fields {
+	 padding-top: 5px;
+ 	 padding-left: 8px;
+ 	 
 }
 
+//footer padding
 .global-footer__inner{
 	padding-top: 30px;
 
@@ -19,11 +20,105 @@ fieldset {
 	padding-bottom: 10px;
 }
 
-.page-section {
-	padding: 20px 0px 80px 0px;
 
+.page-section {
+	@include media(mobile){
+		padding: 20px 5px 80px 0px;
+	}
 	@include media(desktop){
-		padding: 30px 0px 80px 0px;
+		padding: 30px 5px 80px 0px;
 	}
     
+}
+
+// left margin for back link in mobile
+.button--back{
+	@include media(mobile){
+	margin-left:14px;
+	
+	}
+	
+}
+
+// .page-section class from frontend-uk over written in order to do spacing changes
+.page-section * + *{
+	margin-top:0px;
+}
+
+.form-title{
+	@include media(desktop){
+		padding-bottom:36px;
+		line-height: 44px;
+	}
+
+	@include media(mobile){
+		padding-bottom:24px;
+	}
+}
+
+.form-textbox, .form-dropdown{
+	@include media(desktop){
+		//margin-top:15px;
+		margin-top:9px;
+	}
+
+	@include media(mobile){
+		//margin-top:10px;
+		margin-top:6px;
+	}
+}
+
+.multiple-choise-horizontal, .multiple-choise-vertical{
+	margin-bottom:20px;	
+}
+
+.form-line{
+	margin-bottom:20px;
+}
+
+.multiple-choice--checkbox, .details__content{
+	margin-bottom:20px;
+}
+
+.form-label{
+	@include media(mobile){
+	line-height: 25px;
+	font-size:16px;
+	}
+}
+
+//remaining 20px will be handled by last element bottom-margin
+.callout--compact,.callout--info{
+	margin:20px 0px;
+}
+details{
+	padding-top:20px;
+	margin-bottom: 20px;
+}
+
+//remaining 20px will be handled by last elements 20px
+.continue-step-btn, .start-step-btn{
+	@include media(desktop){
+		margin-top:20px;
+		}
+	@include media(mobile){
+		margin-top:10px;
+		}
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+legend{
+	padding-bottom:14px;
+}
+
+.pad-bottom20{
+	padding-bottom:20px;
 }

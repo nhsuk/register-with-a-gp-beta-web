@@ -15,12 +15,12 @@
   box-shadow: none;
   display: block;
   float: left;
-  line-height: 56px;
+  //line-height: 56px;
   padding: 0;
   text-align:left;
 
   @include media(tablet) {
-    line-height: 56px;
+    //line-height: 56px;
   }
 
   &:link,
