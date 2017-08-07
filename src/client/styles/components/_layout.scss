@@ -1,6 +1,6 @@
 .form-fields {
-	 padding-top: 5px;
- 	 padding-left: 8px;
+	padding-top: 3px;
+ 	 padding-left: 4px;
  	 
 }
 
@@ -20,13 +20,13 @@
 	padding-bottom: 10px;
 }
 
-
+//desktop pad-top 30 but 4 is from header leine height
 .page-section {
 	@include media(mobile){
-		padding: 20px 5px 80px 0px;
+		padding: 18px 5px 80px 0px;		//top: 18 + 2(header line ht)=20
 	}
 	@include media(desktop){
-		padding: 30px 5px 80px 0px;
+		padding: 26px 5px 80px 0px;   		//top :26+4(header line ht)=30
 	}
     
 }
@@ -47,12 +47,14 @@
 
 .form-title{
 	@include media(desktop){
-		padding-bottom:36px;
+		padding-bottom:33px; // 40= 34+4px(line ht)+3px form-fields
 		line-height: 44px;
 	}
 
 	@include media(mobile){
-		padding-bottom:24px;
+		font-size:24px;
+		line-height:29px;
+		padding-bottom:25px; //30 =26 + 2px(line ht)+3 form-fields
 	}
 }
 
@@ -69,7 +71,7 @@
 }
 
 .multiple-choise-horizontal, .multiple-choise-vertical{
-	margin-bottom:20px;	
+	margin-bottom:28px;	
 }
 
 .form-line{
@@ -89,7 +91,12 @@
 
 //remaining 20px will be handled by last element bottom-margin
 .callout--compact,.callout--info{
-	margin:20px 0px;
+	@include media(desktop){
+		margin:30px 0px 10px 0px;
+	}
+	@include media(mobile){
+		margin: 10px 0px 10px 0px;
+	}
 }
 details{
 	padding-top:20px;
@@ -97,7 +104,8 @@ details{
 }
 
 //remaining 20px will be handled by last elements 20px
-.continue-step-btn, .start-step-btn{
+.continue-step, .start-step-btn{
+	padding-left:3px;
 	@include media(desktop){
 		margin-top:20px;
 		}
@@ -121,4 +129,21 @@ legend{
 
 .pad-bottom20{
 	padding-bottom:20px;
+}
+.back-link{
+	@include media(desktop){
+		padding-bottom:22px;
+	}
+	@include media(mobile){
+		padding-bottom:14px;
+	}
+	
+}
+.error-summary{
+	@include media(desktop){
+		margin-bottom:36px;
+	}
+	@include media(mobile){
+		margin-bottom:24px;
+	}
 }
