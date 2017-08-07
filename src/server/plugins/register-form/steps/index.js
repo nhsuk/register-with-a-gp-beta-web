@@ -84,4 +84,29 @@ const steps = [
   summaryStep
 ];
 
+export const stepDependency = {
+  'nhs-number': [
+    'nhs-number-details'
+  ],
+  'home-address-lookup': [
+    'home-address-manual',
+    'home-address-lookup-choose'
+  ],
+  'previously-armed': [
+    'armed-staff-number',
+    'armed-enlist-date'
+  ],
+  'previously-registered': [
+    'registered-address',
+    'registered-address-manual',
+    'registered-name',
+    'registered-name-details'
+  ],
+  'current-medication': [
+    'current-medication-details',
+  ],
+  'allergies': [
+    'allergies-details'
+  ]
+};
 export default steps;
