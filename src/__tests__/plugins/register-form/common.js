@@ -1,4 +1,4 @@
-import {getNextStep, getLatestUncompletedStep, getlastCompletedStep, checkStepCompletedBefore, getSlugById, getNextSlug} from '../../../server/plugins/register-form/steps/common';
+import {getNextStep, getLatestUncompletedStep, getlastCompletedStep, checkStepCompletedBefore, getNextSlug} from '../../../server/plugins/register-form/steps/common';
 
 import steps from '../../../server/plugins/register-form/steps/index';
 
