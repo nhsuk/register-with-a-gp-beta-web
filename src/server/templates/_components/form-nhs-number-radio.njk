@@ -76,7 +76,7 @@
     {% if nestedField %}
         {% set nestedFieldError = stepErrors[nestedField].message | replace(stepErrors[nestedField].label, "") %}
 
-        {% set showNestedField = (value in nestedFieldVisibleValue) %}
+        {% set showNestedField = (value == nestedFieldVisibleValue) %}
 
         <div id="nhs-number-nested-container" style="{{ 'display:none' if not showNestedField }}">
             <label for="input-nhs-number" class="form-label">
