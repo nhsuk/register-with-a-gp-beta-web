@@ -1,3 +1,6 @@
+/**
+ * @type Step
+ */
 import Joi from 'joi';
 import {postHandlerFactory, getHandlerFactory} from './common';
 
@@ -6,8 +9,8 @@ const schema = Joi.object().keys({
     .meta({
       componentType: 'radio-horizontal',
       children: [
-        { label: 'Yes', value: 'true' },
-        { label: 'No', value: 'false' },
+        { label: 'Yes', value: true},
+        { label: 'No', value: false},
       ],
       variant: 'radio',
     })
@@ -16,8 +19,13 @@ const schema = Joi.object().keys({
         any: { required: '!Please tell us if you served in the armed forces' },
       },
     }),
+  'armedStaffNumber': Joi.when('previously-armed', {is: true, then:Joi.string()}),
+  'day': Joi.when('previously-armed', {is: true, then:Joi.number().integer().min(1).max(31).required()}),
+  'month': Joi.when('previously-armed', {is: true, then:Joi.number().integer().min(1).max(12).required()}),
+  'year': Joi.when('previously-armed', {is: true, then:Joi.number().integer().min(1885).max(2025).required()}),
   'submit': Joi.any().optional().strip()
 });
+
 
 const title = 'Have you served in the armed forces?';
 const key = 'previouslyArmed';
@@ -34,9 +42,6 @@ const handlers = {
   POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps),
 };
 
-/**
- * @type Step
- */
 export default {
   key,
   slug,
