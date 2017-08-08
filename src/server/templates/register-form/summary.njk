@@ -28,7 +28,6 @@
       {{ row('Place of birth', data.countryAndTown, 'countryAndTown', true) }}
       {{ row('Contact Details', data.contactDetails, 'contactDetails', true) }}
 
-
       {% if data.nhsNumber['nhs-number-known'] %}
         {{ row('NHS number', data.nhsNumberDetails, 'nhsNumber', true) }}
       {% else %}
