@@ -46,12 +46,15 @@
 }
 
 .form-title{
+
 	@include media(desktop){
+		font-weight:bold;
 		padding-bottom:33px; // 40= 34+4px(line ht)+3px form-fields
 		line-height: 44px;
 	}
 
 	@include media(mobile){
+		font-weight:bold;
 		font-size:24px;
 		line-height:29px;
 		padding-bottom:25px; //30 =26 + 2px(line ht)+3 form-fields
