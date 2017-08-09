@@ -53,8 +53,8 @@
       
       <label
         for="{{ inputId }}"
-        class="multiple-choice multiple-choice--{{ variant | default('radio') }}{{ ' multiple-choice--inline' if inline }}{{ ' has-error' if error }} multiple-choice-radio-horizontal"
-        data-label="{{ option.label }}"
+        class="multiple-choice multiple-choice--{{ variant | default('radio') }}{{ ' multiple-choice--inline' if inline }}{{ ' has-error' if error }} multiple-choice-radio-horizontal nested-radio-button"
+        data-label="{{ option.label }}" data-show-nested-field="{{ option.show_nhs_number_input }}"
       >
         {{ option.label }}
         <input
@@ -76,14 +76,15 @@
     {% if field.nestedFields %}
         {% set showNestedField = (value == field.nestedFieldVisibleValue) %}
 
-        <div id="armed-nested-container" style="{{ 'display:none' if not showNestedField }}">
+        <div id="armed-nested-container" style="{{ 'display:none' if not showNestedField }}" class="nested-fields-container">
             {% for f in field.nestedFields %}
-                {% set nestedFieldError = stepErrors[f.name].message | replace(stepErrors[f.name].label, "") %}
-                <label for="input-{{ f.name }}" class="form-label">
-                    Service or staff number
-                    <input type="text" name="{{ f.name }}" id="input-{{ f.name }}"
+                {% set nestedFieldError = stepErrors[f.key].message | replace(stepErrors[f.key].label, "") %}
+
+                <label for="input-{{ f.key }}" class="form-label">
+                    {{ f.label }}
+                    <input type="text" name="{{ f.key }}" id="input-{{ f.key }}"
                     class="form-textbox form-textbox--short {{ ' has-error' if nestedFieldError }}"
-                    value="{{ stepData[f.name] | default('') }} ">
+                    value="{{ stepData[f.key] | default('') }} ">
                 </label>
             {% endfor %}
         </div>
