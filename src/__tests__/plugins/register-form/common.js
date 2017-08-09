@@ -1,8 +1,6 @@
-import {getNextStep, getLatestUncompletedStep, getlastCompletedStep, checkStepCompletedBefore, getSlugById, getNextSlug} from '../../../server/plugins/register-form/steps/common';
+import {getNextStep, getLatestUncompletedStep, getlastCompletedStep, checkStepCompletedBefore, getNextSlug} from '../../../server/plugins/register-form/steps/common';
 
 import steps from '../../../server/plugins/register-form/steps/index';
-
-import {key as NHSNumberStepKey, slug as NHSNumberStepSlug} from '../../../server/plugins/register-form/steps/nhs-number-details';
 
 
 describe('Get next step', () => {
@@ -89,10 +87,6 @@ describe('Get next step', () => {
     expect(checkStepCompletedBefore(requestedStepKey, latestUncompletedStep)).toEqual(true);
   });
 
-  it('should call getSlugById and return right practice', () => {
-    expect(getSlugById(NHSNumberStepKey)).toEqual(NHSNumberStepSlug);
-  });
-
   it('call getNextSlug and return right step slug', () => {
     const cookieData = {
       'nhsNumber': {
@@ -104,6 +98,6 @@ describe('Get next step', () => {
     };
 
     const nextSteps = steps.slice(2);
-    expect(getNextSlug(nextSteps, cookieData)).toEqual('gender-or-sex');
+    expect(getNextSlug(nextSteps, cookieData)).toEqual('name');
   });
 });

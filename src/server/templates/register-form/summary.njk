@@ -19,7 +19,6 @@
 {% block body_main_content %}
   <div class="page-section">
     <h1 class="form-title">{{ title }}</h1>
-
     <table class="summary">
       {{ row('Name', data.name, 'name') }}
       {{ row('Sex', data.gender, 'gender') }}
@@ -29,7 +28,7 @@
       {{ row('Contact Details', data.contactDetails, 'contactDetails', true) }}
 
       {% if data.nhsNumber['nhs-number-known'] %}
-        {{ row('NHS number', data.nhsNumberDetails, 'nhsNumber', true) }}
+        {{ row('NHS number', {'nhs-number': data.nhsNumber['nhs-number']}, 'nhsNumber', true) }}
       {% else %}
         {{ row('NHS number', {'empty': 'I don’t know my NHS number'}, 'nhsNumber') }}
       {% endif %}

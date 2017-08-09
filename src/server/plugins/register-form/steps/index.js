@@ -16,7 +16,6 @@ import registeredAddressDetailsStep from './registered-address-details';
 import registeredNameStep from './registered-name';
 import registeredNameDetailsStep from './registered-name-details';
 import nhsNumberStep from './nhs-number';
-import nhsNumberDetailsStep from './nhs-number-details';
 import currentMedicationStep from './current-medication';
 import currentMedicationDetailsStep from './current-medication-details';
 import allergiesStep from './allergies';
@@ -58,7 +57,6 @@ import summaryStep from './summary';
 const steps = [
   previouslyArmedStep,
   nhsNumberStep,
-  nhsNumberDetailsStep,
   genderStep,
   nameStep,
   dateOfBirthStep,
