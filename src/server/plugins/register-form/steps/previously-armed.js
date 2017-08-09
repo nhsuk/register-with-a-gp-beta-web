@@ -7,7 +7,26 @@ import {postHandlerFactory, getHandlerFactory} from './common';
 const schema = Joi.object().keys({
   'previously-armed': Joi.boolean().required()
     .meta({
-      componentType: 'radio-horizontal',
+      componentType: 'armed-radio-horizontal',
+      nestedFields: [
+        {
+          'label': 'Service or staff number',
+          'key': 'armedStaffNumber',
+        },
+        {
+          'label': 'Day',
+          'key': 'day',
+        },
+        {
+          'label': 'Month',
+          'key': 'month',
+        },
+        {
+          'label': 'Year',
+          'key': 'year',
+        }
+      ],
+      nestedFieldVisibleValue: true,
       children: [
         { label: 'Yes', value: true},
         { label: 'No', value: false},
