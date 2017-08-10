@@ -1,11 +1,6 @@
 .error-summary {
-  @include element-padding;
-  background-color: $red-10;
-  border-top: $baseline-grid-unit solid $red;
-
-  &:focus {
-    outline: 3px solid $yellow;
-  }
+  padding : 16px 0px 24px 20px;           //top 20px= 16+ 4(lineht)
+  border: $baseline-grid-unit*2 solid $red;
 }
 
 .error-summary__heading {
@@ -15,6 +10,7 @@
 .error-summary__list {
   list-style: none;
   padding-left: 0;
+  padding-top:20px;
 }
 
 .error-summary__error-link {
