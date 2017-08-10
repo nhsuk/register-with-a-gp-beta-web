@@ -27,7 +27,7 @@ describe('gethandler', () =>{
     }
   };
   gReply.view.prototype.unstate = function(a) {
-        return a;
+    return a;
   };
 
   it('should give back register-form/summary{\"fromsummaryTo"}', () => {
