@@ -9,11 +9,9 @@ const TIMEOUT = 10000;
 
 function getAddresses(postcode, housenumber = '', timeout=TIMEOUT) {
   return new Promise((resolve, reject) => {
-    const cleaned = postcode.replace(/\s+/g, '').toLowerCase();
-    const cleanedhousenumber = housenumber.replace(' ', '%20');
     const request = https.get({
       host: process.env.POSTCODE_API_HOST,
-      path: `/v2/uk/${ cleaned }/${ cleanedhousenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`
+      path: `/v2/uk/${ postcode }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`
     }, function(response) {
       if (response.statusCode === 200 && response.statusMessage === 'OK') {
         let body = '';
@@ -27,7 +25,7 @@ function getAddresses(postcode, housenumber = '', timeout=TIMEOUT) {
           resolve(body);
         });
         response.on('error', (err) => {
-          request.log({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ cleaned }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`, 'message': err }});
+          request.log({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ postcode }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`, 'message': err }});
           reject(err);
         });
       } else {
@@ -35,7 +33,7 @@ function getAddresses(postcode, housenumber = '', timeout=TIMEOUT) {
       }
     });
     request.setTimeout(timeout, () => {
-      request.log({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ cleaned }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`, 'message': 'timeout'}});
+      request.log({'addresslookuperror': {'url': process.env.POSTCODE_API_HOST+ `/v2/uk/${ postcode }/${ housenumber }/?api-key=${ process.env.POSTCODE_API_KEY }&format=true`, 'message': 'timeout'}});
       request.abort();
       reject();
     });
@@ -46,8 +44,13 @@ function getAddresses(postcode, housenumber = '', timeout=TIMEOUT) {
 exports.getAddresses = getAddresses;
 
 
-function addressLookuptHandler(request, reply) {
-  getAddresses(request.payload.postcode)
+function addressLookupHandler(request, reply) {
+  const postcode = request.payload.postcode;
+  const housenumber = request.payload.housenumber; 
+  const cleaned = postcode.replace(/\s+/g, '').toLowerCase();
+  const cleanedhousenumber = housenumber.replace(' ', '%20');
+
+  getAddresses(cleaned, cleanedhousenumber)
     .then(addresses => {
       reply(addresses);
     })
@@ -59,18 +62,21 @@ function addressLookuptHandler(request, reply) {
 
 
 exports.register = function(server, options, next) {
-  const routeConfig = {
-    state: cookies.disableCookies,
-  };
-  if (options.exposeEndpoint) {
-    server.route({
-      method: 'POST',
-      config: _.merge({}, routeConfig, {id: 'address'}),
-      path: '/address',
-      handler: addressLookuptHandler
-    });
-  }
-
+  const routeConfig = assign(
+    {},
+    { state: cookies.enableCookies },
+    { plugins: { crumb: true } }
+  );  
+  server.route({
+    method: 'POST',
+    config: _.merge({}, routeConfig, {id: 'addressAPI'}),
+    path: '/address',
+    plugins: {
+      // route specific options
+      crumb: {}
+    },
+    handler: addressLookupHandler
+  });
   next();
 };
 
