@@ -21,3 +21,6 @@
     color: darken($red, 10);
   }
 }
+.error-summary li + li{
+  margin-top:0px;
+}
