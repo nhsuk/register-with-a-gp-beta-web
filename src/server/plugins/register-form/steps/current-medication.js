@@ -4,7 +4,15 @@ import {postHandlerFactory, getHandlerFactory} from './common';
 const schema = Joi.object().keys({
   'current-medication': Joi.boolean().required()
     .meta({
-      componentType: 'radio-horizontal',
+      componentType: 'current-medication-radio',
+      nestedFieldVisibleValue: 'true',
+      initialNestedFieldCount: 2,
+      nestedFields: [
+        {
+          'label': 'Medication',
+          'key': 'medication',
+        }
+      ],
       children: [
         { label: 'Yes', value: 'true' },
         { label: 'No', value: 'false' },
@@ -16,6 +24,7 @@ const schema = Joi.object().keys({
         any: { required: '!!Please tell us if you’re currently taking any medication' },
       },
     }),
+  'medication': Joi.when('current-medication', {is: true, then: Joi.array().items(Joi.string().max(200)).meta({ componentType: 'nested'}).single()}),
   'submit': Joi.any().optional().strip()
 });
 
