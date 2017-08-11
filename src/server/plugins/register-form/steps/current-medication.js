@@ -14,8 +14,8 @@ const schema = Joi.object().keys({
         }
       ],
       children: [
-        { label: 'Yes', value: 'true' },
-        { label: 'No', value: 'false' },
+        { label: 'Yes', value: 'true', show_nhs_number_input:'true'},
+        { label: 'No', value: 'false', show_nhs_number_input:'false'},
       ],
       variant: 'radio',
     })
@@ -24,7 +24,7 @@ const schema = Joi.object().keys({
         any: { required: '!!Please tell us if you’re currently taking any medication' },
       },
     }),
-  'medication': Joi.when('current-medication', {is: true, then: Joi.array().items(Joi.string().max(200)).meta({ componentType: 'nested'}).single()}),
+  'medication': Joi.when('current-medication', {is: true, then: Joi.array().items(Joi.string().max(200)).min(0)}),
   'submit': Joi.any().optional().strip()
 });
 

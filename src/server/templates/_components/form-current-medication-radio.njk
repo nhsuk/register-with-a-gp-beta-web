@@ -74,18 +74,19 @@
     {% endfor %}
 
     {% if field.nestedFields %}
-        {% set showNestedField = (value == field.nestedFieldVisibleValue) %}
+      {% set showNestedField = (value in field.nestedFieldVisibleValue) %}
 
-        <div id="armed-nested-container" style="{{ 'display:none' if not showNestedField }}" class="nested-fields-container">
-            {% for f in field.nestedFields %}
-                {% set nestedFieldError = stepErrors[f.key].message | replace(stepErrors[f.key].label, "") %}
-
-                <label for="input-{{ f.key }}" class="form-label">
-                    {{ f.label }}
+      <div id="current-medication-nested-container" class="nested-fields-container">
+        {% for f in field.nestedFields %}
+          {% set nestedFieldError = stepErrors[f.key].message | replace(stepErrors[f.key].label, "") %}
+            <label for="input-{{ f.key }}" class="form-label">
+                {{ f.label }}
+                {% for i in range(0, field.initialNestedFieldCount) -%}
                     <input type="text" name="{{ f.key }}" id="input-{{ f.key }}"
                     class="form-textbox form-textbox--short {{ ' has-error' if nestedFieldError }}"
-                    value="{{ stepData[f.key] | default('') }}">
-                </label>
+                    value="{{ stepData[f.key][i] | default('') }}">
+                {% endfor %}
+            </label>
             {% endfor %}
         </div>
     {% endif %}
