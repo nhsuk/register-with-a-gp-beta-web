@@ -40,7 +40,7 @@
     </legend>
   {% endif %}
 
-  <div class="multiple-choice__container">
+  <div class="multiple-choice__container margin-btm20">
     {% for option in children %}
       {% set inputValue = option.value if 'value' in option else option.label %}
       {% set inputId = ['input', name, loop.index] | join('--') %}
@@ -72,18 +72,17 @@
         >
       </label>
     {% endfor %}
-
-    {% if nestedField %}
+  </div>
+  {% if nestedField %}
         {% set nestedFieldError = stepErrors[nestedField].message | replace(stepErrors[nestedField].label, "") %}
 
         {% set showNestedField = (value == nestedFieldVisibleValue) %}
 
-        <div id="nhs-number-nested-container" style="{{ 'display:none' if not showNestedField }}">
+        <div id="nhs-number-nested-container" style="{{ 'display:none' if not showNestedField }}" class="nestedFieldContainer">
             <label for="input-nhs-number" class="form-label">
                 NHS number
                 <input type="text" name="nhs-number" id="input-nhs-number" class="form-textbox form-textbox--short {{ ' has-error' if nestedFieldError }}" value="{{ stepData[nestedField] | default('') }} ">
             </label>
         </div>
     {% endif %}
-  </div>
 </fieldset>
