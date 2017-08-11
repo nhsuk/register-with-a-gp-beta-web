@@ -89,9 +89,7 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
 
   I.see('Do you know your NHS number?');
   I.click('label[data-label=Yes]');
-  I.click('Continue');
-
-  I.see('What is your NHS number?');
+  I.waitForElement('#input-nhs-number', 3);
   I.fillField('NHS number', '943 476 5919');
   I.click('Continue');
 
