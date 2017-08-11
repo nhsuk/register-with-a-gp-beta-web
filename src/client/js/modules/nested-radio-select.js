@@ -22,7 +22,7 @@ NestedRadioSelect.prototype.bindEvents = function bindEvents() {
 NestedRadioSelect.prototype.onClick = function onClick(e) {
   const $el = $(e.target);
   const $parent = $el.parent('label');
-  const showNestedField = $($parent).data('show-nested-field');
+  const showNestedField = $($parent).data('show-nested-fields');
   if (showNestedField){
     this.$body.find(this.nestedFieldContainer).show();
   }else{
