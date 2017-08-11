@@ -9,10 +9,10 @@ const schema = Joi.object().keys({
     .meta({
       componentType: 'nhs-number-radio',
       nestedField: 'nhs-number',
-      nestedFieldVisibleValue: 'true',
+      nestedFieldVisibleValue: true,
       children: [
-        { label: 'Yes', value: 'true', show_nhs_number_input:'true'},
-        { label: 'No', value: 'false', show_nhs_number_input:'false'},
+        { label: 'Yes', value: true, show_nhs_number_input:'true'},
+        { label: 'No', value: false, show_nhs_number_input:'false'},
       ],
       variant: 'radio',
     })

@@ -81,7 +81,7 @@
         <div id="nhs-number-nested-container" style="{{ 'display:none' if not showNestedField }}" class="nested-fields-container">
             <label for="input-nhs-number" class="form-label">
                 NHS number
-                <input type="text" name="nhs-number" id="input-nhs-number" class="form-textbox form-textbox--short {{ ' has-error' if nestedFieldError }}" value="{{ stepData[field.nestedField] | default('') }} ">
+                <input type="text" name="nhs-number" id="input-nhs-number" class="form-textbox form-textbox--short {{ ' has-error' if nestedFieldError }}" value="{{ stepData[field.nestedField] | default('') }}">
             </label>
         </div>
     {% endif %}
