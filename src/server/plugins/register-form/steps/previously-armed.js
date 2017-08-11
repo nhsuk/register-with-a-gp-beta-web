@@ -12,19 +12,22 @@ const schema = Joi.object().keys({
       nestedFields: [
         {
           'label': 'Service or staff number',
-          'key': 'armedStaffNumber',
+          'key': 'armedStaffNumber'
         },
         {
           'label': 'Day',
           'key': 'day',
+          'class' : 'form-line'
         },
         {
           'label': 'Month',
           'key': 'month',
+          'class' : 'form-line'
         },
         {
           'label': 'Year',
           'key': 'year',
+          'class' : 'form-line'
         }
       ],
       children: [
