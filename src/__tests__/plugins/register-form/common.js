@@ -2,8 +2,6 @@ import {getNextStep, getLatestUncompletedStep, getlastCompletedStep, checkStepCo
 
 import steps from '../../../server/plugins/register-form/steps/index';
 
-import {key as NHSNumberStepKey, slug as NHSNumberStepSlug} from '../../../server/plugins/register-form/steps/nhs-number-details';
-
 
 describe('Get next step', () => {
 
@@ -104,6 +102,6 @@ describe('Get next step', () => {
     };
 
     const nextSteps = steps.slice(2);
-    expect(getNextSlug(nextSteps, cookieData)).toEqual('gender-or-sex');
+    expect(getNextSlug(nextSteps, cookieData)).toEqual('name');
   });
 });
