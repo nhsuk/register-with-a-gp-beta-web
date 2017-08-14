@@ -81,7 +81,7 @@
                 <label for="input-{{ f.key }}" class="form-label">
                     {{ f.label }}
                     <input type="text" name="{{ f.key }}" id="input-{{ f.key }}"
-                    class="form-textbox form-textbox--short {{ ' has-error' if nestedFieldError }}"
+                    class="form-textbox form-textbox--short {{ ' has-error' if nestedFieldError }} form-nested-{{ f.key }}"
                     value="{{ stepData[f.key] | default('') }}">
                 </label>
             {% endfor %}

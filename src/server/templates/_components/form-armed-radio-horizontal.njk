@@ -81,14 +81,14 @@
             {% for f in field.nestedFields %}
                 {% set nestedFieldError = stepErrors[f.key].message | replace(stepErrors[f.key].label, "") %}
                  {% if f.key == "day" %}
-                    <div>Enlistment Date</div>
+                    <div class="form-label">Enlistment Date</div>
                 {% endif %}
                 <div id="inputdiv-{{ f.key }}" class="{{f.class}}">
 
                 <label for="input-{{ f.key }}" class="form-label">
                     {{ f.label }}
                     <input type="number" name="{{ f.key }}" id="input-{{ f.key }}"
-                    class="form-textbox {{ ' has-error' if nestedFieldError }}"
+                    class="form-textbox {{ ' has-error' if nestedFieldError }} form-nested-{{ f.key }}"
                     value="{{ stepData[f.key] | default('') }}">
                 </label>
                 </div>
