@@ -77,7 +77,7 @@
 
       {% block submitRow %}
         <div class="form-group">
-          <button type="submit" id="addressbutton" class="button">Continue</button>
+          <button type="button" id="addressbutton" class="button">Continue</button>
         </div>
       {% endblock submitRow %}
 
@@ -85,5 +85,5 @@
   </div>
 {% component 'analytics', {
   ga_client_ID: cid
-  } %}      
+  } %}
 {% endblock body_main_content %}

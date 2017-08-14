@@ -2,14 +2,14 @@ const $ = require('jquery');
 
 class AddressAjax {
   init(){
-    this.housenumber = $('#houseNumber');
+    this.housenumber = $('#housenumber');
     this.postcode = $('#postcode');
     this.csrf = $('input[name=\'csrf\']');
     this.button = $('#addressbutton');
     this.endpoint = '/address';
     this.button.on('click', this.formHandler.bind(this));
-//    this.resultListContainerElem = $('.address-results');
-//    this.resultListContainerElem.on('click', '.select-link', this.resultItemClickHandler.bind(this));
+    this.resultListContainerElem = $('.address-results');
+    this.resultListContainerElem.on('click', '.select-link', this.resultItemClickHandler.bind(this));
   }
 
   static getResultTemplate (){
@@ -43,12 +43,14 @@ class AddressAjax {
     this.resultListContainerElem.empty().hide();
   }
 
-  formHandler (){
- //   this.cleanSelectedAddress();
- //   const postcode = this.postcode.val();
- //   const housenumber = this.housenumber.val();
-    console.log('ldkfjlkasdf');
-    return "{'list': '53245423523'}";
+  formHandler (e){
+    e.preventDefault();
+    this.cleanSelectedAddress();
+    const postcode = this.postcode.val();
+    const housenumber = this.housenumber.val();
+    return false;
+    this.fetchList.bind(this, this.endpoint, postcode, housenumber);
+    return false;
   }
 
   appendResultListItem (i, d){

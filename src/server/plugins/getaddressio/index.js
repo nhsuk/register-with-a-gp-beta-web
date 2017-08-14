@@ -62,6 +62,7 @@ function addressLookupHandler(request, reply) {
 
 
 exports.register = function(server, options, next) {
+  const { assign } = Object;
   const routeConfig = assign(
     {},
     { state: cookies.enableCookies },
@@ -71,10 +72,6 @@ exports.register = function(server, options, next) {
     method: 'POST',
     config: _.merge({}, routeConfig, {id: 'addressAPI'}),
     path: '/address',
-    plugins: {
-      // route specific options
-      crumb: {}
-    },
     handler: addressLookupHandler
   });
   next();
