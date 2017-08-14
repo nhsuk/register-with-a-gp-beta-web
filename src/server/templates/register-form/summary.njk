@@ -36,8 +36,10 @@
     <table class="summary">
       <caption>Armed forces</caption>
       {% if data.previouslyArmed['previously-armed'] %}
-        {{ row('Staff number', data.armedStaffNumber, 'armedStaffNumber', true)}}
-        {{ row('Enlist date', data.armedEnlistDate, 'armedEnlistDate', false, '/')}}
+
+        {{ row('Staff number', {'armedStaffNumber': data.previouslyArmed['armedStaffNumber']}, 'previouslyArmed', true)}}
+        {{ row('Enlist date', {'day' : data.previouslyArmed['day'], 'month': data.previouslyArmed['month'], 'year':data.previouslyArmed['year']}, 'previouslyArmed', false, '/')}}
+
       {% else %}
         {{ row('Armed forces',{'empty': 'I haven’t served in the armed forces'}, 'previouslyArmed' )}}
       {% endif %}
