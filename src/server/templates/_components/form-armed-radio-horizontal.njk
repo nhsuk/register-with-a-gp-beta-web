@@ -75,7 +75,7 @@
   </div>
 
   {% if field.nestedFields %}
-        {% set showNestedField = (field.nestedFieldVisibleValue|string === value) %}
+        {% set showNestedField = (field.nestedFieldVisibleValue|string === value|string) %}
 
         <div id="armed-nested-container" style="{{ 'display:none' if not showNestedField }}" class="nested-fields-container">
             {% for f in field.nestedFields %}
