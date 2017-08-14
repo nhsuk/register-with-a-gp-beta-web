@@ -101,7 +101,7 @@
       <button type="submit" id="sendBtn" class="button">Send my details</button>
     </form>
 
-    <p>
+    <p class="summeryNote">
       Your details will be sent to {{ CURRENT_PRACTICE.name | default('the GP practice') }} to begin your registration.
       {% if data.email.email %}
         A confirmation email will be sent to {{ data.email.email }}.
