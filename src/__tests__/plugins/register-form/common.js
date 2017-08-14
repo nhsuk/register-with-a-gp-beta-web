@@ -88,7 +88,7 @@ describe('Get next step', () => {
   });
 
   it('should call getSlugByKey and return right practice', () => {
-    expect(getSlugByKey(NHSNumberStepKey)).toEqual(NHSNumberStepSlug);
+    expect(getSlugByKey('nhsNumber')).toEqual('nhs-number');
   });
 
   it('call getNextSlug and return right step slug', () => {
