@@ -8,11 +8,16 @@ const schema = Joi.object().keys({
   'nhs-number-known': Joi.boolean().required()
     .meta({
       componentType: 'nhs-number-radio',
-      nestedField: 'nhs-number',
-      nestedFieldVisibleValue: 'true',
+      nestedFields: [
+        {
+          'label': 'NHS number',
+          'key': 'nhs-number',
+        },
+      ],
+      nestedFieldVisibleValue: true,
       children: [
-        { label: 'Yes', value: 'true', show_nhs_number_input:'true'},
-        { label: 'No', value: 'false', show_nhs_number_input:'false'},
+        { label: 'Yes', value: true, show_nested_fields:true},
+        { label: 'No', value: false, show_nested_fields:false},
       ],
       variant: 'radio',
     })

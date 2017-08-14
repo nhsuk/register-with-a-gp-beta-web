@@ -8,28 +8,31 @@ const schema = Joi.object().keys({
   'previously-armed': Joi.boolean().required()
     .meta({
       componentType: 'armed-radio-horizontal',
-      nestedFieldVisibleValue: 'true',
+      nestedFieldVisibleValue: true,
       nestedFields: [
         {
           'label': 'Service or staff number',
-          'key': 'armedStaffNumber',
+          'key': 'armedStaffNumber'
         },
         {
           'label': 'Day',
           'key': 'day',
+          'class' : 'form-line'
         },
         {
           'label': 'Month',
           'key': 'month',
+          'class' : 'form-line'
         },
         {
           'label': 'Year',
           'key': 'year',
+          'class' : 'form-line'
         }
       ],
       children: [
-        { label: 'Yes', value: 'true', show_nhs_number_input:true},
-        { label: 'No', value: 'false', show_nhs_number_input:false},
+        { label: 'Yes', value: true, show_nested_fields:true},
+        { label: 'No', value: false, show_nested_fields:false},
       ],
       variant: 'radio',
     })

@@ -40,7 +40,7 @@
     </legend>
   {% endif %}
 
-  <div class="multiple-choice__container">
+  <div class="multiple-choice__container margin-btm20">
     {% for option in children %}
       {% set inputValue = option.value if 'value' in option else option.label %}
       {% set inputId = ['input', name, loop.index] | join('--') %}
@@ -54,7 +54,7 @@
       <label
         for="{{ inputId }}"
         class="multiple-choice multiple-choice--{{ variant | default('radio') }}{{ ' multiple-choice--inline' if inline }}{{ ' has-error' if error }} multiple-choice-radio-horizontal nhs-number-radio nested-radio-button"
-        data-label="{{ option.label }}" data-show-nested-field="{{ option.show_nhs_number_input }}"
+        data-label="{{ option.label }}" data-show-nested-fields="{{ option.show_nested_fields }}"
       >
         {{ option.label }}
         <input
@@ -73,17 +73,19 @@
       </label>
     {% endfor %}
 
-    {% if field.nestedField %}
-        {% set nestedFieldError = stepErrors[field.nestedField].message | replace(stepErrors[field.nestedField].label, "") %}
-
-        {% set showNestedField = (value in field.nestedFieldVisibleValue) %}
+    {% if field.nestedFields %}
+        {% set showNestedField = (field.nestedFieldVisibleValue|string === value) %}
 
         <div id="nhs-number-nested-container" style="{{ 'display:none' if not showNestedField }}" class="nested-fields-container">
-            <label for="input-nhs-number" class="form-label">
-                NHS number
-                <input type="text" name="nhs-number" id="input-nhs-number" class="form-textbox form-textbox--short {{ ' has-error' if nestedFieldError }}" value="{{ stepData[field.nestedField] | default('') }} ">
-            </label>
+            {% for f in field.nestedFields %}
+                {% set nestedFieldError = stepErrors[f.key].message | replace(stepErrors[f.key].label, "") %}
+                <label for="input-{{ f.key }}" class="form-label">
+                    {{ f.label }}
+                    <input type="text" name="{{ f.key }}" id="input-{{ f.key }}"
+                    class="form-textbox form-textbox--short {{ ' has-error' if nestedFieldError }}"
+                    value="{{ stepData[f.key] | default('') }}">
+                </label>
+            {% endfor %}
         </div>
     {% endif %}
-  </div>
 </fieldset>

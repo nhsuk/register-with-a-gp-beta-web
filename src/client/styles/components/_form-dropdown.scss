@@ -7,7 +7,7 @@
   padding: $baseline-grid-unit;
   width: 100%;
   line-height: 32px;
-  font-size: 30px;
+  font-size: 20px;
 
   &:focus {
     outline: 3px solid $yellow;
@@ -15,5 +15,15 @@
 
   &.has-error {
     border-color: $red;
+  }
+
+  @include media(desktop){
+    padding: 9px 0px;
+  }
+  @include media(mobile){
+    padding: 8px 0px;
+  }
+  @include media(tablet){
+    padding: 9px 0px;
   }
 }

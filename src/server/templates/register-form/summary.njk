@@ -11,7 +11,7 @@
       {%- endfor %}
     </td>
     <td class="summary__control">
-      <a href="{{ REQUEST_AKA(editDestination) | safe }}" class="button button--secondary">Change <span class="util-visuallyhidden">{{ title }}</span></a>
+      <a href="{{ GET_REDIRECT(editDestination) | safe }}" class="button button--secondary">Change <span class="util-visuallyhidden">{{ title }}</span></a>
     </td>
   </tr>
 {%- endmacro %}
@@ -22,7 +22,7 @@
     <table class="summary">
       {{ row('Name', data.name, 'name') }}
       {{ row('Sex', data.gender, 'gender') }}
-      {{ row('Date of birth', data.dateOfBirth, 'name', false, '/') }}
+      {{ row('Date of birth', data.dateOfBirth, 'dateOfBirth', false, '/') }}
       {{ row('Address', data.address, 'address', true) }}
       {{ row('Place of birth', data.countryAndTown, 'countryAndTown', true) }}
       {{ row('Contact Details', data.contactDetails, 'contactDetails', true) }}
@@ -101,7 +101,7 @@
       <button type="submit" id="sendBtn" class="button">Send my details</button>
     </form>
 
-    <p>
+    <p class="summeryNote">
       Your details will be sent to {{ CURRENT_PRACTICE.name | default('the GP practice') }} to begin your registration.
       {% if data.email.email %}
         A confirmation email will be sent to {{ data.email.email }}.

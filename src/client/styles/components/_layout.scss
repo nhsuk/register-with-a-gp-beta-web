@@ -1,9 +1,10 @@
-fieldset {
-   padding-top: 5px;
-    padding-left: 5px;
-    padding-bottom: 12px;
+.form-fields {
+	padding-top: 3px;
+ 	 padding-left: 4px;
+ 	 
 }
 
+//footer padding
 .global-footer__inner{
 	padding-top: 30px;
 
@@ -19,11 +20,141 @@ fieldset {
 	padding-bottom: 10px;
 }
 
+//desktop pad-top 30 but 4 is from header leine height
 .page-section {
-	padding: 20px 0px 80px 0px;
-
+	@include media(mobile){
+		padding: 18px 5px 80px 0px;		//top: 18 + 2(header line ht)=20
+	}
 	@include media(desktop){
-		padding: 30px 0px 80px 0px;
+		padding: 26px 5px 80px 0px;   		//top :26+4(header line ht)=30
 	}
     
+}
+
+// left margin for back link in mobile
+.button--back{
+	@include media(mobile){
+	margin-left:14px;
+	
+	}
+	
+}
+
+// .page-section class from frontend-uk over written in order to do spacing changes
+.page-section * + *{
+	margin-top:0px;
+}
+
+.form-title{
+
+	@include media(desktop){
+		font-weight:bold;
+		padding-bottom:30px; // 40= 30+4px(line ht header)+6px line ht of (title)form-fields
+		line-height: 44px;
+	}
+
+	@include media(mobile){
+		font-weight:bold;
+		font-size:24px;
+		line-height:29px;
+		padding-bottom:25px; //30 =26 + 2px(line ht)+3 form-fields
+	}
+}
+
+.form-textbox, .form-dropdown{
+	@include media(desktop){
+		//margin-top:15px;
+		margin-top:9px;
+	}
+
+	@include media(mobile){
+		//margin-top:10px;
+		margin-top:6px;
+	}
+}
+
+.multiple-choise-horizontal, .multiple-choise-vertical{
+	margin-bottom:28px;	
+	padding-top: 4px;
+}
+
+.form-line{
+	margin-bottom:20px;
+}
+
+.multiple-choice--checkbox, .details__content{
+	margin-bottom:20px;
+}
+
+.form-label{
+	@include media(mobile){
+	line-height: 25px;
+	font-size:16px;
+	}
+}
+
+//remaining 20px will be handled by last element bottom-margin
+.callout--compact,.callout--info{
+	@include media(desktop){
+		margin:30px 0px 10px 0px;
+	}
+	@include media(mobile){
+		margin: 10px 0px 10px 0px;
+	}
+}
+details{
+	padding:12px 0px;
+	//margin-bottom: 20px;
+}
+
+//remaining 20px will be handled by last elements 20px
+.continue-step, .start-step-btn{
+	padding-left:3px;
+	@include media(desktop){
+		margin-top:20px;
+		}
+	@include media(mobile){
+		margin-top:10px;
+		}
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+legend{
+	padding-bottom:14px;
+}
+
+.pad-bottom20{
+	padding-bottom:20px;
+}
+.back-link{
+	@include media(desktop){
+		padding-bottom:22px;
+	}
+	@include media(mobile){
+		padding-bottom:14px;
+	}
+	
+}
+.error-summary{
+	@include media(desktop){
+		margin-bottom:36px;
+	}
+	@include media(mobile){
+		margin-bottom:24px;
+	}
+}
+.margin-btm20{
+	margin-bottom:20px;
+}
+
+.nestedFieldContainer{
+	padding-top:10px;
 }

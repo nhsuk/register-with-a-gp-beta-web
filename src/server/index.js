@@ -10,6 +10,15 @@ const port = process.env.PORT || 3333;
 const debug = env === 'development';
 const templatePath = Path.join(__dirname, 'templates');
 
+let goodSqueezeArgs = {log: '*', error: '*', request: '*', response: '*'};
+
+// Disable the dev server logs when acceptance tests running
+const ACCEPTANCE_TEST = process.env.ACCEPTANCE_TEST;
+if (ACCEPTANCE_TEST){
+  goodSqueezeArgs = {};
+}
+
+
 const manifest = {
   server: {
     app: {
@@ -41,7 +50,7 @@ const manifest = {
               {
                 module: 'good-squeeze',
                 name: 'Squeeze',
-                args: [{log: '*', error: '*', request: '*', response: '*'}]
+                args: [goodSqueezeArgs]
               }, {
                 module: 'good-console',
               },
@@ -131,6 +140,12 @@ const manifest = {
     },
     {
       plugin: {
+        register: './plugins/check_redirect',
+        options: {}
+      }
+    },
+    {
+      plugin: {
         register: './plugins/service',
         options: {}
       }
@@ -138,6 +153,12 @@ const manifest = {
     {
       plugin: {
         register: './plugins/widget',
+        options: {}
+      }
+    },
+    {
+      plugin: {
+        register: './plugins/redirect',
         options: {}
       }
     }

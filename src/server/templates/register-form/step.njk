@@ -5,8 +5,8 @@
 {% block body_main_content %}
   <div class="page-section">
     {% if prevStep %}
-      <div class="form-group">
-        <a href="{{ prevStep }}"  class="button button--back">Back</a>
+      <div class="form-group back-link">
+        <a href="{{ prevStep }}"  class="button--back">Back</a>
       </div>
     {% endif %}
         
@@ -79,7 +79,7 @@
       {% endif %}
 
       {% block submitRow %}
-        <div class="form-group">
+        <div class="form-group continue-step">
           <button type="submit" class="button">Continue</button>
         </div>
       {% endblock submitRow %}

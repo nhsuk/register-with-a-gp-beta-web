@@ -1,4 +1,4 @@
-import {getNextStep, getLatestUncompletedStep, getlastCompletedStep, checkStepCompletedBefore, getNextSlug} from '../../../server/plugins/register-form/steps/common';
+import {getNextStep, getLatestUncompletedStep, getlastCompletedStep, checkStepCompletedBefore, getSlugByKey, getNextSlug} from '../../../server/plugins/register-form/steps/common';
 
 import steps from '../../../server/plugins/register-form/steps/index';
 
@@ -85,6 +85,10 @@ describe('Get next step', () => {
     const latestUncompletedStep = getLatestUncompletedStep(cookieData);
     const requestedStepKey = 'name';
     expect(checkStepCompletedBefore(requestedStepKey, latestUncompletedStep)).toEqual(true);
+  });
+
+  it('should call getSlugByKey and return right practice', () => {
+    expect(getSlugByKey('nhsNumber')).toEqual('nhs-number');
   });
 
   it('call getNextSlug and return right step slug', () => {
