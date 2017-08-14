@@ -83,16 +83,9 @@ const steps = [
 ];
 
 export const stepDependency = {
-  'nhs-number': [
-    'nhs-number-details'
-  ],
   'home-address-lookup': [
     'home-address-manual',
     'home-address-lookup-choose'
-  ],
-  'previously-armed': [
-    'armed-staff-number',
-    'armed-enlist-date'
   ],
   'previously-registered': [
     'registered-address',
