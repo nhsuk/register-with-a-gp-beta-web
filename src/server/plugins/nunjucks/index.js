@@ -5,7 +5,7 @@ import _ from 'lodash';
 import getFilters from './filters';
 import PracticeLookup from '../../../shared/lib/practice-lookup';
 import LoadFile from '../../../shared/lib/load-file';
-import {getSlugById} from '../register-form/steps/common';
+import {getSlugByKey} from '../register-form/steps/common';
 
 const webpackAssetsPath = Path.resolve(__dirname, '../../../client/compiled/webpack-assets.json');
 const webpackAssets = require(webpackAssetsPath);
@@ -107,8 +107,11 @@ exports.register = function(server, options, next) {
     isCached: !debug,
     context: function (request) {
       const context = {
-        REQUEST_AKA: function(id) {
-          return '/' + request.params.practice + '/register/' + getSlugById(id);
+        REQUEST_AKA: function(key) {
+          return '/' + request.params.practice + '/register/' + getSlugByKey(key);
+        },
+        GET_REDIRECT: function(key) {
+          return '/' + request.params.practice + '/redirect/' + getSlugByKey(key);
         },
         ENV_VALUE: function(name) {
           if(process.env[name] === 'undefined'){

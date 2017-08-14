@@ -16,14 +16,22 @@ describe('gethandler', () =>{
   });
   const gReply = {
     view: function(a,b){
-      return a + JSON.stringify(b.data);
+      const r = a + b;
+      this.unstate = function(a=r){
+        return a;
+      };
+      return this;
     },
     redirect: function(a){
       return a;
     }
   };
-  it('should give back register-form/summary{\"medicalHistory\":\"c\"}', () => {
-    expect(summaryGetHandler(mockGet(), gReply)).toBe('register-form/summary{\"medicalHistory\":\"c\"}');
+  gReply.view.prototype.unstate = function(a) {
+    return a;
+  };
+
+  it('should give back register-form/summary{\"fromsummaryTo"}', () => {
+    expect(summaryGetHandler(mockGet(), gReply)).toBe('fromSummaryTo');
   });
   it('should give back a redirect to nhs-number', () => {
     expect(summaryGetHandler(mockGet(), gReply)).toBe('/b/register/nhs-number');

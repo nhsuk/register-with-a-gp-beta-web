@@ -27,7 +27,8 @@ export function summaryGetHandler(request, reply) {
     const data = _.get(request, 'state.data', {});
     if(data.hasOwnProperty('medicalHistory')){
       return reply
-        .view('register-form/summary', {data, title});
+        .view('register-form/summary', {data, title})
+        .unstate('fromSummaryTo', { path: '/' });
     } else {
       return reply
         .redirect('/' + practice + '/register/nhs-number');

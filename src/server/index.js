@@ -140,6 +140,12 @@ const manifest = {
     },
     {
       plugin: {
+        register: './plugins/check_redirect',
+        options: {}
+      }
+    },
+    {
+      plugin: {
         register: './plugins/service',
         options: {}
       }
@@ -147,6 +153,12 @@ const manifest = {
     {
       plugin: {
         register: './plugins/widget',
+        options: {}
+      }
+    },
+    {
+      plugin: {
+        register: './plugins/redirect',
         options: {}
       }
     }
