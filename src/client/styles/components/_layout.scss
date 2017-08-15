@@ -3,8 +3,6 @@
  	 padding-left: 4px;
  	 
 }
-
-//footer padding
 .global-footer__inner{
 	padding-top: 30px;
 
@@ -20,18 +18,17 @@
 	padding-bottom: 10px;
 }
 
-//desktop pad-top 30 but 4 is from header leine height
 .page-section {
 	@include media(mobile){
-		padding: 18px 5px 80px 0px;		//top: 18 + 2(header line ht)=20
+		padding: 18px 5px 80px 0px;
 	}
 	@include media(desktop){
-		padding: 26px 5px 80px 0px;   		//top :26+4(header line ht)=30
+		padding: 26px 5px 80px 0px;
 	}
     
 }
 
-// left margin for back link in mobile
+
 .button--back{
 	@include media(mobile){
 	margin-left:14px;
@@ -39,17 +36,15 @@
 	}
 	
 }
-
-// .page-section class from frontend-uk over written in order to do spacing changes
 .page-section * + *{
-	margin-top:0px;
+	margin-top:10px;
 }
 
 .form-title{
 
 	@include media(desktop){
 		font-weight:bold;
-		padding-bottom:30px; // 40= 30+4px(line ht header)+6px line ht of (title)form-fields
+		padding-bottom:30px;
 		line-height: 44px;
 	}
 
@@ -57,18 +52,16 @@
 		font-weight:bold;
 		font-size:24px;
 		line-height:29px;
-		padding-bottom:25px; //30 =26 + 2px(line ht)+3 form-fields
+		padding-bottom:25px;
 	}
 }
 
 .form-textbox, .form-dropdown{
 	@include media(desktop){
-		//margin-top:15px;
 		margin-top:9px;
 	}
 
 	@include media(mobile){
-		//margin-top:10px;
 		margin-top:6px;
 	}
 }
@@ -93,7 +86,6 @@
 	}
 }
 
-//remaining 20px will be handled by last element bottom-margin
 .callout--compact,.callout--info{
 	@include media(desktop){
 		margin:30px 0px 10px 0px;
@@ -104,10 +96,8 @@
 }
 details{
 	padding:12px 0px;
-	//margin-bottom: 20px;
 }
 
-//remaining 20px will be handled by last elements 20px
 .continue-step, .start-step-btn{
 	padding-left:3px;
 	@include media(desktop){
@@ -154,7 +144,6 @@ legend{
 .margin-btm20{
 	margin-bottom:20px;
 }
-
-.nestedFieldContainer{
-	padding-top:10px;
+.multiple-choice__container{
+	margin-bottom:20px;
 }
