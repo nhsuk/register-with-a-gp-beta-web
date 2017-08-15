@@ -13,7 +13,6 @@
   vertical-align: top;
 
   @include media(tablet) {
-    //border-top: 1px solid $grey-2;
     border-bottom: 1px solid $grey-2;
     display: table-cell;
     padding: $baseline-grid-unit * 4 $baseline-grid-unit * 2;
@@ -30,8 +29,6 @@
 
 .summary__title {
   @include bold-font(16);
-  //border-top: 1px solid $grey-2;
-  //color: $grey-1;
   padding-top: $baseline-grid-unit * 4;
 
   @include media(tablet) {
