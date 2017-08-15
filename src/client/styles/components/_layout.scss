@@ -30,8 +30,12 @@
 .button--back {
 	@include media(mobile) {
 		margin-left: 14px;
+		padding-bottom: 14px;
 	}
-	
+
+	@include media(tablet) {
+		padding-bottom: 22px;
+	}
 }
 .page-section * + * {
 	margin-top: 10px;
@@ -119,15 +123,7 @@ legend {
 .pad-bottom20 {
 	padding-bottom: 20px;
 }
-.back-link {
-	@include media(desktop) {
-		padding-bottom: 22px;
-	}
-	@include media(mobile) {
-		padding-bottom: 14px;
-	}
-	
-}
+
 .error-summary {
 	@include media(desktop) {
 		margin-bottom: 36px;
