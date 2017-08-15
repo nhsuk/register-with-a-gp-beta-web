@@ -83,11 +83,12 @@
                 {% for i in range(0, field.initialNestedFieldCount) -%}
                     {% set nestedFieldError = stepErrors[f.key+'.'+i].message | replace(stepErrors[f.key+'.'+i].label, "") %}
                     <input type="text" name="{{ f.key }}" id="input-{{ f.key }}"
-                    class="form-textbox form-textbox--short {{ ' has-error' if nestedFieldError }}"
+                    class="form-textbox form-textbox--short {{ ' has-error' if nestedFieldError }} {{ ' nested-inline-base-input' if i==0 }}"
                     value="{{ stepData[f.key][i] | default('') }}">
                 {% endfor %}
             </label>
             {% endfor %}
+            <a href="#" class="add-row">Add row</a>
         </div>
     {% endif %}
 
