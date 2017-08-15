@@ -10,12 +10,12 @@ const schema = Joi.object().keys({
       nestedFields: [
         {
           'label': 'Medication',
-          'key': 'medication',
+          'key': 'medications',
         }
       ],
       children: [
-        { label: 'Yes', value: 'true', show_nhs_number_input:'true'},
-        { label: 'No', value: 'false', show_nhs_number_input:'false'},
+        { label: 'Yes', value: 'true', show_nested_fields:true},
+        { label: 'No', value: 'false', show_nested_fields:false},
       ],
       variant: 'radio',
     })
@@ -24,7 +24,14 @@ const schema = Joi.object().keys({
         any: { required: '!!Please tell us if you’re currently taking any medication' },
       },
     }),
-  'medication': Joi.when('current-medication', {is: true, then: Joi.array().items(Joi.string().max(200)).min(0)}),
+  'medications': Joi.when('current-medication', {
+    is: true,
+    then: Joi.array().items(Joi.string().max(200).min(2)).required().options({
+      language: {
+        key: 'A medication item ',
+      },
+    })
+  }),
   'submit': Joi.any().optional().strip()
 });
 
