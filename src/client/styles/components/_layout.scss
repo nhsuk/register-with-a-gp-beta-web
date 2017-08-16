@@ -28,15 +28,14 @@
 
 
 .button--back {
-	@include media(mobile) {
-		margin-left: 14px;
-		padding-bottom: 14px;
-	}
-
+	margin-left: 14px;
+	padding-bottom: 14px;
+	
 	@include media(tablet) {
+		margin-left: 0px;
 		padding-bottom: 22px;
 	}
-}
+} 
 
 .form-title {
 	font-weight: bold;
@@ -85,7 +84,7 @@
 		margin: 30px 0px 10px 0px;
 	}
 	@include media(mobile) {
-		margin: 10px 0px 10px 0px;
+		margin: 10px 0;
 	}
 }
 details {
