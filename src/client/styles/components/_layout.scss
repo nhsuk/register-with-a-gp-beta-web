@@ -132,4 +132,6 @@ legend {
 .multiple-choice__container {
 	margin-bottom: 20px;
 }
-
+.page-section * + *{
+	margin-bottom:10px;
+}
