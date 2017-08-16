@@ -89,9 +89,7 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
 
   I.see('Do you know your NHS number?');
   I.click('label[data-label=Yes]');
-  I.click('Continue');
-
-  I.see('What is your NHS number?');
+  I.waitForElement('.nested-fields-container', 3);
   I.fillField('NHS number', '943 476 5919');
   I.click('Continue');
 
@@ -130,16 +128,11 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
 
   I.see('Have you served in the armed forces?');
   I.click('label[data-label=Yes]');
-  I.click('Continue');
-
-  I.see('What was your service or staff number?');
-  I.fillField('#input-armedStaffNumber', '11111112233');
-  I.click('Continue');
-
-  I.see('When did you enlist?');
-  I.fillField('#input-day', '01');
-  I.fillField('#input-month', '01');
-  I.fillField('#input-year', '2010');
+  I.waitForElement('.nested-fields-container', 3);
+  I.fillField('Service or staff number', '11111112233');
+  I.fillField('Day', '11');
+  I.fillField('Month', '11');
+  I.fillField('Year', '2011');
   I.click('Continue');
 
   I.see('Are you already registered with a GP?');

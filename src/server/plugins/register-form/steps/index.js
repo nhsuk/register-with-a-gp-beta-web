@@ -6,8 +6,6 @@ import homeAddressLookupPickStep from './home-address-lookup-choose';
 import homeAddressStep from './home-address';
 import contactDetailsStep from './contact-details';
 import previouslyArmedStep from './previously-armed';
-import armedStaffNumberStep from './armed-staff-number';
-import armedEnlistDateStep from './armed-enlist-date';
 import previouslyRegisteredStep from './previously-registered';
 import currentGP from './current-gp';
 import enterGpAddress from './current-gp-address';
@@ -16,7 +14,6 @@ import registeredAddressDetailsStep from './registered-address-details';
 import registeredNameStep from './registered-name';
 import registeredNameDetailsStep from './registered-name-details';
 import nhsNumberStep from './nhs-number';
-import nhsNumberDetailsStep from './nhs-number-details';
 import currentMedicationStep from './current-medication';
 import currentMedicationDetailsStep from './current-medication-details';
 import allergiesStep from './allergies';
@@ -57,7 +54,6 @@ import summaryStep from './summary';
  */
 const steps = [
   nhsNumberStep,
-  nhsNumberDetailsStep,
   genderStep,
   nameStep,
   dateOfBirthStep,
@@ -67,8 +63,6 @@ const steps = [
   countryAndTown,
   contactDetailsStep,
   previouslyArmedStep,
-  armedStaffNumberStep,
-  armedEnlistDateStep,
   previouslyRegisteredStep,
   currentGP,
   enterGpAddress,
@@ -84,4 +78,22 @@ const steps = [
   summaryStep
 ];
 
+export const stepDependency = {
+  'home-address-lookup': [
+    'home-address-manual',
+    'home-address-lookup-choose'
+  ],
+  'previously-registered': [
+    'registered-address',
+    'registered-address-manual',
+    'registered-name',
+    'registered-name-details'
+  ],
+  'current-medication': [
+    'current-medication-details',
+  ],
+  'allergies': [
+    'allergies-details'
+  ]
+};
 export default steps;
