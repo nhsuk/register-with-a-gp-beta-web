@@ -37,20 +37,15 @@
 		padding-bottom: 22px;
 	}
 }
-.page-section * + * {
-	margin-top: 10px;
-}
 
 .form-title {
-
-	@include media(desktop) {
-		font-weight: bold;
+	font-weight: bold;
+	@include media(tablet) {
 		padding-bottom: 30px;
 		line-height: 44px;
 	}
 
 	@include media(mobile) {
-		font-weight: bold;
 		font-size: 24px;
 		line-height: 29px;
 		padding-bottom: 25px;
