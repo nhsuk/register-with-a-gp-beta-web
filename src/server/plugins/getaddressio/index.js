@@ -45,13 +45,8 @@ exports.getAddresses = getAddresses;
 
 
 function addressLookupHandler(request, reply) {
-  console.log(request.payload);
   const postcode = request.payload.postcode;
   const housenumber = request.payload.housenumber; 
-//  const csrfToken = request.payload.csrf;
-//  console.log('postcode' + cleaned);
-//  console.log('housenumber' + cleanedhousenumber);
-//  console.log('csrf' + csrfToken);
 
   getAddresses(postcode, housenumber)
     .then(addresses => {
@@ -63,7 +58,24 @@ function addressLookupHandler(request, reply) {
     });
 }
 
-
+function addressPostHandler(request, reply) {
+  const address1 = request.payload.address1;  
+  const address2 = request.payload.address2;  
+  const address3 = request.payload.address3;  
+  const town = request.payload.town;  
+  const county = request.payload.county;
+  const address =  {
+    address1: address1,
+    address2: address2,
+    address3: address3,
+    locality:  joinStrStripEmpty([town, county]),
+    postcode
+  };
+  
+}
+function joinStrStripEmpty(vals) {
+  return _.join(_.compact(_.map(vals, x => _.trim(x))), ' ,');
+}
 exports.register = function(server, options, next) {
   const { assign } = Object;
   const routeConfig = assign(
@@ -76,6 +88,12 @@ exports.register = function(server, options, next) {
     config: _.merge({}, routeConfig, {id: 'addressAPI'}),
     path: '/address',
     handler: addressLookupHandler
+  });
+  server.route({
+    method: 'POST',
+    config: _.merge({}, routeConfig, {id: 'addressSaveAPI'}),
+    path: '/addresspost',
+    handler: addressPostHandler    
   });
   next();
 };

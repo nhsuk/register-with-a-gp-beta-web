@@ -68,9 +68,10 @@ class AddressAjax {
 
   formHandler (){
  //   this.cleanSelectedAddress();
-    const postcode = this.postcode.val();
+    let postcode = this.postcode.val();
     const housenumber = this.housenumber.val();
     this.fetchList(this.endpoint, postcode, housenumber);
+    postcode = postcode.replace(/\s/g, '');
   }
 
   fetchList (endpoint, postcode, housenumber){
@@ -117,7 +118,5 @@ class AddressAjax {
     });
   }
 }
-
-
 
 module.exports = new AddressAjax('/address');
