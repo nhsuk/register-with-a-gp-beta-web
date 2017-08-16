@@ -27,8 +27,6 @@ services:
       GP_EMAIL_WALLINGTON_FAMILY_PRACTICE: ${GP_EMAIL_WALLINGTON_FAMILY_PRACTICE}
       GP_EMAIL_BURNS_PRACTICE: ${GP_EMAIL_BURNS_PRACTICE}
       GP_EMAIL_HAMPTON_WICK_SURGERY: ${GP_EMAIL_HAMPTON_WICK_SURGERY}
-      ES_HOST: gp-reg-db
-      ES_PORT: 9200
     labels:
       traefik.enable: true
       traefik.frontend.rule: $TRAEFIK_RULE
@@ -46,6 +44,3 @@ services:
         splunk-verify-connection: "false"
         tag: "{{`{{.ImageName}} {{.Name}} {{.FullID}}`}}"
         splunk-format: json
-
-  gp-reg-db:
-    image: nhsuk/profiles-db-elastic:0.3.0
