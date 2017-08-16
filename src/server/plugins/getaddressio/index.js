@@ -45,12 +45,15 @@ exports.getAddresses = getAddresses;
 
 
 function addressLookupHandler(request, reply) {
+  console.log(request.payload);
   const postcode = request.payload.postcode;
   const housenumber = request.payload.housenumber; 
-  const cleaned = postcode.replace(/\s+/g, '').toLowerCase();
-  const cleanedhousenumber = housenumber.replace(' ', '%20');
+//  const csrfToken = request.payload.csrf;
+//  console.log('postcode' + cleaned);
+//  console.log('housenumber' + cleanedhousenumber);
+//  console.log('csrf' + csrfToken);
 
-  getAddresses(cleaned, cleanedhousenumber)
+  getAddresses(postcode, housenumber)
     .then(addresses => {
       reply(addresses);
     })
@@ -66,7 +69,7 @@ exports.register = function(server, options, next) {
   const routeConfig = assign(
     {},
     { state: cookies.enableCookies },
-    { plugins: { crumb: true } }
+    {plugins: {crumb: true }}
   );  
   server.route({
     method: 'POST',

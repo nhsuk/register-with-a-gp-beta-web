@@ -9,33 +9,16 @@
         <a href="{{ prevStep }}"  class="button button--back">Back</a>
       </div>
     {% endif %}
-        
-
     {% component 'error-summary', { children: stepErrors } %}
-
     <h1 class="form-title">{{ title | render | safe }}</h1>
-
     <form method="post" id="current-step-form" class="{{key}}-form">
       <input type="hidden" name="csrf" value="{{csrf}}">
-
-      {% if beforeTemplate %}
-        {% include beforeTemplate %}
-      {% endif %}
-      {% if details %}
-        {% if details.position =='above' %}
-          {% set content = details.content %}
-          <details>
-            <summary>
-              <span class="details__summary">{{ details.summary }}</span>
-            </summary>
-            <div class="details__content">
-              <div class="callout callout--info">
-                <p>{{ content | render() | safe }}</p>
-              </div>
-            </div>
-          </details>
-        {%endif %}
-      {% endif %}
+      <input type="hidden" id="selectedAddress1" value="">
+      <input type="hidden" id="selectedAddress2" value="">
+      <input type="hidden" id="selectedAddress3" value="">
+      <input type="hidden" id="selectedTown" value="">
+      <input type="hidden" id="selectedCounty" value="">
+      
       {% block formFields %}
         <div class="form-fields">
           {% for field in fields %}
@@ -53,32 +36,23 @@
             {% endif %}
           {% endfor %}
         </div>
+        </ul> 
       {% endblock %}
-      {% if extraInfo %}
-        <div class="callout callout--info callout--compact">
-          <p>{{ extraInfo | render() | safe }}</p>
+      {% block confirm %}
+        <div class="address-confirm">
+          <span class="address-confirm-line" id="confirmAddress1"></span>
+          <span class="address-confirm-line" id="confirmAddress2"></span>
+          <span class="address-confirm-line" id="confirmAddress3"></span>
+          <span class="address-confirm-line" id="confirmTown"></span>
+          <span class="address-confirm-line" id="confirmCounty"></span>
+          <div class="confirm-reset">reset x</div>
         </div>
-      {% endif %}  
-      {% if details %}
-        {% if details.position == 'below' %}
-          {% set content = details.content %}
-          <details>
-            <summary>
-              <span class="details__summary">{{ details.summary | render }}</span>
-            </summary>
-            <div class="details__content">
-              <div class="callout callout--info">
-                <p>{{ content | render() | safe }}</p>
-              </div>
-            </div>
-          </details>
-        {% endif %}
-      {% endif %}
-
+      {% endblock %}
       {% block submitRow %}
         <div class="form-group">
           <button type="button" id="addressbutton" class="button">Continue</button>
         </div>
+       <ul class="address-results">
       {% endblock submitRow %}
 
     </form>
