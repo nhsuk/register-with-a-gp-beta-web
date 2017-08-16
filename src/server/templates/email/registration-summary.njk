@@ -1,4 +1,4 @@
-{%- macro render_one_line(title, fields) -%}
+{%- macro render_one_line(title, fields, ) -%}
   {{ title }}:
   {% for name, line in fields -%}
     {% if line %}  {{ line | nl2br }} {% endif %}
@@ -26,7 +26,7 @@ Date of Birth: {{ data.dateOfBirth['year'] }}/{{ data.dateOfBirth['month'] }}/{{
 {{ render_multi_line('Contact Details', data.contactDetails) }}
 
 {% if data.nhsNumber['nhs-number-known'] -%}
-  {{ render_one_line('NHS number', data.nhsNumberDetails) }}
+  {{ render_one_line('NHS number', {'nhs-number': data.nhsNumber['nhs-number']}) }}
 {% else -%}
   {{ render_one_line('NHS number', {'empty': 'I don’t know my NHS number'}) }}
 {%- endif %}
@@ -35,9 +35,9 @@ Armed force
 ===========
 
 {% if data.previouslyArmed['previously-armed'] -%}
-  {{ render_one_line('Staff number', data.armedStaffNumber) }}
+  {{ render_one_line('Staff number', {'armedStaffNumber': data.previouslyArmed['armedStaffNumber']}) }}
   {{ render_one_line('Enlist date', data.armedEnlistDate) }}
-  Enlist date: {{ data.armedEnlistDate['year'] }}/{{ data.armedEnlistDate['month'] }}/{{ data.armedEnlistDate['day'] }}
+  Enlist date:{{ data.previouslyArmed['year'] }}/{{ data.previouslyArmed['month'] }}/{{ data.previouslyArmed['day'] }}
 {%- endif %}
 
 Your current GP

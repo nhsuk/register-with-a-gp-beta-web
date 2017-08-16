@@ -4,7 +4,7 @@
 </head>
 <body>
 {%- macro render_one_line(title, fields) %}
-  {{ title }}:
+  <strong>{{ title }}:</strong>
   {% for name, line in fields %}
     {% if line %}<p>{{ line | nl2br | safe }}</p>{% endif %}
   {% endfor %}
@@ -36,17 +36,17 @@
 {{ render_multi_line('Contact Details', data.contactDetails) }}
 <hr>
 {% if data.nhsNumber['nhs-number-known'] -%}
-{{ render_multi_line('NHS number', data.nhsNumber) }}
+    {{ render_multi_line('NHS number', {'nhs-number': data.nhsNumber['nhs-number']}) }}
 {% else -%}
-{{ render_one_line('NHS number', {'empty': 'I don’t know my NHS number'}) }}
+    {{ render_one_line('NHS number', {'empty': 'I don’t know my NHS number'}) }}
 {%- endif %}
 <hr>
 {% if data.previouslyArmed['previously-armed'] -%}
-Armed force
+    <strong>Armed force</strong>
 
-<p>{{ render_one_line('Staff number', data.armedStaffNumber) }}</p>
-<p>Enlist date:{{ data.armedEnlistDate['year'] }}/{{ data.armedEnlistDate['month'] }}/{{ data.armedEnlistDate['day'] }}</p>
-<hr>
+    <p>{{ render_one_line('Staff number', {'armedStaffNumber': data.previouslyArmed['armedStaffNumber']}) }}</p>
+    <p>Enlist date:{{ data.previouslyArmed['year'] }}/{{ data.previouslyArmed['month'] }}/{{ data.previouslyArmed['day'] }}</p>
+    <hr>
 {%- endif %}
 Your current GP
 
