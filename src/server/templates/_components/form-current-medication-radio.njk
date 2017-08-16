@@ -76,7 +76,7 @@
     {% if field.nestedFields %}
       {% set showNestedField = (value in field.nestedFieldVisibleValue) %}
 
-      <div id="current-medication-nested-container" class="nested-fields-container">
+      <div id="current-medication-nested-container" class="nested-fields-container"  style="{{ 'display:none' if not showNestedField }}">
         {% for f in field.nestedFields %}
             <label for="input-{{ f.key }}" class="form-label">
                 {{ f.label }}

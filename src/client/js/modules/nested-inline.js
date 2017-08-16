@@ -20,7 +20,9 @@ NestedInline.prototype.bindEvents = function bindEvents() {
 };
 
 NestedInline.prototype.onClick = function onClick() {
-  $(this.addRowSelector).before($(this.baseInputSelector).clone().removeClass(this.baseInputSelector.replace('.', '')));
+  $(this.addRowSelector).before($(this.baseInputSelector)
+    .clone().val('').removeClass(this.baseInputSelector.replace('.', '')));
+  return false;
 };
 
 
