@@ -3,7 +3,7 @@ import JoiPostcode from 'joi-postcode';
 import JoiNHSNumber from '../../../../shared/lib/joi-nhs-number-validator';
 import JoiFullDate from '../../../../shared/lib/joi-full-date-validator';
 import _ from 'lodash';
-import steps from './index';
+import {steps, stepDepency} from './index';
 import ua from 'universal-analytics';
 let params = {};
 
@@ -72,6 +72,35 @@ export function getPrevStep(prevSteps, cookieData, request) {
       return '/' + practice + '/register/' + step.slug;
     }
   }
+}
+
+export function getNextNonDepStep(key){
+  let slug = '';
+  let stepKey = 0;
+  for (let i = 0; i < steps.length; i++){
+    const step = steps[i];
+    if(step.key == key){
+      slug = step.slug;
+      stepKey = i;
+    }
+  }
+  const depSlug = stepDependency[slug];
+  if( depSlug !== 'undefined'){
+    return steps[i+1].slug;
+  } else {
+    let found = false;
+    for (let k = stepKey+1; k < steps.length; k++){
+      for(let l = 0; l < depSlug.length; l++){
+        if(depSlug[l] == steps[k].slug){
+          found = true;
+        }
+      }
+      if(!found){
+        return steps[k].slug;
+      }
+    }
+  }
+  
 }
 
 export function getNextStep(nextSteps, cookieData) {

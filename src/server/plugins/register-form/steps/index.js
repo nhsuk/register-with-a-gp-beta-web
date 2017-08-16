@@ -84,4 +84,23 @@ const steps = [
   summaryStep
 ];
 
+export const stepDependency = {
+  'home-address-lookup': [
+    'home-address-manual',
+    'home-address-lookup-choose'
+  ],
+  'previously-registered': [
+    'registered-address',
+    'registered-address-manual',
+    'registered-name',
+    'registered-name-details'
+  ],
+  'current-medication': [
+    'current-medication-details',
+  ],
+  'allergies': [
+    'allergies-details'
+  ]
+};
+
 export default steps;
