@@ -70,7 +70,7 @@ class AddressAjax {
  //   this.cleanSelectedAddress();
     let postcode = this.postcode.val();
     const housenumber = this.housenumber.val();
-    this.fetchList(this.endpoint, postcode, housenumber);
+    this.fetchList('/' + $('#practice').val() + '/' + this.endpoint, postcode, housenumber);
     postcode = postcode.replace(/\s/g, '');
   }
 

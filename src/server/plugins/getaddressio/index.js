@@ -2,6 +2,7 @@ import _ from 'lodash';
 import https from 'https';
 import cookies from '../../config/cookies';
 import naturalSort from 'javascript-natural-sort';
+import {getNextNonDepStep} from '../register-form/steps/common'; 
 
 
 const TIMEOUT = 10000;
@@ -71,7 +72,11 @@ function addressPostHandler(request, reply) {
     locality:  joinStrStripEmpty([town, county]),
     postcode
   };
-  
+  const practice = request.params.practice;
+  const To = getNextNonDepStep('addressLookup');
+  return reply
+    .redirect(To)
+    .state(data)
 }
 function joinStrStripEmpty(vals) {
   return _.join(_.compact(_.map(vals, x => _.trim(x))), ' ,');
@@ -92,7 +97,7 @@ exports.register = function(server, options, next) {
   server.route({
     method: 'POST',
     config: _.merge({}, routeConfig, {id: 'addressSaveAPI'}),
-    path: '/addresspost',
+    path: '/{practice}/addresspost',
     handler: addressPostHandler    
   });
   next();

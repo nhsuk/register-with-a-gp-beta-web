@@ -3,7 +3,7 @@ import JoiPostcode from 'joi-postcode';
 import JoiNHSNumber from '../../../../shared/lib/joi-nhs-number-validator';
 import JoiFullDate from '../../../../shared/lib/joi-full-date-validator';
 import _ from 'lodash';
-import {steps, stepDepency} from './index';
+import {steps, stepDependency} from './index';
 import ua from 'universal-analytics';
 let params = {};
 
