@@ -4,7 +4,7 @@
   border: ($baseline-grid-unit / 2) solid $blue;
   display: block;
   max-width: 540px;
-  padding: 8px 0 8px 10px;
+  padding: 8px 0 8px 6px;
   width: 100%;
   line-height: 32px;
  
@@ -15,8 +15,5 @@
 
   &.has-error {
     border-color: $red;
-  }
-  @include media(tablet) {
-    padding: 9px 0 9px 10px;
   }
 }
