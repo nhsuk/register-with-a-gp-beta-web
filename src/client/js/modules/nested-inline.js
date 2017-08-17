@@ -2,7 +2,9 @@ const $ = require('jquery');
 
 const NestedInline = function NestedInline() {
   this.addRowSelector = '.add-row';
-  this.baseInputSelector = '.nested-inline-base-input';
+  this.baseNestedInputSelector = '.nested-inline-base-input';
+  this.nestedInputIDPrefix = 'input-medications';
+  this.nestedInlineLabelClass = '.nested-inline-label';
 };
 
 NestedInline.prototype.init = function init() {
@@ -20,8 +22,14 @@ NestedInline.prototype.bindEvents = function bindEvents() {
 };
 
 NestedInline.prototype.onClick = function onClick() {
-  $(this.addRowSelector).before($(this.baseInputSelector)
-    .clone().val('').removeClass(this.baseInputSelector.replace('.', '')));
+  const newNestedInput = $(this.baseNestedInputSelector).clone().val('');
+  const lastNestedInput = $(this.nestedInlineLabelClass).find('.nested-input').last();
+  const lastNestedInputID = lastNestedInput.attr('id');
+  const numberPattern = /\d+/g;
+  const rowIndex = parseInt(lastNestedInputID.match(numberPattern)) +1;
+  const newNestedInputID = `${this.nestedInputIDPrefix}-${rowIndex}`;
+  newNestedInput.attr('id', newNestedInputID).removeClass(this.baseNestedInputSelector.replace('.', ''));
+  $(this.nestedInlineLabelClass).append(newNestedInput);
   return false;
 };
 
