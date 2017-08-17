@@ -6,7 +6,7 @@
 
   ga('create', 'UA-67365892-10', {'clientId': '{{ ga_client_ID }}' });
   ga('send', 'pageview');
-  function ga_event(Category, Text){
+  function ga_event(Category, Text, Label=''){
     ga('send', 'event', Category, Text, Label);
   }
 </script>
