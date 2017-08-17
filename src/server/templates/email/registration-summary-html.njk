@@ -76,7 +76,7 @@ Your current GP
 Your health
 
 {% if data.currentMedication['current-medication'] %}
-  <p>{{ render_multi_line('Medication', data.medicationDetails) }}</p>
+  <p>{{ render_multi_line('Medication', {'medicationDetails': data.currentMedication['medications']}) }}</p>
 {% else %}
   <p>{{ render_one_line('Medication', {'empty': 'I’m not currently taking any medication'}) }}</p>
 {% endif %}

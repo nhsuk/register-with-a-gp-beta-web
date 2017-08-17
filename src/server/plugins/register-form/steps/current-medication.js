@@ -6,8 +6,11 @@ const schema = Joi.object().keys({
     .meta({
       componentType: 'current-medication-radio',
       nestedFieldVisibleValue: 'true',
-      initialNestedFieldCount: 2,
       nestedFields: [
+        {
+          'label': 'Medication',
+          'key': 'medications',
+        },
         {
           'label': 'Medication',
           'key': 'medications',
