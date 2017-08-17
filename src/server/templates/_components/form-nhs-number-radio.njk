@@ -72,7 +72,7 @@
         >
       </label>
     {% endfor %}
-
+    </div>
     {% if field.nestedFields %}
         {% set showNestedField = (field.nestedFieldVisibleValue|string === value|default('')|string) %}
         <div id="nhs-number-nested-container" style="{{ 'display:none' if not showNestedField }}" class="nested-fields-container">

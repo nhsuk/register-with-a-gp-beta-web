@@ -147,4 +147,8 @@ $_radio-spacing: ($_element-size - $_radio-size) / 2;
    clear: none;
    float : none;
    padding-right:40px;
+
+    .js-enabled & {
+      padding-top: 6px;
+    }
 }
