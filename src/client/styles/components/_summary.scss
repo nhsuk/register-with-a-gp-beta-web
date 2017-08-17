@@ -11,6 +11,7 @@
   margin: 0;
   padding: $baseline-grid-unit * 2 0 0;
   vertical-align: top;
+  @include core-font(16);
 
   @include media(tablet) {
     border-bottom: 1px solid $grey-2;
@@ -18,12 +19,8 @@
     padding: $baseline-grid-unit * 4 $baseline-grid-unit * 2;
   }
 
-   @include media(desktop){
+  @include media(desktop) {
     @include core-font(20);
-  }
-  @include media(mobile){
-    @include core-font(16);
-    
   }
 }
 
@@ -58,6 +55,6 @@
   }
 }
 
-.summeryNote{
+.summary-note{
   padding-top:20px;
 }

@@ -1,14 +1,20 @@
+$callout-line: #BFC1C3;
 .form-fields {
-	padding-top: 3px;
- 	 padding-left: 4px;
+	padding: 8px 0 4px 4px;
  	 
 }
-.global-footer__inner{
+.page-section * + * {
+	
+	@include media(desktop) {
+		margin-top: 10px;
+	}
+}
+.global-footer__inner {
 	padding-top: 30px;
 
 }
 
-.global-footer__inner:before{
+.global-footer__inner:before {
 	margin-bottom: 30px;
 	
 }
@@ -19,92 +25,82 @@
 }
 
 .page-section {
-	@include media(mobile){
-		padding: 18px 5px 80px 0px;
-	}
-	@include media(desktop){
+	padding: 18px 5px 80px 0px;
+	@include media(tablet) {
 		padding: 26px 5px 80px 0px;
 	}
     
 }
 
-
-.button--back{
-	@include media(mobile){
-	margin-left:14px;
+.button--back {
+	margin-left: 14px;
+	padding-bottom: 14px;
 	
+	@include media(tablet) {
+		margin-left: 0px;
+		padding-bottom: 8px;
 	}
-	
-}
-.page-section * + *{
-	margin-top:10px;
-}
+} 
 
-.form-title{
-
-	@include media(desktop){
-		font-weight:bold;
-		padding-bottom:30px;
+.form-title {
+	font-weight: bold;
+	@include media(tablet) {
+		padding-bottom: 10px;
 		line-height: 44px;
 	}
 
-	@include media(mobile){
-		font-weight:bold;
-		font-size:24px;
-		line-height:29px;
-		padding-bottom:25px;
+	@include media(mobile) {
+		font-size: 24px;
+		line-height: 29px;
+		padding-bottom: 25px;
 	}
 }
 
-.form-textbox, .form-dropdown{
-	@include media(desktop){
-		margin-top:9px;
-	}
+.form-textbox, .form-dropdown {
+	margin-top: 6px;
 
-	@include media(mobile){
-		margin-top:6px;
+	@include media(tablet) {
+		margin-top: 9px;
 	}
 }
 
-.multiple-choise-horizontal, .multiple-choise-vertical{
-	margin-bottom:28px;	
-	padding-top: 4px;
+.multiple-choise-horizontal, .multiple-choise-vertical {
+	margin-bottom: 8px;
 }
 
-.form-line{
-	margin-bottom:20px;
+.details__content {
+	margin-bottom: 20px;
 }
 
-.multiple-choice--checkbox, .details__content{
-	margin-bottom:20px;
-}
-
-.form-label{
-	@include media(mobile){
+.form-label {
+	@include media(mobile) {
 	line-height: 25px;
-	font-size:16px;
+	font-size: 16px;
 	}
 }
 
-.callout--compact,.callout--info{
-	@include media(desktop){
-		margin:30px 0px 10px 0px;
+.callout--compact,.callout--info {
+	@include media(desktop) {
+		margin: 30px 0px 10px 0px;
 	}
-	@include media(mobile){
-		margin: 10px 0px 10px 0px;
+	@include media(mobile) {
+		margin: 10px 0;
 	}
 }
-details{
-	padding:12px 0px;
+details {
+	padding-top: 16px;
+	.callout--info {
+		margin : 0;
+	}
 }
 
-.continue-step, .start-step-btn{
-	padding-left:3px;
-	@include media(desktop){
-		margin-top:20px;
+.continue-step, .start-step-btn {
+	padding-left: 3px;
+	@include media(desktop) {
+		margin-top: 40px;
 		}
-	@include media(mobile){
-		margin-top:10px;
+	@include media(mobile) {
+		margin-top: 10px;
 		}
 }
 
@@ -114,36 +110,36 @@ input[type=number]::-webkit-inner-spin-button {
     margin: 0;
 }
 input[type=number] {
-    -moz-appearance:textfield;
+    -moz-appearance: textfield;
 }
 
-legend{
-	padding-bottom:14px;
+.error-summary {
+	@include media(desktop) {
+		margin-bottom: 36px;
+	}
+	@include media(mobile) {
+		margin-bottom: 24px;
+	}
 }
 
-.pad-bottom20{
-	padding-bottom:20px;
+.multiple-choice__container {
+	padding: 10px 0 8px 0;
 }
-.back-link{
-	@include media(desktop){
-		padding-bottom:22px;
-	}
-	@include media(mobile){
-		padding-bottom:14px;
-	}
-	
+.nested-fields-container {
+	border: solid $callout-line;
+    border-width: 0 0 0 4px;
+    padding: 10px 0 0 20px;
+    margin-left: 0;
+
+    #inputdiv-day, #inputdiv-month, #inputdiv-year {
+    	float: none;
+    }
 }
-.error-summary{
-	@include media(desktop){
-		margin-bottom:36px;
-	}
-	@include media(mobile){
-		margin-bottom:24px;
-	}
+.button {
+	letter-spacing: 0px;
 }
-.margin-btm20{
-	margin-bottom:20px;
+.callout--info {
+	border-left: solid $callout-line;
 }
-.multiple-choice__container{
-	margin-bottom:20px;
-}
+
+
