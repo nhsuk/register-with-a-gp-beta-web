@@ -170,8 +170,6 @@ export function getHandlerFactory(
   template = 'register-form/step') {
   return (request, reply) => {
     const latestUncompletedStep = getLatestUncompletedStep(request.state.data);
-    console.log(request.state.data);
-    console.log(latestUncompletedStep);
     const practice = request.params.practice;
     if (!checkStepCompletedBefore(key, latestUncompletedStep)){
       return reply.redirect('/' + practice + '/register/' + latestUncompletedStep.slug);
