@@ -5,14 +5,17 @@ class AddressAjax {
     this.housenumber = $('#input-housenumber');
     this.postcode = $('#input-postcode');
     this.csrf = $('input[name=\'csrf\']').val();
-    this.button = $('#addressbutton');
+    this.addressButton = $('#addressbutton');
     this.endpoint = '/address';
+    this.finalEndpoint = '/addresspost';
     this.formFields = $('.form-fields');
-    this.button.on('click', this.formHandler.bind(this));
+    this.addressButton.on('click', this.formHandler.bind(this));
     this.resultListContainerElem = $('.address-results');
     this.resultListContainerElem.on('click', '.select-link', this.resultItemClickHandler.bind(this));
+    this.addressContinue = $('#addresscontinue');
     this.confirmContainer = $('.address-confirm');
     this.confirmContainer.hide();
+    this.addressContinue.hide();
     this.confirmResetButton = $('.confirm-reset');
     this.confirmResetButton.on('click',this.confirmReset.bind(this));
   }
@@ -32,6 +35,8 @@ class AddressAjax {
     this.housenumber.val('');
     this.postcode.val('');
     this.confirmContainer.hide();
+    this.addressButton.show();
+    this.addressContinue.hide();
     this.formFields.show();
   }
   
@@ -49,7 +54,8 @@ class AddressAjax {
     this.confirmContainer.show();
     this.resultListContainerElem.hide();
     this.formFields.hide();
-    
+    this.addressButton.hide();
+    this.addressContinue.show();
   }
 
   cleanSelectedAddress (){
@@ -69,9 +75,9 @@ class AddressAjax {
   formHandler (){
  //   this.cleanSelectedAddress();
     let postcode = this.postcode.val();
-    const housenumber = this.housenumber.val();
-    this.fetchList('/' + $('#practice').val() + '/' + this.endpoint, postcode, housenumber);
     postcode = postcode.replace(/\s/g, '');
+    const housenumber = this.housenumber.val();
+    this.fetchList('/' + $('#practice').val() + this.endpoint, postcode, housenumber);
   }
 
   fetchList (endpoint, postcode, housenumber){

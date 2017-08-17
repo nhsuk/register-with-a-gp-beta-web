@@ -11,7 +11,7 @@
     {% endif %}
     {% component 'error-summary', { children: stepErrors } %}
     <h1 class="form-title">{{ title | render | safe }}</h1>
-    <form method="post" id="current-step-form" class="{{key}}-form">
+    <form method="post" id="current-step-form" class="{{key}}-form" action="/{{ CURRENT_PRACTICE.key }}/addresspost">
       <input type="hidden" name="csrf" value="{{csrf}}">
       <input type="hidden" id="selectedAddress1" value="">
       <input type="hidden" id="selectedAddress2" value="">
@@ -51,7 +51,8 @@
       {% endblock %}
       {% block submitRow %}
         <div class="form-group">
-          <button type="button" id="addressbutton" class="button">Continue</button>
+          <button type="button" id="addressbutton" class="button">Find address</button>
+          <button type="submit" id="addresscontinue" class="button">Continue</button>
         </div>
        <ul class="address-results">
       {% endblock submitRow %}

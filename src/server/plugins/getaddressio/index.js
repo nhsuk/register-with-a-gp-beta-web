@@ -2,11 +2,9 @@ import _ from 'lodash';
 import https from 'https';
 import cookies from '../../config/cookies';
 import naturalSort from 'javascript-natural-sort';
-import {getNextNonDepStep} from '../register-form/steps/common'; 
-
+import {getNextSlugByKey} from '../register-form/steps/common'; 
 
 const TIMEOUT = 10000;
-
 
 function getAddresses(postcode, housenumber = '', timeout=TIMEOUT) {
   return new Promise((resolve, reject) => {
@@ -60,26 +58,32 @@ function addressLookupHandler(request, reply) {
 }
 
 function addressPostHandler(request, reply) {
+console.log(request.payload);
   const address1 = request.payload.address1;  
   const address2 = request.payload.address2;  
   const address3 = request.payload.address3;  
   const town = request.payload.town;  
   const county = request.payload.county;
+  const postcode = request.payload.postcode;
+  const housenumber = request.payload.housenumber;
   const address =  {
     address1: address1,
     address2: address2,
     address3: address3,
-    locality:  joinStrStripEmpty([town, county]),
-    postcode
+    locality: joinStrStripEmpty([town, county]),
+    postcode: postcode
   };
+  let data = request.state.data;
+  data.address = address;
+  data.addressLookup = { postcode: postcode, housenumber: housenumber };
   const practice = request.params.practice;
-  const To = getNextNonDepStep('addressLookup');
+  const To = '/' + practice + '/register/' + getNextSlugByKey('addressLookup');
   return reply
     .redirect(To)
-    .state(data)
+    .state('data', data);
 }
 function joinStrStripEmpty(vals) {
-  return _.join(_.compact(_.map(vals, x => _.trim(x))), ' ,');
+  return _.join(_.compact(_.map(vals, x => _.trim(x))), ', ');
 }
 exports.register = function(server, options, next) {
   const { assign } = Object;
@@ -91,7 +95,7 @@ exports.register = function(server, options, next) {
   server.route({
     method: 'POST',
     config: _.merge({}, routeConfig, {id: 'addressAPI'}),
-    path: '/address',
+    path: '/{practice}/address',
     handler: addressLookupHandler
   });
   server.route({

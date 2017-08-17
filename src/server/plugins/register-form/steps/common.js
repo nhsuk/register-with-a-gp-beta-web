@@ -3,7 +3,8 @@ import JoiPostcode from 'joi-postcode';
 import JoiNHSNumber from '../../../../shared/lib/joi-nhs-number-validator';
 import JoiFullDate from '../../../../shared/lib/joi-full-date-validator';
 import _ from 'lodash';
-import {steps, stepDependency} from './index';
+import steps from './index';
+
 import ua from 'universal-analytics';
 let params = {};
 
@@ -74,7 +75,7 @@ export function getPrevStep(prevSteps, cookieData, request) {
   }
 }
 
-export function getNextNonDepStep(key){
+export function getNextSlugByKey(key){
   let slug = '';
   let stepKey = 0;
   for (let i = 0; i < steps.length; i++){
@@ -82,25 +83,9 @@ export function getNextNonDepStep(key){
     if(step.key == key){
       slug = step.slug;
       stepKey = i;
+      return steps[stepKey +1].slug;
     }
-  }
-  const depSlug = stepDependency[slug];
-  if( depSlug !== 'undefined'){
-    return steps[i+1].slug;
-  } else {
-    let found = false;
-    for (let k = stepKey+1; k < steps.length; k++){
-      for(let l = 0; l < depSlug.length; l++){
-        if(depSlug[l] == steps[k].slug){
-          found = true;
-        }
-      }
-      if(!found){
-        return steps[k].slug;
-      }
-    }
-  }
-  
+  }  
 }
 
 export function getNextStep(nextSteps, cookieData) {
@@ -185,6 +170,8 @@ export function getHandlerFactory(
   template = 'register-form/step') {
   return (request, reply) => {
     const latestUncompletedStep = getLatestUncompletedStep(request.state.data);
+    console.log(request.state.data);
+    console.log(latestUncompletedStep);
     const practice = request.params.practice;
     if (!checkStepCompletedBefore(key, latestUncompletedStep)){
       return reply.redirect('/' + practice + '/register/' + latestUncompletedStep.slug);
