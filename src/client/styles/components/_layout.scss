@@ -142,4 +142,8 @@ input[type=number] {
 	border-left: solid $callout-line;
 }
 
+#current-medication-nested-container .nested-inline-label * + * {
+	margin-top: 20px;
+}
+
 
