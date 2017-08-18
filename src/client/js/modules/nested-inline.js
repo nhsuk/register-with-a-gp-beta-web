@@ -3,7 +3,6 @@ const $ = require('jquery');
 const NestedInline = function NestedInline() {
   this.addRowSelector = '.add-row';
   this.baseNestedInputSelector = '.nested-inline-base-input';
-  this.nestedInputIDPrefix = 'input-medications';
   this.nestedInlineLabelClass = '.nested-inline-label';
 };
 
@@ -27,7 +26,8 @@ NestedInline.prototype.onClick = function onClick() {
   const lastNestedInputID = lastNestedInput.attr('id');
   const numberPattern = /\d+/g;
   const rowIndex = parseInt(lastNestedInputID.match(numberPattern)) +1;
-  const newNestedInputID = `${this.nestedInputIDPrefix}-${rowIndex}`;
+  const nestedInputIDPrefix = $(newNestedInput).attr('id').replace(/\d/g,'');
+  const newNestedInputID = nestedInputIDPrefix+rowIndex;
   newNestedInput.attr('id', newNestedInputID).removeClass(this.baseNestedInputSelector.replace('.', ''));
   $(this.nestedInlineLabelClass).append(newNestedInput);
   return false;

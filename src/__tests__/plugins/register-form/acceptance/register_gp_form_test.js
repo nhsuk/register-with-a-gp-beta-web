@@ -159,10 +159,11 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
 
   I.see('Do you have any allergies?');
   I.click('label[data-label=Yes]');
-  I.click('Continue');
-
-  I.see('List your allergies');
-  I.fillField('#input-allergies', 'Lorem Ipsum is simply dummy text');
+  I.fillField('#input-allergies-0', 'Gluten');
+  I.fillField('#input-allergies-1', 'Hay fever');
+  I.click('.add-row');
+  I.waitForElement('#input-allergies-2', 3);
+  I.fillField('#input-allergies-2', 'pollen');
   I.click('Continue');
 
   I.see('Have you ever had any of these conditions?');
