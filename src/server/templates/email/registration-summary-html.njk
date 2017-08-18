@@ -82,7 +82,7 @@ Your health
 {% endif %}
 
 {% if data.allergies['any-allergies'] %}
-  <p>{{ render_multi_line('Allergies', data.allergiesDetails) }}</p>
+  <p>{{ render_multi_line('Allergies', {'allergies-list': data.allergies['allergies']}) }}</p>
 {% else %}
   <p>{{ render_one_line('Allergies', {'empty': 'I don’t have any allergies'}) }}</p>
 {% endif %}
