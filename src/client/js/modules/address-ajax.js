@@ -104,8 +104,12 @@ class AddressAjax {
               '</div></li>');
             const item = $(template).clone();
             item.find('#addr1').text(a[0] + ', ');
-            item.find('#addr2').text(a[1] + ', ');
-            item.find('#addr3').text(a[2] + ', ');
+            if(a[1].length > 0){ 
+              item.find('#addr2').text(a[1] + ', ');
+            }
+            if(a[2].length > 0){
+              item.find('#addr3').text(a[2] + ', ');
+            }
             item.find('#town').text(a[3] + ', ');
             item.find('#county').text(a[4] + ' ');
             const adData = {
