@@ -22,19 +22,15 @@ const schema = Joi.object().keys({
       variant: 'checkbox',
       hint: 'Select all that apply'
     }),
-  'medical-history': Joi.string().max(200).allow('').optional()
-    .label('I’ve had a serious condition or illness that isn’t listed')
+  'medical-history': Joi.array().items(Joi.string().max(200).min(2)).optional()
+    .label('I have a condition not listed above')
     .meta({
-      componentType: 'disclosure',
-      variant: 'large',
-      text: 'What other serious illnesses or medical conditions have you had?'
+      componentType: 'nested-inline',
     }),
-  'medical-history-details': Joi.string().max(200).allow('').optional()
-    .label('Is there anything else you need to tell the GP about your health?')
+  'medical-history-details': Joi.array().items(Joi.string().max(200).min(2)).optional()
+    .label('I had major surgey')
     .meta({
-      componentType: 'textbox',
-      variant: 'large',
-      hint: 'For example, you’ve had a major operation, surgery or treatment after an accident.'
+      componentType: 'nested-inline',
     }),
 
   'submit': Joi.any().optional().strip()
