@@ -24,8 +24,8 @@
   <header role="banner">
     <div class="global-header">
       <div class="global-header__inner">
-        <a href="/{{ CURRENT_PRACTICE.key }}/start" class="global-header__link">
-          <img src="{{ asset_path('assets/images/logotype-nhs-mono.png') }}" alt="NHS">
+        <a href="/{{ CURRENT_PRACTICE.key }}/start" class="">
+          <img src="{{ asset_path('assets/images/logotype-nhs-colour.png') }}" alt="NHS">
         </a>
         {% block header_service_title %}
           {% if serviceTitle %}
@@ -34,6 +34,14 @@
         {% endblock %}
       </div>
     </div>
+    {% if showNotifications %}
+      <div class="beta-service">
+        <div class="beta-service__inner">
+          <img src="/static/BETA.svg" class="beta-sevice-icon">
+          <p class="beta-service-title"> This is a new service.</p>
+        </div>
+      </div>
+    {% endif %}
   </header>
 {% endblock %}
 
