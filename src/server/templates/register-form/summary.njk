@@ -76,7 +76,7 @@
       <caption>Your health</caption>
 
       {% if data.currentMedication['current-medication'] %}
-        {{ row('Medication', data.medicationDetails, 'currentMedication', true) }}
+        {{ row('Medication', {'medicationDetails': data.currentMedication['medications']| join(", ")}, 'currentMedication', true) }}
       {% else %}
         {{ row('Medication', {'empty': 'I’m not currently taking any medication'}, 'currentMedication') }}
       {% endif %}

@@ -149,10 +149,12 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
 
   I.see('Are you taking any medication?');
   I.click('label[data-label=Yes]');
-  I.click('Continue');
-
-  I.see('List your regular medicines');
-  I.fillField('#input-medication', 'Lorem Ipsum is simply dummy text');
+  I.waitForElement('.nested-fields-container', 3);
+  I.fillField('#input-medications-0', 'Nurofen');
+  I.fillField('#input-medications-1', 'Vitamin');
+  I.click('.add-row');
+  I.waitForElement('#input-medications-2', 3);
+  I.fillField('#input-medications-2', 'Pain Killer');
   I.click('Continue');
 
   I.see('Do you have any allergies?');
