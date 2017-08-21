@@ -17,6 +17,7 @@ const schema = Joi.object().keys({
           'key': 'allergies',
         }
       ],
+      addRowLabel: 'Add another allergy',
       children: [
         { label: 'Yes', value: 'true', show_nested_fields:true},
         { label: 'No', value: 'false', show_nested_fields:false},
