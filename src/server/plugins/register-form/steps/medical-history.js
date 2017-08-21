@@ -29,10 +29,10 @@ const schema = Joi.object().keys({
       addRowLabel: 'Add another condition'
     }),
   'medical-history-details': Joi.array().items(Joi.string().max(200).allow('').optional())
-    .label('I had major surgey')
+    .label('I had major surgery')
     .meta({
       componentType: 'nested-inline',
-      addRowLabel: 'Add another surgey'
+      addRowLabel: 'Add another surgery'
     }),
 
   'submit': Joi.any().optional().strip()
