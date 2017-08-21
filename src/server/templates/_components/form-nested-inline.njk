@@ -10,29 +10,26 @@
     </legend>
   {% endif %}
 
-  {% set showNestedField = (value in field.nestedFieldVisibleValue) %}
+  <div id="current-medication-nested-container" class="nested-fields-container">
 
-  <div id="current-medication-nested-container" class="nested-fields-container"  style="{{ 'display:none' if not showNestedField }}">
-
-  {% set firstNestedField = field.nestedFields[0] %}
-
-  <label for="input-{{ firstNestedField.key }}" class="form-label nested-inline-label">
-    {% if stepData[firstNestedField.key] %}
-        {% for d in stepData[firstNestedField.key] %}
-          {{ f.label if loop.first }}
-          {% set nestedFieldError = stepErrors[firstNestedField.key+'.'+loop.index0].message | replace(stepErrors[firstNestedField.key+'.'+loop.index0].label, "") %}
-          <input type="text" name="{{ firstNestedField.key }}" id="input-{{ firstNestedField.key }}-{{ loop.index0 }}"
+  <label for="input-{{ field.id }}" class="form-label nested-inline-label">
+    {% if stepData[field.id] %}
+        {% for d in stepData[field.id] %}
+          {% set nestedFieldError = stepErrors[field.id+'.'+loop.index0].message | replace(stepErrors[field.id+'.'+loop.index0].label, "") %}
+          <input type="text" name="{{ field.id }}" id="input-{{ field.id }}-{{ loop.index0 }}"
           class="form-textbox  nested-input {{ ' has-error' if nestedFieldError }} {{ ' nested-inline-base-input' if loop.first }}"
           value="{{ d }}">
         {% endfor %}
     {% else %}
-          {% for f in field.nestedFields %}
-            {{ f.label if loop.first }}
-            {% set nestedFieldError = stepErrors[f.key+'.'+i].message | replace(stepErrors[f.key+'.'+loop.index].label, "") %}
-            <input type="text" name="{{ f.key }}" id="input-{{ f.key }}-{{ loop.index0 }}"
-            class="form-textbox nested-input {{ ' has-error' if nestedFieldError }} {{ ' nested-inline-base-input' if loop.first }}"
-            value="{{ stepData[f.key][loop.index] | default('') }}">
-          {% endfor %}
+      {% set nestedFieldError = stepErrors[field.id+'.0'].message | replace(stepErrors[field.id+'.0'].label, "") %}
+      <input type="text" name="{{ field.id }}" id="input-{{ field.id }}-0"
+      class="form-textbox nested-input {{ ' has-error' if nestedFieldError }} nested-inline-base-input"
+      value="{{ stepData[field.id][0] | default('') }}">
+
+      <input type="text" name="{{ field.id }}" id="input-{{ field.id }}-1"
+      class="form-textbox nested-input {{ ' has-error' if nestedFieldError }} nested-inline-base-input"
+      value="{{ stepData[field.id][0] | default('') }}">
+
     {% endif %}
   </label>
 
