@@ -71,6 +71,16 @@ Scenario('Test all yes/no question with "no" answer on gp registration flow', (I
   I.click('label[data-label=Asthma]');
   I.click('label[data-label=Cancer]');
   I.click('label[data-label=Diabetes]');
+  I.fillField('#input-medical-history-0', 'FLU');
+  I.fillField('#input-medical-history-1', 'Anxiety');
+  I.click('Add another condition');
+  I.waitForElement('#input-medical-history-2', 3);
+  I.fillField('#input-medical-history-2', 'Dyslexia');
+  I.fillField('#input-medical-history-details-0', 'Cardiology');
+  I.fillField('#input-medical-history-details-1', 'Radiology');
+  I.click('Add another surgery');
+  I.waitForElement('#input-medical-history-2', 3);
+  I.fillField('#input-medical-history-details-2', 'Dentist');
   I.click('Continue');
 
   I.see('Check your details');
@@ -170,13 +180,11 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
   I.click('label[data-label=Asthma]');
   I.click('label[data-label=Cancer]');
   I.click('label[data-label=Diabetes]');
-
   I.fillField('#input-medical-history-0', 'FLU');
   I.fillField('#input-medical-history-1', 'Anxiety');
   I.click('Add another condition');
   I.waitForElement('#input-medical-history-2', 3);
   I.fillField('#input-medical-history-2', 'Dyslexia');
-
   I.fillField('#input-medical-history-details-0', 'Cardiology');
   I.fillField('#input-medical-history-details-1', 'Radiology');
   I.click('Add another surgery');
