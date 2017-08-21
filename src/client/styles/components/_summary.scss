@@ -1,20 +1,32 @@
+$summary-border :  #C7C7C7;
+
 .summary {
   border-bottom: 1px solid $grey-2;
   margin-bottom: $baseline-grid-unit * 16;
+
+  @include media(tablet) {
+    max-width: 75%;
+    margin-top: 44px;
+  }
+
+  @include media(mobile) {
+    tr {
+      border-bottom: 1px solid $summary-border;
+    }
+  }
 }
 
 .summary__title,
 .summary__content,
 .summary__control {
   border-bottom: 0;
-  display: block;
   margin: 0;
   padding: $baseline-grid-unit * 2 0 0;
   vertical-align: top;
   @include core-font(16);
 
   @include media(tablet) {
-    border-bottom: 1px solid $grey-2;
+    border-bottom: 1px solid $summary-border;
     display: table-cell;
     padding: $baseline-grid-unit * 4 $baseline-grid-unit * 2;
   }
@@ -34,27 +46,48 @@
 
   @include media(mobile){
     @include bold-font(16);
+    display: block;
   }
 }
 
 .summary__control {
-  padding-bottom: $baseline-grid-unit * 4;
+  //padding-bottom: $baseline-grid-unit * 4;
   text-align: right;
 
   .button {
     @include core-font(16);
   }
+
+  @include media(mobile) {
+    a {
+      position: relative;
+      top: 8px;
+    }
+  }
 }
 
 .summary caption{
+
   @include media(mobile) {
     @include bold-font(20);
   }
    @include media(desktop) {
     @include bold-font(24);
+    margin-bottom: 12px;
   }
 }
 
-.summary-note{
-  padding-top:20px;
+.summary-note__title {
+   @include bold-font(24);
+   font-weight: bold;
+}
+
+.summary-note__description {
+  margin-top:15px;
+}
+
+.summary__content {
+  @include media(mobile) {
+    display: block;
+  }
 }
