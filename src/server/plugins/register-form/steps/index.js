@@ -16,7 +16,6 @@ import registeredNameDetailsStep from './registered-name-details';
 import nhsNumberStep from './nhs-number';
 import currentMedicationStep from './current-medication';
 import allergiesStep from './allergies';
-import allergiesDetailsStep from './allergies-details';
 import medicalHistoryStep from './medical-history';
 import countryAndTown from './countries-and-town';
 import summaryStep from './summary';
@@ -71,7 +70,6 @@ const steps = [
   registeredNameDetailsStep,
   currentMedicationStep,
   allergiesStep,
-  allergiesDetailsStep,
   medicalHistoryStep,
   summaryStep
 ];
@@ -86,9 +84,6 @@ export const stepDependency = {
     'registered-address-manual',
     'registered-name',
     'registered-name-details'
-  ],
-  'allergies': [
-    'allergies-details'
   ]
 };
 export default steps;

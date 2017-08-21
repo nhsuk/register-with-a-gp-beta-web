@@ -83,7 +83,7 @@
 
       {% if data.allergies['any-allergies'] %}
 
-        {{ row('Allergies', data.allergiesDetails, 'allergies', true) }}
+        {{ row('Allergies', {'allergies-list': data.allergies['allergies']| join(", ")}, 'allergies', true) }}
       {% else %}
         {{ row('Allergies', {'empty': 'I don’t have any allergies'}, 'allergies') }}
       {% endif %}

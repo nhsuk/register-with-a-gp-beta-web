@@ -90,13 +90,13 @@
               value="{{ d }}">
             {% endfor %}
         {% else %}
-              {% for f in field.nestedFields %}
-                {{ f.label if loop.first }}
-                {% set nestedFieldError = stepErrors[f.key+'.'+i].message | replace(stepErrors[f.key+'.'+loop.index].label, "") %}
-                <input type="text" name="{{ f.key }}" id="input-{{ f.key }}-{{ loop.index0 }}"
-                class="form-textbox nested-input {{ ' has-error' if nestedFieldError }} {{ ' nested-inline-base-input' if loop.first }}"
-                value="{{ stepData[f.key][loop.index] | default('') }}">
-              {% endfor %}
+            {% for f in field.nestedFields %}
+              {{ f.label if loop.first }}
+              {% set nestedFieldError = stepErrors[f.key+'.'+i].message | replace(stepErrors[f.key+'.'+loop.index].label, "") %}
+              <input type="text" name="{{ f.key }}" id="input-{{ f.key }}-{{ loop.index0 }}"
+              class="form-textbox nested-input {{ ' has-error' if nestedFieldError }} {{ ' nested-inline-base-input' if loop.first }}"
+              value="{{ stepData[f.key][loop.index] | default('') }}">
+            {% endfor %}
         {% endif %}
       </label>
 

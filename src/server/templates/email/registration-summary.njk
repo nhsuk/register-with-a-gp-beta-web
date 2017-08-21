@@ -73,7 +73,7 @@ Your health
 {% endif %}
 
 {% if data.allergies['any-allergies'] %}
-  {{ render_multi_line('Allergies', data.allergiesDetails, true) }}
+  {{ render_multi_line('Allergies', {'allergies-list': data.allergies['allergies']}, true) }}
 {% else %}
   {{ render_one_line('Allergies', {'empty': 'I don’t have any allergies'}) }}
 {% endif %}
