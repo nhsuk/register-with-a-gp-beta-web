@@ -15,7 +15,8 @@
 	border-bottom: 2px solid $callout-line;
 
 	.beta-service-title {
-		@include core-font(16);
+		font-size: 16px;
+		line-height: 24px;
 	}
 
 	@include media(mobile) {
