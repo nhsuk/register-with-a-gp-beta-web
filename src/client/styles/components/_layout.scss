@@ -1,10 +1,16 @@
 $callout-line: #BFC1C3;
+
 .form-fields {
-	padding: 8px 0 4px 4px;
- 	 
+	padding: 2px 0 2px 0;
+
+	@include media(tablet) {
+		padding: 8px 0 4px 0;
+	}
+	 
 }
 .page-section * + * {
-	
+	margin-top: 10px;
+
 	@include media(desktop) {
 		margin-top: 10px;
 	}
@@ -25,9 +31,9 @@ $callout-line: #BFC1C3;
 }
 
 .page-section {
-	padding: 18px 5px 80px 0px;
+	padding: 18px 5px 80px 0;
 	@include media(tablet) {
-		padding: 26px 5px 80px 0px;
+		padding: 26px 5px 80px 0;
 	}
     
 }
@@ -37,7 +43,7 @@ $callout-line: #BFC1C3;
 	padding-bottom: 14px;
 	
 	@include media(tablet) {
-		margin-left: 0px;
+		margin-left: 0;
 		padding-bottom: 8px;
 	}
 } 
@@ -52,7 +58,6 @@ $callout-line: #BFC1C3;
 	@include media(mobile) {
 		font-size: 24px;
 		line-height: 29px;
-		padding-bottom: 25px;
 	}
 }
 
@@ -80,28 +85,30 @@ $callout-line: #BFC1C3;
 }
 
 .callout--compact,.callout--info {
+
+	margin-top: 25px;
+
 	@include media(desktop) {
-		margin: 30px 0px 10px 0px;
-	}
-	@include media(mobile) {
-		margin: 10px 0;
+		margin: 30px 0 10px 0;
 	}
 }
 details {
-	padding-top: 16px;
+	padding-top: 10px;
 	.callout--info {
 		margin : 0;
+	}
+
+	@include media(tablet) {
+		padding-top: 16px;
 	}
 }
 
 .continue-step, .start-step-btn {
-	padding-left: 3px;
+	margin-top: 25px;
 	@include media(desktop) {
 		margin-top: 40px;
-		}
-	@include media(mobile) {
-		margin-top: 10px;
-		}
+	}
+	
 }
 
 input[type=number]::-webkit-outer-spin-button,
@@ -123,16 +130,20 @@ input[type=number] {
 }
 
 .multiple-choice__container {
-	padding: 10px 0 8px 0;
+	padding: 10px 0 8px 4px;
 }
 .nested-fields-container {
 	border: solid $callout-line;
-    border-width: 0 0 0 4px;
-    padding: 10px 0 0 20px;
+    border-width: 0 0 0 3px;
+    padding: 2px 0 0 20px;
     margin-left: 0;
 
     #inputdiv-day, #inputdiv-month, #inputdiv-year {
     	float: none;
+    }
+
+    @include media(tablet) {
+    	padding: 10px 0 0 20px;
     }
 }
 .button {
@@ -140,6 +151,9 @@ input[type=number] {
 }
 .callout--info {
 	border-left: solid $callout-line;
+}
+.form-line {
+	padding-left: 4px;
 }
 
 
