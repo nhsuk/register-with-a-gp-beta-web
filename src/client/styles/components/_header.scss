@@ -17,6 +17,10 @@
 	.beta-service-title {
 		@include core-font(16);
 	}
+
+	@include media(mobile) {
+		margin-left: 14px;
+	}
 	
 }
 
