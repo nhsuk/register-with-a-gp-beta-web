@@ -74,7 +74,7 @@
     <table class="summary">
       <caption>Your health</caption>
 
-      {% if data.currentMedication['current-medication'] %}
+      {% if (data.allergies['current-medication']) and (data.allergies['medications'] | nl2br) %}
         {{ row('Medication', {'medicationDetails': data.currentMedication['medications']}, 'currentMedication', true) }}
       {% else %}
         {{ row('Medication', {'empty': 'I’m not currently taking any medication'}, 'currentMedication') }}
@@ -86,7 +86,7 @@
         {{ row('Allergies', {'empty': 'I don’t have any allergies'}, 'allergies') }}
       {% endif %}
 
-      {% if (data.medicalHistory['medical-history']) or (data.medicalHistory['history-chosen']) or (data.medicalHistory['medical-history-details']) %}
+      {% if (data.medicalHistory['medical-history'] | nl2br) or (data.medicalHistory['history-chosen'] | nl2br) or (data.medicalHistory['medical-history-details'] | nl2br) %}
         {{ row('Health', data.medicalHistory, 'medicalHistory', true) }}
       {% else %}
         {{ row('Health', {'empty': 'I’m not supplying any health details'}, 'medicalHistory') }}

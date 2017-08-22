@@ -4,6 +4,10 @@ import xss from 'xss';
 function getFilters(env) {
   return {
     nl2br(line) {
+      if (!line){
+        return '';
+      }
+
       if (Array.isArray(line)){
         line = _.join(_.compact(_.map(line, x => _.trim(x))), ', ');
       }

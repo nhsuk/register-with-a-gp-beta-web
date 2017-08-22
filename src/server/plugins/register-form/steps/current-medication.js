@@ -30,7 +30,7 @@ const schema = Joi.object().keys({
     }),
   'medications': Joi.when('current-medication', {
     is: true,
-    then: Joi.array().items(Joi.string().max(200).min(2)).required().options({
+    then: Joi.array().items(Joi.string().max(200).allow('')).options({
       language: {
         key: 'A medication item ',
       },
