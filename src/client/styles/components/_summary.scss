@@ -2,11 +2,12 @@ $summary-border :  #C7C7C7;
 
 .summary {
   border-bottom: 1px solid $grey-2;
-  margin-bottom: $baseline-grid-unit * 16;
+   margin-bottom: $baseline-grid-unit * 4;
 
   @include media(tablet) {
     max-width: 75%;
     margin-top: 44px;
+    margin-bottom: $baseline-grid-unit * 16;
   }
 
   @include media(mobile) {
@@ -38,9 +39,8 @@ $summary-border :  #C7C7C7;
 
 .summary__title {
   @include bold-font(16);
-  padding-top: $baseline-grid-unit * 4;
-
   @include media(tablet) {
+    padding-top: $baseline-grid-unit * 4;
     @include bold-font(20);
   }
 
@@ -51,7 +51,6 @@ $summary-border :  #C7C7C7;
 }
 
 .summary__control {
-  //padding-bottom: $baseline-grid-unit * 4;
   text-align: right;
 
   .button {
@@ -61,7 +60,7 @@ $summary-border :  #C7C7C7;
   @include media(mobile) {
     a {
       position: relative;
-      top: 8px;
+      top: 0;
     }
   }
 }
@@ -70,6 +69,7 @@ $summary-border :  #C7C7C7;
 
   @include media(mobile) {
     @include bold-font(20);
+    margin-bottom: 0px;
   }
    @include media(desktop) {
     @include bold-font(24);
@@ -78,16 +78,24 @@ $summary-border :  #C7C7C7;
 }
 
 .summary-note__title {
-   @include bold-font(24);
+   @include bold-font(16);
    font-weight: bold;
+
+   @include media(desktop) {
+    @include bold-font(24);
+  }
 }
 
 .summary-note__description {
   margin-top:15px;
+   @include media(mobile) {
+    @include core-font(16);
+  }
 }
 
 .summary__content {
   @include media(mobile) {
     display: block;
+    padding-bottom: 8px;
   }
 }
