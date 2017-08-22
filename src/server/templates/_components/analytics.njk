@@ -4,10 +4,15 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-67365892-10', {'clientId': '{{ ga_client_ID }}' });
+  ga('create', '{{ GA_ID() }}');
   ga('send', 'pageview');
   function ga_event(Category, Text, Label=''){
     ga('send', 'event', Category, Text, Label);
   }
+  {% if gaEvents %}
+      gaEvents.each(e){
+        ga_event(ec, ea, el);
+      }
+  {% endif %}
 </script>
 <script type="text/javascript" src="/static/webtrends.load.js"></script>

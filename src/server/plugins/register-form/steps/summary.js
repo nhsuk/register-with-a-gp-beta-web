@@ -5,7 +5,6 @@ import ChangeCase from 'change-case';
 import sendEmail from '../../../../shared/lib/send-exchange-email';
 import practiceLookup from '../../../../shared/lib/practice-lookup';
 import { validate } from './common';
-import ua from 'universal-analytics';
 
 const schema = Joi.object().keys({
   'submit': Joi.any().optional().strip()
@@ -100,7 +99,7 @@ export function summaryPostHandler(request, reply) {
 }
 
 function GACharacterCounts(request){
-  const visitor = ua('UA-67365892-10', request.state.cid );
+  const visitor = ua(process.env.GOOGLEANALYTICSKEY, request.state.cid );
   let openText = ['allergies', 'medication', 'medical-history', 'medical-history-details'];
   let params = {};
   for(let i=0; i<openText.length; i++) {
