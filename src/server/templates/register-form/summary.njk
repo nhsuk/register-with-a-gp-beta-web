@@ -51,7 +51,6 @@
 
         {% if data.manualGPAddress['gpName'] %}
             {{ row('Current GP', data.manualGPAddress, 'manualGPAddress', true) }}
-
         {% else %}
             {{ row('Current GP', data.currentGP, 'currentGP', true) }}
         {% endif %}
@@ -75,22 +74,20 @@
     <table class="summary">
       <caption>Your health</caption>
 
-      {% if data.currentMedication['current-medication'] %}
-        {{ row('Medication', {'medicationDetails': data.currentMedication['medications']| join(", ")}, 'currentMedication', true) }}
+      {% if (data.allergies['current-medication']) and (data.allergies['medications'] | nl2br) %}
+        {{ row('Medication', {'medicationDetails': data.currentMedication['medications']}, 'currentMedication', true) }}
       {% else %}
         {{ row('Medication', {'empty': 'I’m not currently taking any medication'}, 'currentMedication') }}
       {% endif %}
 
-      {% if data.allergies['any-allergies'] %}
-
-        {{ row('Allergies', {'allergies-list': data.allergies['allergies']| join(", ")}, 'allergies', true) }}
+      {% if (data.allergies['any-allergies']) and (data.allergies['allergies'] | nl2br) %}
+        {{ row('Allergies', {'allergies-list': data.allergies['allergies']}, 'allergies', true) }}
       {% else %}
         {{ row('Allergies', {'empty': 'I don’t have any allergies'}, 'allergies') }}
       {% endif %}
 
-      {% if (data.medicalHistory['medical-history']) or (data.medicalHistory['history-chosen']) or (data.medicalHistory['medical-history-details']) %}
+      {% if (data.medicalHistory['medical-history'] | nl2br) or (data.medicalHistory['history-chosen'] | nl2br) or (data.medicalHistory['medical-history-details'] | nl2br) %}
         {{ row('Health', data.medicalHistory, 'medicalHistory', true) }}
-
       {% else %}
         {{ row('Health', {'empty': 'I’m not supplying any health details'}, 'medicalHistory') }}
       {% endif %}
