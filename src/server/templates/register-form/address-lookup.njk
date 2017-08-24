@@ -59,6 +59,7 @@
         </div>
        <ul class="address-results">
       {% endblock submitRow %}
+       </ul>
       <details>
         <summary>
           <span class="details__summary">I can't find my address, enter manually</span>
@@ -66,14 +67,14 @@
         <div class="details__content">
           <div class="callout callout--info">
             <p>Address</p>
-            <input type="input" id="manualAddress1" />
-            <input type="input" id="manualAddress2" />
-            <input type="input" id="manualAddress3" />
+            <input type="input" id="manualAddress1" value="" />
+            <input type="input" id="manualAddress2" value="" />
+            <input type="input" id="manualAddress3" value="" />
             <p>Town or city</p>
-            <input type="input" id="manualTown" />
+            <input type="input" id="manualTown" value="" />
             <p>Postcode</p>
-            <input type="input" id="manualPostcode" />
-            <button type="submit" id="manualcontinue" class="button">Continue</button>
+            <input type="input" id="manualPostcode" value="" />
+            <button type="button" id="manualcontinue" class="button">Continue</button>
 
           </div>
         </div>

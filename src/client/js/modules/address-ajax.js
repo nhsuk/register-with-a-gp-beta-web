@@ -7,12 +7,13 @@ class AddressAjax {
     this.csrf = $('input[name=\'csrf\']').val();
     this.addressButton = $('#addressbutton');
     this.endpoint = '/address';
-    this.finalEndpoint = '/addresspost';
     this.formFields = $('.form-fields');
     this.addressButton.on('click', this.formHandler.bind(this));
     this.resultListContainerElem = $('.address-results');
     this.resultListContainerElem.on('click', '.select-link', this.resultItemClickHandler.bind(this));
     this.addressContinue = $('#addresscontinue');
+    this.manualContinue = $('#manualcontinue');
+    this.resultListContainerElem.on('click', '#manualcontinue', this.fillManual.bind(this));
     this.confirmContainer = $('.address-confirm');
     this.confirmContainer.hide();
     this.addressContinue.hide();
@@ -57,7 +58,16 @@ class AddressAjax {
     this.addressButton.hide();
     this.addressContinue.show();
   }
-
+  
+  fillManual(){
+    $('#selectedAddress1').val($('#manualAddress1').val());
+    $('#selectedAddress2').val($('#manualAddress2').val());
+    $('#selectedAddress3').val($('#manualAddress3').val());
+    $('#selectedTown').val($('#manualTown').val());
+    $('#input-postcode').val($('#manualPostcode').val());
+    $('#current-step-form').submit();
+  }
+  
   cleanSelectedAddress (){
     $('#address').val('');
   }
