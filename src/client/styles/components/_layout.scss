@@ -106,6 +106,7 @@ details {
 
 .continue-step, .start-step-btn {
 	margin-top: 25px;
+	margin-left: 4px;
 	@include media(desktop) {
 		margin-top: 40px;
 	}
