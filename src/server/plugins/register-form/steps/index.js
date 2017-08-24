@@ -49,6 +49,7 @@ import summaryStep from './summary';
  * @type {Array.<Step>}
  */
 const steps = [
+  previouslyRegisteredStep,
   nhsNumberStep,
   genderStep,
   nameStep,
@@ -57,7 +58,6 @@ const steps = [
   countryAndTown,
   contactDetailsStep,
   previouslyArmedStep,
-  previouslyRegisteredStep,
   currentGP,
   enterGpAddress,
   registeredAddressStep,

@@ -4,10 +4,11 @@ import {postHandlerFactory, getHandlerFactory} from './common';
 const schema = Joi.object().keys({
   'previously-registered': Joi.boolean().required()
     .meta({
-      componentType: 'radio-horizontal',
+      componentType: 'nested-gp-lookup',
+      nestedFieldVisibleValue: 'true',
       children: [
-        { label: 'Yes', value: 'true' },
-        { label: 'No', value: 'false' },
+        { label: 'Yes', value: 'true', show_nested_fields:true},
+        { label: 'No', value: 'false', show_nested_fields:false},
       ],
       variant: 'radio',
     })

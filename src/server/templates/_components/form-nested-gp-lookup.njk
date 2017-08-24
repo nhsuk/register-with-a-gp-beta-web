@@ -1,0 +1,65 @@
+<fieldset id="input-{{ name }}">
+  {% if label or hint or error %}
+    <legend class="form-label" id="group-{{ name }}">
+      {{ label }} {% if optional %}(optional){% endif %}
+      {% if hint %}
+        <span class="form-label__hint" id="{{ hintId }}">{{ hint }}</span>
+      {% endif %}
+    </legend>
+  {% endif %}
+
+  <div class="multiple-choice__container">
+    {% for option in children %}
+      {% set inputValue = option.value if 'value' in option else option.label %}
+      {% set inputId = ['input', name, loop.index] | join('--') %}
+
+      {% if variant == 'checkbox' %}
+        {% set isSelected = (value and (inputValue in value)) %}
+      {% else %}
+        {% set isSelected = (inputValue | string == value | default('') | string) %}
+      {% endif %}
+
+      <label
+        for="{{ inputId }}"
+        class="multiple-choice multiple-choice--{{ variant | default('radio') }}{{ ' multiple-choice--inline' if inline }}{{ ' has-error' if error }} multiple-choice-radio-horizontal nested-radio-button"
+        data-label="{{ option.label }}" data-show-nested-fields="{{ option.show_nested_fields }}"
+      >
+        {{ option.label }}
+        <input
+          type="{{ variant | default('radio') }}"
+          name="{{ name }}"
+          id="{{ inputId }}"
+          value="{{ inputValue }}"
+          class="multiple-choice__input"
+          {% if isSelected %}
+            checked="checked"
+          {% endif %}
+          {% if hint %}
+            aria-describedby="{{ hintId }}"
+          {% endif %}
+        >
+      </label>
+    {% endfor %}
+    </div>
+    {% set showNestedField = (value in field.nestedFieldVisibleValue) %}
+
+    <div id="previously-registered-nested-container" class="nested-fields-container"  style="{{ 'display:none' if not showNestedField }}">
+
+    <label for="input-gp-lookup" class="form-label nested-inline-label">
+      Find current GP
+      <div class="form-control form-group">
+        <input type="text" id="input-gp-lookup" class="form-textbox nested-input" placeholder="Enter keywords" autocomplete="off" style="display:inline-block">
+        <button type="submit" class="button" style="font-size: 18px;padding: 4px 20px">Find Surgery</button>
+      </div>
+      <input type="hidden" name="gpCode" id="gp-code">
+      <input type="hidden" name="gpName" id="gp-name">
+      <input type="hidden" name="gpAddress" id="gp-address">
+
+      <ul class="gp-results">
+      </ul>
+    </label>
+
+    <p class="add-element-link"><a href="#" class="add-row">{{ field.addRowLabel }}</a></p>
+    </div>
+
+</fieldset>
