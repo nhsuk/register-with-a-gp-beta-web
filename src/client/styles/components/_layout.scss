@@ -1,15 +1,26 @@
-fieldset {
-   padding-top: 5px;
-    padding-left: 5px;
-    padding-bottom: 12px;
-}
+$callout-line: #BFC1C3;
 
-.global-footer__inner{
+.form-fields {
+	padding: 2px 0 2px 0;
+
+	@include media(tablet) {
+		padding: 8px 0 4px 0;
+	}
+	 
+}
+.page-section * + * {
+	margin-top: 10px;
+
+	@include media(desktop) {
+		margin-top: 10px;
+	}
+}
+.global-footer__inner {
 	padding-top: 30px;
 
 }
 
-.global-footer__inner:before{
+.global-footer__inner:before {
 	margin-bottom: 30px;
 	
 }
@@ -20,10 +31,133 @@ fieldset {
 }
 
 .page-section {
-	padding: 20px 0px 80px 0px;
-
-	@include media(desktop){
-		padding: 30px 0px 80px 0px;
+	padding: 18px 5px 80px 0;
+	@include media(tablet) {
+		padding: 26px 5px 80px 0;
 	}
     
 }
+
+.button--back {
+	margin-left: 14px;
+	padding-bottom: 14px;
+	
+	@include media(tablet) {
+		margin-left: 0;
+		padding-bottom: 8px;
+	}
+} 
+
+.form-title {
+	font-weight: bold;
+	@include media(tablet) {
+		padding-bottom: 10px;
+		line-height: 44px;
+	}
+
+	@include media(mobile) {
+		font-size: 24px;
+		line-height: 29px;
+	}
+}
+
+.form-textbox, .form-dropdown {
+	margin-top: 6px;
+
+	@include media(tablet) {
+		margin-top: 9px;
+	}
+}
+
+.multiple-choise-horizontal, .multiple-choise-vertical {
+	margin-bottom: 8px;
+}
+
+.details__content {
+	margin-bottom: 20px;
+}
+
+.form-label {
+	@include media(mobile) {
+	line-height: 25px;
+	font-size: 16px;
+	}
+}
+
+.callout--compact,.callout--info {
+
+	margin-top: 25px;
+
+	@include media(desktop) {
+		margin: 30px 0 10px 0;
+	}
+}
+details {
+	padding-top: 10px;
+	.callout--info {
+		margin : 0;
+	}
+
+	@include media(tablet) {
+		padding-top: 16px;
+	}
+}
+
+.continue-step, .start-step-btn {
+	margin-top: 25px;
+	@include media(desktop) {
+		margin-top: 40px;
+	}
+	
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.error-summary {
+	@include media(desktop) {
+		margin-bottom: 36px;
+	}
+	@include media(mobile) {
+		margin-bottom: 24px;
+	}
+}
+
+.multiple-choice__container {
+	padding: 10px 0 8px 4px;
+}
+.nested-fields-container {
+	border: solid $callout-line;
+    border-width: 0 0 0 3px;
+    padding: 2px 0 0 20px;
+    margin-left: 0;
+
+    #inputdiv-day, #inputdiv-month, #inputdiv-year {
+    	float: none;
+    }
+
+    @include media(tablet) {
+    	padding: 10px 0 0 20px;
+    }
+}
+.button {
+	letter-spacing: 0px;
+}
+.callout--info {
+	border-left: solid $callout-line;
+}
+.form-line {
+	padding-left: 4px;
+}
+
+#current-medication-nested-container .nested-inline-label * + * {
+	margin-top: 20px;
+}
+
+

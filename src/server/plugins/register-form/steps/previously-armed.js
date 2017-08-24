@@ -1,13 +1,38 @@
+/**
+ * @type Step
+ */
 import Joi from 'joi';
 import {postHandlerFactory, getHandlerFactory} from './common';
 
 const schema = Joi.object().keys({
   'previously-armed': Joi.boolean().required()
     .meta({
-      componentType: 'radio-horizontal',
+      componentType: 'armed-radio-horizontal',
+      nestedFieldVisibleValue: true,
+      nestedFields: [
+        {
+          'label': 'Service or staff number',
+          'key': 'armedStaffNumber'
+        },
+        {
+          'label': 'Day',
+          'key': 'day',
+          'class' : 'form-line'
+        },
+        {
+          'label': 'Month',
+          'key': 'month',
+          'class' : 'form-line'
+        },
+        {
+          'label': 'Year',
+          'key': 'year',
+          'class' : 'form-line'
+        }
+      ],
       children: [
-        { label: 'Yes', value: 'true' },
-        { label: 'No', value: 'false' },
+        { label: 'Yes', value: true, show_nested_fields:true},
+        { label: 'No', value: false, show_nested_fields:false},
       ],
       variant: 'radio',
     })
@@ -16,8 +41,13 @@ const schema = Joi.object().keys({
         any: { required: '!Please tell us if you served in the armed forces' },
       },
     }),
+  'armedStaffNumber': Joi.when('previously-armed', {is: true, then:Joi.string()}),
+  'day': Joi.when('previously-armed', {is: true, then:Joi.number().integer().min(1).max(31).required()}),
+  'month': Joi.when('previously-armed', {is: true, then:Joi.number().integer().min(1).max(12).required()}),
+  'year': Joi.when('previously-armed', {is: true, then:Joi.number().integer().min(1885).max(2025).required()}),
   'submit': Joi.any().optional().strip()
 });
+
 
 const title = 'Have you served in the armed forces?';
 const key = 'previouslyArmed';
@@ -34,9 +64,6 @@ const handlers = {
   POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps),
 };
 
-/**
- * @type Step
- */
 export default {
   key,
   slug,

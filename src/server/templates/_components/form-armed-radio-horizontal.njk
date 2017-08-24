@@ -40,7 +40,7 @@
     </legend>
   {% endif %}
 
-  <div class="multiple-choice__container multiple-choise-horizontal">
+  <div class="multiple-choice__container">
     {% for option in children %}
       {% set inputValue = option.value if 'value' in option else option.label %}
       {% set inputId = ['input', name, loop.index] | join('--') %}
@@ -53,8 +53,8 @@
       
       <label
         for="{{ inputId }}"
-        class="multiple-choice multiple-choice--{{ variant | default('radio') }}{{ ' multiple-choice--inline' if inline }}{{ ' has-error' if error }} multiple-choice-radio-horizontal"
-        data-label="{{ option.label }}"
+        class="multiple-choice multiple-choice--{{ variant | default('radio') }}{{ ' multiple-choice--inline' if inline }}{{ ' has-error' if error }} multiple-choice-radio-horizontal nested-radio-button"
+        data-label="{{ option.label }}" data-show-nested-fields="{{ option.show_nested_fields }}"
       >
         {{ option.label }}
         <input
@@ -73,4 +73,26 @@
       </label>
     {% endfor %}
   </div>
+
+  {% if field.nestedFields %}
+        {% set showNestedField = (field.nestedFieldVisibleValue|string === value|default('')|string) %}
+
+        <div id="armed-nested-container" style="{{ 'display:none' if not showNestedField }}" class="nested-fields-container">
+            {% for f in field.nestedFields %}
+                {% set nestedFieldError = stepErrors[f.key].message | replace(stepErrors[f.key].label, "") %}
+                 {% if f.key == "day" %}
+                    <div class="form-label">Enlistment Date</div>
+                {% endif %}
+                <div id="inputdiv-{{ f.key }}" class="{{f.class}}">
+
+                <label for="input-{{ f.key }}" class="form-label">
+                    {{ f.label }}
+                    <input type="number" name="{{ f.key }}" id="input-{{ f.key }}"
+                    class="form-textbox {{ ' has-error' if nestedFieldError }} form-nested-{{ f.key }}"
+                    value="{{ stepData[f.key] | default('') }}">
+                </label>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 </fieldset>

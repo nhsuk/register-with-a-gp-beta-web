@@ -7,10 +7,17 @@ const Joi = JoiBase.extend(JoiNHSNumber);
 const schema = Joi.object().keys({
   'nhs-number-known': Joi.boolean().required()
     .meta({
-      componentType: 'radio-horizontal',
+      componentType: 'nhs-number-radio',
+      nestedFields: [
+        {
+          'label': 'NHS number',
+          'key': 'nhs-number',
+        },
+      ],
+      nestedFieldVisibleValue: true,
       children: [
-        { label: 'Yes', value: 'true' },
-        { label: 'No', value: 'false' },
+        { label: 'Yes', value: true, show_nested_fields:true},
+        { label: 'No', value: false, show_nested_fields:false},
       ],
       variant: 'radio',
     })
@@ -19,6 +26,8 @@ const schema = Joi.object().keys({
         any: { required: '!!Please tell us if you know your NHS number' },
       },
     }),
+  'nhs-number': Joi.when('nhs-number-known', {is: true, then:Joi.string().nhsnumber().required()}),
+
   'submit': Joi.any().optional().strip(),
 });
 

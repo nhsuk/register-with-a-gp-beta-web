@@ -3,7 +3,9 @@ import EWS from 'node-ews';
 
 function consoleEmail(toEmail, text, subject) {
   /* eslint-disable no-console */
-  console.log(toEmail, text, subject);
+  if (!process.env.ACCEPTANCE_TEST) {
+    console.log(toEmail, text, subject);
+  }
   /* eslint-enable no-console */
   return new Promise((resolve) => {
     setTimeout(resolve, 100);

@@ -1,5 +1,7 @@
 const labelFocus = require('./modules/label-focus');
 const labelSelect = require('./modules/label-select');
+const NestedRadioSelect = require('./modules/nested-radio-select');
+const NestedInline = require('./modules/nested-inline');
 const errorSummary = require('./modules/error-summary');
 const GPAutoComplete = require('./modules/gp-autocomplete');
 const btnDisable = require('./modules/disable-button');
@@ -13,7 +15,12 @@ errorSummary.init();
 title.init();
 
 GPAutoComplete.init();
+
 AddressAjax.init();
+
+NestedInline.init();
+NestedRadioSelect.init();
+
 btnDisable.init();
 
 if (module.hot) {

@@ -1,0 +1,42 @@
+.global-header {
+	background-color: $blue;
+	border-bottom: solid $link-visited-colour;
+}
+
+.beta-sevice-icon {
+	float: left;
+	margin-right: 20px;
+}
+
+.beta-service__inner {
+	padding: 10px 0;
+	max-width: 960px;
+	margin: 0 auto;
+	border-bottom: 2px solid $callout-line;
+
+	.beta-service-title {
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	@include media(mobile) {
+		margin: 0 14px;
+	}
+	
+}
+
+.local-header {
+	padding: 0;
+	margin-top: 20px;
+	background-color: #fff;
+
+	.local-header__title {
+		color: #000
+	}
+}
+
+.global-header__service-name {
+	color: #fff;
+}
+	
+

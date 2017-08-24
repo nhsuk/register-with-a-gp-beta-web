@@ -95,9 +95,9 @@ export function getNextSlug(nextSteps, cookieData) {
   return 'end';
 }
 
-export function getSlugById(id){
+export function getSlugByKey(key){
   for (let step of steps) {
-    if(step.key == id) {
+    if(step.key == key) {
       return step.slug;
     }
   }
