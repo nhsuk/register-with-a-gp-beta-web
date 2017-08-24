@@ -107,8 +107,13 @@ details {
 .continue-step, .start-step-btn {
 	margin-top: 25px;
 	margin-left: 4px;
+
 	@include media(desktop) {
 		margin-top: 40px;
+	}
+
+	.button {
+		background-color: $button-color;
 	}
 	
 }
@@ -163,7 +168,6 @@ input[type=number] {
 }
 .button {
 	letter-spacing: 0px;
-	background-color: $button-color;
 }
 .callout--info {
 	border-left: solid $callout-line;
