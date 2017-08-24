@@ -11,6 +11,10 @@ WORKDIR /code
 
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
+ARG GPMedicalPracticesSourceURL=https://raw.githubusercontent.com/nhsuk/general-medical-practices/master/output/general-medical-practices.json
+ARG GPMedicalPractitionersSourceURL=https://raw.githubusercontent.com/nhsuk/general-medical-practitioners/master/output/general-medical-practitioners.json
+ARG ES_HOST=profiles-db-elastic.profiles-db-elastic-gp-reg
+ARG ES_PORT=9200
 
 COPY yarn.lock package.json /code/
 
