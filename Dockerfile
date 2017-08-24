@@ -29,6 +29,6 @@ USER $USERNAME
 
 RUN yarn build
 
-CMD yarn update_gp_index
-
 CMD yarn start
+
+RUN yarn update_gp_index
