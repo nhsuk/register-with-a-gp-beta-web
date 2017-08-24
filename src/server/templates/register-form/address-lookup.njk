@@ -59,7 +59,25 @@
         </div>
        <ul class="address-results">
       {% endblock submitRow %}
+      <details>
+        <summary>
+          <span class="details__summary">I can't find my address, enter manually</span>
+        </summary>
+        <div class="details__content">
+          <div class="callout callout--info">
+            <p>Address</p>
+            <input type="input" id="manualAddress1" />
+            <input type="input" id="manualAddress2" />
+            <input type="input" id="manualAddress3" />
+            <p>Town or city</p>
+            <input type="input" id="manualTown" />
+            <p>Postcode</p>
+            <input type="input" id="manualPostcode" />
+            <button type="submit" id="manualcontinue" class="button">Continue</button>
 
+          </div>
+        </div>
+      </details>
     </form>
   </div>
 {% component 'analytics', {
