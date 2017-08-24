@@ -6,8 +6,8 @@ const Joi = JoiBase.extend(JoiPostcodeExtension);
 
 const schema = Joi.object().keys({
   'houseNumber': Joi.string().allow('').max(50)
-    .label('Flat or house number, or house name (optional)')
-    .meta({ componentType: 'textbox', variant: 'short' }),
+    .label('House number/ name (optional)')
+    .meta({ componentType: 'textbox' }),
   'postcode': Joi.postcode().required().uppercase().options({
     language: {
       string: {

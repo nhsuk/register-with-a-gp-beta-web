@@ -1,0 +1,33 @@
+#inputdiv-houseNumber.form-line ,#inputdiv-postcode.form-line ,.addresslookup{
+	@include media(tablet){
+		float: left;
+    	display: inline-block;
+    	margin-right: 20px;
+    	margin-top: 0!important
+	}
+	
+}
+
+#input-houseNumber.form-textbox {
+	max-width: 324px;
+}
+
+.addresslookup {
+	@include media(tablet){
+		position: relative;
+		top : 40px;
+	}
+
+	.button {
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 32px;
+		padding: 4px 24px;
+
+		@include media(tablet) {
+			font-size: 18px;
+			padding: 6px 20px;
+		}
+
+	}
+}

@@ -36,8 +36,11 @@
           } %}
             {% endif %}
           {% endfor %}
+          <div class="form-group addresslookup">
+           <button type="button" id="addressbutton" class="button findAddress">Find address</button>
+           </div>
         </div>
-        </ul> 
+        
       {% endblock %}
       {% block confirm %}
         <div class="address-confirm">
@@ -51,7 +54,7 @@
       {% endblock %}
       {% block submitRow %}
         <div class="form-group">
-          <button type="button" id="addressbutton" class="button">Find address</button>
+         
           <button type="submit" id="addresscontinue" class="button">Continue</button>
         </div>
        <ul class="address-results">
