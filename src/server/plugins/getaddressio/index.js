@@ -2,9 +2,20 @@ import _ from 'lodash';
 import https from 'https';
 import cookies from '../../config/cookies';
 import naturalSort from 'javascript-natural-sort';
-import {getNextSlugByKey} from '../register-form/steps/common'; 
+import steps from './index';
 
 const TIMEOUT = 10000;
+
+function getNextSlugByKey(key){
+  let stepKey = 0;
+  for (let i = 0; i < steps.length; i++){
+    const step = steps[i];
+    if(step.key == key){
+      stepKey = i;
+      return steps[stepKey +1].slug;
+    }
+  }
+}
 
 function getAddresses(postcode, housenumber = '', timeout=TIMEOUT) {
   return new Promise((resolve, reject) => {
@@ -45,7 +56,7 @@ exports.getAddresses = getAddresses;
 
 function addressLookupHandler(request, reply) {
   const postcode = request.payload.postcode;
-  const housenumber = request.payload.housenumber; 
+  const housenumber = request.payload.housenumber;
 
   getAddresses(postcode, housenumber)
     .then(addresses => {
@@ -58,11 +69,11 @@ function addressLookupHandler(request, reply) {
 }
 
 function addressPostHandler(request, reply) {
-console.log(request.payload);
-  const address1 = request.payload.address1;  
-  const address2 = request.payload.address2;  
-  const address3 = request.payload.address3;  
-  const town = request.payload.town;  
+
+  const address1 = request.payload.address1;
+  const address2 = request.payload.address2;
+  const address3 = request.payload.address3;
+  const town = request.payload.town;
   const county = request.payload.county;
   const postcode = request.payload.postcode;
   const housenumber = request.payload.housenumber;
@@ -91,7 +102,7 @@ exports.register = function(server, options, next) {
     {},
     { state: cookies.enableCookies },
     {plugins: {crumb: true }}
-  );  
+  );
   server.route({
     method: 'POST',
     config: _.merge({}, routeConfig, {id: 'addressAPI'}),
@@ -102,7 +113,7 @@ exports.register = function(server, options, next) {
     method: 'POST',
     config: _.merge({}, routeConfig, {id: 'addressSaveAPI'}),
     path: '/{practice}/addresspost',
-    handler: addressPostHandler    
+    handler: addressPostHandler
   });
   next();
 };

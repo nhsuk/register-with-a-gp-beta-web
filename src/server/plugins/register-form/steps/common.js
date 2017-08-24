@@ -75,19 +75,6 @@ export function getPrevStep(prevSteps, cookieData, request) {
   }
 }
 
-export function getNextSlugByKey(key){
-  let slug = '';
-  let stepKey = 0;
-  for (let i = 0; i < steps.length; i++){
-    const step = steps[i];
-    if(step.key == key){
-      slug = step.slug;
-      stepKey = i;
-      return steps[stepKey +1].slug;
-    }
-  }  
-}
-
 export function getNextStep(nextSteps, cookieData) {
   for (let currentStep of nextSteps) {
     const check = _.get(currentStep, 'checkApplies', () => true);

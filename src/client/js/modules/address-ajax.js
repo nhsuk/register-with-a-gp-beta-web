@@ -39,7 +39,7 @@ class AddressAjax {
     this.addressContinue.hide();
     this.formFields.show();
   }
-  
+
   selectAddress (elem){
     $('#selectedAddress1').val(elem.data('address1'));
     $('#selectedAddress2').val(elem.data('address2'));
@@ -104,7 +104,7 @@ class AddressAjax {
               '</div></li>');
             const item = $(template).clone();
             item.find('#addr1').text(a[0] + ', ');
-            if(a[1].length > 0){ 
+            if(a[1].length > 0){
               item.find('#addr2').text(a[1] + ', ');
             }
             if(a[2].length > 0){
