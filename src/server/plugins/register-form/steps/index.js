@@ -2,8 +2,6 @@ import nameStep from './your-name';
 import genderStep from './gender';
 import dateOfBirthStep from './date-of-birth';
 import homeAddressLookupStep from './home-address-lookup';
-import homeAddressLookupPickStep from './home-address-lookup-choose';
-import homeAddressStep from './home-address';
 import contactDetailsStep from './contact-details';
 import previouslyArmedStep from './previously-armed';
 import previouslyRegisteredStep from './previously-registered';
@@ -56,8 +54,6 @@ const steps = [
   nameStep,
   dateOfBirthStep,
   homeAddressLookupStep,
-  homeAddressLookupPickStep,
-  homeAddressStep,
   countryAndTown,
   contactDetailsStep,
   previouslyArmedStep,

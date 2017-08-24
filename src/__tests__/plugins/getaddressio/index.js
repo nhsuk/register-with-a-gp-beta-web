@@ -1,6 +1,6 @@
 import {getAddresses} from '../../../server/plugins/getaddressio/index';
-
 jest.mock('https');
+
 
 
 const expectedData = [

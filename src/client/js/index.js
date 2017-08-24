@@ -7,6 +7,7 @@ const GPAutoComplete = require('./modules/gp-autocomplete');
 const btnDisable = require('./modules/disable-button');
 import title from './lib/title';
 const gaEvents = require('./modules/ga-events');
+const AddressAjax = require('./modules/address-ajax');
 
 labelFocus.init();
 labelSelect.init();
@@ -14,8 +15,12 @@ errorSummary.init();
 title.init();
 
 GPAutoComplete.init();
+
+AddressAjax.init();
+
 NestedInline.init();
 NestedRadioSelect.init();
+
 btnDisable.init();
 
 if (module.hot) {
