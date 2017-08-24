@@ -10,7 +10,9 @@ class GPAutoComplete {
   init(){
     this.formElem = $('#current-step-form');
     this.resultListContainerElem = $('.gp-results');
-    this.autoCompleteInput = $('#gp-search');
+    this.autoCompleteInput = $('#input-gp-lookup');
+    this.resetButton = $('.reset', '#selected-gp-summary');
+    this.resetButton.on('click', this.cleanSelectedGP.bind(this));
     this.autoCompleteInput.on('keyup', this.autoCompleteInputKeyUpHandler.bind(this));
     this.resultListContainerElem.on('click', '.select-link', this.resultItemClickHandler.bind(this));
   }
@@ -31,10 +33,13 @@ class GPAutoComplete {
     $('#gp-code').val(elem.data('code'));
     $('#gp-name').val(elem.data('name'));
     $('#gp-address').val(elem.data('address'));
-    this.formElem.submit();
+    const address = elem.data('address');
+    $('#selected-gp-summary').show();
+    // this.formElem.submit();
   }
 
   cleanSelectedGP (){
+
     $('#gp-code').val('');
     $('#gp-name').val('');
     $('#gp-address').val('');
