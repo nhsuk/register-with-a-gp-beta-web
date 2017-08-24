@@ -1,3 +1,7 @@
+.form-line {
+  padding-left: 4px;
+}
+
 #inputdiv-day.form-line {
   width: 50px;
   float: left;
@@ -53,4 +57,8 @@ textarea.form-textbox {
 .form-fields {
   clear: left;
   overflow: auto;
+}
+
+#armed-nested-container #inputdiv-day.form-line {
+  padding-left: 0;
 }

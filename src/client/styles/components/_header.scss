@@ -37,6 +37,13 @@
 
 .global-header__service-name {
 	color: #fff;
+	vertical-align: middle;
+
+	@include media(mobile) {
+		display: inline;
+		padding-left: 10px;
+	}
+
 }
 	
 

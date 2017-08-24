@@ -1,4 +1,5 @@
 $callout-line: #BFC1C3;
+$button-color: #008038;
 
 .form-fields {
 	padding: 2px 0 2px 0;
@@ -105,10 +106,29 @@ details {
 
 .continue-step, .start-step-btn {
 	margin-top: 25px;
+	margin-left: 4px;
+
 	@include media(desktop) {
 		margin-top: 40px;
 	}
+
+	.button {
+		background-color: $button-color;
+	}
 	
+}
+
+.continue-step .button {
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 32px;
+		padding: 4px 24px;
+
+	@include media(tablet) {
+		font-size: 18px;
+		padding: 4px 20px;
+
+	}
 }
 
 input[type=number]::-webkit-outer-spin-button,
@@ -151,9 +171,6 @@ input[type=number] {
 }
 .callout--info {
 	border-left: solid $callout-line;
-}
-.form-line {
-	padding-left: 4px;
 }
 
 #current-medication-nested-container .nested-inline-label * + * {

@@ -35,7 +35,7 @@
         {% endif %}
         {% block header_service_title %}
           {% if serviceTitle %}
-            <span class="global-header__service-name">{{ serviceTitle }}</span>
+            {% include 'layouts/header.njk'%}
           {% endif %}
         {% endblock %}
       </div>
