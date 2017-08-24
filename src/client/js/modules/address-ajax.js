@@ -94,14 +94,17 @@ class AddressAjax {
           $.each(addressList, function(i,a){
             const template = $.parseHTML('' +
               '<li class="address-item result">' +
-              '<div class="first-line">' +
+              '<div class="address-line">' +
               '<span id="addr1"></span>' +
               '<span id="addr2"></span>' +
               '<span id="addr3"></span>' +
               '<span id="town"></span>' +
               '<span id="county"></span>' +
+              '</div>'+
+              '<span>'+
               '<a href="#" class="select-link">Select</a>' +
-              '</div></li>');
+              '</span>'+
+              '</li>');
             const item = $(template).clone();
             item.find('#addr1').text(a[0] + ', ');
             if(a[1].length > 0){

@@ -31,3 +31,44 @@
 
 	}
 }
+
+ul.address-results{
+	list-style: none;
+  	margin: 20px 0;
+  	padding: 0;
+  	font-family: Frutiger W01;
+
+  	@include media(tablet) {
+  		width: 68%;
+  	}
+}
+ul.address-results li.address-item {
+  overflow:hidden;
+  border-top: 1px #ccc solid;
+  padding: 15px 10px;
+  margin-top: 0;
+
+  .select-link {
+  	float: right;
+  	@include core-font(16);
+  	vertical-align:top;
+
+  	@include media(tablet) {
+  		@include core-font(20);
+  	}
+  }
+}
+
+.address-line{
+	max-width: 200px;
+	font-weight: bold;
+	display: inline;
+	float: left;
+	font-size: 16px;
+
+	@include media(tablet){
+		max-width: 450px;
+		font-size: 20px;
+
+	}
+}
