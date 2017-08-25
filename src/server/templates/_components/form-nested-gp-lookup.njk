@@ -45,28 +45,29 @@
 
     <div id="previously-registered-nested-container" class="nested-fields-container"  style="{{ 'display:none' if not showNestedField }}">
 
-      <label for="input-gp-lookup" class="form-label nested-inline-label">
-        Find current GP
-        <div class="form-control form-group">
-          <input type="text" id="input-gp-lookup" class="form-textbox nested-input" placeholder="Enter keywords" autocomplete="off" style="display:inline-block">
-          <button type="submit" class="button" style="font-size: 18px;padding: 4px 20px">Find Surgery</button>
-        </div>
+      <div class="inputs-container">
+        <label for="input-gp-lookup" class="form-label nested-inline-label">
+          Find current GP
+          <div class="form-control form-group">
+            <input type="text" id="input-gp-lookup" class="form-textbox nested-input" placeholder="Enter keywords" autocomplete="off" style="display:inline-block">
+            <button type="submit" class="button" style="font-size: 18px;padding: 4px 20px">Find Surgery</button>
+          </div>
+        </label>
         <input type="hidden" name="gpCode" id="gp-code">
         <input type="hidden" name="gpName" id="gp-name">
         <input type="hidden" name="gpAddress" id="gp-address">
 
         <ul class="gp-results">
         </ul>
-      </label>
-
-
+      </div>
 
       <div id="selected-gp-summary" style="width:300px;backgorund:#ccc;display:none">
-        <a class="reset" style="cursor:pointer, float:right">Reset X</a>
-        <h5 class="title"></h5>
-        <div class="address">
+        <a class="reset" style="cursor:pointer; float:right">Reset X</a>
+        <h5 class="gp-name"></h5>
+        <div class="gp-address">
         </div>
       </div>
+
     </div>
 
 </fieldset>

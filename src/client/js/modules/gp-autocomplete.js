@@ -9,40 +9,65 @@ class GPAutoComplete {
 
   init(){
     this.formElem = $('#current-step-form');
-    this.resultListContainerElem = $('.gp-results');
+    this.resultListContainer = $('.gp-results');
     this.autoCompleteInput = $('#input-gp-lookup');
+    this.nestedFieldsContainer = $('.inputs-container');
+    this.summaryContainer = $('#selected-gp-summary');
     this.resetButton = $('.reset', '#selected-gp-summary');
-    this.resetButton.on('click', this.cleanSelectedGP.bind(this));
+    this.resetButton.on('click', this.resetBtnClickHandler.bind(this));
     this.autoCompleteInput.on('keyup', this.autoCompleteInputKeyUpHandler.bind(this));
-    this.resultListContainerElem.on('click', '.select-link', this.resultItemClickHandler.bind(this));
+    this.resultListContainer.on('click', '.select-link', this.resultItemClickHandler.bind(this));
   }
 
   static getResultTemplate (){
     return $.parseHTML('' +
-          '<li class="gp-item result">' +
-            '<div class="first-line">' +
-              '<span class="name"></span>' +
-              '<a href="#" class="select-link">Select</a>' +
-            '</div>' +
-            '<small class="address"></small>' +
-          '</li>'
-        );
+      '<li class="gp-item result">' +
+        '<div class="first-line">' +
+          '<span class="name"></span>' +
+          '<a href="#" class="select-link">Select</a>' +
+        '</div>' +
+        '<small class="address"></small>' +
+      '</li>'
+    );
+  }
+
+  updateSummaryContainer (name, address){
+    $('.gp-name', this.summaryContainer).text(name);
+    if (address){
+      const addressLines = address.split(',');
+      $.each(addressLines, (i, line) => {
+        $('.gp-address', this.summaryContainer).append($('<p\>').text(line));
+      });
+    }
   }
 
   selectGP (elem){
-    $('#gp-code').val(elem.data('code'));
-    $('#gp-name').val(elem.data('name'));
-    $('#gp-address').val(elem.data('address'));
+    const name = elem.data('name');
     const address = elem.data('address');
-    $('#selected-gp-summary').show();
-    // this.formElem.submit();
+    $('#gp-code').val(elem.data('code'));
+    $('#gp-name').val(name);
+    $('#gp-address').val(address);
+    this.updateSummaryContainer(name, address);
+    this.summaryContainer.show();
+    this.nestedFieldsContainer.hide();
   }
 
   cleanSelectedGP (){
-
     $('#gp-code').val('');
     $('#gp-name').val('');
     $('#gp-address').val('');
+  }
+
+  resetBtnClickHandler (){
+    $('#gp-code').val('');
+    $('#gp-name').val('');
+    $('#gp-address').val('');
+    this.summaryContainer.hide();
+    this.nestedFieldsContainer.show();
+    this.resultListContainer.empty();
+    this.autoCompleteInput.val('');
+    $('.gp-name', this.summaryContainer).empty();
+    $('.gp-address', this.summaryContainer).empty();
   }
 
   resultItemClickHandler (e){
@@ -52,7 +77,7 @@ class GPAutoComplete {
   }
 
   cleanResults (){
-    this.resultListContainerElem.empty().hide();
+    this.resultListContainer.empty().hide();
   }
 
   autoCompleteInputKeyUpHandler (e){
@@ -83,7 +108,7 @@ class GPAutoComplete {
     };
     item.data(gpData);
 
-    this.resultListContainerElem.append(item);
+    this.resultListContainer.append(item);
   }
 
   fetchList (endpoint, queryParam, keywords){
@@ -100,7 +125,7 @@ class GPAutoComplete {
         if (data.length > 0){
           const gpList = data.slice(0, this.showTotalItemsNumber);
           $.each(gpList, this.appendResultListItem.bind(this));
-          this.resultListContainerElem.show();
+          this.resultListContainer.show();
         }
       }.bind(this)
     });
