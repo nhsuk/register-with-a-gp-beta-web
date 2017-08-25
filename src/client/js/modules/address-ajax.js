@@ -58,7 +58,7 @@ class AddressAjax {
     this.addressButton.hide();
     this.addressContinue.show();
   }
-  
+
   fillManual(){
     $('#selectedAddress1').val($('#manualAddress1').val());
     $('#selectedAddress2').val($('#manualAddress2').val());
@@ -66,10 +66,9 @@ class AddressAjax {
     $('#selectedTown').val($('#manualTown').val());
     $('#selectedCounty').val($('#manualCounty').val());
     $('#input-postcode').val($('#manualPostcode').val());
-    console.log("send");
     document.getElementById('current-step-form').submit();
   }
-  
+
   resultItemClickHandler (e){
     const selectedElem = $(e.target).closest('.result');
     this.selectAddress(selectedElem);
@@ -77,8 +76,7 @@ class AddressAjax {
   }
 
   cleanResults(){
-    console.log('clean');
-     this.resultListContainerElem.hide();
+    this.resultListContainerElem.hide();
     this.resultListContainerElem.empty().hide();
   }
 
