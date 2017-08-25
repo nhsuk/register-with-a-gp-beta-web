@@ -7,15 +7,16 @@ class AddressAjax {
     this.csrf = $('input[name=\'csrf\']').val();
     this.addressButton = $('#addressbutton');
     this.endpoint = '/address';
-    this.finalEndpoint = '/addresspost';
     this.formFields = $('.form-fields');
     this.addressButton.on('click', this.formHandler.bind(this));
     this.resultListContainerElem = $('.address-results');
     this.resultListContainerElem.on('click', '.select-link', this.resultItemClickHandler.bind(this));
-    this.addressContinue = $('#addresscontinue');
+    this.addressContinue = $('#address-lookup-continue');
+    this.manualContinue = $('#manualcontinue');
+    this.resultListContainerElem.on('click', '#manualcontinue', this.fillManual.bind(this));
+    this.manualDiv = $('#manualDiv');
+    this.manualDiv.on('click', '.details__summary', this.cleanResults.bind(this));
     this.confirmContainer = $('.address-confirm');
-    this.confirmContainer.hide();
-    this.addressContinue.hide();
     this.confirmResetButton = $('.confirm-reset');
     this.confirmResetButton.on('click',this.confirmReset.bind(this));
   }
@@ -58,8 +59,14 @@ class AddressAjax {
     this.addressContinue.show();
   }
 
-  cleanSelectedAddress (){
-    $('#address').val('');
+  fillManual(){
+    $('#selectedAddress1').val($('#manualAddress1').val());
+    $('#selectedAddress2').val($('#manualAddress2').val());
+    $('#selectedAddress3').val($('#manualAddress3').val());
+    $('#selectedTown').val($('#manualTown').val());
+    $('#selectedCounty').val($('#manualCounty').val());
+    $('#input-postcode').val($('#manualPostcode').val());
+    document.getElementById('current-step-form').submit();
   }
 
   resultItemClickHandler (e){
@@ -69,14 +76,15 @@ class AddressAjax {
   }
 
   cleanResults(){
+    this.resultListContainerElem.hide();
     this.resultListContainerElem.empty().hide();
   }
 
   formHandler (){
- //   this.cleanSelectedAddress();
     let postcode = this.postcode.val();
     postcode = postcode.replace(/\s/g, '');
     const housenumber = this.housenumber.val();
+    this.manualDiv.removeAttr('open');
     this.fetchList('/' + $('#practice').val() + this.endpoint, postcode, housenumber);
   }
 
@@ -88,20 +96,24 @@ class AddressAjax {
       data: { postcode: postcode, housenumber: housenumber, csrf: this.csrf },
       cache: false,
       success: function(data){
+        $('.address-results').show();
         $('.address-results').empty().hide();
         if (data.length > 0){
           const addressList = data;
           $.each(addressList, function(i,a){
             const template = $.parseHTML('' +
               '<li class="address-item result">' +
-              '<div class="first-line">' +
+              '<div class="address-line">' +
               '<span id="addr1"></span>' +
               '<span id="addr2"></span>' +
               '<span id="addr3"></span>' +
               '<span id="town"></span>' +
               '<span id="county"></span>' +
+              '</div>'+
+              '<span>'+
               '<a href="#" class="select-link">Select</a>' +
-              '</div></li>');
+              '</span>'+
+              '</li>');
             const item = $(template).clone();
             item.find('#addr1').text(a[0] + ', ');
             if(a[1].length > 0){

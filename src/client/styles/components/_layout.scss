@@ -1,5 +1,6 @@
 $callout-line: #BFC1C3;
 $button-color: #008038;
+$confirm-block-backgroud: #F0F4F5;
 
 .form-fields {
 	padding: 2px 0 2px 0;
@@ -101,6 +102,14 @@ details {
 
 	@include media(tablet) {
 		padding-top: 16px;
+		font-size: 20px;
+	}
+
+	summary {
+		font-size: 16px;
+		@include media(tablet) {
+			font-size: 20px;
+		}
 	}
 }
 
