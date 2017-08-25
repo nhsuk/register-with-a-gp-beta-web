@@ -36,7 +36,7 @@ const handlers = {
   ),
 };
 
-const checkApplies = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered', false);
+const checkApplies = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered');
 
 /**
  * @type Step
