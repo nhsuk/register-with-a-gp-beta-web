@@ -18,6 +18,11 @@
 		top : 40px;
 	}
 
+	@include media(mobile) {
+		margin-top: 30px;
+		margin-left: 4px;
+	}
+
 	.button {
 		font-weight: normal;
 		font-size: 16px;
@@ -30,4 +35,87 @@
 		}
 
 	}
+}
+
+#address-lookup-continue, #address-confirm, #address-results {
+	display: none;
+}
+
+ul.address-results{
+	list-style: none;
+  	margin: 20px 0;
+  	padding: 0;
+  	font-family: Frutiger W01;
+
+  	@include media(tablet) {
+  		width: 68%;
+  	}
+}
+ul.address-results li.address-item {
+  overflow:hidden;
+  border-top: 1px #ccc solid;
+  padding: 15px 10px;
+  margin-top: 0;
+
+  .select-link {
+  	float: right;
+  	font-size: 16px;
+  	vertical-align:top;
+
+  	@include media(tablet) {
+  		font-size: 20px;
+  	}
+
+  }
+}
+
+ul.address-results li:last-child {
+	border-bottom: 1px #ccc solid;
+}
+
+.address-line{
+	max-width: 200px;
+	font-weight: bold;
+	display: inline;
+	float: left;
+	font-size: 16px;
+
+	@include media(tablet){
+		max-width: 450px;
+		font-size: 20px;
+
+	}
+}
+
+.address-confirm {
+	background-color: $callout-backgroud;
+	font-weight: bold;
+	font-size: 18px;
+	padding: 20px;
+	
+
+	@include media(tablet){
+		font-size: 20px;
+		padding: 30px;
+		max-width: 650px;
+	}
+}
+
+.address-confirm-line {
+	margin-top: 0px;
+}
+
+.confirm-address-details {
+
+	margin-top: 0;
+	max-width: 180px;
+	@include media(tablet) {
+		max-width: 200px;
+	}
+	
+}
+
+.reset-address {
+	
+	float:right;
 }
