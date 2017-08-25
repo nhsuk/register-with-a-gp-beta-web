@@ -6,7 +6,7 @@ import steps from '../register-form/steps/index';
 
 const TIMEOUT = 10000;
 
-function getNextSlugByKey(key){
+export function getNextSlugByKey(steps,key){
   let stepKey = 0;
   for (let i = 0; i < steps.length; i++){
     const step = steps[i];
@@ -88,7 +88,7 @@ function addressPostHandler(request, reply) {
   data.address = address;
   data.addressLookup = { postcode: postcode, housenumber: housenumber };
   const practice = request.params.practice;
-  const To = '/' + practice + '/register/' + getNextSlugByKey('addressLookup');
+  const To = '/' + practice + '/register/' + getNextSlugByKey(steps,'addressLookup');
   return reply
     .redirect(To)
     .state('data', data);
