@@ -62,7 +62,7 @@ const steps = [
   enterGpAddress,
   registeredAddressStep,
   registeredAddressDetailsStep,
-  registeredNameStep,x
+  registeredNameStep,
   registeredNameDetailsStep,
   currentMedicationStep,
   allergiesStep,
