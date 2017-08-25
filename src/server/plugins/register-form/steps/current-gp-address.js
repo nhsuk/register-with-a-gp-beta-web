@@ -33,9 +33,7 @@ const handlers = {
 };
 
 const checkApplies = function(cookieData) {
-  const  gpCode = _.get(cookieData, 'currentGP.gpCode') === undefined;
-  const  registered = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered')(cookieData);
-  return gpCode && registered;
+  return _.get(cookieData, 'previouslyRegistered.gpCode') === undefined;
 };
 
 /**
