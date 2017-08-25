@@ -11,7 +11,7 @@ class AddressAjax {
     this.addressButton.on('click', this.formHandler.bind(this));
     this.resultListContainerElem = $('.address-results');
     this.resultListContainerElem.on('click', '.select-link', this.resultItemClickHandler.bind(this));
-    this.addressContinue = $('#addresscontinue');
+    this.addressContinue = $('#address-lookup-continue');
     this.manualContinue = $('#manualcontinue');
     this.resultListContainerElem.on('click', '#manualcontinue', this.fillManual.bind(this));
     this.manualDiv = $('#manualDiv');

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import https from 'https';
 import cookies from '../../config/cookies';
 import naturalSort from 'javascript-natural-sort';
-import steps from './index';
+import steps from '../register-form/steps/index';
 
 const TIMEOUT = 10000;
 
