@@ -60,7 +60,7 @@
        <ul class="address-results">
       {% endblock submitRow %}
        </ul>
-      <details>
+      <details id="manualDiv">
         <summary>
           <span class="details__summary">I can't find my address, enter manually</span>
         </summary>
@@ -72,6 +72,8 @@
             <input type="input" id="manualAddress3" value="" />
             <p>Town or city</p>
             <input type="input" id="manualTown" value="" />
+            <p>County</p>
+            <input type="input" id="manualCounty" value="" />
             <p>Postcode</p>
             <input type="input" id="manualPostcode" value="" />
             <button type="button" id="manualcontinue" class="button">Continue</button>

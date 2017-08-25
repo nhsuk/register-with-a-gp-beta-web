@@ -14,9 +14,9 @@ class AddressAjax {
     this.addressContinue = $('#addresscontinue');
     this.manualContinue = $('#manualcontinue');
     this.resultListContainerElem.on('click', '#manualcontinue', this.fillManual.bind(this));
+    this.manualDiv = $('#manualDiv');
+    this.manualDiv.on('click', '.details__summary', this.cleanResults.bind(this));
     this.confirmContainer = $('.address-confirm');
-    this.confirmContainer.hide();
-    this.addressContinue.hide();
     this.confirmResetButton = $('.confirm-reset');
     this.confirmResetButton.on('click',this.confirmReset.bind(this));
   }
@@ -64,14 +64,12 @@ class AddressAjax {
     $('#selectedAddress2').val($('#manualAddress2').val());
     $('#selectedAddress3').val($('#manualAddress3').val());
     $('#selectedTown').val($('#manualTown').val());
+    $('#selectedCounty').val($('#manualCounty').val());
     $('#input-postcode').val($('#manualPostcode').val());
-    $('#current-step-form').submit();
+    console.log("send");
+    document.getElementById('current-step-form').submit();
   }
   
-  cleanSelectedAddress (){
-    $('#address').val('');
-  }
-
   resultItemClickHandler (e){
     const selectedElem = $(e.target).closest('.result');
     this.selectAddress(selectedElem);
@@ -79,14 +77,16 @@ class AddressAjax {
   }
 
   cleanResults(){
+    console.log('clean');
+     this.resultListContainerElem.hide();
     this.resultListContainerElem.empty().hide();
   }
 
   formHandler (){
- //   this.cleanSelectedAddress();
     let postcode = this.postcode.val();
     postcode = postcode.replace(/\s/g, '');
     const housenumber = this.housenumber.val();
+    this.manualDiv.removeAttr('open');
     this.fetchList('/' + $('#practice').val() + this.endpoint, postcode, housenumber);
   }
 
@@ -98,6 +98,7 @@ class AddressAjax {
       data: { postcode: postcode, housenumber: housenumber, csrf: this.csrf },
       cache: false,
       success: function(data){
+        $('.address-results').show();
         $('.address-results').empty().hide();
         if (data.length > 0){
           const addressList = data;
