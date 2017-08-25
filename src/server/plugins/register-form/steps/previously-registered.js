@@ -17,6 +17,9 @@ const schema = Joi.object().keys({
         any: { required: '!!Please tell us if you’re registered with a GP' },
       },
     }),
+  'gpCode': Joi.when('previously-armed', {is: true, then:Joi.string().required()}),
+  'gpName': Joi.when('previously-armed', {is: true, then:Joi.string().required()}),
+  'gpAddress': Joi.when('previously-armed', {is: true, then:Joi.string().allow('').optional()}),
   'submit': Joi.any().optional().strip()
 });
 

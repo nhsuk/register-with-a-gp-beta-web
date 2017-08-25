@@ -45,7 +45,7 @@
 
     <div id="previously-registered-nested-container" class="nested-fields-container"  style="{{ 'display:none' if not showNestedField }}">
 
-      <div class="inputs-container">
+      <div class="inputs-container" style="{{ 'display:none' if stepData['gpCode'] }}">
         <label for="input-gp-lookup" class="form-label nested-inline-label">
           Find current GP
           <div class="form-control form-group">
@@ -53,18 +53,24 @@
             <button type="submit" class="button" style="font-size: 18px;padding: 4px 20px">Find Surgery</button>
           </div>
         </label>
-        <input type="hidden" name="gpCode" id="gp-code">
-        <input type="hidden" name="gpName" id="gp-name">
-        <input type="hidden" name="gpAddress" id="gp-address">
+        <input type="hidden" name="gpCode" id="gp-code" value="{{ stepData['gpCode'] }}">
+        <input type="hidden" name="gpName" id="gp-name" value="{{ stepData['gpName'] }}">
+        <input type="hidden" name="gpAddress" id="gp-address" value="{{ stepData['gpAddress'] }}">
 
         <ul class="gp-results">
         </ul>
       </div>
 
-      <div id="selected-gp-summary" style="width:300px;backgorund:#ccc;display:none">
+      <div id="selected-gp-summary" style="width:500px;{{ 'display:none' if not stepData['gpCode'] }}">
         <a class="reset" style="cursor:pointer; float:right">Reset X</a>
-        <h5 class="gp-name"></h5>
+        <h3 class="gp-name">{{ stepData['gpName'] | default('') }}</h5>
         <div class="gp-address">
+          {% if stepData['gpAddress'] %}
+            {% set addressLines = stepData['gpAddress'] | split %}
+            {% for line in addressLines %}
+              <p>{{ line }}</p>
+            {% endfor %}
+          {% endif %}
         </div>
       </div>
 
