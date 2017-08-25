@@ -31,7 +31,7 @@
 
 		@include media(tablet) {
 			font-size: 18px;
-			padding: 6px 20px;
+			padding: 6px 22px;
 		}
 
 	}
@@ -79,30 +79,36 @@ ul.address-results li:last-child {
 	display: inline;
 	float: left;
 	font-size: 16px;
+	line-height: 25px;
 
-	@include media(tablet){
+	@include media(tablet) {
 		max-width: 450px;
 		font-size: 20px;
+		line-height: 32px;
 
 	}
 }
 
 .address-confirm {
-	background-color: $callout-backgroud;
+	background-color: $confirm-block-backgroud;
 	font-weight: bold;
-	font-size: 18px;
 	padding: 20px;
 	
 
 	@include media(tablet){
-		font-size: 20px;
-		padding: 30px;
 		max-width: 650px;
 	}
 }
 
 .address-confirm-line {
+	font-size: 16px;
+	line-height: 25px;
 	margin-top: 0px;
+
+	@include media(tablet) {
+		font-size: 20px;
+		line-height: 32px;
+	}
 }
 
 .confirm-address-details {
@@ -116,6 +122,25 @@ ul.address-results li:last-child {
 }
 
 .reset-address {
-	
 	float:right;
+
+	.confirm-reset {
+		font-size: 14px;
+		font-weight: normal;
+
+		@include media(tablet) {
+			font-size: 16px;
+		}
+	}
+}
+
+details#manualDiv {
+	margin-top: 10px;
+}
+
+#manual-address-details .form-line {
+	@include media(tablet) {
+		max-width: 420px;
+	}
+	
 }
