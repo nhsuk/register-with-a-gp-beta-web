@@ -53,7 +53,7 @@ const steps = [
   genderStep,
   nameStep,
   dateOfBirthStep,
-  // homeAddressLookupStep,
+  homeAddressLookupStep,
   countryAndTown,
   contactDetailsStep,
   previouslyArmedStep,
