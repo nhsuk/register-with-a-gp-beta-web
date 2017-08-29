@@ -42,11 +42,11 @@ class AddressAjax {
   }
 
   selectAddress (elem){
-    $('#selectedAddress1').val(elem.data('address1'));
-    $('#selectedAddress2').val(elem.data('address2'));
-    $('#selectedAddress3').val(elem.data('address3'));
-    $('#selectedTown').val(elem.data('town'));
-    $('#selectedCounty').val(elem.data('county'));
+    $('#input-address1').val(elem.data('address1'));
+    $('#input-address2').val(elem.data('address2'));
+    $('#input-address3').val(elem.data('address3'));
+    $('#input-town').val(elem.data('town'));
+    $('#input-county').val(elem.data('county'));
     $('#confirmAddress1').text(elem.data('address1'));
     $('#confirmAddress2').text(elem.data('address2'));
     $('#confirmAddress3').text(elem.data('address3'));
@@ -60,11 +60,11 @@ class AddressAjax {
   }
 
   fillManual(){
-    $('#selectedAddress1').val($('#manualAddress1').val());
-    $('#selectedAddress2').val($('#manualAddress2').val());
-    $('#selectedAddress3').val($('#manualAddress3').val());
-    $('#selectedTown').val($('#manualTown').val());
-    $('#selectedCounty').val($('#manualCounty').val());
+    $('#input-address1').val($('#manualAddress1').val());
+    $('#input-address2').val($('#manualAddress2').val());
+    $('#input-address3').val($('#manualAddress3').val());
+    $('#input-town').val($('#manualTown').val());
+    $('#input-county').val($('#manualCounty').val());
     $('#input-postcode').val($('#manualPostcode').val());
     document.getElementById('current-step-form').submit();
   }

@@ -15,6 +15,12 @@ const schema = Joi.object().keys({
       },
     },
   }).label('Postcode').meta({ componentType: 'textbox', variant: 'short' }),
+  'address1': Joi.string().max(50).required().meta({ componentType: 'hidden' }),
+  'address2': Joi.string().allow('').max(50).meta({ componentType: 'hidden' }),
+  'address3': Joi.string().allow('').max(50).meta({ componentType: 'hidden' }),
+  'town': Joi.string().max(50).required().meta({ componentType: 'hidden' }),
+  'county': Joi.string().max(50).required().meta({ componentType: 'hidden' }),
+  
   'submit': Joi.any().optional().strip(),
 });
 
