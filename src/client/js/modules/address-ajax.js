@@ -13,7 +13,7 @@ class AddressAjax {
     this.resultListContainerElem.on('click', '.select-link', this.resultItemClickHandler.bind(this));
     this.addressContinue = $('#address-lookup-continue');
     this.manualContinue = $('#manualcontinue');
-    this.resultListContainerElem.on('click', '#manualcontinue', this.fillManual.bind(this));
+    this.manualContinue.on('click', this.fillManual.bind(this));
     this.manualDiv = $('#manualDiv');
     this.manualDiv.on('click', '.details__summary', this.cleanResults.bind(this));
     this.confirmContainer = $('.address-confirm');
@@ -66,7 +66,7 @@ class AddressAjax {
     $('#input-town').val($('#manualTown').val());
     $('#input-county').val($('#manualCounty').val());
     $('#input-postcode').val($('#manualPostcode').val());
-    document.getElementById('current-step-form').submit();
+    $('#current-step-form').submit();
   }
 
   resultItemClickHandler (e){
