@@ -46,8 +46,7 @@
   </table>
     <table class="summary">
       <caption>Your current GP</caption>
-
-      {% if data.previouslyRegistered['previously-registered'] %}
+      {% if data.manualGPAddress['gpName'] %}
 
         {% if data.manualGPAddress['gpName'] %}
             {{ row('Current GP', data.manualGPAddress, 'manualGPAddress', true) }}
@@ -66,6 +65,7 @@
         {% else %}
           {{ row('Registered name', data.registeredNameDetails, 'registeredName') }}
         {% endif %}
+
       {% else %}
         {{ row('Current GP', {'empty': 'I’m not registered with a GP'}, 'previouslyRegistered') }}
       {% endif %}
