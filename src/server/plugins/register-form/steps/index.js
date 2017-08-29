@@ -58,7 +58,6 @@ const steps = [
   contactDetailsStep,
   previouslyArmedStep,
   previouslyRegisteredStep,
-  currentGP,
   enterGpAddress,
   registeredAddressStep,
   registeredAddressDetailsStep,

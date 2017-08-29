@@ -1,7 +1,7 @@
 import Joi from 'joi';
+import _ from 'lodash';
 
-import { postHandlerFactory, getHandlerFactory, dependsOnBoolean, dataTransformer } from './common';
-import previouslyRegisteredStep from './previously-registered';
+import { postHandlerFactory, getHandlerFactory, dataTransformer } from './common';
 
 const schema = Joi.object().keys({
   'registered-name-correct': Joi.boolean().required()
@@ -36,7 +36,9 @@ const handlers = {
   ),
 };
 
-const checkApplies = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered');
+const checkApplies = (cookieData) => {
+  return _.get(cookieData, 'previouslyRegistered') === undefined;
+};
 
 /**
  * @type Step
