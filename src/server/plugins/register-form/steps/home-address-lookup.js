@@ -31,7 +31,7 @@ const template = 'register-form/address-lookup';
 
 const handlers = {
   GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps, undefined, undefined, undefined, template),
-  POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps),
+  POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps, template),
 };
 
 /**
