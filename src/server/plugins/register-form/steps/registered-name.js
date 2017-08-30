@@ -35,12 +35,7 @@ const handlers = {
   ),
 };
 
-const checkApplies = (cookieData) => {
-  const registered = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered')(cookieData);
-  const isGPSelected = propertyIsExists(cookieData, 'previouslyRegistered.gpCode');
-  const enteredGPName = propertyIsExists(cookieData, 'manualGPAddress.gpName');
-  return registered && enteredGPName && !isGPSelected;
-};
+const checkApplies = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered');
 
 /**
  * @type Step

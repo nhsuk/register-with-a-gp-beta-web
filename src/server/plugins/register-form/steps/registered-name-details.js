@@ -23,8 +23,7 @@ const handlers = {
 const checkApplies = (cookieData) => {
   const registered = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered')(cookieData);
   const incorrect = dependsOnBoolean(registeredNameStep, 'registered-name-correct', false)(cookieData);
-  const isGPSelected = propertyIsExists(cookieData, 'previouslyRegistered.gpCode');
-  return registered && incorrect && !isGPSelected;
+  return registered && incorrect;
 };
 
 /**

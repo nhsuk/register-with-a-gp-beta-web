@@ -46,12 +46,13 @@
   </table>
     <table class="summary">
       <caption>Your current GP</caption>
-      {% if data.manualGPAddress['gpName'] %}
+      {% if data.previouslyRegistered['previously-registered'] %}
 
-        {% if data.manualGPAddress['gpName'] %}
-            {{ row('Current GP', data.manualGPAddress, 'manualGPAddress', true) }}
+        {% if data.previouslyRegistered['gpCode'] %}
+            {% set selectedGPData = {'gp-name': data.previouslyRegistered['gpName'], 'gp-address': data.previouslyRegistered['gpAddress']} %}
+            {{ row('Current GP', selectedGPData, 'previouslyRegistered', true) }}
         {% else %}
-            {{ row('Current GP', data.currentGP, 'currentGP', true) }}
+            {{ row('Current GP', data.manualGPAddress, 'manualGPAddress', true) }}
         {% endif %}
 
         {% if data.registedAddress['registered-address-correct'] %}
