@@ -1,0 +1,29 @@
+{##
+ # Family: Control
+ #
+ # @param {string} [variant]  Type of text box (default|large)
+ # @param {string} [name]     Name for the form element
+ #
+ # @param {string} [value]    The current value - Used to prefill the field (optional)
+ # @param {string} [error]    Whether to display an error on the field (optional)
+ # @param {bool}   [optional] Whether the field is optional or not (optional)
+ #
+ # @return {string} HTML for multiple choice options
+ #
+ # @example
+ #   {% component 'hidden', {
+ #     name:  'age'
+ #   } %}
+ #}
+{% set hintId = 'hint-' + name %}
+<div id="inputdiv-{{ name }}" class="form-line">
+
+<input
+  type="hidden"
+  name="{{ name }}"
+  id="input-{{ name }}"
+  {% if value %}
+    value="{{ value }}"
+  {% endif %}
+>
+</div>

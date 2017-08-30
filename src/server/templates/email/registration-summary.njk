@@ -67,13 +67,13 @@ Your health
 ===========
 
 {% if data.currentMedication['current-medication'] %}
-  {{ render_multi_line('Medication', data.medicationDetails, true) }}
+  {{ render_multi_line('Medication', {'medicationDetails': data.currentMedication['medications']}, true) }}
 {% else %}
   {{ render_one_line('Medication', {'empty': 'I’m not currently taking any medication'}) }}
 {% endif %}
 
 {% if data.allergies['any-allergies'] %}
-  {{ render_multi_line('Allergies', data.allergiesDetails, true) }}
+  {{ render_multi_line('Allergies', {'allergies-list': data.allergies['allergies']}, true) }}
 {% else %}
   {{ render_one_line('Allergies', {'empty': 'I don’t have any allergies'}) }}
 {% endif %}
