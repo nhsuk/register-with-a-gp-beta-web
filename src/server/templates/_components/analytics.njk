@@ -4,14 +4,22 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', '{{ GA_ID() }}');
+  ga('create');
   ga('send', 'pageview');
   function ga_event(Category, Text, Label=''){
     ga('send', 'event', Category, Text, Label);
+    console.log('send,' + 'event,' + Category + ',' + Text + ',' + Label);
   }
-  {% if gaEvents %}
-      gaEvents.each(e){
-        ga_event(ec, ea, el);
+  const eventsJson = '{{ events|safe }}';
+  const events = JSON.parse(eventsJson);
+  console.log(events);
+  {% if events %}
+      if(Array.isArray(events)) {
+        for(i=0; i<events.length; i++){
+          ga_event(events[i].ec, events[i].ea, events[i].el);
+        }
+      } else if(typeof events === 'object') {
+          ga_event(events.ec, events.ea, events.el);
       }
   {% endif %}
 </script>

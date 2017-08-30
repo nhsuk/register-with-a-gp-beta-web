@@ -40,7 +40,5 @@
 {% block body_footer %}
   {{ super() }}
   <script src="{{ jsBundle }}" type="application/javascript"></script>
-  {% component 'analytics', {
-  ga_user_ID: uid
-  } %}  
+  {% component 'analytics', { events: ga_events } %}      
 {% endblock body_footer %}

@@ -83,7 +83,6 @@ function endHandler(request, reply) {
         });
     }
   }
-
   return reply.view(practiceEndTemplate);
 }
 

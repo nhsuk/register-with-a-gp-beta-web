@@ -11,9 +11,5 @@
     </ul>
 
     <p>Tell {{ practice.name | default('the GP practice') }} if you don’t have any of these things.</p>
-{% component 'analytics', {
-  ga_client_ID: cid,
-  ga_user_ID: uid
-  } %}    
 {% endblock %}
 
