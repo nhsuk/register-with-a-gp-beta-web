@@ -202,3 +202,11 @@ input[type=number] {
 		max-width: 260px;
 	}
 }
+
+.callout p, .callout li {
+	@include core-font(16);
+
+	@include media(tablet) {
+    	@include core-font(20);
+  	}
+}

@@ -7,7 +7,7 @@ $_radio-size: 20px;
 $_radio-spacing: ($_element-size - $_radio-size) / 2;
 
 .multiple-choice {
-  @include core-font(20);
+  @include core-font(16);
   clear: left;
   cursor: pointer;
   display: block;
@@ -24,6 +24,10 @@ $_radio-spacing: ($_element-size - $_radio-size) / 2;
     @include ie-lte(8) {
       padding-left: 0;
     }
+  }
+
+  @include media(tablet) {
+    @include core-font(20);
   }
 }
 
