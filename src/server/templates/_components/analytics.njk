@@ -8,11 +8,9 @@
   ga('send', 'pageview');
   function ga_event(Category, Text, Label=''){
     ga('send', 'event', Category, Text, Label);
-    console.log('send,' + 'event,' + Category + ',' + Text + ',' + Label);
   }
   const eventsJson = '{{ events|safe }}';
   const events = JSON.parse(eventsJson);
-  console.log(events);
   {% if events %}
       if(Array.isArray(events)) {
         for(i=0; i<events.length; i++){
