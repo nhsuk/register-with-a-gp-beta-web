@@ -39,9 +39,9 @@ const handlers = {
 };
 
 const checkApplies = (cookieData) => {
-  const registered = _.get(cookieData, 'previouslyRegistered') === undefined;
-  const enteredGPName = _.get(cookieData, 'manualGPAddress.gpName', false);
-  return (registered && enteredGPName);
+  const registered = _.get(cookieData, 'previouslyRegistered.previously-registered');
+  const enteredGPName = _.get(cookieData, 'manualGPAddress.gpName');
+  return !registered && enteredGPName;
 };
 
 /**

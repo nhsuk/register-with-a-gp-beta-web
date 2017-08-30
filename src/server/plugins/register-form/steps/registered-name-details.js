@@ -21,9 +21,8 @@ const handlers = {
 };
 
 const checkApplies = (cookieData) => {
-  const registered = _.get(cookieData, 'previouslyRegistered') === undefined;
   const incorrect = dependsOnBoolean(registeredNameStep, 'registered-name-correct', false)(cookieData);
-  return !!(registered && incorrect);
+  return incorrect;
 };
 
 /**

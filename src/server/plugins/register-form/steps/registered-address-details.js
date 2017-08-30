@@ -34,9 +34,12 @@ const handlers = {
 };
 
 const checkApplies = (cookieData) => {
-  const registered = dependsOnBoolean(previouslyRegisteredStep, 'gpName', false);
+  const registered = _.get(cookieData, 'previouslyRegistered.previously-registered');
+  const ccc = _.get(cookieData, 'registedAddress.registered-address-correct');
+  console.log(typeof ccc);
   const incorrect = dependsOnBoolean(registeredAddressStep, 'registered-address-correct', false)(cookieData);
-  return !!(registered && incorrect);
+  console.log(incorrect);
+  return !registered && incorrect;
 };
 
 /**
