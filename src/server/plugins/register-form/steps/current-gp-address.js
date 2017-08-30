@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import JoiBase from 'joi';
 import JoiPostcodeExtension from 'joi-postcode';
 import {postHandlerFactory, getHandlerFactory, dependsOnBoolean, propertyIsExists} from './common';

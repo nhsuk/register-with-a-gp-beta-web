@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { postHandlerFactory, getHandlerFactory, dependsOnBoolean,  propertyIsExists } from './common';
+import { postHandlerFactory, getHandlerFactory, dependsOnBoolean,} from './common';
 import previouslyRegisteredStep from './previously-registered';
 import registeredNameStep from './registered-name';
 

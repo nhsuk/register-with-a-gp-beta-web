@@ -1,7 +1,6 @@
 import Joi from 'joi';
-import _ from 'lodash';
 
-import { postHandlerFactory, getHandlerFactory, dependsOnBoolean, propertyIsExists, dataTransformer } from './common';
+import { postHandlerFactory, getHandlerFactory, dependsOnBoolean, dataTransformer} from './common';
 import previouslyRegisteredStep from './previously-registered';
 
 

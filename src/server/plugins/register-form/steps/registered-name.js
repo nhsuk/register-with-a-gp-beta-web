@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { postHandlerFactory, getHandlerFactory, dependsOnBoolean, propertyIsExists, dataTransformer } from './common';
+import { postHandlerFactory, getHandlerFactory, dependsOnBoolean, dataTransformer } from './common';
 import previouslyRegisteredStep from './previously-registered';
 
 const schema = Joi.object().keys({
