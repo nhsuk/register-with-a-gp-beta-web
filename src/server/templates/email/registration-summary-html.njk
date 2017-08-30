@@ -51,10 +51,12 @@ Armed force
 Your current GP
 
 {% if data.previouslyRegistered['previously-registered'] -%}
+
   {% if data.manualGPAddress['gpName'] %}
       <p>{{ render_multi_line('Current GP', data.manualGPAddress) }}</p>
   {% else %}
-      <p>{{ render_multi_line('Current GP', data.currentGP) }}</p>
+      {% set selectedGPData = {'gp-name': data.previouslyRegistered['gpName'], 'gp-address': data.previouslyRegistered['gpAddress']} %}
+      <p>{{ render_multi_line('Current GP', selectedGPData) }}</p>
   {% endif %}
 
   {% if data.registedAddress['registered-address-correct'] %}

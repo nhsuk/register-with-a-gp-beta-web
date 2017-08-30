@@ -44,11 +44,14 @@ Your current GP
 ===============
 
 {% if data.previouslyRegistered['previously-registered'] %}
+
   {% if data.manualGPAddress['gpName'] %}
     {{ render_one_line('Current GP', data.manualGPAddress) }}
   {% else %}
-    {{ render_one_line('Current GP', data.currentGP) }}
+    {% set selectedGPData = {'gp-name': data.previouslyRegistered['gpName'], 'gp-address': data.previouslyRegistered['gpAddress']} %}
+    {{ render_one_line('Current GP', selectedGPData) }}
   {% endif %}
+
   {% if data.registedAddress['registered-address-correct'] %}
     {{ render_one_line('Registered address', data.address) }}
   {% else %}
