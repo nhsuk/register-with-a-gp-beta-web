@@ -1,8 +1,8 @@
 import Joi from 'joi';
-import _ from 'lodash';
-
-import { postHandlerFactory, getHandlerFactory, dependsOnBoolean } from './common';
+import { postHandlerFactory, getHandlerFactory, dependsOnBoolean,  propertyIsExists } from './common';
+import previouslyRegisteredStep from './previously-registered';
 import registeredNameStep from './registered-name';
+
 
 const schema = Joi.object().keys({
   'firstName': Joi.string().max(100).label('First name').meta({ componentType: 'textbox' }),
@@ -21,8 +21,10 @@ const handlers = {
 };
 
 const checkApplies = (cookieData) => {
+  const registered = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered')(cookieData);
   const incorrect = dependsOnBoolean(registeredNameStep, 'registered-name-correct', false)(cookieData);
-  return incorrect;
+  const isGPSelected = propertyIsExists(cookieData, 'previouslyRegistered.gpCode');
+  return registered && incorrect && !isGPSelected;
 };
 
 /**

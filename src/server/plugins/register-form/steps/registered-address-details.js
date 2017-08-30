@@ -2,7 +2,7 @@ import JoiBase from 'joi';
 import JoiPostcodeExtension from 'joi-postcode';
 import _ from 'lodash';
 
-import { postHandlerFactory, getHandlerFactory, dependsOnBoolean } from './common';
+import { postHandlerFactory, getHandlerFactory, dependsOnBoolean, propertyIsExists } from './common';
 import previouslyRegisteredStep from './previously-registered';
 import registeredAddressStep from './registered-address';
 
@@ -34,12 +34,10 @@ const handlers = {
 };
 
 const checkApplies = (cookieData) => {
-  const registered = _.get(cookieData, 'previouslyRegistered.previously-registered');
-  const ccc = _.get(cookieData, 'registedAddress.registered-address-correct');
-  console.log(typeof ccc);
+  const registered = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered')(cookieData);
   const incorrect = dependsOnBoolean(registeredAddressStep, 'registered-address-correct', false)(cookieData);
-  console.log(incorrect);
-  return !registered && incorrect;
+  const isGPSelected = propertyIsExists(cookieData, 'previouslyRegistered.gpCode');
+  return registered && incorrect && !isGPSelected;
 };
 
 /**

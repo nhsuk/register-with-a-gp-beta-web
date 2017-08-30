@@ -1,7 +1,6 @@
 import Joi from 'joi';
-import _ from 'lodash';
-
-import { postHandlerFactory, getHandlerFactory, dataTransformer } from './common';
+import { postHandlerFactory, getHandlerFactory, dependsOnBoolean, propertyIsExists, dataTransformer } from './common';
+import previouslyRegisteredStep from './previously-registered';
 
 const schema = Joi.object().keys({
   'registered-name-correct': Joi.boolean().required()
@@ -37,9 +36,10 @@ const handlers = {
 };
 
 const checkApplies = (cookieData) => {
-  const registered = _.get(cookieData, 'previouslyRegistered.previously-registered');
-  const enteredGPName = _.get(cookieData, 'manualGPAddress.gpName');
-  return !registered && enteredGPName;
+  const registered = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered')(cookieData);
+  const isGPSelected = propertyIsExists(cookieData, 'previouslyRegistered.gpCode');
+  const enteredGPName = propertyIsExists(cookieData, 'manualGPAddress.gpName');
+  return registered && enteredGPName && !isGPSelected;
 };
 
 /**
