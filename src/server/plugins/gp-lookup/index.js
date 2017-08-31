@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import cookies from '../../config/cookies';
 import elasticsearch from './elasticsearch';
+import {getMockedGPLookupData} from '../../../__tests__/helpers/index';
 
 function getGPList(keywords) {
   return new Promise((resolve) => {
@@ -32,6 +33,15 @@ exports.getGPList = getGPList;
 
 
 function gpLookupHandler(request, reply) {
+
+  // fixme: Our current test framework(jest) not working with codeceptJS,
+  // that's the reason implemeted this logic. it is mocking data for acceptance tests.
+  if (process.env.ACCEPTANCE_TEST){
+    const gpsData = getMockedGPLookupData();
+    reply(gpsData);
+    return;
+  }
+
   getGPList(request.query.search)
     .then(gps => {
       reply(gps);
