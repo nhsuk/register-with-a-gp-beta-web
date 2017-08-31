@@ -1,5 +1,5 @@
 .form-dropdown {
-  @include core-font(20);
+  @include core-font(16);
   appearance: none;
   border: ($baseline-grid-unit / 2) solid $blue;
   display: block;
@@ -15,5 +15,9 @@
 
   &.has-error {
     border-color: $red;
+  }
+
+  @include media(tablet) {
+    @include core-font(20);
   }
 }
