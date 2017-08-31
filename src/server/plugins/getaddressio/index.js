@@ -10,7 +10,7 @@ export function getNextSlugByKey(steps,key){
   let stepKey = 0;
   for (let i = 0; i < steps.length; i++){
     const step = steps[i];
-    if(step.key == key){
+    if(step.key === key){
       stepKey = i;
       return steps[stepKey +1].slug;
     }

@@ -42,8 +42,9 @@ $confirm-block-backgroud: #F0F4F5;
 
 .button--back {
 	margin-left: 14px;
-	padding-bottom: 14px;
-	
+	line-height: 14px;
+	font-size: 14px;
+
 	@include media(tablet) {
 		margin-left: 0;
 		padding-bottom: 8px;
@@ -186,4 +187,26 @@ input[type=number] {
 	margin-top: 20px;
 }
 
+.add-icon::before {
+	content : "+";
+	padding-right: 4px;
+}
 
+.add-element-link {
+	font-size: 14px;
+	color: #1260BB
+}
+
+#current-medication-nested-container .nested-input{
+	@include media(mobile) {
+		max-width: 260px;
+	}
+}
+
+.callout p, .callout li {
+	@include core-font(16);
+
+	@include media(tablet) {
+    	@include core-font(20);
+  	}
+}

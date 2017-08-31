@@ -11,19 +11,14 @@
     {% endif %}
     {% component 'error-summary', { children: stepErrors } %}
     <h1 class="form-title">{{ title | render | safe }}</h1>
-    <form method="post" id="current-step-form" class="{{key}}-form" action="/{{ CURRENT_PRACTICE.key }}/addresspost">
+    <form method="post" id="current-step-form" class="{{key}}-form" >
       <input type="hidden" name="csrf" value="{{csrf}}">
-      <input type="hidden" name="address1" id="selectedAddress1" value="">
-      <input type="hidden" name="address2" id="selectedAddress2" value="">
-      <input type="hidden" name="address3" id="selectedAddress3" value="">
-      <input type="hidden" name="town" id="selectedTown" value="">
-      <input type="hidden" name="county" id="selectedCounty" value="">
       <input type="hidden" id="practice" value="{{ CURRENT_PRACTICE.key }}">
       
       {% block formFields %}
         <div class="form-fields">
           {% for field in fields %}
-            {% if field.componentType in ['textbox', 'multiple-choice', 'disclosure', 'dropdown', 'numeric', 'tel','radio-horizontal'] %}
+            {% if field.componentType in ['textbox', 'multiple-choice', 'disclosure', 'dropdown', 'numeric', 'tel','radio-horizontal', 'hidden'] %}
               {% component 'form-' + field.componentType, {
             label: field.label,
             name: field.id,
@@ -77,7 +72,7 @@
               <label for="input-locality" class="form-label">
                 Address
               </label>
-              <input type="text" name="address1" class="form-textbox" id="manualAddress1" value="" />
+              <input type="text" class="form-textbox" id="manualAddress1" value="" />
             </div>
             <div id="inputdiv-manualAddress2" class="form-line">
               <input type="text" class="form-textbox" id="manualAddress2" value="" />
@@ -89,19 +84,19 @@
               <label for="input-manualTown" class="form-label">
                 Town or city
               </label>
-              <input type="text" class="form-textbox" name="Town or city" id="manualTown" value="" />
+              <input type="text" class="form-textbox" id="manualTown" value="" />
             </div>
             <div id="inputdiv-manualCounty" class="form-line">
               <label for="input-manualCounty" class="form-label">
-                Country
+                County
               </label>
-              <input type="text" class="form-textbox" name="Country" id="manualCounty" value="" />
+              <input type="text" class="form-textbox" id="manualCounty" value="" />
             </div>
             <div id="inputdiv-manualPostcode" class="form-line">
               <label for="input-manualPostcode" class="form-label">
                 Postcode
               </label>
-              <input type="text" name="Postcode"  class="form-textbox form-textbox--short" id="manualPostcode" value="" />
+              <input type="text"  class="form-textbox form-textbox--short" id="manualPostcode" value="" />
             </div>
             <div class="form-group continue-step">
             <button type="button" id="manualcontinue" class="button">Continue</button>
