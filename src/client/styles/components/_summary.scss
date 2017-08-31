@@ -80,9 +80,12 @@ $summary-border :  #C7C7C7;
 }
 
 .summary-note__description {
-  margin-top:15px;
+  margin-top:10px;
    @include media(mobile) {
     @include core-font(16);
+  }
+  @include media(tablet) {
+    margin-top:15px;
   }
 }
 
