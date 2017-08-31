@@ -84,9 +84,7 @@ $summary-border :  #C7C7C7;
    @include media(mobile) {
     @include core-font(16);
   }
-  @include media(tablet) {
-    margin-top:15px;
-  }
+
 }
 
 .summary__content {
@@ -98,5 +96,12 @@ $summary-border :  #C7C7C7;
     clear: both;
   }
 }
-
-
+.confirm-summary {
+  margin-top: 15px;
+  @include media(tablet) {
+    margin-top: 25px;
+  }
+}
+.summary-info-details {
+  padding-top: 10px;
+}
