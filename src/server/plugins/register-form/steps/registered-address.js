@@ -22,7 +22,7 @@ const schema = Joi.object().keys({
   'submit': Joi.any().optional().strip()
 });
 
-const title = 'Are you registered at {{ data.currentGP.gpName | default(data.manualGPAddress.gpName) }} with this address?';
+const title = 'Are you registered at {{ data.previouslyRegistered.gpName | default(data.previouslyRegistered.manualGPName) }} with this address?';
 const key = 'registedAddress';
 const slug = 'registered-address';
 const beforeTemplate = '_includes/current-address.njk';
@@ -30,7 +30,7 @@ const template = 'register-form/registered-address.njk';
 
 const handlers = {
   GET: (prevSteps) => getHandlerFactory(
-      key, title, schema, prevSteps, undefined, undefined, undefined, template
+      key, title, schema, prevSteps, undefined, beforeTemplate, undefined, template
   ),
   POST: (prevSteps, nextSteps) => postHandlerFactory(
       key, title, schema, prevSteps, nextSteps, {beforeTemplate, template, dataTransformer}
