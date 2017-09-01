@@ -60,6 +60,7 @@ $confirm-block-backgroud: #F0F4F5;
 
 	@include media(mobile) {
 		font-size: 24px;
+		padding-top: 5px;
 		line-height: 29px;
 	}
 }
