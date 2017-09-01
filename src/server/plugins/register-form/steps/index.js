@@ -57,7 +57,6 @@ const steps = [
   contactDetailsStep,
   previouslyArmedStep,
   previouslyRegisteredStep,
-  enterGpAddress,
   registeredAddressStep,
   registeredAddressDetailsStep,
   registeredNameStep,
