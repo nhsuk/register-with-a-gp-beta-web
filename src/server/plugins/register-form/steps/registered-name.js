@@ -20,7 +20,7 @@ const schema = Joi.object().keys({
   'submit': Joi.any().optional().strip()
 });
 
-const title = 'Are you registered at {{ data.currentGP.gpName | default(data.manualGPAddress.gpName) }} with this name?';
+const title = 'Are you registered at {{ data.previouslyRegistered.gpName | default(data.previouslyRegistered.manualGPName) }} with this name?';
 const key = 'registeredName';
 const slug = 'registered-name';
 const beforeTemplate = '_includes/current-name.njk';

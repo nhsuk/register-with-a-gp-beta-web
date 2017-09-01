@@ -10,15 +10,17 @@
   {% endfor %}
 {% endmacro %}
 
-{% macro render_multi_line(title, fields) %}
+{% macro render_multi_line(title, fields, hiddenFields=[]) %}
   {% set join = joiner('<br>') %}
     <p>
   {{ title }}:
     </p>
     <p>
   {% for name, line in fields %}
-    {%if line %}
-{{ join() | safe }}{{ line | nl2br | safe }}
+    {% if not name in hiddenFields %}
+      {%if line %}
+  {{ join() | safe }}{{ line | nl2br | safe }}
+      {% endif %}
     {% endif %}
   {% endfor %}
     </p>
@@ -52,11 +54,13 @@ Your current GP
 
 {% if data.previouslyRegistered['previously-registered'] -%}
 
-  {% if data.manualGPAddress['gpName'] %}
-      <p>{{ render_multi_line('Current GP', data.manualGPAddress) }}</p>
-  {% else %}
+  {% if data.previouslyRegistered['gpName'] %}
+
       {% set selectedGPData = {'gp-name': data.previouslyRegistered['gpName'], 'gp-address': data.previouslyRegistered['gpAddress']} %}
+
       <p>{{ render_multi_line('Current GP', selectedGPData) }}</p>
+  {% else %}
+      <p>{{ render_multi_line('Current GP', data.previouslyRegistered, ['previously-registered']) }}</p>
   {% endif %}
 
   {% if data.registedAddress['registered-address-correct'] %}
