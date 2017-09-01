@@ -105,3 +105,10 @@ $summary-border :  #C7C7C7;
 .summary-info-details {
   padding-top: 10px;
 }
+
+.summary th{
+  @include media(tablet){
+    width: 210px;
+  }
+  
+}
