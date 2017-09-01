@@ -14,6 +14,7 @@ class GPAutoComplete {
     this.nestedFieldsContainer = $('.inputs-container');
     this.summaryContainer = $('#selected-gp-summary');
     this.resetButton = $('.reset', '#selected-gp-summary');
+    this.manualAddressContainer = $('#gp-manual-address');
     this.resetButton.on('click', this.resetBtnClickHandler.bind(this));
     this.autoCompleteInput.on('keyup', this.autoCompleteInputKeyUpHandler.bind(this));
     this.resultListContainer.on('click', '.select-link', this.resultItemClickHandler.bind(this));
@@ -44,7 +45,6 @@ class GPAutoComplete {
   selectGP (elem){
     const name = elem.data('name');
     const address = elem.data('address');
-    $('#gp-code').val(elem.data('code'));
     $('#gp-name').val(name);
     $('#gp-address').val(address);
     this.updateSummaryContainer(name, address);

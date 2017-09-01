@@ -1,5 +1,8 @@
-import Joi from 'joi';
+import JoiBase from 'joi';
+import JoiPostcodeExtension from 'joi-postcode';
 import {postHandlerFactory, getHandlerFactory} from './common';
+
+const Joi = JoiBase.extend(JoiPostcodeExtension);
 
 const schema = Joi.object().keys({
   'previously-registered': Joi.boolean().required()
@@ -17,15 +20,42 @@ const schema = Joi.object().keys({
         any: { required: '!!Please tell us if you’re registered with a GP' },
       },
     }),
-  'gpCode': Joi.when('previously-registered', {is: true, then:Joi.string().allow('')}),
-  'gpName': Joi.when('previously-registered', {is: true, then:Joi.string().allow('')}),
+  'gpName': Joi.when('manualGPName',{
+    is: '',
+    otherwise: Joi.string().allow('').optional()
+  }).when('previously-registered', {
+    is: true,
+    then:Joi.string().max(50).required().options({
+      language: {
+        key: '',
+        any: { empty: 'Please type a GP name' },
+      },
+    }),
+  }),
   'gpAddress': Joi.when('previously-registered', {is: true, then:Joi.string().allow('').optional()}),
+  'manualGPName': Joi.string().allow(''),
+  'address1': Joi.string().allow('').max(50),
+  'address2': Joi.string().allow('').max(50),
+  'address3': Joi.string().allow('').max(50),
+  'locality': Joi.string().allow('').max(100).required(),
+  'postcode': Joi.when('gpName', {
+    is: '',
+    then: Joi.postcode().uppercase().options({
+      language: {
+        string: {
+          regex: {base: 'must be a valid UK postcode'},
+        },
+      },
+    }),
+    otherwise: Joi.string().allow('')
+  }),
   'submit': Joi.any().optional().strip()
 });
 
 const title = 'Are you already registered with a GP?';
 const key = 'previouslyRegistered';
 const slug = 'previously-registered';
+
 
 const handlers = {
   GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps),
