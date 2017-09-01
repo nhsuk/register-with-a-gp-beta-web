@@ -9,6 +9,7 @@ const schema = Joi.object().keys({
     .meta({
       componentType: 'nested-gp-lookup',
       nestedFieldVisibleValue: 'true',
+      hiddenSummaryPage: true,
       children: [
         { label: 'Yes', value: 'true', show_nested_fields:true},
         { label: 'No', value: 'false', show_nested_fields:false},
@@ -32,12 +33,16 @@ const schema = Joi.object().keys({
       },
     }),
   }),
+  'manualGPName': Joi.when('gpAddress', {
+    is: '',
+    then: Joi.string().required(),
+    otherwise: Joi.string().allow('').max(50)
+  }),
   'gpAddress': Joi.when('previously-registered', {is: true, then:Joi.string().allow('').optional()}),
-  'manualGPName': Joi.string().allow(''),
   'address1': Joi.string().allow('').max(50),
   'address2': Joi.string().allow('').max(50),
   'address3': Joi.string().allow('').max(50),
-  'locality': Joi.string().allow('').max(100).required(),
+  'locality': Joi.string().allow('').max(100),
   'postcode': Joi.when('gpName', {
     is: '',
     then: Joi.postcode().uppercase().options({

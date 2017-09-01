@@ -5,11 +5,13 @@
   {%- endfor -%}
 {%- endmacro -%}
 
-{%- macro render_multi_line(title, fields) -%}
+{%- macro render_multi_line(title, fields, hiddenFields=[]) -%}
   {{ title }}:
   {%- for name, line in fields -%}
-    {%- if line %}
-    {{ line }}
+    {%- if not name in hiddenFields %}
+      {%- if line %}
+        {{ line }}
+      {%- endif -%}
     {%- endif -%}
   {%- endfor -%}
 {%- endmacro -%}
@@ -45,11 +47,15 @@ Your current GP
 
 {% if data.previouslyRegistered['previously-registered'] %}
 
-  {% if data.manualGPAddress['gpName'] %}
-    {{ render_one_line('Current GP', data.manualGPAddress) }}
-  {% else %}
+  {% if data.previouslyRegistered['gpName'] %}
     {% set selectedGPData = {'gp-name': data.previouslyRegistered['gpName'], 'gp-address': data.previouslyRegistered['gpAddress']} %}
     {{ render_one_line('Current GP', selectedGPData) }}
+  {% else %}
+    {{ render_one_line('Current GP', data.previouslyRegistered, ['previously-registered']) }}
+  {% endif %}
+
+  {% if data.manualGPAddress['gpName'] %}
+  {% else %}
   {% endif %}
 
   {% if data.registedAddress['registered-address-correct'] %}
