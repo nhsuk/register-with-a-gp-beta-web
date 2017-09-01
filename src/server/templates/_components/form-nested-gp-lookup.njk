@@ -62,7 +62,7 @@
         </ul>
       </div>
 
-      <div id="selected-gp-summary" style="width:500px;{{ 'display:none' if not stepData['gpName'] }}">
+      <div id="selected-gp-summary" style="{{ 'display:none' if not stepData['gpName'] }}">
         <a class="reset" style="cursor:pointer; float:right">Reset X</a>
         <h3 class="gp-name">{{ stepData['gpName'] | default('') }}</h5>
         <div class="gp-address">
@@ -75,7 +75,7 @@
         </div>
       </div>
 
-    <details id="gp-manual-address">
+    <details id="gp-manual-address" style="{{ 'display:none' if stepData['gpName'] }}">
       <summary>
         <span class="details__summary">I can't find my address, enter manually</span>
       </summary>

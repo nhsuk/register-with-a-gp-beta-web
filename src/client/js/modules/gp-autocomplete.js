@@ -50,6 +50,7 @@ class GPAutoComplete {
     this.updateSummaryContainer(name, address);
     this.summaryContainer.show();
     this.nestedFieldsContainer.hide();
+    this.manualAddressContainer.hide();
   }
 
   cleanSelectedGP (){
@@ -68,6 +69,7 @@ class GPAutoComplete {
     this.autoCompleteInput.val('');
     $('.gp-name', this.summaryContainer).empty();
     $('.gp-address', this.summaryContainer).empty();
+    this.manualAddressContainer.show();
   }
 
   resultItemClickHandler (e){
