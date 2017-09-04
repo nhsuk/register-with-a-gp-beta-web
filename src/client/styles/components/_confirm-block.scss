@@ -1,0 +1,47 @@
+.confirm-block {
+	background-color: $confirm-block-backgroud;
+	font-weight: bold;
+	padding:  11px 20px;
+
+	@include media(tablet){
+		max-width: 650px;
+	}
+}
+
+.confirm-block-title {
+	font-weight: bold;
+}
+
+.confirm-block-line {
+	font-size: 16px;
+	line-height: 25px;
+	margin-top: 0px;
+
+	@include media(tablet) {
+		font-size: 20px;
+		line-height: 32px;
+	}
+}
+
+.confirm-block-details {
+
+	margin-top: 0;
+	max-width: 180px;
+	@include media(tablet) {
+		max-width: 200px;
+	}
+	
+}
+
+.reset-address {
+	float:right;
+
+	.confirm-reset {
+		font-size: 14px;
+		font-weight: normal;
+
+		@include media(tablet) {
+			font-size: 16px;
+		}
+	}
+}

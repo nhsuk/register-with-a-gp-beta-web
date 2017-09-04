@@ -52,7 +52,7 @@
             {% set typeahedFieldError = stepErrors['gpName'].message | replace(stepErrors['gpName'].label, "") %}
 
             <input type="text" id="input-gp-lookup" class="form-textbox nested-input {{ ' has-error' if typeahedFieldError }}" placeholder="Enter keywords" autocomplete="off" style="display:inline-block">
-            <button type="submit" class="button" style="font-size: 18px;padding: 4px 20px">Find Surgery</button>
+            <button type="submit" class=" gp-lookup-btn button">Find Surgery</button>
           </div>
         </label>
         <input type="hidden" name="gpName" id="gp-name" value="{{ stepData['gpName'] }}">
@@ -62,14 +62,21 @@
         </ul>
       </div>
 
-      <div id="selected-gp-summary" style="{{ 'display:none' if not stepData['gpName'] }}">
-        <a class="reset" style="cursor:pointer; float:right">Reset X</a>
-        <h3 class="gp-name">{{ stepData['gpName'] | default('') }}</h5>
-        <div class="gp-address">
+      <div id="selected-gp-summary" class="confirm-block" style="{{ 'display:none' if not stepData['gpName'] }}">
+        <span class="reset-address">
+            <a href class="confirm-reset">Reset 
+              <span="cross-icon">x
+              </span> 
+            </a>
+          </span> 
+        <div class="confirm-block-details gp-address">
+          {% if stepData['gpName'] %}
+            <p class="confirm-block-title confirm-block-line">{{ stepData['gpName']}}</p>
+          {% endif %}
           {% if stepData['gpAddress'] %}
             {% set addressLines = stepData['gpAddress'] | split %}
             {% for line in addressLines %}
-              <p>{{ line }}</p>
+              <p class="confirm-block-line">{{ line }}</p>
             {% endfor %}
           {% endif %}
         </div>
@@ -81,8 +88,9 @@
     {% set manualaddress3Error = stepErrors['address3'].message | replace(stepErrors['address3'].label, "") %}
     {% set localityError = stepErrors['locality'].message | replace(stepErrors['locality'].label, "") %}
     {% set postcodeError = stepErrors['postcode'].message | replace(stepErrors['postcode'].label, "") %}
+  </div>
 
-    <details id="gp-manual-address" style="{{ 'display:none' if stepData['gpName'] }}" {% if stepData['manualGPName'] or postcodeError or stepData['postcode'] %}open{% endif %}>
+  <details id="gp-manual-address" style="{{ 'display:none' if stepData['gpName'] }}" {% if stepData['manualGPName'] or postcodeError or stepData['postcode'] %}{% endif %}>
       <summary>
         <span class="details__summary">I can't find my address, enter manually</span>
       </summary>
@@ -121,6 +129,5 @@
         </div>
         </div>
       </details>
-    </div>
 
 </fieldset>

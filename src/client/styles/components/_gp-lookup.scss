@@ -1,0 +1,22 @@
+ul.gp-results li:last-child {
+	border-bottom: 1px #ccc solid;
+}
+
+#gp-manual-address summary {
+	margin-left: 4px;
+}
+
+.gp-lookup-btn {
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 32px;
+		padding: 4px 24px;
+
+		@include media(tablet) {
+			font-size: 18px;
+			padding: 5px 22px;
+			position: relative;
+    		top: -2px;
+		}
+
+	}

@@ -98,50 +98,6 @@ ul.address-results li:last-child {
 	}
 }
 
-.address-confirm {
-	background-color: $confirm-block-backgroud;
-	font-weight: bold;
-	padding: 20px;
-	
-	margin-top: 20px;
-	@include media(tablet){
-		max-width: 650px;
-	}
-}
-
-.address-confirm-line {
-	font-size: 16px;
-	line-height: 25px;
-	margin-top: 0px;
-
-	@include media(tablet) {
-		font-size: 20px;
-		line-height: 32px;
-	}
-}
-
-.confirm-address-details {
-
-	margin-top: 0;
-	max-width: 180px;
-	@include media(tablet) {
-		max-width: 200px;
-	}
-	
-}
-
-.reset-address {
-	float:right;
-
-	.confirm-reset {
-		font-size: 14px;
-		font-weight: normal;
-
-		@include media(tablet) {
-			font-size: 16px;
-		}
-	}
-}
 
 details#manualDiv {
 	padding-top: 10px;
@@ -155,4 +111,8 @@ details#manualDiv {
 		max-width: 420px;
 	}
 	
+}
+
+.address-confirm {
+	margin-top: 20px;
 }
