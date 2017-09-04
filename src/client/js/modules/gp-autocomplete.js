@@ -13,9 +13,11 @@ class GPAutoComplete {
     this.autoCompleteInput = $('#input-gp-lookup');
     this.nestedFieldsContainer = $('.inputs-container');
     this.summaryContainer = $('#selected-gp-summary');
-    this.resetButton = $('.reset', '#selected-gp-summary');
+    this.resetButton = $('.confirm-reset', '#selected-gp-summary');
+    this.findSurgeryButton = $('.gp-lookup-btn', '#previously-registered-nested-container');
     this.manualAddressContainer = $('#gp-manual-address');
     this.resetButton.on('click', this.resetBtnClickHandler.bind(this));
+    this.findSurgeryButton.on('click', this.findSurgeryButtonClickHandler.bind(this));
     this.autoCompleteInput.on('keyup', this.autoCompleteInputKeyUpHandler.bind(this));
     this.resultListContainer.on('click', '.select-link', this.resultItemClickHandler.bind(this));
   }
@@ -70,6 +72,7 @@ class GPAutoComplete {
     $('.gp-name', this.summaryContainer).empty();
     $('.gp-address', this.summaryContainer).empty();
     this.manualAddressContainer.show();
+    return false;
   }
 
   resultItemClickHandler (e){
@@ -80,6 +83,11 @@ class GPAutoComplete {
 
   cleanResults (){
     this.resultListContainer.empty().hide();
+  }
+
+  findSurgeryButtonClickHandler (){
+    this.fetchList(this.endpoint, this.queryParam, this.autoCompleteInput.val());
+    return false;
   }
 
   autoCompleteInputKeyUpHandler (e){
