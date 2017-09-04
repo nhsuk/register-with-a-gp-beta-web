@@ -28,7 +28,7 @@ const template = 'register-form/registered-name.njk';
 
 const handlers = {
   GET: (prevSteps) => getHandlerFactory(
-      key, title, schema, prevSteps, undefined, undefined, undefined, template
+      key, title, schema, prevSteps, undefined, beforeTemplate, undefined, template
   ),
   POST: (prevSteps, nextSteps) => postHandlerFactory(
       key, title, schema, prevSteps, nextSteps, {beforeTemplate, template, dataTransformer}
