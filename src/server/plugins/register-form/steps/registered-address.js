@@ -33,7 +33,7 @@ const handlers = {
       key, title, schema, prevSteps, null, beforeTemplate, '', template
   ),
   POST: (prevSteps, nextSteps) => postHandlerFactory(
-      key, title, schema, prevSteps, nextSteps, {beforeTemplate, template, dataTransformer}
+      key, title, schema, prevSteps, nextSteps, template, {beforeTemplate, dataTransformer}
   ),
 };
 

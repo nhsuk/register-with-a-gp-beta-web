@@ -26,6 +26,10 @@ const schema = Joi.object().keys({
       is: false,
       then: Joi.string().allow(''),
     })
+    .when('manualGPName', {
+      is: '',
+      otherwise: Joi.string().allow(''),
+    })
     .when('previously-registered', {
       is: true,
       then:Joi.string().max(50).required().options({
@@ -41,7 +45,7 @@ const schema = Joi.object().keys({
       is: false,
       then: Joi.string().allow(''),
     })
-    .when('gpName', {
+    .when('gpAddress', {
       is: '',
       then: Joi.string().required().options({
         language: {
