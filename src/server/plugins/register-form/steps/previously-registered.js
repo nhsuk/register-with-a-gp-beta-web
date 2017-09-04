@@ -21,39 +21,61 @@ const schema = Joi.object().keys({
         any: { required: '!!Please tell us if you’re registered with a GP' },
       },
     }),
-  'gpName': Joi.when('manualGPName',{
-    is: '',
-    otherwise: Joi.string().allow('').optional()
-  }).when('previously-registered', {
-    is: true,
-    then:Joi.string().max(50).required().options({
-      language: {
-        key: '',
-        any: { empty: 'Please type a GP name' },
-      },
+  'gpName': Joi.alternatives()
+    .when('previously-registered', {
+      is: false,
+      then: Joi.string().allow(''),
+    })
+    .when('previously-registered', {
+      is: true,
+      then:Joi.string().max(50).required().options({
+        language: {
+          key: ' ',
+          any: { empty: 'Please type a GP name' },
+        },
+      }),
     }),
-  }),
-  'manualGPName': Joi.when('gpAddress', {
-    is: '',
-    then: Joi.string().required(),
-    otherwise: Joi.string().allow('').max(50)
-  }),
-  'gpAddress': Joi.when('previously-registered', {is: true, then:Joi.string().allow('').optional()}),
+  'gpAddress': Joi.when('previously-registered', {is: false, then:Joi.string().allow('').optional()}),
+  'manualGPName': Joi.alternatives()
+    .when('previously-registered', {
+      is: false,
+      then: Joi.string().allow(''),
+    })
+    .when('gpName', {
+      is: '',
+      then: Joi.string().required().options({
+        language: {
+          key: ' ',
+          any: { empty: ' ', required: ' ' },
+          string: {
+            regex: {base: ' '},
+          },
+        },
+      }),
+      otherwise: Joi.string().allow('').max(50)
+    }),
   'address1': Joi.string().allow('').max(50),
   'address2': Joi.string().allow('').max(50),
   'address3': Joi.string().allow('').max(50),
   'locality': Joi.string().allow('').max(100),
-  'postcode': Joi.when('gpName', {
-    is: '',
-    then: Joi.postcode().uppercase().options({
-      language: {
-        string: {
-          regex: {base: 'must be a valid UK postcode'},
+  'postcode': Joi.alternatives()
+    .when('previously-registered', {
+      is: false,
+      then: Joi.string().allow(''),
+    })
+    .when('gpName', {
+      is: '',
+      then: Joi.postcode().uppercase().options({
+        language: {
+          key: ' ',
+          any: { empty: ' ', required: ' ' },
+          string: {
+            regex: {base: ' '},
+          },
         },
-      },
+      }),
+      otherwise: Joi.string().allow('')
     }),
-    otherwise: Joi.string().allow('')
-  }),
   'submit': Joi.any().optional().strip()
 });
 
