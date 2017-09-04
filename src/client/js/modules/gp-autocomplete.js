@@ -22,12 +22,12 @@ class GPAutoComplete {
     this.resultListContainer.on('click', '.select-link', this.resultItemClickHandler.bind(this));
   }
 
-  static getResultTemplate (){
+  static getResultTemplate (index){
     return $.parseHTML('' +
       '<li class="gp-item result">' +
         '<div class="first-line">' +
           '<span class="name"></span>' +
-          '<a href="#" class="select-link">Select</a>' +
+          '<a href="#" class="select-link" id="select-link-'+index+'">Select</a>' +
         '</div>' +
         '<div class="address"></div>' +
       '</li>'
@@ -107,7 +107,7 @@ class GPAutoComplete {
   }
 
   appendResultListItem (i, d){
-    const template = GPAutoComplete.getResultTemplate();
+    const template = GPAutoComplete.getResultTemplate(i);
     const item = $(template).clone();
     item.find('.name').text(d._source.name);
     item.find('.address').text(d._source.address);
