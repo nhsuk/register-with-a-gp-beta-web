@@ -17,6 +17,13 @@ ul.gp-results li:last-child {
 			padding: 5px 22px;
 			position: relative;
     		top: -2px;
+    		margin-left: 18px;
 		}
 
 	}
+
+#input-gp-lookup {
+	@include media(tablet){
+		width: 50%;
+	}
+}
