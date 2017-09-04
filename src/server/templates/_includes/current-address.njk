@@ -1,5 +1,5 @@
 {% set linebreak = joiner('<br>') %}
-<div class="panel">
+<div class="callout callout--info callout--medium">
   <p>
     {%- for name, line in data.addressLookup -%}
       {% if line -%}{{ linebreak() | safe }}{{ line }}{%- endif %}

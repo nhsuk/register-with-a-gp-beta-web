@@ -211,3 +211,10 @@ input[type=number] {
     	@include core-font(20);
   	}
 }
+
+.callout--medium {
+
+	@include media(tablet) {
+		width: 70%;
+	}
+}
