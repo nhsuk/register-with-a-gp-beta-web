@@ -55,7 +55,7 @@
         {% endif %}
 
         {% if data.registedAddress['registered-address-correct'] %}
-          {{ row('Registered address', data.address, 'registedAddress', true) }}
+          {{ row('Registered address', data.addressLookup, 'registedAddress', true) }}
         {% else %}
           {{ row('Registered address', data.registeredAddressDetails, 'registedAddress', true) }}
         {% endif %}
