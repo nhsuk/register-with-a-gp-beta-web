@@ -24,7 +24,7 @@
       {{ row('Name', data.name, 'name') }}
       {{ row('Sex', data.gender, 'gender') }}
       {{ row('Date of birth', data.dateOfBirth, 'dateOfBirth', false, '/') }}
-      {{ row('Current Address', data.address, 'address', true) }}
+      {{ row('Current Address', data.addressLookup, 'addressLookup', true) }}
       {{ row('Place of birth', data.countryAndTown, 'countryAndTown', true) }}
       {{ row('Contact Details', data.contactDetails, 'contactDetails', true) }}
       {% if data.nhsNumber['nhs-number-known'] %}
