@@ -54,4 +54,5 @@
 {% block body_footer %}
   {{ super() }}
   <script src="{{ jsBundle }}" type="application/javascript"></script>
+  {% component 'analytics', { events: ga_events } %}      
 {% endblock body_footer %}

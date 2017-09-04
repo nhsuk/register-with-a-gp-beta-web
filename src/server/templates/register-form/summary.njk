@@ -26,7 +26,7 @@
       {{ row('Name', data.name, 'name') }}
       {{ row('Sex', data.gender, 'gender') }}
       {{ row('Date of birth', data.dateOfBirth, 'dateOfBirth', false, '/') }}
-      {{ row('Current Address', data.address, 'address', true) }}
+      {{ row('Current Address', data.addressLookup, 'addressLookup', true) }}
       {{ row('Place of birth', data.countryAndTown, 'countryAndTown', true) }}
       {{ row('Contact Details', data.contactDetails, 'contactDetails', true) }}
       {% if data.nhsNumber['nhs-number-known'] %}
@@ -120,7 +120,4 @@
        <button type="submit" id="sendBtn" class="button">Send to surgery</button>
       </form>
   </div>
-{% component 'analytics', {
-  ga_client_ID: cid
-  } %}      
 {% endblock body_main_content %}
