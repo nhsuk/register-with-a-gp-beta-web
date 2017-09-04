@@ -30,7 +30,7 @@ const template = 'register-form/registered-address.njk';
 
 const handlers = {
   GET: (prevSteps) => getHandlerFactory(
-      key, title, schema, prevSteps, undefined, beforeTemplate, undefined, template
+      key, title, schema, prevSteps, null, beforeTemplate, '', template
   ),
   POST: (prevSteps, nextSteps) => postHandlerFactory(
       key, title, schema, prevSteps, nextSteps, {beforeTemplate, template, dataTransformer}
