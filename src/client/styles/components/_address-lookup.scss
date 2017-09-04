@@ -116,3 +116,8 @@ details#manualDiv {
 .address-confirm {
 	margin-top: 20px;
 }
+.addressLookup-form {
+	@include media(tablet){
+		padding-top: 10px;
+	}
+}
