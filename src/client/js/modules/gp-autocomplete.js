@@ -29,7 +29,7 @@ class GPAutoComplete {
           '<span class="name"></span>' +
           '<a href="#" class="select-link">Select</a>' +
         '</div>' +
-        '<small class="address"></small>' +
+        '<div class="address"></div>' +
       '</li>'
     );
   }
