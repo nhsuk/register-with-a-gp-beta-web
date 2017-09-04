@@ -35,11 +35,11 @@ class GPAutoComplete {
   }
 
   updateSummaryContainer (name, address){
-    $('.gp-name', this.summaryContainer).text(name);
+    $('.gp-title', this.summaryContainer).text(name);
     if (address){
       const addressLines = address.split(',');
       $.each(addressLines, (i, line) => {
-        $('.gp-address', this.summaryContainer).append($('<p\>').text(line));
+        $('.gp-address', this.summaryContainer).append($('<p\>', {'class': 'confirm-block-line'}).text(line));
       });
     }
   }
@@ -69,7 +69,7 @@ class GPAutoComplete {
     this.nestedFieldsContainer.show();
     this.resultListContainer.empty();
     this.autoCompleteInput.val('');
-    $('.gp-name', this.summaryContainer).empty();
+    $('.gp-title', this.summaryContainer).empty();
     $('.gp-address', this.summaryContainer).empty();
     this.manualAddressContainer.show();
     return false;

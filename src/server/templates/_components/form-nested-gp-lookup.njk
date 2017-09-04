@@ -70,9 +70,7 @@
             </a>
           </span> 
         <div class="confirm-block-details gp-address">
-          {% if stepData['gpName'] %}
-            <p class="confirm-block-title confirm-block-line">{{ stepData['gpName']}}</p>
-          {% endif %}
+          <p class="gp-title confirm-block-title confirm-block-line">{{ stepData['gpName']}}</p>
           {% if stepData['gpAddress'] %}
             {% set addressLines = stepData['gpAddress'] | split %}
             {% for line in addressLines %}
