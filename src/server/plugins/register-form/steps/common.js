@@ -5,7 +5,6 @@ import JoiFullDate from '../../../../shared/lib/joi-full-date-validator';
 import _ from 'lodash';
 import steps from './index';
 
-import ua from 'universal-analytics';
 let params = {};
 
 const Joi = JoiBase
@@ -236,7 +235,7 @@ export function postHandlerFactory(
         request.log(['error'], err);
         const stepErrors = {};
         const prevStep = getPrevStep(prevSteps, request.state.data, request);
-        const visitor = ua('UA-67365892-10', request.state.cid );
+        let events = [];
         _.each(err.details, (error) => {
           stepErrors[error.path] = {
             message: error.message,
@@ -249,7 +248,7 @@ export function postHandlerFactory(
             ev: 1,
             dp: error.path
           };
-          visitor.event(params).send();
+          events.push(params);
         });
         return reply.view(template, {
           fields: getFieldData(schema),
@@ -260,7 +259,8 @@ export function postHandlerFactory(
           key,
           title,
           stepErrors,
-          prevStep
+          prevStep,
+          ga_events: JSON.stringify(params)
         });
       });
   };
