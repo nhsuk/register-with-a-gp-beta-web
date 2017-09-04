@@ -215,7 +215,7 @@ export function postHandlerFactory(
   nextSteps,
   {
     beforeTemplate = undefined,
-  template = 'register-form/step',
+    template = 'register-form/step',
     transformData = dataTransformer
   } = {}
 ) {
