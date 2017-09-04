@@ -1,0 +1,158 @@
+#address-lookup__inline {
+	@include media(tablet){
+		display: inline;
+	}
+}
+
+#inputdiv-houseNumber.form-line ,#inputdiv-postcode.form-line ,.addresslookup{
+	@include media(tablet){
+		float: left;
+    	display: inline;
+    	margin-right: 20px;
+    	margin-top: 0!important;
+    	margin-bottom: 20px;
+	}
+	
+}
+
+#input-houseNumber.form-textbox {
+	max-width: 324px;
+}
+
+.addresslookup {
+	@include media(tablet){
+		position: relative;
+		top : 40px;
+	}
+
+	@include media(mobile) {
+		margin-top: 30px;
+		margin-left: 4px;
+	}
+
+	.button {
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 32px;
+		padding: 4px 24px;
+
+		@include media(tablet) {
+			font-size: 18px;
+			padding: 5px 22px;
+		}
+
+	}
+}
+
+#address-lookup-continue, #address-confirm, #address-results {
+	display: none;
+}
+
+ul.address-results{
+	list-style: none;
+  	margin: 20px 0 0 0;
+  	padding: 0;
+  	font-family: Frutiger W01;
+  	clear: both;
+
+  	@include media(tablet) {
+  		width: 68%;
+  		margin: 20px 0;
+  	}
+}
+ul.address-results li.address-item {
+  overflow:hidden;
+  border-top: 1px #ccc solid;
+  padding: 15px 10px;
+  margin-top: 0;
+
+  .select-link {
+  	float: right;
+  	font-size: 16px;
+  	vertical-align:top;
+
+  	@include media(tablet) {
+  		font-size: 20px;
+  	}
+
+  }
+}
+
+ul.address-results li:last-child {
+	border-bottom: 1px #ccc solid;
+}
+
+.address-line{
+	max-width: 200px;
+	font-weight: bold;
+	display: inline;
+	float: left;
+	font-size: 16px;
+	line-height: 25px;
+
+	@include media(tablet) {
+		max-width: 450px;
+		font-size: 20px;
+		line-height: 32px;
+
+	}
+}
+
+.address-confirm {
+	background-color: $confirm-block-backgroud;
+	font-weight: bold;
+	padding: 20px;
+	
+	margin-top: 20px;
+	@include media(tablet){
+		max-width: 650px;
+	}
+}
+
+.address-confirm-line {
+	font-size: 16px;
+	line-height: 25px;
+	margin-top: 0px;
+
+	@include media(tablet) {
+		font-size: 20px;
+		line-height: 32px;
+	}
+}
+
+.confirm-address-details {
+
+	margin-top: 0;
+	max-width: 180px;
+	@include media(tablet) {
+		max-width: 200px;
+	}
+	
+}
+
+.reset-address {
+	float:right;
+
+	.confirm-reset {
+		font-size: 14px;
+		font-weight: normal;
+
+		@include media(tablet) {
+			font-size: 16px;
+		}
+	}
+}
+
+details#manualDiv {
+	padding-top: 10px;
+	@include media(tablet) {
+		//padding-top: 30px;
+	}
+}
+
+#manual-address-details .form-line {
+	@include media(tablet) {
+		max-width: 420px;
+	}
+	
+}

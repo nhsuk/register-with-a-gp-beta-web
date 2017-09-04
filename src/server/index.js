@@ -117,7 +117,7 @@ const manifest = {
     {
       plugin: {
         register: './plugins/getaddressio',
-        options: {exposeEndpoint: false}
+        options: {exposeEndpoint: true}
       }
     },
     {

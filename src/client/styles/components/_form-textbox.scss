@@ -1,3 +1,7 @@
+.form-line {
+  padding-left: 4px;
+}
+
 #inputdiv-day.form-line {
   width: 50px;
   float: left;
@@ -20,7 +24,7 @@
 }
 
 .form-textbox {
-  @include core-font(20);
+  @include core-font(16);
   appearance: none;
   border: ($baseline-grid-unit / 2) solid $blue;
   display: block;
@@ -35,6 +39,10 @@
 
   &.has-error {
     border-color: $red;
+  }
+
+  @include media(tablet) {
+    @include core-font(20);
   }
 }
 
@@ -53,4 +61,8 @@ textarea.form-textbox {
 .form-fields {
   clear: left;
   overflow: auto;
+}
+
+#armed-nested-container #inputdiv-day.form-line {
+  padding-left: 0;
 }

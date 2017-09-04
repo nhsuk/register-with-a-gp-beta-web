@@ -22,13 +22,13 @@ const schema = Joi.object().keys({
       variant: 'checkbox',
       hint: 'Select all that apply'
     }),
-  'medical-history': Joi.array().items(Joi.string().max(200).allow('').optional())
+  'medical-history': Joi.array().items(Joi.string().max(200).allow(''))
     .label('I have a condition not listed above')
     .meta({
       componentType: 'nested-inline',
       addRowLabel: 'Add another condition'
     }),
-  'medical-history-details': Joi.array().items(Joi.string().max(200).allow('').optional())
+  'medical-history-details': Joi.array().items(Joi.string().max(200).allow(''))
     .label('I had major surgery')
     .meta({
       componentType: 'nested-inline',

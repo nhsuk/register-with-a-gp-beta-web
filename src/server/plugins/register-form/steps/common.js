@@ -4,6 +4,7 @@ import JoiNHSNumber from '../../../../shared/lib/joi-nhs-number-validator';
 import JoiFullDate from '../../../../shared/lib/joi-full-date-validator';
 import _ from 'lodash';
 import steps from './index';
+
 import ua from 'universal-analytics';
 let params = {};
 
@@ -213,9 +214,9 @@ export function postHandlerFactory(
   schema,
   prevSteps,
   nextSteps,
+  template = 'register-form/step',
   {
     beforeTemplate = undefined,
-    template = 'register-form/step',
     transformData = dataTransformer
   } = {}
 ) {
