@@ -26,10 +26,6 @@
       class="form-textbox nested-input {{ ' has-error' if nestedFieldError }} nested-inline-base-input"
       value="{{ stepData[field.id][0] | default('') }}">
 
-      <input type="text" name="{{ field.id }}" id="input-{{ field.id }}-1"
-      class="form-textbox nested-input {{ ' has-error' if nestedFieldError }}"
-      value="{{ stepData[field.id][0] | default('') }}">
-
     {% endif %}
   </label>
 
