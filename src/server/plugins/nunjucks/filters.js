@@ -23,6 +23,9 @@ function getFilters(env) {
     render(str){
       return env.renderString(str, this.getVariables());
     },
+    split(str, seperator=','){
+      return str.split(seperator);
+    },
     fulldateerror(str){
       if (str.includes('Fulldate error')){
         return 'This is not a valid date';

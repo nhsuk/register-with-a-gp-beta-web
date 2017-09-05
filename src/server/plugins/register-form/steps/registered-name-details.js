@@ -1,8 +1,8 @@
 import Joi from 'joi';
-
-import { postHandlerFactory, getHandlerFactory, dependsOnBoolean } from './common';
+import { postHandlerFactory, getHandlerFactory, dependsOnBoolean,} from './common';
 import previouslyRegisteredStep from './previously-registered';
 import registeredNameStep from './registered-name';
+
 
 const schema = Joi.object().keys({
   'firstName': Joi.string().max(100).label('First name').meta({ componentType: 'textbox' }),
@@ -23,12 +23,7 @@ const handlers = {
 const checkApplies = (cookieData) => {
   const registered = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered')(cookieData);
   const incorrect = dependsOnBoolean(registeredNameStep, 'registered-name-correct', false)(cookieData);
-
-  if (registered && incorrect) {
-    return true;
-  } else {
-    return false;
-  }
+  return registered && incorrect;
 };
 
 /**
