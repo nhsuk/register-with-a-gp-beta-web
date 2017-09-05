@@ -161,3 +161,11 @@ $_radio-spacing: ($_element-size - $_radio-size) / 2;
 
     }
 }
+.multiple-choice-vertical {
+  .js-enabled & {
+    @include media(mobile) {
+      padding-top: 7px;
+    }
+  }
+
+}
