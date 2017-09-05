@@ -87,8 +87,8 @@
     "production": "true"    
   },
   {
-    "key": "register-gp-test",
-    "name": "Test Practice 2",
+    "key": "south-chinnor-gp-practice",
+    "name": "South Chinnor GP Practice",
     "contact": {
       "phone": ["0208 123 45678"],
       "address": [
