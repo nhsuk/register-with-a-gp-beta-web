@@ -10,15 +10,17 @@
     ga('send', 'event', Category, Text, Label);
   }
   const eventsJson = '{{ events|safe }}';
-  const events = JSON.parse(eventsJson);
-  {% if events %}
-      if(Array.isArray(events)) {
-        for(i=0; i<events.length; i++){
-          ga_event(events[i].ec, events[i].ea, events[i].el);
+  if(eventsJson !== ''){
+    const events = JSON.parse(eventsJson);
+    {% if events %}
+        if(Array.isArray(events)) {
+          for(i=0; i<events.length; i++){
+            ga_event(events[i].ec, events[i].ea, events[i].el);
+          }
+        } else if(typeof events === 'object') {
+            ga_event(events.ec, events.ea, events.el);
         }
-      } else if(typeof events === 'object') {
-          ga_event(events.ec, events.ea, events.el);
-      }
-  {% endif %}
+    {% endif %}
+  }
 </script>
 <script type="text/javascript" src="/static/webtrends.load.js"></script>
