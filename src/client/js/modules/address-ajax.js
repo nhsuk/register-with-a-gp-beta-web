@@ -111,7 +111,7 @@ class AddressAjax {
               '<span id="county"></span>' +
               '</div>'+
               '<span>'+
-              '<a href="#" class="select-link">Select</a>' +
+              '<a href="#" class="select-link" id="select-link-' + i +'">Select</a>' +
               '</span>'+
               '</li>');
             const item = $(template).clone();

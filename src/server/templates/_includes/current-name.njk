@@ -1,5 +1,5 @@
 {% set space = joiner(' ') %}
-<div class="panel">
+<div class="callout callout--info callout--medium registered-name">
   <p>
     {%- for name, line in data.name -%}
       {% if line -%}{{ space() | safe }}{{ line }}{%- endif %}

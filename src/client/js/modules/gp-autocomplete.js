@@ -9,35 +9,70 @@ class GPAutoComplete {
 
   init(){
     this.formElem = $('#current-step-form');
-    this.resultListContainerElem = $('.gp-results');
-    this.autoCompleteInput = $('#gp-search');
+    this.resultListContainer = $('.gp-results');
+    this.autoCompleteInput = $('#input-gp-lookup');
+    this.nestedFieldsContainer = $('.inputs-container');
+    this.summaryContainer = $('#selected-gp-summary');
+    this.resetButton = $('.confirm-reset', '#selected-gp-summary');
+    this.findSurgeryButton = $('.gp-lookup-btn', '#previously-registered-nested-container');
+    this.manualAddressContainer = $('#gp-manual-address');
+    this.resetButton.on('click', this.resetBtnClickHandler.bind(this));
+    this.findSurgeryButton.on('click', this.findSurgeryButtonClickHandler.bind(this));
     this.autoCompleteInput.on('keyup', this.autoCompleteInputKeyUpHandler.bind(this));
-    this.resultListContainerElem.on('click', '.select-link', this.resultItemClickHandler.bind(this));
+    this.resultListContainer.on('click', '.select-link', this.resultItemClickHandler.bind(this));
   }
 
-  static getResultTemplate (){
+  static getResultTemplate (index){
     return $.parseHTML('' +
-          '<li class="gp-item result">' +
-            '<div class="first-line">' +
-              '<span class="name"></span>' +
-              '<a href="#" class="select-link">Select</a>' +
-            '</div>' +
-            '<small class="address"></small>' +
-          '</li>'
-        );
+      '<li class="gp-item result">' +
+        '<div class="first-line">' +
+          '<span class="name"></span>' +
+          '<a href="#" class="select-link" id="select-link-'+index+'">Select</a>' +
+        '</div>' +
+        '<div class="address"></div>' +
+      '</li>'
+    );
+  }
+
+  updateSummaryContainer (name, address){
+    $('.gp-title', this.summaryContainer).text(name);
+    if (address){
+      const addressLines = address.split(',');
+      $.each(addressLines, (i, line) => {
+        $('.gp-address', this.summaryContainer).append($('<p\>', {'class': 'confirm-block-line'}).text(line));
+      });
+    }
   }
 
   selectGP (elem){
-    $('#gp-code').val(elem.data('code'));
-    $('#gp-name').val(elem.data('name'));
-    $('#gp-address').val(elem.data('address'));
-    this.formElem.submit();
+    const name = elem.data('name');
+    const address = elem.data('address');
+    $('#gp-name').val(name);
+    $('#gp-address').val(address);
+    this.updateSummaryContainer(name, address);
+    this.summaryContainer.show();
+    this.nestedFieldsContainer.hide();
+    this.manualAddressContainer.hide();
   }
 
   cleanSelectedGP (){
     $('#gp-code').val('');
     $('#gp-name').val('');
     $('#gp-address').val('');
+  }
+
+  resetBtnClickHandler (){
+    $('#gp-code').val('');
+    $('#gp-name').val('');
+    $('#gp-address').val('');
+    this.summaryContainer.hide();
+    this.nestedFieldsContainer.show();
+    this.resultListContainer.empty();
+    this.autoCompleteInput.val('');
+    $('.gp-title', this.summaryContainer).empty();
+    $('.gp-address', this.summaryContainer).empty();
+    this.manualAddressContainer.show();
+    return false;
   }
 
   resultItemClickHandler (e){
@@ -47,7 +82,12 @@ class GPAutoComplete {
   }
 
   cleanResults (){
-    this.resultListContainerElem.empty().hide();
+    this.resultListContainer.empty().hide();
+  }
+
+  findSurgeryButtonClickHandler (){
+    this.fetchList(this.endpoint, this.queryParam, this.autoCompleteInput.val());
+    return false;
   }
 
   autoCompleteInputKeyUpHandler (e){
@@ -67,7 +107,7 @@ class GPAutoComplete {
   }
 
   appendResultListItem (i, d){
-    const template = GPAutoComplete.getResultTemplate();
+    const template = GPAutoComplete.getResultTemplate(i);
     const item = $(template).clone();
     item.find('.name').text(d._source.name);
     item.find('.address').text(d._source.address);
@@ -78,7 +118,7 @@ class GPAutoComplete {
     };
     item.data(gpData);
 
-    this.resultListContainerElem.append(item);
+    this.resultListContainer.append(item);
   }
 
   fetchList (endpoint, queryParam, keywords){
@@ -95,7 +135,7 @@ class GPAutoComplete {
         if (data.length > 0){
           const gpList = data.slice(0, this.showTotalItemsNumber);
           $.each(gpList, this.appendResultListItem.bind(this));
-          this.resultListContainerElem.show();
+          this.resultListContainer.show();
         }
       }.bind(this)
     });

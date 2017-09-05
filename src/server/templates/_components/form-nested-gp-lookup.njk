@@ -1,0 +1,131 @@
+<fieldset id="input-{{ name }}">
+  {% if label or hint or error %}
+    <legend class="form-label" id="group-{{ name }}">
+      {{ label }} {% if optional %}(optional){% endif %}
+      {% if hint %}
+        <span class="form-label__hint" id="{{ hintId }}">{{ hint }}</span>
+      {% endif %}
+    </legend>
+  {% endif %}
+
+  <div class="multiple-choice__container">
+    {% for option in children %}
+      {% set inputValue = option.value if 'value' in option else option.label %}
+      {% set inputId = ['input', name, loop.index] | join('--') %}
+
+      {% if variant == 'checkbox' %}
+        {% set isSelected = (value and (inputValue in value)) %}
+      {% else %}
+        {% set isSelected = (inputValue | string == value | default('') | string) %}
+      {% endif %}
+
+      <label
+        for="{{ inputId }}"
+        class="multiple-choice multiple-choice--{{ variant | default('radio') }}{{ ' multiple-choice--inline' if inline }}{{ ' has-error' if error }} multiple-choice-radio-horizontal nested-radio-button"
+        data-label="{{ option.label }}" data-show-nested-fields="{{ option.show_nested_fields }}"
+      >
+        {{ option.label }}
+        <input
+          type="{{ variant | default('radio') }}"
+          name="{{ name }}"
+          id="{{ inputId }}"
+          value="{{ inputValue }}"
+          class="multiple-choice__input"
+          {% if isSelected %}
+            checked="checked"
+          {% endif %}
+          {% if hint %}
+            aria-describedby="{{ hintId }}"
+          {% endif %}
+        >
+      </label>
+    {% endfor %}
+    </div>
+    {% set showNestedField = (value in field.nestedFieldVisibleValue) %}
+
+    <div id="previously-registered-nested-container" class="nested-fields-container"  style="{{ 'display:none' if not showNestedField }}">
+
+      <div class="inputs-container" style="{{ 'display:none' if stepData['gpName'] }}">
+        <label for="input-gp-lookup" class="form-label nested-inline-label">
+          Find current GP
+          <div class="form-control form-group">
+            {% set typeahedFieldError = stepErrors['gpName'].message | replace(stepErrors['gpName'].label, "") %}
+
+            <input type="text" id="input-gp-lookup" class="form-textbox nested-input {{ ' has-error' if typeahedFieldError }}" placeholder="Enter keywords" autocomplete="off" style="display:inline-block">
+            <a class="gp-lookup-btn button">Find Surgery</a>
+          </div>
+        </label>
+        <input type="hidden" name="gpName" id="gp-name" value="{{ stepData['gpName'] }}">
+        <input type="hidden" name="gpAddress" id="gp-address" value="{{ stepData['gpAddress'] }}">
+
+        <ul class="gp-results">
+        </ul>
+      </div>
+
+      <div id="selected-gp-summary" class="confirm-block" style="{{ 'display:none' if not stepData['gpName'] }}">
+        <span class="reset-address">
+            <a class="confirm-reset">Reset
+              <span="cross-icon">x
+              </span> 
+            </a>
+          </span> 
+        <div class="confirm-block-details gp-address">
+          <p class="gp-title confirm-block-title confirm-block-line">{{ stepData['gpName']}}</p>
+          {% if stepData['gpAddress'] %}
+            {% set addressLines = stepData['gpAddress'] | split %}
+            {% for line in addressLines %}
+              <p class="confirm-block-line">{{ line }}</p>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+    {% set manualGPNameError = stepErrors['manualGPName'].message | replace(stepErrors['manualGPName'].label, "") %}
+    {% set manualaddress1Error = stepErrors['address1'].message | replace(stepErrors['address1'].label, "") %}
+    {% set manualaddress2Error = stepErrors['address2'].message | replace(stepErrors['address2'].label, "") %}
+    {% set manualaddress3Error = stepErrors['address3'].message | replace(stepErrors['address3'].label, "") %}
+    {% set localityError = stepErrors['locality'].message | replace(stepErrors['locality'].label, "") %}
+    {% set postcodeError = stepErrors['postcode'].message | replace(stepErrors['postcode'].label, "") %}
+  </div>
+
+  <details id="gp-manual-address" style="{{ 'display:none' if stepData['gpName'] }}" {% if stepData['manualGPName'] or postcodeError or stepData['postcode'] %}{% endif %}>
+      <summary>
+        <span class="details__summary">I can't find my address, enter manually</span>
+      </summary>
+      <div id="manual-address-details" class="details__content">
+        <div class="nested-fields-container">
+          <div id="inputdiv-gp-name" class="form-line">
+            <label for="input-manual-gp-name" class="form-label">
+              GP practice name
+            </label>
+            <input type="text" name="manualGPName" class="form-textbox {{ ' has-error' if manualGPNameError }}" id="input-manual-gp-name" value="{{ stepData['manualGPName'] }}" />
+          </div>
+          <div id="inputdiv-manualAddress1" class="form-line">
+            <label for="manualAddress1" class="form-label">
+              Address
+            </label>
+            <input type="text" name="address1" class="form-textbox {{ ' has-error' if manualaddress1Error }}"  id="manualAddress1" value="{{ stepData['address1'] }}"/>
+          </div>
+          <div id="inputdiv-manualAddress2" class="form-line">
+            <input type="text" name="address2" class="form-textbox {{ ' has-error' if manualaddress2Error }}" id="manualAddress2" value="{{ stepData['address2'] }}"/>
+          </div>
+           <div id="inputdiv-manualAddress3" class="form-line">
+            <input type="text" name="address3" class="form-textbox {{ ' has-error' if manualaddress3Error }}" id="manualAddress3" value="{{ stepData['address3'] }}"/>
+          </div>
+          <div id="inputdiv-manualTown" class="form-line">
+            <label for="input-manualTown" class="form-label">
+              Town or city
+            </label>
+            <input type="text" name="locality" class="form-textbox {{ ' has-error' if manualaddress3Error }}" id="input-manualTown" value="{{ stepData['locality'] }}"/>
+          </div>
+          <div id="inputdiv-manualPostcode" class="form-line">
+            <label for="input-manualPostcode" class="form-label">
+              Postcode
+            </label>
+            <input type="text" name="postcode" class="form-textbox form-textbox--short {{ ' has-error' if postcodeError }}" id="input-manualPostcode" value="{{ stepData['postcode'] }}"/>
+          </div>
+        </div>
+        </div>
+      </details>
+
+</fieldset>

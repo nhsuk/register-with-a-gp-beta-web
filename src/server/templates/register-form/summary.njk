@@ -1,13 +1,15 @@
 {% extends 'layouts/base.njk' %}
 
-{% macro row(title, fields, editDestination, multiline, separator=' ') -%}
+{% macro row(title, fields, editDestination, multiline, separator=' ', hiddenFields=[]) -%}
   {% set join = joiner('<br>') if multiline else joiner(separator) %}
 
   <tr>
     <th class="summary__title" scope="row">{{ title }}</th>
     <td class="summary__content">
       {%- for name, line in fields -%}
-        {% if line -%}{{ join() | safe }}{{ line | nl2br | safe }}{%- endif %}
+        {% if not name in hiddenFields %}
+          {% if line -%}{{ join() | safe }}{{ line | nl2br | safe }}{%- endif %}
+        {% endif %}
       {%- endfor %}
     </td>
     <td class="summary__control">
@@ -45,14 +47,15 @@
       <caption>Your current GP</caption>
       {% if data.previouslyRegistered['previously-registered'] %}
 
-        {% if data.manualGPAddress['gpName'] %}
-            {{ row('Current GP', data.manualGPAddress, 'manualGPAddress', true) }}
+        {% if data.previouslyRegistered['gpName'] %}
+            {% set selectedGPData = {'gp-name': data.previouslyRegistered['gpName'], 'gp-address': data.previouslyRegistered['gpAddress']} %}
+            {{ row('Current GP', selectedGPData, 'previouslyRegistered', true) }}
         {% else %}
-            {{ row('Current GP', data.currentGP, 'currentGP', true) }}
+            {{ row('Current GP', data.previouslyRegistered, 'previouslyRegistered', true, ' ',['previously-registered']) }}
         {% endif %}
 
         {% if data.registedAddress['registered-address-correct'] %}
-          {{ row('Registered address', data.address, 'registedAddress', true) }}
+          {{ row('Registered address', data.addressLookup, 'registedAddress', true) }}
         {% else %}
           {{ row('Registered address', data.registeredAddressDetails, 'registedAddress', true) }}
         {% endif %}
@@ -62,6 +65,7 @@
         {% else %}
           {{ row('Registered name', data.registeredNameDetails, 'registeredName') }}
         {% endif %}
+
       {% else %}
         {{ row('Current GP', {'empty': 'I’m not registered with a GP'}, 'previouslyRegistered') }}
       {% endif %}

@@ -181,7 +181,7 @@ input[type=number] {
 	letter-spacing: 0px;
 }
 .callout--info {
-	border-left: solid $callout-line;
+	border-left: solid #BFC1C3;
 }
 
 #current-medication-nested-container .nested-inline-label * + * {
@@ -210,4 +210,15 @@ input[type=number] {
 	@include media(tablet) {
     	@include core-font(20);
   	}
+}
+
+.callout--medium {
+
+	@include media(tablet) {
+		width: 70%;
+	}
+}
+
+.registered-address, .registered-name {
+	margin-bottom: 20px;
 }

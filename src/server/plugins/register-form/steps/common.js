@@ -192,6 +192,17 @@ export function dependsOnBoolean(step, path, toBe = true) {
     return _.get(cookieData, `${step.key}.${path}`, false) === toBe;
   };
 }
+
+/**
+ * Helper `isExists` checking has propery of JS objects
+ * @param {object} obj - a JS object like `cookieData`
+ * @param {string} path - property namespace
+ * @returns {boolean}
+ */
+export function propertyIsExists(obj, path) {
+  return Boolean(_.get(obj, `${path}`, false));
+}
+
 /**
  * default transformer for old state data and new submitted data
  *

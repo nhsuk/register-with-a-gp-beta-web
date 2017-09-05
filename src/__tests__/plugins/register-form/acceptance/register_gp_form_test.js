@@ -35,14 +35,17 @@ Scenario('Test all yes/no question with "no" answer on gp registration flow', (I
   I.fillField('#input-year','1976');
   I.click('Continue');
 
-  I.see('What is your address?');
-  I.fillField('Postcode', 'SW1A1AA');
-  I.click('Continue');
-  I.click('Continue');  // this step has two part
-
   I.see('Where were you born?');
   I.selectOption('Country','United Kingdom');
   I.fillField('Town or City', 'London');
+  I.click('Continue');
+
+  I.see('What is your address?');
+  I.fillField('Postcode', 'SW1A1AA');
+  I.click('Find address');
+  I.waitForElement('#select-link-0', 3);
+  I.click('#select-link-0');
+  I.waitForElement('#address-confirm', 3);
   I.click('Continue');
 
   I.see(`How can ${firstPractice.name} contact you?`);
@@ -84,7 +87,7 @@ Scenario('Test all yes/no question with "no" answer on gp registration flow', (I
   I.click('Continue');
 
   I.see('Check your details');
-  I.click('Send my details');
+  I.click('Send to surgery');
 
   I.see(`Your application has been sent to ${firstPractice.name}`);
 });
@@ -120,14 +123,17 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
   I.fillField('#input-year','1976');
   I.click('Continue');
 
-  I.see('What is your address?');
-  I.fillField('Postcode', 'SW1A1AA');
-  I.click('Continue');
-  I.click('Continue');  // this step has two part
-
   I.see('Where were you born?');
   I.selectOption('Country','United Kingdom');
   I.fillField('Town or City', 'London');
+  I.click('Continue');
+
+  I.see('What is your address?');
+  I.fillField('Postcode', 'SW1A1AA');
+  I.click('Find address');
+  I.waitForElement('#select-link-0', 3);
+  I.click('#select-link-0');
+  I.waitForElement('#address-confirm', 3);
   I.click('Continue');
 
   I.see(`How can ${firstPractice.name} contact you?`);
@@ -146,16 +152,21 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
   I.click('Continue');
 
   I.see('Are you already registered with a GP?');
-  I.click('label[data-label=No]');
+  I.click('label[data-label=Yes]');
+  I.fillField('#input-gp-lookup', 'newland');
+  I.waitForElement('#select-link-0', 5);
+  I.click('#select-link-0');
+  I.waitForElement('#selected-gp-summary', 5);
   I.click('Continue');
 
-  /* todo mock elasticsearch module for gp-autocomplete component */
+  // todo selected GP data here
+  // I.see(`Are you registered at ${firstPractice.name} with this address?`);
+  I.click('label[data-label=Yes]');
+  I.click('Continue');
 
-  // I.see('What is the name and address of your current GP practice?');
-  // I.fillField('#gp-search', 'newland');
-  // I.waitForElement('.result', 10);
-  // I.click('.result');
-  // I.click('Continue');
+  // todo selected GP data here
+  I.click('label[data-label=Yes]');
+  I.click('Continue');
 
   I.see('Are you taking any medication?');
   I.click('label[data-label=Yes]');
@@ -193,7 +204,7 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
   I.click('Continue');
 
   I.see('Check your details');
-  I.click('Send my details');
+  I.click('Send to surgery');
 
   I.see(`Your application has been sent to ${firstPractice.name}`);
 });
