@@ -37,7 +37,19 @@ function resolveUrl(
   return `http://localhost:${instance.info.port}${relativeUrl}`;
 }
 
-const GPLookupData = [{'_index':'gp-lookup','_type':'practice','_id':'J81032','_score':22.547205,'_source':{'organisation_code':'J81032','name':'Newland Surgery','address':'Newland Surgery, Grove Med Ctr, Wootton Gr, Sherborne, Dorset, DT9 4DL','contact_telephone_number':'01935 813438','practitioners':[]}}];
+const GPLookupData = [{
+  '_index':'test-gp-lookup',
+  '_type':'practice',
+  '_id':'193kd02',
+  '_score':1939213,
+  '_source':{
+    'organisation_code':'J81032',
+    'name':'South Chinnor',
+    'address':'South Chinnor GP Practice, 5CE 4DL',
+    'contact_telephone_number':'1111 222222',
+    'practitioners':[]
+  }
+}];
 
 function getMockedGPLookupData() {
   return JSON.stringify(GPLookupData);
