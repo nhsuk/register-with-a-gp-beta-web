@@ -67,10 +67,6 @@ const steps = [
 ];
 
 export const stepDependency = {
-  'home-address-lookup': [
-    'home-address-manual',
-    'home-address-lookup-choose'
-  ],
   'previously-registered': [
     'registered-address',
     'registered-address-manual',
