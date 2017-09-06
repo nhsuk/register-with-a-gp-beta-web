@@ -2,7 +2,7 @@ const $ = require('jquery');
 
 class AddressAjax {
   init(){
-    this.housenumber = $('#input-housenumber');
+    this.housenumber = $('#input-houseNumber');
     this.postcode = $('#input-postcode');
     this.csrf = $('input[name=\'csrf\']').val();
     this.addressButton = $('#addressbutton');
@@ -52,6 +52,7 @@ class AddressAjax {
     $('#confirmAddress3').text(elem.data('address3'));
     $('#confirmTown').text(elem.data('town'));
     $('#confirmCounty').text(elem.data('county'));
+    $('#confirmPostcode').text(this.postcode.val());
     this.confirmContainer.show();
     this.resultListContainerElem.hide();
     this.formFields.hide();
@@ -89,6 +90,7 @@ class AddressAjax {
   }
 
   fetchList (endpoint, postcode, housenumber){
+    const _this = this;
     $.ajax({
       type: 'POST',
       url: endpoint,
@@ -99,42 +101,63 @@ class AddressAjax {
         $('.address-results').show();
         $('.address-results').empty().hide();
         if (data.length > 0){
-          const addressList = data;
-          $.each(addressList, function(i,a){
-            const template = $.parseHTML('' +
-              '<li class="address-item result">' +
-              '<div class="address-line">' +
-              '<span id="addr1"></span>' +
-              '<span id="addr2"></span>' +
-              '<span id="addr3"></span>' +
-              '<span id="town"></span>' +
-              '<span id="county"></span>' +
-              '</div>'+
-              '<span>'+
-              '<a href="#" class="select-link" id="select-link-' + i +'">Select</a>' +
-              '</span>'+
-              '</li>');
-            const item = $(template).clone();
-            item.find('#addr1').text(a[0] + ', ');
-            if(a[1].length > 0){
-              item.find('#addr2').text(a[1] + ', ');
-            }
-            if(a[2].length > 0){
-              item.find('#addr3').text(a[2] + ', ');
-            }
-            item.find('#town').text(a[3] + ', ');
-            item.find('#county').text(a[4] + ' ');
-            const adData = {
-              'address1': a[0],
-              'address2': a[1],
-              'address3': a[2],
-              'town': a[3],
-              'county': a[4]
-            };
-            item.data(adData);
-            $('.address-results').append(item);
-          });
-          $('.address-results').show();
+          if(data.length === 1){
+            const a = data[0];
+            $('#input-address1').val(a[0]);
+            $('#input-address2').val(a[1]);
+            $('#input-address3').val(a[2]);
+            $('#input-town').val(a[3]);
+            $('#input-county').val(a[4]);
+            $('#confirmAddress1').text(a[0]);
+            $('#confirmAddress2').text(a[1]);
+            $('#confirmAddress3').text(a[2]);
+            $('#confirmTown').text(a[3]);
+            $('#confirmCounty').text(a[4]);
+            $('#confirmPostcode').text(_this.postcode.val());
+            _this.confirmContainer.show();
+            _this.resultListContainerElem.hide();
+            _this.formFields.hide();
+            _this.addressButton.hide();
+            _this.addressContinue.show();
+            _this.manualDiv.hide();
+          } else {
+            const addressList = data;
+            $.each(addressList, function(i,a){
+              const template = $.parseHTML('' +
+                '<li class="address-item result">' +
+                '<div class="address-line">' +
+                '<span id="addr1"></span>' +
+                '<span id="addr2"></span>' +
+                '<span id="addr3"></span>' +
+                '<span id="town"></span>' +
+                '<span id="county"></span>' +
+                '</div>'+
+                '<span>'+
+                '<a href="#" class="select-link" id="select-link-' + i +'">Select</a>' +
+                '</span>'+
+                '</li>');
+              const item = $(template).clone();
+              item.find('#addr1').text(a[0] + ', ');
+              if(a[1].length > 0){
+                item.find('#addr2').text(a[1] + ', ');
+              }
+              if(a[2].length > 0){
+                item.find('#addr3').text(a[2] + ', ');
+              }
+              item.find('#town').text(a[3] + ', ');
+              item.find('#county').text(a[4] + ' ');
+              const adData = {
+                'address1': a[0],
+                'address2': a[1],
+                'address3': a[2],
+                'town': a[3],
+                'county': a[4]
+              };
+              item.data(adData);
+              $('.address-results').append(item);
+            });
+            $('.address-results').show();
+          }
         }
       }
     });

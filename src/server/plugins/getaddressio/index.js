@@ -18,6 +18,7 @@ export function getNextSlugByKey(steps,key){
 }
 
 function getAddresses(postcode, housenumber = '', timeout=TIMEOUT) {
+  housenumber = encodeURIComponent(housenumber);
   return new Promise((resolve, reject) => {
     const request = https.get({
       host: process.env.POSTCODE_API_HOST,
