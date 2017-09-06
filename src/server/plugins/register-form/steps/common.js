@@ -224,9 +224,9 @@ export function postHandlerFactory(
   schema,
   prevSteps,
   nextSteps,
-  template = 'register-form/step',
   {
     beforeTemplate = undefined,
+    template = 'register-form/step',
     transformData = dataTransformer
   } = {}
 ) {
