@@ -31,8 +31,8 @@ services:
     labels:
       traefik.enable: true
       traefik.frontend.rule: $TRAEFIK_RULE
+      traefik.backend: ${RANCHER_STACK_NAME}-register-with-a-gp
       traefik.port: 3333
-      map-public-http: 3333
       io.rancher.container.pull_image: always
     logging:
       driver: splunk
