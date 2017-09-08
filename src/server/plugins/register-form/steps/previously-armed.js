@@ -38,10 +38,13 @@ const schema = Joi.object().keys({
     })
     .options({
       language: {
-        any: { required: '!Please tell us if you served in the armed forces' },
+        any: { required: 'Please answer this question' },
       },
     }),
-  'armedStaffNumber': Joi.when('previously-armed', {is: true, then:Joi.string()}),
+  'armedStaffNumber': Joi.when('previously-armed', {
+    is: true,
+    then:Joi.string()
+  }),
   'day': Joi.when('previously-armed', {is: true, then:Joi.number().integer().min(1).max(31).required()}),
   'month': Joi.when('previously-armed', {is: true, then:Joi.number().integer().min(1).max(12).required()}),
   'year': Joi.when('previously-armed', {is: true, then:Joi.number().integer().min(1885).max(2025).required()}),
