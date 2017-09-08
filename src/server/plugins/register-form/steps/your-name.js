@@ -2,10 +2,11 @@ import Joi from 'joi';
 import {postHandlerFactory, getHandlerFactory} from './common';
 
 const schema = Joi.object().keys({
-  'nameTitle': Joi.string().max(10).label('Title')
+  'nameTitle': Joi.string().max(10).label('Title').required()
     .meta({
       componentType: 'dropdown' ,
       children: [
+        { label: '----', value: ''},
         { label: 'Mr', value: 'Mr'},
         { label: 'Mrs', value: 'Mrs'},
         { label: 'Ms', value: 'Ms'},
@@ -13,10 +14,33 @@ const schema = Joi.object().keys({
         { label: 'Dr', value: 'Dr'},
         { label: 'Prof', value: 'Prof'}
       ],
+    }).options({
+      language: {
+        any: {
+          empty: 'Please select a title'
+        },
+      },
     }),
-  'firstName': Joi.string().max(100).label('First name').meta({ componentType: 'textbox' }),
-  'middleNames': Joi.string().allow('').max(100).optional().label('Middle names').meta({ componentType: 'textbox' }),
-  'lastName': Joi.string().max(100).label('Last name').meta({ componentType: 'textbox' }),
+  'firstName': Joi.string().max(100).label('First name')
+    .meta({ componentType: 'textbox' }).options({
+      language: {
+        any: {
+          empty: 'Please enter your first name'
+        },
+      },
+    }),
+  'middleNames': Joi.string().allow('').max(100).optional().label('Middle names')
+    .meta({componentType: 'textbox'}),
+  'lastName': Joi.string().max(100).label('Last name')
+    .meta({
+      componentType: 'textbox'
+    }).options({
+      language: {
+        any: {
+          empty: 'Please enter your last name'
+        },
+      },
+    }),
   'submit': Joi.any().optional().strip()
 }).or('firstName', 'middleNames', 'lastName');
 
