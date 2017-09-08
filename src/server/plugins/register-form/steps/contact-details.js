@@ -20,7 +20,7 @@ const details = {
 
 const handlers = {
   GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps, details),
-  POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps),
+  POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps, details),
 };
 
 /**

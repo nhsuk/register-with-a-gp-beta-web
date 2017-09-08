@@ -224,11 +224,13 @@ export function postHandlerFactory(
   schema,
   prevSteps,
   nextSteps,
+  details,
+  extraInfo,
   {
     beforeTemplate = undefined,
     template = 'register-form/step',
     transformData = dataTransformer
-  } = {}
+  } = {},
 ) {
   return (request, reply) => {
     // if form valid then redirect to next step
@@ -271,7 +273,9 @@ export function postHandlerFactory(
           title,
           stepErrors,
           prevStep,
-          ga_events: JSON.stringify(params)
+          ga_events: JSON.stringify(params),
+          details,
+          extraInfo
         });
       });
   };
