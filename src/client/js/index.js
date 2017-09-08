@@ -8,7 +8,7 @@ const btnDisable = require('./modules/disable-button');
 import title from './lib/title';
 const gaEvents = require('./modules/ga-events');
 const AddressAjax = require('./modules/address-ajax');
-const closeCookieBar = require('./modules/close-cookiebar')
+const closeCookieBar = require('./modules/close-cookiebar');
 
 labelFocus.init();
 labelSelect.init();
