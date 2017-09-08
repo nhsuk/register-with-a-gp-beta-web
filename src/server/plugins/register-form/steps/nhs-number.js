@@ -23,11 +23,21 @@ const schema = Joi.object().keys({
     })
     .options({
       language: {
-        any: { required: '!!Please tell us if you know your NHS number' },
+        any: {
+          required: 'Please answer this question'
+        },
       },
     }),
-  'nhs-number': Joi.when('nhs-number-known', {is: true, then:Joi.string().nhsnumber().required()}),
-
+  'nhs-number': Joi.when('nhs-number-known', {
+    is: true,
+    then: Joi.string().nhsnumber().required().options({
+      language: {
+        any: {
+          empty: 'Please answer this question'
+        },
+      },
+    }),
+  }),
   'submit': Joi.any().optional().strip(),
 });
 
