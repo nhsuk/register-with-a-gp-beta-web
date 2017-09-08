@@ -13,7 +13,7 @@
     "babel-runtime": "^6.23.0",
     "blipp": "^2.3.0",
     "change-case": "^3.0.1",
-    "codeceptjs": "^1.0.0",
+    "codeceptjs": "^1.0.2",
     "crumb": "^6.0.3",
     "dotenv": "^4.0.0",
     "eclint": "^2.0.1",
