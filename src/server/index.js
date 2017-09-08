@@ -200,7 +200,7 @@ const options = {
 };
 
 const server = Glue.compose(manifest, options);
-
+exports.server = server;
 function start() {
   return new Promise((resolve, reject) => {
     server.then(
