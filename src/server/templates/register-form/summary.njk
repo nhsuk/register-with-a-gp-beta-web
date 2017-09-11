@@ -29,6 +29,7 @@
       {{ row('Current Address', data.addressLookup, 'addressLookup', true, ' ', ['houseNumber']) }}
       {{ row('Place of birth', data.countryAndTown, 'countryAndTown', true) }}
       {{ row('Contact Details', data.contactDetails, 'contactDetails', true) }}
+      {{ row('Country and Town', data.countryAndTown, 'countryAndTown', true) }}
       {% if data.nhsNumber['nhs-number-known'] %}
         {{ row('NHS number', {'nhs-number': data.nhsNumber['nhs-number']}, 'nhsNumber', true) }}
       {% else %}
