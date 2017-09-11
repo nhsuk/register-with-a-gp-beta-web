@@ -37,4 +37,23 @@ function resolveUrl(
   return `http://localhost:${instance.info.port}${relativeUrl}`;
 }
 
-export {startTestServer, stopTestServer, resolveUrl};
+const GPLookupData = [{
+  '_index':'test-gp-lookup',
+  '_type':'practice',
+  '_id':'193kd02',
+  '_score':1939213,
+  '_source':{
+    'organisation_code':'J81032',
+    'name':'South Chinnor',
+    'address':'South Chinnor GP Practice, 5CE 4DL',
+    'contact_telephone_number':'1111 222222',
+    'practitioners':[]
+  }
+}];
+
+function getMockedGPLookupData() {
+  return JSON.stringify(GPLookupData);
+}
+
+
+export {startTestServer, stopTestServer, resolveUrl, getMockedGPLookupData};

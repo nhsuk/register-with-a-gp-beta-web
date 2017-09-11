@@ -1,7 +1,7 @@
 import JoiBase from 'joi';
 import JoiPostcodeExtension from 'joi-postcode';
 
-import { postHandlerFactory, getHandlerFactory, dependsOnBoolean } from './common';
+import { postHandlerFactory, getHandlerFactory, dependsOnBoolean,} from './common';
 import previouslyRegisteredStep from './previously-registered';
 import registeredAddressStep from './registered-address';
 
@@ -35,12 +35,7 @@ const handlers = {
 const checkApplies = (cookieData) => {
   const registered = dependsOnBoolean(previouslyRegisteredStep, 'previously-registered')(cookieData);
   const incorrect = dependsOnBoolean(registeredAddressStep, 'registered-address-correct', false)(cookieData);
-
-  if (registered && incorrect) {
-    return true;
-  } else {
-    return false;
-  }
+  return registered && incorrect;
 };
 
 /**

@@ -1,15 +1,32 @@
 ul.gp-results {
   list-style: none;
-  width: 80%;
-  margin: 20px 0;
-  padding: 0;
-  font-family: Frutiger W01;
+    margin: 20px 0 0 0;
+    padding: 0;
+    font-family: Frutiger W01;
+    clear: both;
+
+    @include media(tablet) {
+      width: 68%;
+      margin: 20px 0;
+    }
 }
 
 ul.gp-results li.gp-item {
-  overflow:hidden;
+   overflow:hidden;
   border-top: 1px #ccc solid;
   padding: 15px 10px;
+  margin-top: 0;
+
+  .select-link {
+    float: right;
+    font-size: 16px;
+    vertical-align:top;
+
+    @include media(tablet) {
+      font-size: 20px;
+    }
+
+  }
 }
 
 ul.gp-results li .gp-data {
@@ -29,4 +46,17 @@ ul.gp-results li a.select-link {
   float: right;
   margin: 0;
 
+}
+
+.gp-item .address {
+  max-width: 200px;
+  font-size: 16px;
+  line-height: 25px;
+
+  @include media(tablet) {
+    max-width: 450px;
+    font-size: 20px;
+    line-height: 32px;
+
+  }
 }

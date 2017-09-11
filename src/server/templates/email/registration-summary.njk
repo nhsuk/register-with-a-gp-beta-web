@@ -5,11 +5,13 @@
   {%- endfor -%}
 {%- endmacro -%}
 
-{%- macro render_multi_line(title, fields) -%}
+{%- macro render_multi_line(title, fields, hiddenFields=[]) -%}
   {{ title }}:
   {%- for name, line in fields -%}
-    {%- if line %}
-    {{ line }}
+    {%- if not name in hiddenFields %}
+      {%- if line %}
+        {{ line }}
+      {%- endif -%}
     {%- endif -%}
   {%- endfor -%}
 {%- endmacro -%}
@@ -44,11 +46,18 @@ Your current GP
 ===============
 
 {% if data.previouslyRegistered['previously-registered'] %}
-  {% if data.manualGPAddress['gpName'] %}
-    {{ render_one_line('Current GP', data.manualGPAddress) }}
+
+  {% if data.previouslyRegistered['gpName'] %}
+    {% set selectedGPData = {'gp-name': data.previouslyRegistered['gpName'], 'gp-address': data.previouslyRegistered['gpAddress']} %}
+    {{ render_one_line('Current GP', selectedGPData) }}
   {% else %}
-    {{ render_one_line('Current GP', data.currentGP) }}
+    {{ render_one_line('Current GP', data.previouslyRegistered, ['previously-registered']) }}
   {% endif %}
+
+  {% if data.manualGPAddress['gpName'] %}
+  {% else %}
+  {% endif %}
+
   {% if data.registedAddress['registered-address-correct'] %}
     {{ render_one_line('Registered address', data.address) }}
   {% else %}
@@ -67,13 +76,13 @@ Your health
 ===========
 
 {% if data.currentMedication['current-medication'] %}
-  {{ render_multi_line('Medication', data.medicationDetails, true) }}
+  {{ render_multi_line('Medication', {'medicationDetails': data.currentMedication['medications']}, true) }}
 {% else %}
   {{ render_one_line('Medication', {'empty': 'I’m not currently taking any medication'}) }}
 {% endif %}
 
 {% if data.allergies['any-allergies'] %}
-  {{ render_multi_line('Allergies', data.allergiesDetails, true) }}
+  {{ render_multi_line('Allergies', {'allergies-list': data.allergies['allergies']}, true) }}
 {% else %}
   {{ render_one_line('Allergies', {'empty': 'I don’t have any allergies'}) }}
 {% endif %}

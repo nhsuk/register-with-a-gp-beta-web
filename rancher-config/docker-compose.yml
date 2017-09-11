@@ -26,13 +26,13 @@ services:
       GP_EMAIL_THE_WOLDS_PRACTICE: ${GP_EMAIL_THE_WOLDS_PRACTICE}
       GP_EMAIL_WALLINGTON_FAMILY_PRACTICE: ${GP_EMAIL_WALLINGTON_FAMILY_PRACTICE}
       GP_EMAIL_BURNS_PRACTICE: ${GP_EMAIL_BURNS_PRACTICE}
-      GP_EMAIL_WORLDS_PRACTICE: ${GP_EMAIL_WORLDS_PRACTICE}
       GP_EMAIL_HAMPTON_WICK_SURGERY: ${GP_EMAIL_HAMPTON_WICK_SURGERY}
+      GP_EMAIL_SOUTH_CHINNOR_GP_PRACTICE: ${GP_EMAIL_SOUTH_CHINNOR_GP_PRACTICE}
     labels:
       traefik.enable: true
       traefik.frontend.rule: $TRAEFIK_RULE
+      traefik.backend: ${RANCHER_STACK_NAME}-register-with-a-gp
       traefik.port: 3333
-      map-public-http: 3333
       io.rancher.container.pull_image: always
     logging:
       driver: splunk

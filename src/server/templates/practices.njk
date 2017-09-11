@@ -7,7 +7,7 @@
 
   <div class="page-section">
     <div class="reading-width">
-      <p class="pad-bottom20">This is a trial service. It's currently only available for these GP practices:</p>
+      <p>This is a trial service. It's currently only available for these GP practices:</p>
       <ul>
         {% for practice in practices %}
             {% if (ENV_VALUE('APP_ENV') != 'development') and (practice.production == 'false')  %}
@@ -20,4 +20,5 @@
       </ul>
     </div>
   </div>
+  
 {% endblock %}

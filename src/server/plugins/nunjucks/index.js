@@ -9,7 +9,7 @@ import {getSlugByKey} from '../register-form/steps/common';
 
 const webpackAssetsPath = Path.resolve(__dirname, '../../../client/compiled/webpack-assets.json');
 const webpackAssets = require(webpackAssetsPath);
-
+const GOOGLEANALYTICSKEY = process.env.GOOGLEANALYTICSKEY;
 const COMPONENTS_PATH = '_components/';
 const COMPONENT_EXT = 'njk';
 
@@ -107,6 +107,9 @@ exports.register = function(server, options, next) {
     isCached: !debug,
     context: function (request) {
       const context = {
+        GA_ID: function(){
+          return GOOGLEANALYTICSKEY;
+        },
         REQUEST_AKA: function(key) {
           return '/' + request.params.practice + '/register/' + getSlugByKey(key);
         },

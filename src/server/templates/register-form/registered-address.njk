@@ -6,7 +6,7 @@
   <div class="page-section">
 
     {% if prevStep %}
-      <div class="form-group back-link">
+      <div class="form-group">
         <a href="{{ prevStep }}"  class="button--back">Back</a>
       </div>
     {% endif %}
@@ -93,7 +93,4 @@
 
     </form>
   </div>
-{% component 'analytics', {
-  ga_client_ID: cid
-  } %}      
 {% endblock body_main_content %}

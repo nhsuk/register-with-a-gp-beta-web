@@ -5,7 +5,7 @@
 {% block body_main_content %}
   <div class="page-section">
     {% if prevStep %}
-      <div class="form-group back-link">
+      <div class="form-group">
         <a href="{{ prevStep }}"  class="button--back">Back</a>
       </div>
     {% endif %}
@@ -13,9 +13,6 @@
     {% component 'error-summary', { children: stepErrors } %}
 
     <h1 class="form-title">{{ title | render | safe }}</h1>
-    <p>
-        <span>{{ data.name.nameTitle | default("") }} {{ data.name.firstName | default("") }} {{ data.name.middleNames | default("") }} {{ data.name.lastName | default("") }}</<span>
-    </p>
     <form method="post" id="current-step-form" class="{{key}}-form">
       <input type="hidden" name="csrf" value="{{csrf}}">
 
@@ -83,7 +80,4 @@
 
     </form>
   </div>
-{% component 'analytics', {
-  ga_client_ID: cid
-  } %}      
 {% endblock body_main_content %}

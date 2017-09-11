@@ -1,0 +1,36 @@
+{% set hintId = 'hint-' + name %}
+
+<fieldset id="input-{{ name }}">
+  {% if label or hint or error %}
+    <legend class="form-label" id="group-{{ name }}">
+      {{ label }} {% if optional %}(optional){% endif %}
+      {% if hint %}
+        <span class="form-label__hint" id="{{ hintId }}">{{ hint }}</span>
+      {% endif %}
+    </legend>
+  {% endif %}
+
+  <div id="current-medication-nested-container" class="nested-fields-container">
+
+  <label for="input-{{ field.id }}" class="form-label nested-inline-label">
+    {% if stepData[field.id] %}
+        {% for d in stepData[field.id] %}
+          {% set nestedFieldError = stepErrors[field.id+'.'+loop.index0].message | replace(stepErrors[field.id+'.'+loop.index0].label, "") %}
+          <input type="text" name="{{ field.id }}" id="input-{{ field.id }}-{{ loop.index0 }}"
+          class="form-textbox  nested-input {{ ' has-error' if nestedFieldError }} {{ ' nested-inline-base-input' if loop.first }}"
+          value="{{ d }}">
+        {% endfor %}
+    {% else %}
+      {% set nestedFieldError = stepErrors[field.id+'.0'].message | replace(stepErrors[field.id+'.0'].label, "") %}
+      <input type="text" name="{{ field.id }}" id="input-{{ field.id }}-0"
+      class="form-textbox nested-input {{ ' has-error' if nestedFieldError }} nested-inline-base-input"
+      value="{{ stepData[field.id][0] | default('') }}">
+
+    {% endif %}
+  </label>
+
+  <p class="add-element-link"><span class="add-icon"></span><a href="#" class="add-row">{{ field.addRowLabel }}</a></p>
+  </div>
+
+
+</fieldset>

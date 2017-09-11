@@ -10,15 +10,17 @@
   {% endfor %}
 {% endmacro %}
 
-{% macro render_multi_line(title, fields) %}
+{% macro render_multi_line(title, fields, hiddenFields=[]) %}
   {% set join = joiner('<br>') %}
     <p>
   {{ title }}:
     </p>
     <p>
   {% for name, line in fields %}
-    {%if line %}
-{{ join() | safe }}{{ line | nl2br | safe }}
+    {% if not name in hiddenFields %}
+      {%if line %}
+  {{ join() | safe }}{{ line | nl2br | safe }}
+      {% endif %}
     {% endif %}
   {% endfor %}
     </p>
@@ -32,7 +34,7 @@
 <p>Date of Birth: {{ data.dateOfBirth['day'] }}/{{ data.dateOfBirth['month'] }}/{{ data.dateOfBirth['year'] }}</p>
 {{ render_one_line('Place of birth', data.countryAndTown) }}
 <hr>
-{{ render_multi_line('Address', data.address) }}
+{{ render_multi_line('Address', data.addressLookup) }}
 {{ render_multi_line('Contact Details', data.contactDetails) }}
 <hr>
 {% if data.nhsNumber['nhs-number-known'] -%}
@@ -51,10 +53,14 @@
 Your current GP
 
 {% if data.previouslyRegistered['previously-registered'] -%}
-  {% if data.manualGPAddress['gpName'] %}
-      <p>{{ render_multi_line('Current GP', data.manualGPAddress) }}</p>
+
+  {% if data.previouslyRegistered['gpName'] %}
+
+      {% set selectedGPData = {'gp-name': data.previouslyRegistered['gpName'], 'gp-address': data.previouslyRegistered['gpAddress']} %}
+
+      <p>{{ render_multi_line('Current GP', selectedGPData) }}</p>
   {% else %}
-      <p>{{ render_multi_line('Current GP', data.currentGP) }}</p>
+      <p>{{ render_multi_line('Current GP', data.previouslyRegistered, ['previously-registered']) }}</p>
   {% endif %}
 
   {% if data.registedAddress['registered-address-correct'] %}
@@ -76,13 +82,13 @@ Your current GP
 Your health
 
 {% if data.currentMedication['current-medication'] %}
-  <p>{{ render_multi_line('Medication', data.medicationDetails) }}</p>
+  <p>{{ render_multi_line('Medication', {'medicationDetails': data.currentMedication['medications']}) }}</p>
 {% else %}
   <p>{{ render_one_line('Medication', {'empty': 'I’m not currently taking any medication'}) }}</p>
 {% endif %}
 
 {% if data.allergies['any-allergies'] %}
-  <p>{{ render_multi_line('Allergies', data.allergiesDetails) }}</p>
+  <p>{{ render_multi_line('Allergies', {'allergies-list': data.allergies['allergies']}) }}</p>
 {% else %}
   <p>{{ render_one_line('Allergies', {'empty': 'I don’t have any allergies'}) }}</p>
 {% endif %}

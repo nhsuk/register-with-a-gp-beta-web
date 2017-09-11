@@ -40,7 +40,7 @@
     </legend>
   {% endif %}
 
-  <div class="multiple-choice__container multiple-choise-horizontal">
+  <div class="multiple-choice__container multiple-choice-horizontal">
     {% for option in children %}
       {% set inputValue = option.value if 'value' in option else option.label %}
       {% set inputId = ['input', name, loop.index] | join('--') %}

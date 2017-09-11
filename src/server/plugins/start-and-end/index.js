@@ -3,10 +3,8 @@ import _ from 'lodash';
 import cookies from '../../config/cookies';
 import practiceLookup from '../../../shared/lib/practice-lookup';
 import {getLatestUncompletedStep} from '../register-form/steps/common.js';
-import ua from 'universal-analytics';
 
 const fs = require('fs');
-const googleAnalyticsKey = process.env.GOOGLEANALYTICSKEY;
 
 function practiceHandler(request, reply) {
   if (request.params.practice) {
@@ -66,11 +64,9 @@ function startHandler(request, reply) {
   const practice = request.params.practice;
   const practiceData = practiceLookup.getPractice(practice);
   const practiceStartTemplate = getPracticeStartTemplate(request);
-  const visitor = ua(googleAnalyticsKey);
   if (typeof practiceData !== 'undefined') {
     reply
-      .view(practiceStartTemplate, {showNotifications: true, firstStep: '/' + practice + '/register/nhs-number'})
-      .state('cid', visitor.cid);
+      .view(practiceStartTemplate, {showNotifications: true, firstStep: '/' + practice + '/register/nhs-number'});
   } else {
     reply.redirect(request.aka(''));
   }
@@ -87,7 +83,6 @@ function endHandler(request, reply) {
         });
     }
   }
-
   return reply.view(practiceEndTemplate);
 }
 

@@ -1,17 +1,19 @@
 {% extends 'layouts/base.njk' %}
 
-{% macro row(title, fields, editDestination, multiline, separator=' ') -%}
+{% macro row(title, fields, editDestination, multiline, separator=' ', hiddenFields=[]) -%}
   {% set join = joiner('<br>') if multiline else joiner(separator) %}
 
   <tr>
     <th class="summary__title" scope="row">{{ title }}</th>
     <td class="summary__content">
       {%- for name, line in fields -%}
-        {% if line -%}{{ join() | safe }}{{ line | nl2br | safe }}{%- endif %}
+        {% if not name in hiddenFields %}
+          {% if line -%}{{ join() | safe }}{{ line | nl2br | safe }}{%- endif %}
+        {% endif %}
       {%- endfor %}
     </td>
     <td class="summary__control">
-      <a href="{{ GET_REDIRECT(editDestination) | safe }}" class="button button--secondary">Change <span class="util-visuallyhidden">{{ title }}</span></a>
+      <a href="{{ GET_REDIRECT(editDestination) | safe }}" class="">Change <span class="util-visuallyhidden">{{ title }}</span></a>
     </td>
   </tr>
 {%- endmacro %}
@@ -20,21 +22,18 @@
   <div class="page-section">
     <h1 class="form-title">{{ title }}</h1>
     <table class="summary">
+       <caption>Personal details</caption>
       {{ row('Name', data.name, 'name') }}
       {{ row('Sex', data.gender, 'gender') }}
       {{ row('Date of birth', data.dateOfBirth, 'dateOfBirth', false, '/') }}
-      {{ row('Address', data.address, 'address', true) }}
+      {{ row('Current Address', data.addressLookup, 'addressLookup', true, ' ', ['houseNumber']) }}
       {{ row('Place of birth', data.countryAndTown, 'countryAndTown', true) }}
       {{ row('Contact Details', data.contactDetails, 'contactDetails', true) }}
-
       {% if data.nhsNumber['nhs-number-known'] %}
         {{ row('NHS number', {'nhs-number': data.nhsNumber['nhs-number']}, 'nhsNumber', true) }}
       {% else %}
         {{ row('NHS number', {'empty': 'I don’t know my NHS number'}, 'nhsNumber') }}
       {% endif %}
-    </table>
-    <table class="summary">
-      <caption>Armed forces</caption>
       {% if data.previouslyArmed['previously-armed'] %}
 
         {{ row('Staff number', {'armedStaffNumber': data.previouslyArmed['armedStaffNumber']}, 'previouslyArmed', true)}}
@@ -43,21 +42,20 @@
       {% else %}
         {{ row('Armed forces',{'empty': 'I haven’t served in the armed forces'}, 'previouslyArmed' )}}
       {% endif %}
-  </table>
+    </table>
     <table class="summary">
       <caption>Your current GP</caption>
-
       {% if data.previouslyRegistered['previously-registered'] %}
 
-        {% if data.manualGPAddress['gpName'] %}
-            {{ row('Current GP', data.manualGPAddress, 'manualGPAddress', true) }}
-
+        {% if data.previouslyRegistered['gpName'] %}
+            {% set selectedGPData = {'gp-name': data.previouslyRegistered['gpName'], 'gp-address': data.previouslyRegistered['gpAddress']} %}
+            {{ row('Current GP', selectedGPData, 'previouslyRegistered', true) }}
         {% else %}
-            {{ row('Current GP', data.currentGP, 'currentGP', true) }}
+            {{ row('Current GP', data.previouslyRegistered, 'previouslyRegistered', true, ' ',['previously-registered']) }}
         {% endif %}
 
         {% if data.registedAddress['registered-address-correct'] %}
-          {{ row('Registered address', data.address, 'registedAddress', true) }}
+          {{ row('Registered address', data.addressLookup, 'registedAddress', true) }}
         {% else %}
           {{ row('Registered address', data.registeredAddressDetails, 'registedAddress', true) }}
         {% endif %}
@@ -67,6 +65,7 @@
         {% else %}
           {{ row('Registered name', data.registeredNameDetails, 'registeredName') }}
         {% endif %}
+
       {% else %}
         {{ row('Current GP', {'empty': 'I’m not registered with a GP'}, 'previouslyRegistered') }}
       {% endif %}
@@ -75,40 +74,50 @@
     <table class="summary">
       <caption>Your health</caption>
 
-      {% if data.currentMedication['current-medication'] %}
-        {{ row('Medication', data.medicationDetails, 'currentMedication', true) }}
+      {% if (data.allergies['current-medication']) and (data.allergies['medications'] | nl2br) %}
+        {{ row('Medication', {'medicationDetails': data.currentMedication['medications']}, 'currentMedication', true) }}
       {% else %}
         {{ row('Medication', {'empty': 'I’m not currently taking any medication'}, 'currentMedication') }}
       {% endif %}
 
-      {% if data.allergies['any-allergies'] %}
-
-        {{ row('Allergies', data.allergiesDetails, 'allergies', true) }}
+      {% if (data.allergies['any-allergies']) and (data.allergies['allergies'] | nl2br) %}
+        {{ row('Allergies', {'allergies-list': data.allergies['allergies']}, 'allergies', true) }}
       {% else %}
         {{ row('Allergies', {'empty': 'I don’t have any allergies'}, 'allergies') }}
       {% endif %}
 
-      {% if (data.medicalHistory['medical-history']) or (data.medicalHistory['history-chosen']) or (data.medicalHistory['medical-history-details']) %}
+      {% if (data.medicalHistory['medical-history'] | nl2br) or (data.medicalHistory['history-chosen'] | nl2br) or (data.medicalHistory['medical-history-details'] | nl2br) %}
         {{ row('Health', data.medicalHistory, 'medicalHistory', true) }}
-
       {% else %}
         {{ row('Health', {'empty': 'I’m not supplying any health details'}, 'medicalHistory') }}
       {% endif %}
     </table>
 
-    <form id="sendForm" name="sendForm" method="post">
-      <input type="hidden" name="csrf" value="{{csrf}}">
-      <button type="submit" id="sendBtn" class="button">Send my details</button>
-    </form>
+    <div class="summary-note">
 
-    <p class="summeryNote">
-      Your details will be sent to {{ CURRENT_PRACTICE.name | default('the GP practice') }} to begin your registration.
+      <p class="summary-note__title"> Now send your application</p>
+
+      <p class="summary-note__description">Your details will be sent to {{ CURRENT_PRACTICE.name | default('the GP practice') }} to begin your registration.
       {% if data.email.email %}
         A confirmation email will be sent to {{ data.email.email }}.
       {% endif %}
-    </p>
+      </p>
+    </div>
+
+    <details class="summary-info-details">
+      <summary>
+        <span class="details__summary">How your personal information is handled</span>
+      </summary>
+      <div class="details__content">
+        <div class="callout callout--info">
+          <p>Only the GP surgery sees the personal information in your application. It’s sent securely to them so they can add it to your medical record. It’s not stored for any other purpose.</p>
+        </div>
+      </div>
+    </details>
+
+      <form id="sendForm" name="sendForm" method="post" class="confirm-summary">
+       <input type="hidden" name="csrf" value="{{csrf}}">
+       <button type="submit" id="sendBtn" class="button">Send to surgery</button>
+      </form>
   </div>
-{% component 'analytics', {
-  ga_client_ID: cid
-  } %}      
 {% endblock body_main_content %}

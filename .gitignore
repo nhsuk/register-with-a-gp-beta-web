@@ -52,3 +52,4 @@ node_modules
 /.env
 .DS_Store
 /data/practiceData.json
+/src/__tests__/plugins/register-form/acceptance/output/

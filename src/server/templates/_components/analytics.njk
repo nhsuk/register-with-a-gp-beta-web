@@ -4,10 +4,23 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-67365892-10', {'clientId': '{{ ga_client_ID }}' });
+  ga('create');
   ga('send', 'pageview');
-  function ga_event(Category, Text){
+  function ga_event(Category, Text, Label=''){
     ga('send', 'event', Category, Text, Label);
+  }
+  const eventsJson = '{{ events|safe }}';
+  if(eventsJson !== ''){
+    const events = JSON.parse(eventsJson);
+    {% if events %}
+        if(Array.isArray(events)) {
+          for(i=0; i<events.length; i++){
+            ga_event(events[i].ec, events[i].ea, events[i].el);
+          }
+        } else if(typeof events === 'object') {
+            ga_event(events.ec, events.ea, events.el);
+        }
+    {% endif %}
   }
 </script>
 <script type="text/javascript" src="/static/webtrends.load.js"></script>
