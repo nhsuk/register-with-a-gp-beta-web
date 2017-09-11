@@ -29,6 +29,7 @@
       {{ row('Current Address', data.addressLookup, 'addressLookup', true, ' ', ['houseNumber']) }}
       {{ row('Place of birth', data.countryAndTown, 'countryAndTown', true) }}
       {{ row('Contact Details', data.contactDetails, 'contactDetails', true) }}
+      {{ row('Country and Town', data.countryAndTown, 'countryAndTown', true) }}
       {% if data.nhsNumber['nhs-number-known'] %}
         {{ row('NHS number', {'nhs-number': data.nhsNumber['nhs-number']}, 'nhsNumber', true) }}
       {% else %}
@@ -55,7 +56,7 @@
         {% endif %}
 
         {% if data.registedAddress['registered-address-correct'] %}
-          {{ row('Registered address', data.addressLookup, 'registedAddress', true) }}
+          {{ row('Registered address', data.addressLookup, 'registedAddress', true, ['houseNumber']) }}
         {% else %}
           {{ row('Registered address', data.registeredAddressDetails, 'registedAddress', true) }}
         {% endif %}
