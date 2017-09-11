@@ -74,7 +74,7 @@
     <table class="summary">
       <caption>Your health</caption>
 
-      {% if (data.allergies['current-medication']) and (data.allergies['medications'] | nl2br) %}
+      {% if (data.currentMedication['current-medication']) and (data.currentMedication['medications'] | nl2br) %}
         {{ row('Medication', {'medicationDetails': data.currentMedication['medications']}, 'currentMedication', true) }}
       {% else %}
         {{ row('Medication', {'empty': 'I’m not currently taking any medication'}, 'currentMedication') }}
