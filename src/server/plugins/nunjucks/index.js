@@ -5,7 +5,7 @@ import _ from 'lodash';
 import getFilters from './filters';
 import PracticeLookup from '../../../shared/lib/practice-lookup';
 import LoadFile from '../../../shared/lib/load-file';
-import {getSlugByKey} from '../register-form/steps/common';
+import {getSlugByKey, isButtonDone} from '../register-form/steps/common';
 
 const webpackAssetsPath = Path.resolve(__dirname, '../../../client/compiled/webpack-assets.json');
 const webpackAssets = require(webpackAssetsPath);
@@ -107,6 +107,9 @@ exports.register = function(server, options, next) {
     isCached: !debug,
     context: function (request) {
       const context = {
+        BUTTON_TEXT: function(defaultText){
+          return isButtonDone(defaultText);
+        },
         GA_ID: function(){
           return GOOGLEANALYTICSKEY;
         },
