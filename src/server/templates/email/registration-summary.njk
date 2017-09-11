@@ -23,7 +23,7 @@ Hello,
 
 Date of Birth: {{ data.dateOfBirth['year'] }}/{{ data.dateOfBirth['month'] }}/{{ data.dateOfBirth['day'] }}
 
-{{ render_multi_line('Address', data.address) }}
+{{ render_multi_line('Address', data.addressLookup, ['houseNumber']) }}
 
 {{ render_multi_line('Contact Details', data.contactDetails) }}
 
