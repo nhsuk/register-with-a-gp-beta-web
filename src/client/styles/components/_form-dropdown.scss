@@ -4,7 +4,7 @@
   border: ($baseline-grid-unit / 2) solid $blue;
   display: block;
   max-width: 540px;
-  padding: 4px 0 4px 10px;
+  padding: 0 0 0 10px;
   width: 100%;
   line-height: 32px;
  
@@ -19,6 +19,7 @@
 
   @include media(tablet) {
     @include core-font(20);
+    padding: 4px 0 4px 10px;
   }
 }
 
@@ -35,26 +36,10 @@ select {
 
 
 select {
-  background-image:
-   
-    linear-gradient(135deg, #000 50%, transparent 50%),
-    linear-gradient(45deg, transparent 50%, #000 50%);
-    //linear-gradient(to right, #ccc, #ccc);
-  background-position:
-    calc(100% - 15px) 16px,
-    calc(100% - 20px) 16px,
-    calc(100% - 2.5em) 0.5em;
-  background-size:
-    6px 6px,
-    6px 6px,
-    2px 1.8em;
+  background-image: url("/static/dropdown-icon.svg");
+  background-position: 98% 50%;
   background-repeat: no-repeat;
-}
 
-
-select:-moz-focusring {
-  color: transparent;
-  text-shadow: 0 0 0 #000;
 }
 
 select::-ms-expand {

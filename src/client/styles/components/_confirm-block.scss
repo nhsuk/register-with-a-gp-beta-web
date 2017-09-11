@@ -39,9 +39,14 @@
 	.confirm-reset {
 		font-size: 14px;
 		font-weight: normal;
+		@include close_icon(12px, #005eb8, 2px, 4px)
 
 		@include media(tablet) {
 			font-size: 16px;
+		}
+		.close_cross {
+			margin-top: 5px;
+			margin-left: 10px;
 		}
 	}
 }

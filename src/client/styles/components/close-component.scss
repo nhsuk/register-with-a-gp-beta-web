@@ -1,3 +1,24 @@
+@mixin close_icon($size, $color,$stroke, $margin-top:0){
+  .close_cross:after {
+    content: '';
+    height: $size;
+    border-left: $stroke solid $color;
+    position: absolute;
+    transform: rotate(45deg);
+    margin-top: $margin-top;
+  }
+
+  .close_cross:before {
+      content: '';
+      height: $size;
+      border-left: $stroke solid $color;
+      position: absolute;
+      transform: rotate(-45deg);
+      margin-top: $margin-top;
+  }
+}
+
+
 .close{
 	float: right;
 	width: 20px;
@@ -15,23 +36,10 @@
 		left: 6px;
 		top: 2px;
   	}
+
+    @include close_icon(10px, #005eb8, 2px)
 }
 .close:hover{
 	cursor: pointer;
 }
 
-.close_cross:after {
-    content: '';
-    height: 10px;
-    border-left: 2px solid #005eb8;
-    position: absolute;
-    transform: rotate(45deg);
-}
-
-.close_cross:before {
-    content: '';
-    height: 10px;
-    border-left: 2px solid #005eb8;
-    position: absolute;
-    transform: rotate(-45deg);
-}
