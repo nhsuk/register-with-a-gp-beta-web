@@ -65,7 +65,7 @@ Your current GP
   {% endif %}
 
   {% if data.registedAddress['registered-address-correct'] %}
-    <p>{{ render_multi_line('Registered address', data.address) }}</p>
+    <p>{{ render_multi_line('Registered address', data.addressLookup, ['houseNumber']) }}</p>
   {% else %}
     <p>{{ render_multi_line('Registered address', data.registeredAddressDetails) }}</p>
   {% endif %}

@@ -1,7 +1,11 @@
-{%- macro render_one_line(title, fields, ) -%}
+{%- macro render_one_line(title, fields, hiddenFields=[]) -%}
   {{ title }}:
   {% for name, line in fields -%}
-    {% if line %}  {{ line | nl2br }} {% endif %}
+    {%- if not name in hiddenFields %}
+      {% if line %}
+        {{ line | nl2br }}
+      {% endif %}
+    {% endif %}
   {%- endfor -%}
 {%- endmacro -%}
 
@@ -60,7 +64,7 @@ Your current GP
   {% endif %}
 
   {% if data.registedAddress['registered-address-correct'] %}
-    {{ render_one_line('Registered address', data.address) }}
+    {{ render_one_line('Registered address', data.addressLookup, ['houseNumber']) }}
   {% else %}
     {{ render_one_line('Registered address', data.registeredAddressDetails) }}
   {% endif %}
