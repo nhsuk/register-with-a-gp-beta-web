@@ -21,24 +21,12 @@
 
 .close{
 	float: right;
-	width: 20px;
-  	height: 20px;
-  	border-radius: 50%;
-	border-color: white;
-  	border-style: solid;
-  	background-color:white;
-  	position: absolute;
-  	top: 8px;
-  	right:40px;
-  
-  	.close_cross {
-		position: relative;
-		left: 6px;
-		top: 2px;
-  	}
+  position: absolute;
+  top: 9px;
+  right:40px;
+} 	
 
-    @include close_icon(10px, #005eb8, 2px)
-}
+    
 .close:hover{
 	cursor: pointer;
 }
