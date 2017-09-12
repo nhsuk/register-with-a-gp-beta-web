@@ -79,7 +79,7 @@
     "build:babel": "babel src -d dist --ignore-files src/client --ignore src/__tests__/plugins/node_modules --copy-files --source-maps",
     "build:webpack": "webpack -p --config src/client/webpack.config.babel.js",
     "build": "./node_modules/.bin/npm-run-all clean --parallel build:* && cp -r src/client/compiled/ dist/client/",
-    "test:acceptance_local": "export ACCEPTANCE_TEST=1;babel-node --inspect ./node_modules/.bin/codeceptjs run --steps --verbose;unset ACCEPTANCE_TEST",
+    "test:acceptance_local": "export ACCEPTANCE_TEST=1;babel-node ./node_modules/.bin/codeceptjs run --steps --verbose;unset ACCEPTANCE_TEST",
     "lint:eslint": "DEBUG=eslint:cli-engine eslint .",
     "lint:editorconfig": "eclint check src/** README.md",
     "lint": "npm-run-all --parallel lint:*",
