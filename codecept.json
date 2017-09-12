@@ -11,8 +11,6 @@
   "include": {
     "I": "./src/__tests__/plugins/register-form/acceptance/steps_file.js"
   },
-  "bootstrap": "./src/__tests__/plugins/register-form/acceptance/app-server.js",
-  "teardown": "./src/__tests__/plugins/register-form/acceptance/app-server.js",
   "mocha": {},
   "name": "acceptance"
 }

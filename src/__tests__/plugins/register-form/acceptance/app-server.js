@@ -12,7 +12,6 @@ class ServerInstanceUndefined {
 function startTestServer(done) {
   return new Promise((resolve) => {
     server = require('../../../../server/');
-    process.env.PORT = '6666';
     server.start().then((instance) => {
       _runningInstance = instance;
       instance.start((err) => {
