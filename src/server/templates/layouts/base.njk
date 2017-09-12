@@ -25,11 +25,11 @@
     <div class="global-header">
       <div class="global-header__inner">
         {% if CURRENT_PRACTICE %}
-          <a href="/{{ CURRENT_PRACTICE.key }}/start" class="">
+          <a href="{{ CURRENT_PRACTICE.key }}/start">
             <img src="{{ asset_path('assets/images/logotype-nhs-colour.png') }}" alt="NHS">
           </a>
         {% else %}
-          <a href="/" class="">
+          <a href="/">
             <img src="{{ asset_path('assets/images/logotype-nhs-colour.png') }}" alt="NHS">
           </a>
         {% endif %}
