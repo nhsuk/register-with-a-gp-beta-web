@@ -32,11 +32,11 @@ function stopTestServer(done) {
     if (_runningInstance) {
       server.stop(_runningInstance).then(function () {
         resolve();
+        done();
       });
     } else {
       throw ServerInstanceUndefined();
     }
-    done();
   });
 }
 
