@@ -4,7 +4,7 @@
   border: ($baseline-grid-unit / 2) solid $blue;
   display: block;
   max-width: 540px;
-  padding: 8px 0 8px 6px;
+  padding: 0 0 0 10px;
   width: 100%;
   line-height: 32px;
  
@@ -19,5 +19,29 @@
 
   @include media(tablet) {
     @include core-font(20);
+    padding: 4px 0 4px 10px;
   }
+}
+
+select { 
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+
+
+select {
+  background-image: url("/static/dropdown-icon.svg");
+  background-position: 98% 50%;
+  background-repeat: no-repeat;
+
+}
+
+select::-ms-expand {
+    display: none;
 }

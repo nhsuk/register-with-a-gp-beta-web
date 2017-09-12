@@ -1,0 +1,33 @@
+@mixin close_icon($size, $color,$stroke, $margin-top:0){
+  .close_cross:after {
+    content: '';
+    height: $size;
+    border-left: $stroke solid $color;
+    position: absolute;
+    transform: rotate(45deg);
+    margin-top: $margin-top;
+  }
+
+  .close_cross:before {
+      content: '';
+      height: $size;
+      border-left: $stroke solid $color;
+      position: absolute;
+      transform: rotate(-45deg);
+      margin-top: $margin-top;
+  }
+}
+
+
+.close{
+	float: right;
+  position: absolute;
+  top: 9px;
+  right:40px;
+} 	
+
+    
+.close:hover{
+	cursor: pointer;
+}
+

@@ -1,0 +1,15 @@
+<svg width="10px" height="17px" viewBox="0 0 10 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <!-- Generator: Sketch 46.1 (44463) - http://www.bohemiancoding.com/sketch -->
+   <desc>Created with Sketch.</desc>
+   <defs></defs>
+   <g id="Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+       <g id="Town/Country-of-Birth" transform="translate(-442.000000, -263.000000)" fill="#000000 ">
+           <g id="Group" transform="translate(30.000000, 250.000000)">
+               <g id="Group-3" transform="translate(412.000000, 13.000000)">
+                   <polygon id="Triangle" transform="translate(5.000000, 3.517241) rotate(-90.000000) translate(-5.000000, -3.517241) " points="8.42857143 3.51724138 1.57142857 7.62068966 1.57142857 -0.586206897"></polygon>
+                   <polygon id="Triangle" transform="translate(5.000000, 13.482759) rotate(-270.000000) translate(-5.000000, -13.482759) " points="8.42857143 13.4827586 1.57142857 17.5862069 1.57142857 9.37931034"></polygon>
+               </g>
+           </g>
+       </g>
+   </g>
+</svg>

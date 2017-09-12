@@ -1,3 +1,4 @@
+$reset-link-color : #005eb8;
 .confirm-block {
 	background-color: $confirm-block-backgroud;
 	font-weight: bold;
@@ -35,13 +36,20 @@
 
 .reset-address {
 	float:right;
-
+	color: $reset-link-color;
+	a:visited {
+		color: $reset-link-color;
+	}
 	.confirm-reset {
 		font-size: 14px;
 		font-weight: normal;
+		@include close_icon(12px, $reset-link-color, 2px, 4px);
 
 		@include media(tablet) {
 			font-size: 16px;
+		}
+		.close_cross {
+			margin-left: 10px;
 		}
 	}
 }
