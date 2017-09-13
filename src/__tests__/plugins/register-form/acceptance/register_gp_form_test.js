@@ -5,6 +5,9 @@ import practiceLookup from '../../../../shared/lib/practice-lookup';
 
 const firstPractice = practiceLookup.getPractices()[0];
 
+process.env['ACCEPTANCE_TEST'] = '1'
+
+
 Feature('GP Registration Form');
 
 Scenario('Test all yes/no question with "no" answer on gp registration flow', (I) => {
