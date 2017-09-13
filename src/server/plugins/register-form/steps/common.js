@@ -43,28 +43,27 @@ export function validate(rawData, schemaDefinition) {
   });
 }
 export function isButtonDone(key,defaultText, jump){
-console.log(stepDependency);
-    if(jump !== undefined){
-      const slug = getSlugByKey(key);
-      if(slug === jump){
-        if(stepDependency[jump] === undefined){
-          // No step dependency
-          defaultText = 'Done';
-        } 
-      } else {
-        // already in dependency loop
-        for(i=0; i<stepDependency[jump].length; i++){
-          let s = stepDependency[jump][i];
-          if(s === slug){
-            if(i === stepDependency[jump].length-1){
-              // this is the last dependency step
-              defaultText = 'Done';
-            }
+  if(jump !== undefined){
+    const slug = getSlugByKey(key);
+    if(slug === jump){
+      if(stepDependency[jump] === undefined){
+        // No step dependency
+        defaultText = 'Done';
+      }
+    } else {
+      // already in dependency loop
+      for(let i=0; i<stepDependency[jump].length; i++){
+        let s = stepDependency[jump][i];
+        if(s === slug){
+          if(i === stepDependency[jump].length-1){
+            // this is the last dependency step
+            defaultText = 'Done';
           }
         }
       }
     }
-    return defaultText;
+  }
+  return defaultText;
 }
 export function getFieldData(schema) {
   const fields = [];
