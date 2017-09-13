@@ -44,6 +44,7 @@ Scenario('Test all yes/no question with "no" answer on gp registration flow', (I
   I.fillField('Postcode', 'SW1A1AA');
   I.click('Find address');
   I.waitForElement('#addresscontinue', 5);
+  I.click('button[type=submit]');
 
   I.see(`How can ${firstPractice.name} contact you?`);
   I.fillField('#input-bestPhone','07779998833');
