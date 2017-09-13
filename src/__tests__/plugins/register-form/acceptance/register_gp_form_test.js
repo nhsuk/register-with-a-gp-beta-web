@@ -43,10 +43,7 @@ Scenario('Test all yes/no question with "no" answer on gp registration flow', (I
   I.see('What is your address?');
   I.fillField('Postcode', 'SW1A1AA');
   I.click('Find address');
-  I.waitForElement('#select-link-0', 3);
-  I.click('#select-link-0');
-  I.waitForElement('#address-confirm', 3);
-  I.click('Continue');
+  I.waitForElement('#addresscontinue', 5);
 
   I.see(`How can ${firstPractice.name} contact you?`);
   I.fillField('#input-bestPhone','07779998833');
@@ -75,15 +72,13 @@ Scenario('Test all yes/no question with "no" answer on gp registration flow', (I
   I.click('label[data-label=Cancer]');
   I.click('label[data-label=Diabetes]');
   I.fillField('#input-medical-history-0', 'FLU');
-  I.fillField('#input-medical-history-1', 'Anxiety');
   I.click('Add another condition');
-  I.waitForElement('#input-medical-history-2', 3);
-  I.fillField('#input-medical-history-2', 'Dyslexia');
+  I.waitForElement('#input-medical-history-1', 3);
+  I.fillField('#input-medical-history-1', 'Dyslexia');
   I.fillField('#input-medical-history-details-0', 'Cardiology');
-  I.fillField('#input-medical-history-details-1', 'Radiology');
   I.click('Add another surgery');
-  I.waitForElement('#input-medical-history-2', 3);
-  I.fillField('#input-medical-history-details-2', 'Dentist');
+  I.waitForElement('#input-medical-history-1', 3);
+  I.fillField('#input-medical-history-details-1', 'Dentist');
   I.click('Continue');
 
   I.see('Check your details');
@@ -131,10 +126,7 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
   I.see('What is your address?');
   I.fillField('Postcode', 'SW1A1AA');
   I.click('Find address');
-  I.waitForElement('#select-link-0', 3);
-  I.click('#select-link-0');
-  I.waitForElement('#address-confirm', 3);
-  I.click('Continue');
+  I.waitForElement('#addresscontinue', 5);
 
   I.see(`How can ${firstPractice.name} contact you?`);
   I.fillField('#input-bestPhone','07779998833');
@@ -159,12 +151,13 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
   I.waitForElement('#selected-gp-summary', 5);
   I.click('Continue');
 
-  // todo selected GP data here
+  // todo check selected GP data here
   // I.see(`Are you registered at ${firstPractice.name} with this address?`);
   I.click('label[data-label=Yes]');
   I.click('Continue');
 
-  // todo selected GP data here
+  // todo check selected GP data here
+  // I.see(`Are you registered at ${firstPractice.name} with this address?`);
   I.click('label[data-label=Yes]');
   I.click('Continue');
 
@@ -192,15 +185,13 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
   I.click('label[data-label=Cancer]');
   I.click('label[data-label=Diabetes]');
   I.fillField('#input-medical-history-0', 'FLU');
-  I.fillField('#input-medical-history-1', 'Anxiety');
   I.click('Add another condition');
-  I.waitForElement('#input-medical-history-2', 3);
-  I.fillField('#input-medical-history-2', 'Dyslexia');
+  I.waitForElement('#input-medical-history-1', 3);
+  I.fillField('#input-medical-history-1', 'Dyslexia');
   I.fillField('#input-medical-history-details-0', 'Cardiology');
-  I.fillField('#input-medical-history-details-1', 'Radiology');
   I.click('Add another surgery');
-  I.waitForElement('#input-medical-history-2', 3);
-  I.fillField('#input-medical-history-details-2', 'Dentist');
+  I.waitForElement('#input-medical-history-1', 3);
+  I.fillField('#input-medical-history-details-1', 'Dentist');
   I.click('Continue');
 
   I.see('Check your details');
