@@ -29,9 +29,10 @@ function startTestServer(done) {
 function stopTestServer(done) {
   return new Promise((resolve) => {
     if (_runningInstance) {
-      server.stop(_runningInstance).then(function () {
+      _runningInstance.stop().then(function () {
         resolve();
         done();
+        process.exit();
       });
     } else {
       throw ServerInstanceUndefined();
