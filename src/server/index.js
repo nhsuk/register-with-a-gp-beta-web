@@ -226,7 +226,7 @@ if (!module.parent) {
   exports.start = start;
 }
 
-exports.stop = (server) => {
+function stop(server) {
   return new Promise((resolve, reject) => {
     server.stop((err) =>{
       if (err) {
@@ -235,4 +235,10 @@ exports.stop = (server) => {
       resolve();
     });
   });
-};
+}
+
+if (!module.parent) {
+  stop();
+} else {
+  exports.stop = stop;
+}

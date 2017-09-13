@@ -5,11 +5,14 @@ import practiceLookup from '../../../../shared/lib/practice-lookup';
 
 const firstPractice = practiceLookup.getPractices()[0];
 
+process.env['ACCEPTANCE_TEST'] = '1'
+
+
 Feature('GP Registration Form');
 
 Scenario('Test all yes/no question with "no" answer on gp registration flow', (I) => {
   I.amOnPage('/');
-  I.see('Apply to register with a GP practice');
+  I.see('Apply to register with a xxxxx');
   I.click(firstPractice.name);
   I.seeElement({css: '#start-button'});
   I.click('#start-button');
