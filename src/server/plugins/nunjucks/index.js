@@ -107,8 +107,8 @@ exports.register = function(server, options, next) {
     isCached: !debug,
     context: function (request) {
       const context = {
-        BUTTON_TEXT: function(defaultText){
-          return isButtonDone(defaultText);
+        BUTTON_TEXT: function(key, defaultText){
+          return isButtonDone(key, defaultText, request.state.fromSummaryTo);
         },
         GA_ID: function(){
           return GOOGLEANALYTICSKEY;

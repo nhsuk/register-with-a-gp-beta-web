@@ -78,7 +78,11 @@
         {% endif %}
       {% endif %}
 
-      {% component 'form-submitrow', {} %}
+      {% block submitRow %}
+        <div class="form-group continue-step">
+          <button type="submit" class="button">{{ BUTTON_TEXT(key, 'Continue') }}</button>
+        </div>
+      {% endblock submitRow %}
 
     </form>
   </div>
