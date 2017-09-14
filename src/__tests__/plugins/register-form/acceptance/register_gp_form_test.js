@@ -128,6 +128,7 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
   I.fillField('Postcode', 'SW1A1AA');
   I.click('Find address');
   I.waitForElement('#addresscontinue', 5);
+  I.click('button[type=submit]');
 
   I.see(`How can ${firstPractice.name} contact you?`);
   I.fillField('#input-bestPhone','07779998833');
@@ -146,7 +147,7 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
 
   I.see('Are you already registered with a GP?');
   I.click('label[data-label=Yes]');
-  I.fillField('#input-gp-lookup', 'newland');
+  I.fillField('#input-gp-lookup', 'South Chinnor');
   I.waitForElement('#select-link-0', 5);
   I.click('#select-link-0');
   I.waitForElement('#selected-gp-summary', 5);
