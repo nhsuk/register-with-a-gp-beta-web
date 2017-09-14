@@ -3,7 +3,7 @@ process.env['ACCEPTANCE_TEST'] = '1';
 exports.config = {
   tests: '../src/__tests__/plugins/register-form/acceptance/*_test.js',
   timeout: 10000,
-  output: '../output',
+  output: '../src/__tests__/plugins/register-form/acceptance/output/',
   helpers: {
     WebDriverIO: {
       host: 'hub-cloud.browserstack.com',
