@@ -16,6 +16,7 @@ errorSummary.init();
 title.init();
 
 GPAutoComplete.init();
+/* global pageKey */
 if(pageKey === 'addressLookup'){
   AddressAjax.init();
 }

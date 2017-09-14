@@ -41,7 +41,7 @@ class AddressAjax {
     this.addressContinue.hide();
     this.formFields.show();
   }
-  
+
   validationFunction() {
     if($('#addresscontinue') === null) {
       return true;
@@ -50,10 +50,9 @@ class AddressAjax {
     }
     return false;
   }
-  
+
   disableEnter() {
     const _this = this;
-    console.log('valid:' + _this.validationFunction());
     $(document).ready(function() {
       $(window).keydown(function(event){
         if( (event.keyCode == 13) && (_this.validationFunction() === false) ) {
@@ -63,7 +62,7 @@ class AddressAjax {
       });
     });
   }
-  
+
   selectAddress (elem){
     $('#input-address1').val(elem.data('address1'));
     $('#input-address2').val(elem.data('address2'));
