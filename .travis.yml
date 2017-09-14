@@ -14,8 +14,11 @@ script:
   - yarn test:acceptance_local
 after_success:
   - bash ./scripts/deploy.sh
+before_install:
+  - docker pull selenium/standalone-chrome:2.53.0
 before_script:
+  - docker run -d --net=host selenium/standalone-chrome:2.53.0
+  - export DISPLAY=:99.0
+  - chmod -R 777 src/__tests__/plugins/register-form/acceptance/output
   - sh -e /etc/init.d/xvfb start
-  - sleep 5
-  - ./node_modules/.bin/selenium-standalone install
-  - ./node_modules/.bin/selenium-standalone start &
+  - sleep 10
