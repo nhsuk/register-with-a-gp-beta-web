@@ -9,7 +9,6 @@ RUN adduser -D $USERNAME && \
 USER $USERNAME
 WORKDIR /code
 
-ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
 COPY yarn.lock package.json /code/
