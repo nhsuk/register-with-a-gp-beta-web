@@ -1,6 +1,7 @@
 process.env['ACCEPTANCE_TEST'] = '1';
 process.env['HOST'] = 'localhost';
 process.env['PORT'] = '3333';
+process.env['NODE_ENV'] = 'development';
 
 exports.config = {
   tests: '../src/__tests__/plugins/register-form/acceptance/*_test.js',
