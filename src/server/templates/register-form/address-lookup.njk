@@ -41,9 +41,8 @@
       {% block confirm %}
         <div class="confirm-block address-confirm" id="address-confirm">
           <span class="reset-address">
-            <a href class="confirm-reset">Reset<span class='close_cross'></span> 
-               
-            </a>
+            <button class="confirm-reset" type="button">Reset<span class='close_cross'></span> 
+            </button>
           </span> 
           <div class="confirm-block-details">
            <p class="confirm-block-line"> <span id="confirmAddress1"></span>
@@ -58,13 +57,13 @@
       {% endblock %}
       {% block submitRow %}
         <div id="address-lookup-continue" class="form-group continue-step">
-          <button type="submit" id="address-continue" class="button" value="Continue">Continue</button>
+          <button type="submit" id="address-continue" class="button" value="Continue">{{ BUTTON_TEXT(key,'Continue') }}</button>
         </div>
        <ul class="address-results" id="address-results">
        </ul>
       {% endblock submitRow %}
       <details id="manualDiv">
-        <summary>
+        <summary role="button">
           <span class="details__summary">I can't find my address, enter manually</span>
         </summary>
         <div id="manual-address-details" class="details__content">
@@ -109,3 +108,4 @@
     </form>
   </div>
 {% endblock body_main_content %}
+
