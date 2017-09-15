@@ -3,7 +3,7 @@ $button-color: #008038;
 $confirm-block-backgroud: #F0F4F5;
 
 .form-fields {
-	padding: 2px 0 2px 0;
+	padding: 2px 0;
 
 	@include media(tablet) {
 		padding: 8px 0 4px 0;

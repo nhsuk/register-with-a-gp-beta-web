@@ -1,0 +1,64 @@
+.registration-success {
+	background-color: #1DA197;
+	color: #fff;
+	text-align: center;
+	padding: 40px;
+
+	@include media(tablet) {
+		padding-top: 50px;
+		padding-bottom: 70px;
+	}
+}
+
+.next-step {
+	padding: 20px;
+	margin-top: 20px;
+
+	@include media(tablet){
+		padding: 30px;
+		margin-top: 30px;
+	}
+
+	li {
+		font-weight: bold;
+		font-family: Frutiger W01;
+	}
+}
+
+.registration-days {
+	margin-top: 30px;
+	font-size: 20px;
+
+	@include media(tablet) {
+		font-size: 24px
+	}
+}
+
+.registration-query {
+	border-top:8px solid #005BBB;
+	padding-top:10px;
+	padding-left:0;
+	margin: 40px 15px;
+
+	@include media(tablet) {
+		margin: 0;
+	}
+
+
+	
+}
+.registation-survey__block {
+	margin-top :40px;
+	p {
+		font-size: 16px;
+	}
+	@include media(tablet){
+		margin-top :60px;
+	}
+}
+
+#confirm-registration {
+	@include media(mobile){
+		padding: 0 10px;
+	}
+}

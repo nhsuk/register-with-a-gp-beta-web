@@ -20,7 +20,8 @@ function practiceHandler(request, reply) {
   reply
     .view('practices', {
       practices: practiceLookup.getPractices(),
-      showNotifications: true
+      showNotifications: true,
+      showCookieBar: true
     });
 }
 
@@ -47,14 +48,14 @@ export function getPracticeStartTemplate(request) {
 
 export function getPracticeEndTemplate(request) {
   const practice = request.params.practice;
-  if (practice){
+ /* if (practice){
     const practiceTemplateName = 'practices/end/' + practice;
     const appSettings = request.server.settings.app;
     const practiceTemplate = Path.join(appSettings.templatePath, practiceTemplateName + '.njk');
     if (fs.existsSync(practiceTemplate)){
       return practiceTemplateName;
     }
-  }
+  }*/
 
   return defaultPracticeEndTemplate;
 }
@@ -66,7 +67,7 @@ function startHandler(request, reply) {
   const practiceStartTemplate = getPracticeStartTemplate(request);
   if (typeof practiceData !== 'undefined') {
     reply
-      .view(practiceStartTemplate, {showNotifications: true, firstStep: '/' + practice + '/register/nhs-number'});
+      .view(practiceStartTemplate, {showNotifications: true, showCookieBar: true, firstStep: '/' + practice + '/register/nhs-number'});
   } else {
     reply.redirect(request.aka(''));
   }
@@ -74,16 +75,18 @@ function startHandler(request, reply) {
 
 function endHandler(request, reply) {
   const practiceEndTemplate = getPracticeEndTemplate(request);
+  let nextStepBlock  = getPracticeStepComponent(request);
+  console.log('nextStepBlock + ',nextStepBlock);
   if (request.params.practice) {
     const practice = practiceLookup.getPractice(request.params.practice);
     if (typeof practice !== 'undefined') {
       return reply
         .view(practiceEndTemplate, {
           practice,
+          nextStepBlock
         });
     }
   }
-  return reply.view(practiceEndTemplate);
 }
 
 function stepMissingHandler(request, reply) {
@@ -159,3 +162,16 @@ exports.register.attributes = {
   version: '1.0.0',
   dependencies: 'NunjucksConfig'
 };
+
+function getPracticeStepComponent(request) {
+    //const appSettings = request.server.settings.app;
+    let component = request.params.practice + '-component';
+    let appSettings = request.server.settings.app;
+    let componentTemplate =Path.join(appSettings.templatePath,'_components/'+ request.params.practice + '-component.njk');
+    console.log(componentTemplate);
+    if (fs.existsSync(componentTemplate)){
+      return component;
+    }else{
+      return 'default-component';
+    }
+}

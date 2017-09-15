@@ -1,78 +1,76 @@
 {% extends 'layouts/base.njk' %}
-
-{% if practice %}
-  {% set serviceTitle = 'Register with ' + practice.name %}
-{% endif %}
-
 {% block body_main_content %}
   <div class="page-section">
-    <h1 class="heading-medium">Your application has been sent to {{ practice.name | default('the GP practice') }}</h1>
-    {% block section_B %}
-
-      <div class="reading-width">
-        <p>Contact {{ practice.name | default('the GP practice') }} to tell them your NHS number if you haven’t already provided it.</p>
-        <p>Also tell them if you don’t have an NHS number or you can’t find it.</p>
-      </div>
-    {% endblock %}
-
-    {% block section_C %}
-      <details>
-        <summary>
-          <span class="details__summary">How to find your NHS number</span>
-        </summary>
-        <div class="details__content">
-          <p>You can usually find your NHS number:</p>
-
-          <ul>
-            <li>on a printed prescription</li>
-            <li>on a GP or hospital letter</li>
-            <li>by asking your current GP</li>
-          </ul>
+    <div class="grid-row" id="confirm-registration">
+      <div class="column--three-quarters">
+        <div class="callout registration-success">
+          <h2>Application sent</h2>
+          <p>You have been sent a confirmation email.</p>
         </div>
-      </details>
+        <div class ="callout callout--attention next-step">
+          <h2>What to do next</h2>
+          {% component nextStepBlock,{} %}
+          <details>
+            <summary>
+              <span class="details__summary">Contact details</span>
+            </summary>
+            <div class="details__content">
+                <div class="callout callout--info">
+                 <p>You can usually find your NHS number:</p>
+                </div>
+            </div>
+          </details>
+       </div>
+        
+        <details>
+            <summary>
+              <span class="details__summary">Urgent appointments</span>
+            </summary>
+            <div class="details__content">
+              <div class="callout callout--info">
+                <p>Call {{ CURRENT_PRACTICE.name }} for an urgent appointment - dont wait untill you are registered.</p>
+                <p>If they are closed, call 111 or go to a walk-in centre.</p>
+              </div>
+            </div>
+          </details>
 
-      <div class="reading-width">
-       {% if practice %}
-          <p>
-            <strong>{{ practice.name }}</strong>
-            {% if practice.contact.address.length %}
-              {% set linebreak = joiner('<br>') %}
-              {% for address in practice.contact.address %}
-                <br>
-                {{ linebreak() | safe }}
-                {{ address | nl2br | safe }}
-              {% endfor %}
-            {% endif %}
-          </p>
+          <details>
+            <summary>
+              <span class="details__summary">Repeat prescription</span>
+            </summary>
+            <div class="details__content">
+              <div class="callout callout--info">
+                <p>Take your repeat prescription or medication to {{CURRENT_PRACTICE.name }} as soon as you can.</p>
+                <p>If you’re running out, get 1 month’s supply from your current GP.</p>
+              </div>
+            </div>
+          </details>
 
-          {% if practice.contact.phone %}
-            {% set linebreak = joiner('<br>') %}
-            <p>
-              {% for phone in practice.contact.phone %}
-                {{ linebreak() | safe }}
-                Phone: {{ phone }}
-              {% endfor %}
-            </p>
-          {% endif %}
-        {% endif %}
-      </div>
-    {% endblock %}
+          <details>
+            <summary>
+              <span class="details__summary">If you're getting hospital treatment</span>
+            </summary>
+            <div class="details__content">
+              <div class="callout callout--info">
+                <p>Tell the hospital you’ve changed GP. </p>
+                <p>Take a hospital letter or other information about your treatment to {{ CURRENT_PRACTICE.name }} as soon as you can.</p>
+              </div>
+            </div>
+          </details>
 
-  <h2 class="heading-medium">After you show your documents</h2>
-
-    <div class="reading-width">
-      <p>Wait {{ CURRENT_PRACTICE.regdays }} days before making appointments at {{ practice.name | default('the GP practice') }} - this is how long it usually takes to be registered. {{ practice.name | default('The GP practice') }} will contact you if they need anything else from you.
-      </p>
-      
-      <h3>If you need an urgent appointment</h3>
-      <p>Call {{ practice.name | default('the GP practice') }} to ask about urgent appointments before you’re registered. If they’re closed, call 111 or go to a walk-in centre.</p>
-    
-      <h3>If you’re on repeat medication</h3>
-      <p>Take your repeat prescription or medication to {{ practice.name | default('the GP practice') }} as soon as you can. If you’re worried about running out, ask your current GP for a prescription for one month’s supply.</p>
-
-      <h3>If you’re having hospital treatment</h3>
-      <p>Tell the hospital that you’ve changed GP. Take a hospital letter or other information about your treatment to {{ practice.name | default('the GP practice') }} as soon as you can.</p>
-   </div>
-
+          <div class="registation-survey__block">
+            <h3> Tell us what you think</h3>
+            <p><a>Take a quick 30 second survey</a> to help improve the service.</p>
+          </div>
+       </div>
+       <div class="column--one-quarter-right registration-query">
+          <h3>Any question ?</h3>
+         <div class="reading-width">
+            <p style="font-size:16px;">If you have any questions about registering with your GP,  please contact {{CURRENT_PRACTICE.name}}.</p>
+          </div>
+       </div>
+     </div>
   </div>
+
+
 {% endblock %}
