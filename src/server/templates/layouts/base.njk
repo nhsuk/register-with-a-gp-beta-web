@@ -54,6 +54,7 @@
 
 {% block body_footer %}
   {{ super() }}
+  <script>const pageKey = '{{ key }}';</script>
   <script src="{{ jsBundle }}" type="application/javascript"></script>
   {% component 'analytics', { events: ga_events } %}      
 {% endblock body_footer %}
