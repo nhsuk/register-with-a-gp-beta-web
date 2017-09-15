@@ -19,6 +19,7 @@ class AddressAjax {
     this.confirmContainer = $('.address-confirm');
     this.confirmResetButton = $('.confirm-reset');
     this.confirmResetButton.on('click',this.confirmReset.bind(this));
+    this.disableEnter();
   }
 
   static getResultTemplate (){
@@ -40,6 +41,27 @@ class AddressAjax {
     this.addressContinue.hide();
     this.formFields.show();
     this.manualDiv.show();
+  }
+
+  validationFunction() {
+    if($('#addresscontinue') === null) {
+      return true;
+    } else if($('#addresscontinue').is(':focus')) {
+      return true;
+    }
+    return false;
+  }
+
+  disableEnter() {
+    const _this = this;
+    $(document).ready(function() {
+      $(window).keydown(function(event){
+        if( (event.keyCode == 13) && (_this.validationFunction() === false) ) {
+          event.preventDefault();
+          return false;
+        }
+      });
+    });
   }
 
   selectAddress (elem){

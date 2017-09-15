@@ -16,8 +16,10 @@ errorSummary.init();
 title.init();
 
 GPAutoComplete.init();
-
-AddressAjax.init();
+/* global pageKey */
+if(pageKey === 'addressLookup'){
+  AddressAjax.init();
+}
 
 NestedInline.init();
 NestedRadioSelect.init();

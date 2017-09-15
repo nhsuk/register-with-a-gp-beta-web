@@ -60,7 +60,7 @@
         {% if details.position == 'below' %}
           {% set content = details.content %}
           <details>
-            <summary>
+            <summary role="button">
               <span class="details__summary">{{ details.summary | render }}</span>
             </summary>
             <div class="details__content">
