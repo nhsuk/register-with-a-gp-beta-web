@@ -39,6 +39,7 @@ class AddressAjax {
     this.addressButton.show();
     this.addressContinue.hide();
     this.formFields.show();
+    this.manualDiv.show();
   }
 
   selectAddress (elem){
