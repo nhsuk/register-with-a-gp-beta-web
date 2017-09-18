@@ -12,7 +12,7 @@ WORKDIR /code
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
-COPY yarn.lock package.json /code/
+COPY package.json /code/
 
 # install dev dependences because they're used by yarn build
 RUN NODE_ENV=development && yarn --pure-lockfile --ignore-optional
