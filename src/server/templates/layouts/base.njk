@@ -27,12 +27,10 @@
       <div class="global-header__inner">
         {% if CURRENT_PRACTICE %}
           <a href="/{{ CURRENT_PRACTICE.key }}/start" class="">
-            <img src="{{ asset_path('assets/images/logotype-nhs-colour.png') }}" alt="NHS">
-          </a>
+            <img src="{{ asset_path('assets/images/logotype-nhs-colour.png') }}" alt="NHS"></a>
         {% else %}
           <a href="/" class="">
-            <img src="{{ asset_path('assets/images/logotype-nhs-colour.png') }}" alt="NHS">
-          </a>
+            <img src="{{ asset_path('assets/images/logotype-nhs-colour.png') }}" alt="NHS"></a>
         {% endif %}
         {% block header_service_title %}
           {% if serviceTitle %}
