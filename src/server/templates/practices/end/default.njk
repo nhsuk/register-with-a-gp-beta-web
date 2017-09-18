@@ -4,11 +4,10 @@
     <div class="grid-row" id="confirm-registration">
       <div class="column--three-quarters">
         <div class="callout registration-success">
-          <h2>Application sent</h2>
-          <p>You have been sent a confirmation email.</p>
+          <p class="registration-success__text">Application sent</h2>
         </div>
         <div class ="callout callout--attention next-step">
-          <h2>What to do next</h2>
+          <p class="callout--attention__title">What to do next</p>
           {% component nextStepBlock,{} %}
           <details>
             <summary>
@@ -59,14 +58,16 @@
           </details>
 
           <div class="registation-survey__block">
-            <h3> Tell us what you think</h3>
-            <p><a>Take a quick 30 second survey</a> to help improve the service.</p>
+            <p class="survey__title"> Tell us what you think</p>
+            <div class="reading-width">
+              <p class="survey__text"><a href="">Take a quick 30 second survey</a> to help improve the service.</p>
+            </div>
           </div>
        </div>
        <div class="column--one-quarter-right registration-query">
-          <h3>Any question ?</h3>
+          <p class="query__title">Any question ?</p>
          <div class="reading-width">
-            <p style="font-size:16px;">If you have any questions about registering with your GP,  please contact {{CURRENT_PRACTICE.name}}.</p>
+            <p class="query__text">If you have any questions about registering with your GP,  please contact {{CURRENT_PRACTICE.name}}.</p>
           </div>
        </div>
      </div>

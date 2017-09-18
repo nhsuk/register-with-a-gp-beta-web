@@ -8,6 +8,15 @@
 		padding-top: 50px;
 		padding-bottom: 70px;
 	}
+	.registration-success__text{
+		@include core-font(24);
+		font-weight: bold;
+
+		@include media(tablet){
+			@include core-font(36);
+		}
+
+	}
 }
 
 .next-step {
@@ -22,6 +31,14 @@
 	li {
 		font-weight: bold;
 		font-family: Frutiger W01;
+	}
+	.callout--attention__title {
+		@include core-font(24);
+		font-weight: bold;
+
+		@include media(tablet){
+			@include core-font(36);
+		}
 	}
 }
 
@@ -48,12 +65,12 @@
 	
 }
 .registation-survey__block {
-	margin-top :40px;
-	p {
-		font-size: 16px;
-	}
+	margin-top: 40px;
 	@include media(tablet){
-		margin-top :60px;
+		margin-top: 60px;
+		.survey__text {
+			@include core-font(20);
+		}
 	}
 }
 
@@ -62,3 +79,16 @@
 		padding: 0 10px;
 	}
 }
+.survey__title, .query__title{
+	@include core-font(20);
+	font-weight: bold;
+
+	@include media(tablet){
+		@include core-font(24);
+		font-weight: bold;
+	}
+}
+.survey__text, .query__text{
+	@include core-font(16);
+}
+

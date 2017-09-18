@@ -11,25 +11,8 @@
  #   } %}
  #}
 {% if children %}
-  <!--div class="error-summary" role="group" tabindex="-1" aria-labelledby="error-summary-heading">
-    <h1 class="error-summary__heading" id="error-summary-heading">
-      There was a problem submitting this page
-    </h1>
-
-    {% if children %}
-      <ul class="error-summary__list">
-        {% for key, error in children -%}
-          <li class="error-summary__error">
-            <a href="#input-{{ key }}"  class="error-summary__error-link">
-              {{ error.message | safe | fulldateerror }}
-            </a>
-          </li>
-        {%- endfor %}
-      </ul>
-    {% endif %}
-  </div-->
   <div class="callout callout--error">
-        <h3>There was a problem submitting this page</h3>
+        <p class="error__title">There was a problem submitting this page</p>
         {% if children %}
       <ul class="error-summary__list">
         {% for key, error in children -%}
