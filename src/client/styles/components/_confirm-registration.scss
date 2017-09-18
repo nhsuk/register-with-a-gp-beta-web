@@ -9,11 +9,10 @@
 		padding-bottom: 70px;
 	}
 	.registration-success__text{
-		@include core-font(24);
-		font-weight: bold;
+		@include bold-font(24);
 
 		@include media(tablet){
-			@include core-font(36);
+			@include bold-font(36);
 		}
 
 	}
@@ -33,11 +32,10 @@
 		font-family: Frutiger W01;
 	}
 	.callout--attention__title {
-		@include core-font(24);
-		font-weight: bold;
+		@include bold-font(24);
 
 		@include media(tablet){
-			@include core-font(36);
+			@include bold-font(36);
 		}
 	}
 }

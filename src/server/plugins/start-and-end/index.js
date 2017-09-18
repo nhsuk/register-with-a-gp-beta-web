@@ -165,13 +165,13 @@ exports.register.attributes = {
 
 function getPracticeStepComponent(request) {
     //const appSettings = request.server.settings.app;
-    let component = request.params.practice + '-component';
+    let component = request.params.practice + '-confirmation-nextStep';
     let appSettings = request.server.settings.app;
-    let componentTemplate =Path.join(appSettings.templatePath,'_components/'+ request.params.practice + '-component.njk');
+    let componentTemplate =Path.join(appSettings.templatePath,'_components/'+ request.params.practice + '-confirmation-nextStep.njk');
     console.log(componentTemplate);
     if (fs.existsSync(componentTemplate)){
       return component;
     }else{
-      return 'default-component';
+      return 'default-confirmation-nextStep';
     }
 }
