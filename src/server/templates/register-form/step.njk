@@ -39,7 +39,7 @@
       {% block formFields %}
         <div class="form-fields">
           {% if details.hint %}
-            <span>For example, 31 3 1980</span>
+            <p class="hint-text">For example, 31 3 1980</p>
           {% endif %}
           {% for field in fields %}
             {% if field.componentType in ['textbox', 'multiple-choice', 'disclosure', 'dropdown', 'numeric', 'tel','radio-horizontal', 'nhs-number-radio', 'armed-radio-horizontal', 'nested-gp-lookup', 'current-medication-radio', 'allergies-nested-radio','nested-inline'] %}
