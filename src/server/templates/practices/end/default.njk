@@ -2,7 +2,7 @@
 {% block body_main_content %}
   <div class="page-section">
     <div class="grid-row" id="confirm-registration">
-      <div class="column--three-quarters">
+      <div class="column--two-thirds">
         <div class="callout registration-success">
           <p class="registration-success__text">Application sent</h2>
         </div>
@@ -11,7 +11,7 @@
           {% component nextStepBlock,{} %}
           <details>
             <summary>
-              <span class="details__summary">Contact details</span>
+              <span class="details__summary">{{ CURRENT_PRACTICE.name }} Contact details</span>
             </summary>
             <div class="details__content">
                 <div class="callout callout--info">
@@ -66,7 +66,7 @@
             </div>
           </div>
        </div>
-       <div class="column--one-quarter-right registration-query">
+       <div class="column--one-third-right registration-query">
           <p class="query__title">Any question ?</p>
          <div class="reading-width">
             <p class="query__text">If you have any questions about registering with your GP,  please contact {{CURRENT_PRACTICE.name}}.</p>

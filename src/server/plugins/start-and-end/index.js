@@ -67,7 +67,9 @@ function endHandler(request, reply) {
       return reply
         .view(defaultPracticeEndTemplate, {
           practice,
-          nextStepBlock
+          nextStepBlock,
+          showNotifications: true,
+          showSurveyLink: true
         });
     }
   }
