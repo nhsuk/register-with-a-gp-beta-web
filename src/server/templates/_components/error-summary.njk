@@ -11,9 +11,10 @@
  #   } %}
  #}
 {% if children %}
-  <div class="callout callout--error">
-        <p class="error__title">There was a problem submitting this page</p>
-        {% if children %}
+  <div class="error-summary" role="group" tabindex="-1" aria-labelledby="error-summary-heading">
+    <h1 class="error-summary__heading" id="error-summary-heading">
+      There was a problem submitting this page
+    </h1>
       <ul class="error-summary__list">
         {% for key, error in children -%}
           <li class="error-summary__error">

@@ -1,6 +1,7 @@
 $callout-line: #BFC1C3;
 $button-color: #008038;
 $confirm-block-backgroud: #F0F4F5;
+$hint-text-color: #9B9B9B;
 
 .form-fields {
 	padding: 2px 0;
@@ -222,5 +223,15 @@ input[type=number] {
 .registered-address, .registered-name {
 	margin-bottom: 20px;
 }
+.hint-text {
+	padding-left: 4px;
+	margin-bottom: 5px;
+	color: $hint-text-color;
+	@include core-font(16);
 
+	@include media(tablet) {
+		margin-bottom: 15px;
+		@include core-font(20);
+	}
+}
 

@@ -73,7 +73,7 @@
         {% if details.position == 'below' %}
           {% set content = details.content %}
           <details>
-            <summary>
+            <summary role="button">
               <span class="details__summary">{{ details.summary | render }}</span>
             </summary>
             <div class="details__content">
@@ -84,13 +84,11 @@
           </details>
         {% endif %}
       {% endif %}
-
       {% block submitRow %}
         <div class="form-group continue-step">
-          <button type="submit" class="button">Continue</button>
+          <button type="submit" class="button">{{ BUTTON_TEXT(key, 'Continue') }}</button>
         </div>
       {% endblock submitRow %}
-
     </form>
   </div>
 {% endblock body_main_content %}

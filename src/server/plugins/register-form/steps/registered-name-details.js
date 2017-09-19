@@ -5,9 +5,22 @@ import registeredNameStep from './registered-name';
 
 
 const schema = Joi.object().keys({
-  'firstName': Joi.string().max(100).label('First name').meta({ componentType: 'textbox' }),
+  'firstName': Joi.string().max(100).label('First name')
+    .meta({ componentType: 'textbox' }).options({
+      language: {
+        any: {
+          empty: 'Please enter your first name',
+        },
+      },
+    }),
   'middleNames': Joi.string().allow('').max(100).optional().label('Middle names').meta({ componentType: 'textbox' }),
-  'lastName': Joi.string().max(100).label('Last name').meta({ componentType: 'textbox' }),
+  'lastName': Joi.string().max(100).label('Last name').meta({ componentType: 'textbox' }).options({
+    language: {
+      any: {
+        empty: 'Please enter your previous last name',
+      },
+    },
+  }),
   'submit': Joi.any().optional().strip()
 }).or('firstName', 'middleNames', 'lastName');
 

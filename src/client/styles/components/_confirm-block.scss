@@ -43,6 +43,9 @@ $reset-link-color : #005eb8;
 	.confirm-reset {
 		font-size: 14px;
 		font-weight: normal;
+    border: none;
+    background: none;
+    cursor: pointer;
 		@include close_icon(12px, $reset-link-color, 2px, 4px);
 
 		@include media(tablet) {

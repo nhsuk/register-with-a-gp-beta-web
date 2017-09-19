@@ -15,6 +15,9 @@ const schema = Joi.object().keys({
     .meta({ componentType: 'textbox' }),
   'postcode': Joi.postcode().required().uppercase().options({
     language: {
+      any: {
+        required: 'Please enter a postcode'
+      },
       string: {
         regex: { base: 'must be a valid UK postcode' },
       },

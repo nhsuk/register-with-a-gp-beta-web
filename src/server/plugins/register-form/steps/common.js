@@ -4,6 +4,7 @@ import JoiNHSNumber from '../../../../shared/lib/joi-nhs-number-validator';
 import JoiFullDate from '../../../../shared/lib/joi-full-date-validator';
 import _ from 'lodash';
 import steps from './index';
+import {stepDependency} from './index';
 
 let params = {};
 
@@ -18,14 +19,7 @@ export function validate(rawData, schemaDefinition) {
     Joi.validate(rawData, schemaDefinition, {
       abortEarly: false,
       language: {
-        key: '{{!key}} ',
-        any: {
-          empty: 'cannot be blank',
-          required: '!!Please tell us {{!key}}',
-        },
-        base: {
-          number: 'must be a number',
-        },
+        key: ' ',
         string: {
           min: 'must be at least {{limit}} characters',
           max: 'must be less than {{limit}} characters',
@@ -41,7 +35,29 @@ export function validate(rawData, schemaDefinition) {
     });
   });
 }
-
+export function isButtonDone(key,defaultText, jump){
+  if(jump !== undefined){
+    const slug = getSlugByKey(key);
+    if(slug === jump){
+      if(stepDependency[jump] === undefined){
+        // No step dependency
+        defaultText = 'Done';
+      }
+    } else {
+      // already in dependency loop
+      for(let i=0; i<stepDependency[jump].length; i++){
+        let s = stepDependency[jump][i];
+        if(s === slug){
+          if(i === stepDependency[jump].length-1){
+            // this is the last dependency step
+            defaultText = 'Done';
+          }
+        }
+      }
+    }
+  }
+  return defaultText;
+}
 export function getFieldData(schema) {
   const fields = [];
 

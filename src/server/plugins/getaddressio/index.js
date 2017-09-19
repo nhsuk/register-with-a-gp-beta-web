@@ -61,6 +61,9 @@ function addressLookupHandler(request, reply) {
 
   getAddresses(postcode, housenumber)
     .then(addresses => {
+      if(addresses.length === 0){
+        addresses = getAddresses(postcode, '');
+      }
       reply(addresses);
     })
     .catch(err => {
