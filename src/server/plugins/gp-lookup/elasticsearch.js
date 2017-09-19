@@ -1,6 +1,6 @@
 const elasticsearchClient = require('./elasticsearchClient');
 
-const GPlookupIndexName = process.env.GPlookupIndexName || 'profiles_20170918152493';
+const GPlookupIndexName = process.env.GPlookupIndexName;
 
 
 const ES_MAPPINGS = {
