@@ -9,7 +9,7 @@ const schema = Joi.object().keys({
   'address2': Joi.string().allow('').max(50).meta({ componentType: 'hidden' }),
   'address3': Joi.string().allow('').max(50).meta({ componentType: 'hidden' }),
   'town': Joi.string().max(50).required().meta({ componentType: 'hidden' }),
-  'county': Joi.string().max(50).required().meta({ componentType: 'hidden' }),
+  'county': Joi.string().max(50).meta({ componentType: 'hidden' }),
   'houseNumber': Joi.string().allow('').max(50)
     .label('House number/ name (optional)')
     .meta({ componentType: 'textbox' }),
@@ -34,7 +34,7 @@ const template = 'register-form/address-lookup';
 
 const handlers = {
   GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps, undefined, undefined, undefined, template),
-  POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps, { beforeTemplet:undefined, template, dataTransformer:undefined }),
+  POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps, undefined, undefined, { beforeTemplate:undefined, template, dataTransformer:undefined }),
 };
 
 /**
