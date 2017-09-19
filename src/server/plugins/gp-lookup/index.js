@@ -9,13 +9,13 @@ function getGPList(keywords) {
       query: {
         multi_match: {
           query: keywords,
-          fields: ['name^3', 'address^2', 'practitioners.name']
+          fields: ['address^3', 'postcode^2', 'displayName', 'doctors.name']
         }
       }
     };
 
     elasticsearch.search(
-      'practice',
+      'gps',
       query,
       (error, response) =>{
         let results = [];

@@ -1,39 +1,83 @@
 const elasticsearchClient = require('./elasticsearchClient');
 
-const GPlookupIndexName = process.env.GPlookupIndexName || 'gp-lookup';
+const GPlookupIndexName = process.env.GPlookupIndexName || 'profiles_20170918152493';
 
 
 const ES_MAPPINGS = {
-  mappings: {
-    practice: {
-      properties: {
-        name: {
-          type: 'string'
+  'mappings': {
+    'gps': {
+      'properties': {
+        'openingTimes': {
+          'enabled': false
         },
-        organisation_code: {
-          type: 'string',
-          index: 'no'
+        'facilities': {
+          'enabled': false
         },
-        address: {
-          type: 'string'
+        'services': {
+          'enabled': false
         },
-        contact_telephone_number: {
-          type: 'string',
-          index: 'no'
+        'onlineServices': {
+          'enabled': false
         },
-        practitioners: {
-          type: 'nested',
-          properties: {
-            general_medical_practitioner_code: {
-              type: 'string',
-              index: 'no'
+        'contact': {
+          'enabled': false
+        },
+        'acceptingNewPatients': {
+          'type': 'boolean'
+        },
+        'address': {
+          'properties': {
+            'addressLines': {
+              'type': 'text',
+              'fields': {
+                'keyword': {
+                  'type': 'keyword',
+                  'ignore_above': 256
+                }
+              }
             },
-            name: {
-              type: 'string',
-            },
-            practice: {
-              type: 'string',
-              index: 'no',
+            'postcode': {
+              'type': 'text',
+              'fields': {
+                'keyword': {
+                  'type': 'keyword',
+                  'ignore_above': 256
+                }
+              }
+            }
+          }
+        },
+        'displayName': {
+          'type': 'text',
+          'fields': {
+            'keyword': {
+              'type': 'keyword',
+              'ignore_above': 256
+            }
+          }
+        },
+        'doctors': {
+          'type': 'nested',
+          'properties': {
+            'name' : {
+              'type': 'string',
+              'analyzer': 'gp_name_analyzer'
+            }
+          }
+        },
+        'location' : {
+          'properties' : {
+            'coordinates' : {
+              'type' : 'geo_point'
+            }
+          }
+        },
+        'name': {
+          'type': 'text',
+          'fields': {
+            'keyword': {
+              'type': 'keyword',
+              'ignore_above': 256
             }
           }
         }
