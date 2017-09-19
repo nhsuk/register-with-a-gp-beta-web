@@ -4,7 +4,7 @@ $confirm-block-backgroud: #F0F4F5;
 $hint-text-color: #9B9B9B;
 
 .form-fields {
-	padding: 2px 0 2px 0;
+	padding: 2px 0;
 
 	@include media(tablet) {
 		padding: 8px 0 4px 0;

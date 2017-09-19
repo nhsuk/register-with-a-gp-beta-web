@@ -1,0 +1,92 @@
+.registration-success {
+	background-color: #1DA197;
+	color: #fff;
+	text-align: center;
+	padding: 40px;
+
+	@include media(tablet) {
+		padding-top: 50px;
+		padding-bottom: 70px;
+	}
+	.registration-success__text{
+		@include bold-font(24);
+
+		@include media(tablet){
+			@include bold-font(36);
+		}
+
+	}
+}
+
+.next-step {
+	padding: 20px;
+	margin-top: 20px;
+
+	@include media(tablet){
+		padding: 30px;
+		margin-top: 30px;
+	}
+
+	li {
+		font-weight: bold;
+		font-family: Frutiger W01;
+	}
+	.callout--attention__title {
+		@include bold-font(24);
+
+		@include media(tablet){
+			@include bold-font(36);
+		}
+	}
+}
+
+.registration-days {
+	margin-top: 30px;
+	font-size: 20px;
+
+	@include media(tablet) {
+		font-size: 24px
+	}
+}
+
+.registration-query {
+	border-top:8px solid #005BBB;
+	padding-top:10px;
+	padding-left:0;
+	margin: 40px 15px;
+
+	@include media(tablet) {
+		margin: 0;
+	}
+
+
+	
+}
+.registation-survey__block {
+	margin-top: 40px;
+	@include media(tablet){
+		margin-top: 60px;
+		.survey__text {
+			@include core-font(20);
+		}
+	}
+}
+
+#confirm-registration {
+	@include media(mobile){
+		padding: 0 10px;
+	}
+}
+.survey__title, .query__title{
+	@include core-font(20);
+	font-weight: bold;
+
+	@include media(tablet){
+		@include core-font(24);
+		font-weight: bold;
+	}
+}
+.survey__text, .query__text{
+	@include core-font(16);
+}
+
