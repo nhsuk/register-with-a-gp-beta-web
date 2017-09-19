@@ -7,11 +7,21 @@ const Joi = JoiBase.extend(JoiPostcodeExtension);
 
 const schema = Joi.object().keys({
   'country': Joi.string().max(50).label('Country')
-		.meta({
-  componentType: 'dropdown' ,
-  children: COUNTRIES,
-}),
-  'town': Joi.string().max(50).label('Town or City').meta({ componentType: 'textbox' }),
+    .meta({
+      componentType: 'dropdown' ,
+      children: COUNTRIES,
+    }),
+  'town': Joi.string().max(50).label('Town or City').required()
+    .meta({
+      componentType: 'textbox'
+    }).options({
+      language: {
+        any: {
+          empty: 'Please enter your town or city',
+          required: 'Please enter your town or city'
+        },
+      },
+    }),
   'submit': Joi.any().optional().strip()
 });
 

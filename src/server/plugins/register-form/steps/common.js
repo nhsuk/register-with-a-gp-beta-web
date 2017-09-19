@@ -19,14 +19,7 @@ export function validate(rawData, schemaDefinition) {
     Joi.validate(rawData, schemaDefinition, {
       abortEarly: false,
       language: {
-        key: '{{!key}} ',
-        any: {
-          empty: 'cannot be blank',
-          required: '!!Please tell us {{!key}}',
-        },
-        base: {
-          number: 'must be a number',
-        },
+        key: ' ',
         string: {
           min: 'must be at least {{limit}} characters',
           max: 'must be less than {{limit}} characters',

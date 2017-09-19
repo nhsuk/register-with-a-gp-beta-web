@@ -8,7 +8,7 @@ let DateConcat = '';
 
 const invalidFullDateRule = {
   name: 'fulldate',
-  description: 'should be a valid Date',
+  description: 'Please enter a valid date / month / year using numbers only',
   validate(params, value, state, options){
     let mm = '0' + value.month.toString();
     let dd = '0' + value.day.toString();

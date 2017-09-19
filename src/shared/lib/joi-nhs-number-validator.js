@@ -17,7 +17,7 @@ export default {
   base: Joi.string(),
   name: 'string',
   language: {
-    nhsnumber: '{{v}} is not valid',
+    nhsnumber: 'Please enter a valid NHS number - it’s a 10 digit number',
   },
   pre(value, state, options) {
     if (options.convert) {
