@@ -46,20 +46,6 @@ export function getPracticeStartTemplate(request) {
   return defaultPracticeStartTemplate;
 }
 
-export function getPracticeEndTemplate(request) {
-  const practice = request.params.practice;
- /* if (practice){
-    const practiceTemplateName = 'practices/end/' + practice;
-    const appSettings = request.server.settings.app;
-    const practiceTemplate = Path.join(appSettings.templatePath, practiceTemplateName + '.njk');
-    if (fs.existsSync(practiceTemplate)){
-      return practiceTemplateName;
-    }
-  }*/
-
-  return defaultPracticeEndTemplate;
-}
-
 function startHandler(request, reply) {
   InvalidCookie(reply);
   const practice = request.params.practice;
@@ -74,14 +60,12 @@ function startHandler(request, reply) {
 }
 
 function endHandler(request, reply) {
-  const practiceEndTemplate = getPracticeEndTemplate(request);
   let nextStepBlock  = getPracticeStepComponent(request);
-  console.log('nextStepBlock + ',nextStepBlock);
   if (request.params.practice) {
     const practice = practiceLookup.getPractice(request.params.practice);
     if (typeof practice !== 'undefined') {
       return reply
-        .view(practiceEndTemplate, {
+        .view(defaultPracticeEndTemplate, {
           practice,
           nextStepBlock
         });
@@ -165,13 +149,12 @@ exports.register.attributes = {
 
 function getPracticeStepComponent(request) {
     //const appSettings = request.server.settings.app;
-    let component = request.params.practice + '-confirmation-nextStep';
-    let appSettings = request.server.settings.app;
-    let componentTemplate =Path.join(appSettings.templatePath,'_components/'+ request.params.practice + '-confirmation-nextStep.njk');
-    console.log(componentTemplate);
-    if (fs.existsSync(componentTemplate)){
-      return component;
-    }else{
-      return 'default-confirmation-nextStep';
-    }
+  let component = request.params.practice + '-confirmation-nextStep';
+  let appSettings = request.server.settings.app;
+  let componentTemplate =Path.join(appSettings.templatePath,'_components/'+ request.params.practice + '-confirmation-nextStep.njk');
+  if (fs.existsSync(componentTemplate)){
+    return component;
+  }else{
+    return 'default-confirmation-nextStep';
+  }
 }

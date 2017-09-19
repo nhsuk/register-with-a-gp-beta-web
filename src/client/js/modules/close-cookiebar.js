@@ -12,7 +12,7 @@ class closeCookieBar {
       let expireTime = 'expires='+d.toUTCString();
 
       $('#global-cookies-banner').empty();
-      document.cookie='hideCookieBar='+true+';'+expireTime+";path=/";
+      document.cookie='hideCookieBar='+true+';'+expireTime+';path=/';
     });
   }
 
