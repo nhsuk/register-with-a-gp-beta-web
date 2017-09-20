@@ -1,6 +1,6 @@
 const elasticsearchClient = require('./elasticsearchClient');
 
-const GPlookupIndexName = process.env.GPlookupIndexName;
+const GPlookupIndexName = process.env.GP_LOOKUP_INDEX_NAME;
 
 
 const ES_MAPPINGS = {

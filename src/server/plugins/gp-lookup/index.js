@@ -9,7 +9,7 @@ function getGPList(keywords) {
       query: {
         multi_match: {
           query: keywords,
-          fields: ['address^3', 'postcode^2', 'displayName', 'doctors.name']
+          fields: ['displayName^4', 'address.postcode^3',  'address.addressLines^2', 'doctors.name']
         }
       }
     };
