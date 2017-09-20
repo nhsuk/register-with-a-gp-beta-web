@@ -44,6 +44,8 @@
         <div class="beta-service__inner">
           <img src="/static/BETA.svg" class="beta-sevice-icon">
           <p class="beta-service-title"> This is a new service.</p>
+          {% if showSurveyLink%}
+          <p class="beta-service-title beta-service__surveyLink"><a href=""> Provide your feedback</a>{% endif %}</p>
         </div>
       </div>
     {% endif %}
