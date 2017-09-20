@@ -7,24 +7,6 @@ const ES_MAPPINGS = {
   'mappings': {
     'gps': {
       'properties': {
-        'openingTimes': {
-          'enabled': false
-        },
-        'facilities': {
-          'enabled': false
-        },
-        'services': {
-          'enabled': false
-        },
-        'onlineServices': {
-          'enabled': false
-        },
-        'contact': {
-          'enabled': false
-        },
-        'acceptingNewPatients': {
-          'type': 'boolean'
-        },
         'address': {
           'properties': {
             'addressLines': {
