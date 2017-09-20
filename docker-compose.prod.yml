@@ -1,11 +1,11 @@
-version: '2.1'
+version: '2'
 services:
-  web:
+  elasticsearch-updater-profiles:
+    image: nhsuk/elasticsearch-updater:0.3.2
     environment:
-      NODE_ENV: 'production'
-
-    build:
-      args:
-        NODE_ENV: 'production'
-
-    command: yarn start
+      CHANGE_THRESHOLD: '0.96'
+      ES_HOST: profiles-db-elastic
+      ES_INDEX: profiles
+      JSON_FILE_URL: https://nhsukgpdataetl.blob.core.windows.net/etl-output/gp-data-merged.json
+      NODE_ENV: production
+      UPDATE_SCHEDULE: ''
