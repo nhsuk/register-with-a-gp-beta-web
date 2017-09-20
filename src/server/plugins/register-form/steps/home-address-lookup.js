@@ -39,10 +39,10 @@ const schema = Joi.object().keys({
       }
     }
   }),
-  'county': Joi.string().max(50).required().meta({ componentType: 'hidden' }).options({
+  'county': Joi.string().allow('').max(50).meta({ componentType: 'hidden' }).options({
     language: {
       string: {
-        max: 'Address length must be less than or equal to 50 characters long'
+        max: 'County length must be less than or equal to 50 characters long'
       }
     }
   }),
@@ -70,7 +70,7 @@ const template = 'register-form/address-lookup';
 
 const handlers = {
   GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps, undefined, undefined, undefined, template),
-  POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps, { beforeTemplet:undefined, template, dataTransformer:undefined }),
+  POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps, undefined, undefined,{ beforeTemplate:undefined, template, dataTransformer:undefined }),
 };
 
 /**
