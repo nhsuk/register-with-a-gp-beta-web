@@ -5,11 +5,47 @@ import {postHandlerFactory, getHandlerFactory} from './common';
 const Joi = JoiBase.extend(JoiPostcodeExtension);
 
 const schema = Joi.object().keys({
-  'address1': Joi.string().max(50).required().meta({ componentType: 'hidden' }),
-  'address2': Joi.string().allow('').max(50).meta({ componentType: 'hidden' }),
-  'address3': Joi.string().allow('').max(50).meta({ componentType: 'hidden' }),
-  'town': Joi.string().max(50).required().meta({ componentType: 'hidden' }),
-  'county': Joi.string().max(50).required().meta({ componentType: 'hidden' }),
+  'address1': Joi.string().max(50).required().meta({ componentType: 'hidden' }).options({
+    language: {
+      any: {
+        empty: 'Address is not allowed to be empty'
+      },
+      string: {
+        max: 'Address length must be less than or equal to 50 characters long'
+      }
+    }
+  }),
+  'address2': Joi.string().allow('').max(50).meta({ componentType: 'hidden' }).options({
+    language: {
+      string: {
+        max: 'Address length must be less than or equal to 50 characters long'
+      }
+    }
+  }),
+  'address3': Joi.string().allow('').max(50).meta({ componentType: 'hidden' }).options({
+    language: {
+      string: {
+        max: 'Address length must be less than or equal to 50 characters long'
+      }
+    }
+  }),
+  'town': Joi.string().max(50).required().meta({ componentType: 'hidden' }).options({
+    language: {
+      any: {
+        empty: 'Town is not allowed to be empty'
+      },
+      string: {
+        max: 'Town length must be less than or equal to 50 characters long'
+      }
+    }
+  }),
+  'county': Joi.string().max(50).required().meta({ componentType: 'hidden' }).options({
+    language: {
+      string: {
+        max: 'Address length must be less than or equal to 50 characters long'
+      }
+    }
+  }),
   'houseNumber': Joi.string().allow('').max(50)
     .label('House number/ name (optional)')
     .meta({ componentType: 'textbox' }),
