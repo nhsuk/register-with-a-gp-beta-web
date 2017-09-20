@@ -66,16 +66,6 @@ ul.address-results li.address-item {
   padding: 15px 10px;
   margin-top: 0;
 
-  .select-link {
-  	float: right;
-  	font-size: 16px;
-  	vertical-align:top;
-
-  	@include media(tablet) {
-  		font-size: 20px;
-  	}
-
-  }
 }
 
 ul.address-results li:last-child {
@@ -84,7 +74,6 @@ ul.address-results li:last-child {
 
 .address-line{
 	max-width: 200px;
-	font-weight: bold;
 	display: inline;
 	float: left;
 	font-size: 16px;

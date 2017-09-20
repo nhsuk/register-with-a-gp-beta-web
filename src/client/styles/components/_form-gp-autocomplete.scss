@@ -16,17 +16,6 @@ ul.gp-results li.gp-item {
   border-top: 1px #ccc solid;
   padding: 15px 10px;
   margin-top: 0;
-
-  .select-link {
-    float: right;
-    font-size: 16px;
-    vertical-align:top;
-
-    @include media(tablet) {
-      font-size: 20px;
-    }
-
-  }
 }
 
 ul.gp-results li .gp-data {
@@ -38,15 +27,9 @@ ul.gp-results li .gp-data span {
 }
 
 ul.gp-results li span.name {
-  font-weight: bold;
 	font-size: 20px
 }
 
-ul.gp-results li a.select-link {
-  float: right;
-  margin: 0;
-
-}
 
 .gp-item .address {
   max-width: 200px;

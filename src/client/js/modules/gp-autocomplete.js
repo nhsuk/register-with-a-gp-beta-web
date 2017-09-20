@@ -26,8 +26,9 @@ class GPAutoComplete {
     return $.parseHTML('' +
       '<li class="gp-item result">' +
         '<div class="first-line">' +
-          '<span class="name"></span>' +
-          '<a href="#" class="select-link" id="select-link-'+index+'">Select</a>' +
+          '<a href="#" class="select-link" id="select-link-'+index+'">'+
+            '<span class="name"></span>' +
+          '</a>' +
         '</div>' +
         '<div class="address"></div>' +
       '</li>'
