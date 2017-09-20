@@ -83,7 +83,6 @@
     "lint:eslint": "DEBUG=eslint:cli-engine eslint .",
     "lint:editorconfig": "eclint check src/** README.md",
     "lint": "npm-run-all --parallel lint:*",
-    "update_gp_index": "babel-node ./bin/update-gp-lookup-search-index.js",
     "export_url_schema": "babel-node ./bin/export-url-schema.js",
     "clean": "rimraf dist/ coverage/ src/client/compiled",
     "start": "NODE_ENV=production node ./dist/server/"
