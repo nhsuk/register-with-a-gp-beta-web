@@ -30,13 +30,19 @@
   </label>
 {% endif %}
 
+{% if value %}
+
+{% endif %}
   <select
     name="{{ name }}"
     id="input-{{ name }}"
     class="form-dropdown{{ ' has-error' if error }}"
   >
   {% for c in children %}
-    <option value="{{ c.value }}">
+    {% if value %}
+      {% set isSelected = (value | string == c.value | default('')) %}
+    {% endif %}
+    <option value="{{ c.value }}" {% if isSelected %}selected="selected"{% endif %}>
       {{ c.label }}
     </option>
   {% endfor %}
