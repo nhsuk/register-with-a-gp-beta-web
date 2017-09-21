@@ -6,7 +6,7 @@ const schema = Joi.object().keys({
     .meta({
       componentType: 'dropdown' ,
       children: [
-        { label: '----', value: ''},
+        { label: 'Select', value: ''},
         { label: 'Mr', value: 'Mr'},
         { label: 'Mrs', value: 'Mrs'},
         { label: 'Ms', value: 'Ms'},
