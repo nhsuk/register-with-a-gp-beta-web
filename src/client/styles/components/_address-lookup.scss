@@ -73,14 +73,13 @@ ul.address-results li:last-child {
 }
 
 .address-line{
-	max-width: 200px;
+	max-width: 100%;
 	display: inline;
 	float: left;
 	font-size: 16px;
 	line-height: 25px;
 
 	@include media(tablet) {
-		max-width: 450px;
 		font-size: 20px;
 		line-height: 32px;
 
