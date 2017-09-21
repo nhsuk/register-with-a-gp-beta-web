@@ -27,7 +27,7 @@ export default {
   base: Joi.object(),
   name: 'object',
   language: {
-    fulldate: 'Fulldate error',
+    fulldate: 'Please enter a valid date using numbers only',
   },
   rules: [invalidFullDateRule]
 };
