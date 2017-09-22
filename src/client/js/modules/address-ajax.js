@@ -149,15 +149,13 @@ class AddressAjax {
               const template = $.parseHTML('' +
                 '<li class="address-item result">' +
                 '<div class="address-line">' +
+                '<a href="#" class="select-link" id="select-link-' + i+'">'+
                 '<span id="addr1"></span>' +
                 '<span id="addr2"></span>' +
                 '<span id="addr3"></span>' +
                 '<span id="town"></span>' +
                 '<span id="county"></span>' +
                 '</div>'+
-                '<span>'+
-                '<a href="#" class="select-link" id="select-link-' + i +'">Select</a>' +
-                '</span>'+
                 '</li>');
               const item = $(template).clone();
               item.find('#addr1').text(a[0] + ', ');
