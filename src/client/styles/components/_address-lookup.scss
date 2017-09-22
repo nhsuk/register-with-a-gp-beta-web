@@ -22,11 +22,11 @@
 .addresslookup {
 	@include media(tablet){
 		position: relative;
-		top : 40px;
+		top : 41px;
 	}
 
 	@include media(mobile) {
-		margin-top: 30px;
+		margin-top: 24px;
 		margin-left: 4px;
 	}
 
@@ -38,7 +38,8 @@
 
 		@include media(tablet) {
 			font-size: 18px;
-			padding: 5px 22px;
+			padding: 6px 22px;
+			height:42px;
 		}
 
 	}
