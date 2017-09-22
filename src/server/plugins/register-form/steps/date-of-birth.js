@@ -11,7 +11,7 @@ const schema = Joi.object().keys({
         base: 'Please enter a valid day using numbers only',
         min: 'Please enter a valid day',
         max: 'Please enter a valid day'
-        
+
       }
     }
   }),
