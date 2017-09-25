@@ -5,9 +5,34 @@ import FullDateValidator from '../../../../shared/lib/joi-full-date-validator';
 const Joi = JoiBase.extend(FullDateValidator);
 
 const schema = Joi.object().keys({
-  'day': Joi.number().integer().min(1).max(31).required().label('Day').meta({ componentType: 'numeric' }),
-  'month': Joi.number().integer().min(1).max(12).required().label('Month').meta({ componentType: 'numeric' }),
-  'year': Joi.number().integer().min(1885).max(2025).required().label('Year').meta({ componentType: 'numeric' }),
+  'day': Joi.number().integer().min(1).max(31).required().label('Day').meta({ componentType: 'numeric' }).options({
+    language: {
+      number: {
+        base: 'Please enter a valid day using numbers only',
+        min: 'Please enter a valid day',
+        max: 'Please enter a valid day'
+
+      }
+    }
+  }),
+  'month': Joi.number().integer().min(1).max(12).required().label('Month').meta({ componentType: 'numeric' }).options({
+    language: {
+      number: {
+        base: 'Please enter a valid month using numbers only',
+        min: 'Please enter a valid month',
+        max: 'Please enter a valid month'
+      }
+    }
+  }),
+  'year': Joi.number().integer().min(1885).max(2025).required().label('Year').meta({ componentType: 'numeric' }).options({
+    language: {
+      number: {
+        base: 'Please enter a valid year using numbers only',
+        min: 'Please enter a year after 1885',
+        max: 'Please enter a valid year'
+      }
+    }
+  }),
   'submit': Joi.any().optional().strip()
 }).fulldate();
 
