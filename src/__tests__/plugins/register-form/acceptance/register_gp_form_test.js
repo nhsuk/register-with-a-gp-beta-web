@@ -89,8 +89,6 @@ Scenario('Test all yes/no question with "no" answer on gp registration flow', (I
   I.see('Check your details');
   I.click('Send to surgery');
 
-  I.see('Application sent');
-  I.see('What to do next');
 });
 
 
@@ -206,6 +204,4 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
   I.see('Check your details');
   I.click('Send to surgery');
 
-  I.see('Application sent');
-  I.see('What to do next');
 });
