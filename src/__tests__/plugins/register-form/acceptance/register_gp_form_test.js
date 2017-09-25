@@ -78,7 +78,7 @@ Scenario('Test all yes/no question with "no" answer on gp registration flow', (I
   I.click('Add another condition');
   I.waitForElement('#input-medical-history-1', 3);
   I.fillField('#input-medical-history-1', 'Dyslexia');
-  
+
   I.fillField('#input-medical-history-details-0', 'Cardiology');
   I.click('Add another surgery');
   I.waitForElement('#input-medical-history-1', 3);
@@ -196,7 +196,7 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
   I.click('Add another condition');
   I.waitForElement('#input-medical-history-1', 3);
   I.fillField('#input-medical-history-1', 'Dyslexia');
-  
+
   I.fillField('#input-medical-history-details-0', 'Cardiology');
   I.click('Add another surgery');
   I.waitForElement('#input-medical-history-1', 3);
