@@ -26,8 +26,9 @@ class GPAutoComplete {
     return $.parseHTML('' +
       '<li class="gp-item result">' +
         '<div class="first-line">' +
-          '<span class="name"></span>' +
-          '<a href="#" class="select-link" id="select-link-'+index+'">Select</a>' +
+          '<a href="#" class="select-link" id="select-link-'+index+'">'+
+            '<span class="name"></span>' +
+          '</a>' +
         '</div>' +
         '<div class="address"></div>' +
       '</li>'
@@ -56,13 +57,11 @@ class GPAutoComplete {
   }
 
   cleanSelectedGP (){
-    $('#gp-code').val('');
     $('#gp-name').val('');
     $('#gp-address').val('');
   }
 
   resetBtnClickHandler (){
-    $('#gp-code').val('');
     $('#gp-name').val('');
     $('#gp-address').val('');
     this.summaryContainer.hide();
@@ -106,15 +105,25 @@ class GPAutoComplete {
     }
   }
 
+  static serializeAddress (data) {
+    if (!data){
+      return '';
+    }
+    const addressLines = data.addressLines;
+    const postcode = data.postcode;
+    const address = addressLines.join(', ');
+    return `${address}\n ${postcode}`;
+  }
+
   appendResultListItem (i, d){
     const template = GPAutoComplete.getResultTemplate(i);
     const item = $(template).clone();
+    const address = GPAutoComplete.serializeAddress(d._source.address);
     item.find('.name').text(d._source.name);
-    item.find('.address').text(d._source.address);
+    item.find('.address').text(address);
     const gpData = {
-      'code': d._source.organisation_code,
       'name': d._source.name || '',
-      'address': d._source.address || ''
+      'address': address
     };
     item.data(gpData);
 

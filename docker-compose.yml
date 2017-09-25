@@ -15,13 +15,39 @@ services:
     ports:
       - 3333:3333
     links:
-      - gp-reg-db:es
+      - profiles-db-elastic:es
     volumes:
       - .:/code
       - register-with-a-gp-node_modules:/code/node_modules
 
-  gp-reg-db:
-    image: "nhsuk/profiles-db-elastic:${profiles_db_elastic_docker_image_tag-0.2.0}"
+  elasticsearch-updater-profiles:
+    image: nhsuk/elasticsearch-updater:0.3.2
+    environment:
+      CHANGE_THRESHOLD: '0.96'
+      ES_HOST: profiles-db-elastic
+      ES_INDEX: profiles
+      JSON_FILE_URL: https://nhsukgpdataetl.blob.core.windows.net/etl-output/gp-data-merged.json
+      NODE_ENV: production
+      UPDATE_SCHEDULE: ''
+    depends_on:
+      profiles-db-elastic:
+        condition: service_healthy
+    links:
+      - profiles-db-elastic
+
+  profiles-db-elastic:
+    image: nhsuk/profiles-db-elastic:0.3.0
+    environment:
+      bootstrap.memory_lock: 'true'
+      xpack.monitoring.enabled: 'false'
+      xpack.security.enabled: 'false'
+    ports:
+      - 9200:9200
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
 volumes:
   register-with-a-gp-node_modules:

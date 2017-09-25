@@ -52,20 +52,19 @@
             {% set typeahedFieldError = stepErrors['gpName'].message | replace(stepErrors['gpName'].label, "") %}
 
             <input type="text" id="input-gp-lookup" class="form-textbox nested-input {{ ' has-error' if typeahedFieldError }}" placeholder="Enter keywords" autocomplete="off" style="display:inline-block">
-            <a class="gp-lookup-btn button">Find Surgery</a>
+            <button type="button" class="gp-lookup-btn button">Find Surgery</button>
           </div>
         </label>
         <input type="hidden" name="gpName" id="gp-name" value="{{ stepData['gpName'] }}">
         <input type="hidden" name="gpAddress" id="gp-address" value="{{ stepData['gpAddress'] }}">
 
-        <ul class="gp-results">
+        <ul class="gp-results" role="alert">
         </ul>
       </div>
 
       <div id="selected-gp-summary" class="confirm-block" style="{{ 'display:none' if not stepData['gpName'] }}">
         <span class="reset-address">
-            <a href class="confirm-reset">Reset<span class="close_cross"></span> 
-            </a>
+            <button class="confirm-reset" type="button">Reset<span class='close_cross'></span></button>
           </span> 
         <div class="confirm-block-details gp-address">
           <p class="gp-title confirm-block-title confirm-block-line">{{ stepData['gpName']}}</p>

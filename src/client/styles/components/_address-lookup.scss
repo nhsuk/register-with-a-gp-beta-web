@@ -22,11 +22,11 @@
 .addresslookup {
 	@include media(tablet){
 		position: relative;
-		top : 40px;
+		top : 41px;
 	}
 
 	@include media(mobile) {
-		margin-top: 30px;
+		margin-top: 24px;
 		margin-left: 4px;
 	}
 
@@ -38,7 +38,8 @@
 
 		@include media(tablet) {
 			font-size: 18px;
-			padding: 5px 22px;
+			padding: 6px 22px;
+			height:42px;
 		}
 
 	}
@@ -66,16 +67,6 @@ ul.address-results li.address-item {
   padding: 15px 10px;
   margin-top: 0;
 
-  .select-link {
-  	float: right;
-  	font-size: 16px;
-  	vertical-align:top;
-
-  	@include media(tablet) {
-  		font-size: 20px;
-  	}
-
-  }
 }
 
 ul.address-results li:last-child {
@@ -83,15 +74,13 @@ ul.address-results li:last-child {
 }
 
 .address-line{
-	max-width: 200px;
-	font-weight: bold;
+	max-width: 100%;
 	display: inline;
 	float: left;
 	font-size: 16px;
 	line-height: 25px;
 
 	@include media(tablet) {
-		max-width: 450px;
 		font-size: 20px;
 		line-height: 32px;
 

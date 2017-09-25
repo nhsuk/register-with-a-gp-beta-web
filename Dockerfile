@@ -29,5 +29,3 @@ USER $USERNAME
 RUN yarn build
 
 CMD yarn start
-
-RUN yarn update_gp_index

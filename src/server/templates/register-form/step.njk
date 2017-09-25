@@ -38,6 +38,9 @@
       {% endif %}
       {% block formFields %}
         <div class="form-fields">
+          {% if details.hint %}
+            <p class="hint-text">For example, 31 3 1980</p>
+          {% endif %}
           {% for field in fields %}
             {% if field.componentType in ['textbox', 'multiple-choice', 'disclosure', 'dropdown', 'numeric', 'tel','radio-horizontal', 'nhs-number-radio', 'armed-radio-horizontal', 'nested-gp-lookup', 'current-medication-radio', 'allergies-nested-radio','nested-inline'] %}
                {% component 'form-' + field.componentType, {

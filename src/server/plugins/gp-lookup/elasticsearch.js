@@ -1,39 +1,65 @@
 const elasticsearchClient = require('./elasticsearchClient');
 
-const GPlookupIndexName = process.env.GPlookupIndexName || 'gp-lookup';
+const GPlookupIndexName = process.env.GP_LOOKUP_INDEX_NAME;
 
 
 const ES_MAPPINGS = {
-  mappings: {
-    practice: {
-      properties: {
-        name: {
-          type: 'string'
-        },
-        organisation_code: {
-          type: 'string',
-          index: 'no'
-        },
-        address: {
-          type: 'string'
-        },
-        contact_telephone_number: {
-          type: 'string',
-          index: 'no'
-        },
-        practitioners: {
-          type: 'nested',
-          properties: {
-            general_medical_practitioner_code: {
-              type: 'string',
-              index: 'no'
+  'mappings': {
+    'gps': {
+      'properties': {
+        'address': {
+          'properties': {
+            'addressLines': {
+              'type': 'text',
+              'fields': {
+                'keyword': {
+                  'type': 'keyword',
+                  'ignore_above': 256
+                }
+              }
             },
-            name: {
-              type: 'string',
-            },
-            practice: {
-              type: 'string',
-              index: 'no',
+            'postcode': {
+              'type': 'text',
+              'fields': {
+                'keyword': {
+                  'type': 'keyword',
+                  'ignore_above': 256
+                }
+              }
+            }
+          }
+        },
+        'displayName': {
+          'type': 'text',
+          'fields': {
+            'keyword': {
+              'type': 'keyword',
+              'ignore_above': 256
+            }
+          }
+        },
+        'doctors': {
+          'type': 'nested',
+          'properties': {
+            'name' : {
+              'type': 'string',
+              'analyzer': 'gp_name_analyzer'
+            }
+          }
+        },
+        'location' : {
+          'properties' : {
+            'coordinates' : {
+              'type' : 'geo_point'
+            }
+          }
+        },
+        'name': {
+          'type': 'text',
+          'fields': {
+            'keyword': {
+              'type': 'keyword',
+              'ignore_above': 256
             }
           }
         }

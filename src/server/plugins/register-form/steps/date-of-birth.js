@@ -14,10 +14,13 @@ const schema = Joi.object().keys({
 const title = 'What is your date of birth?';
 const key = 'dateOfBirth';
 const slug = 'date-of-birth';
+const defails = {
+  hint: 'For example, 31 3 1980'
+};
 
 const handlers = {
-  GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps),
-  POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps),
+  GET: (prevSteps) => getHandlerFactory(key, title, schema, prevSteps, defails),
+  POST: (prevSteps, nextSteps) => postHandlerFactory(key, title, schema, prevSteps, nextSteps, defails),
 };
 
 /**

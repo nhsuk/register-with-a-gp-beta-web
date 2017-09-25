@@ -1,10 +1,10 @@
-@import url("https://fast.fonts.net/cssapi/0985eb4d-eec4-488b-baa4-22fe85c5ce32.css");
+@import url("https://assets.nhs.uk/fonts/nhsuk-fonts-1.1.0.css");
 body p, h1, h2, h3, details summary, ul {
   font-family: Frutiger W01;
 }
 a .global-footer, .summary__control .button {
   font-family: Frutiger W01;
 }
-.local-header__title, .error-summary__heading, .form-label, .form-title, .button, .multiple-choice, .global-header__service-name, .summary *, .button--back, .notification-banner *, .beta-service__inner, .global-footer *, .reset-address, .callout p, .callout ul>li, .summary caption, .summary-note__title {
+.local-header__title, .error-summary__heading, .form-label, .form-title, .button, .multiple-choice, .global-header__service-name, .summary *, .button--back, .notification-banner *, .beta-service__inner, .global-footer *, .reset-address, .callout p, .callout ul>li, .summary caption, .summary-note__title, .hint-text, .confirm-reset {
   font-family: Frutiger W01;
 }

@@ -26,7 +26,9 @@ const schema = Joi.object().keys({
     })
     .options({
       language: {
-        any: { required: '!!Please tell us if you’re currently taking any medication' },
+        any: {
+          required: 'Please answer this question'
+        },
       },
     }),
   'allergies': Joi.when('any-allergies', {

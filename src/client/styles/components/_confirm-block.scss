@@ -36,16 +36,15 @@ $reset-link-color : #005eb8;
 
 .reset-address {
 	float:right;
-	color: $reset-link-color;
-	a:visited {
-		color: $reset-link-color;
-	}
+	
 	.confirm-reset {
+		text-decoration: underline;
+		color: $reset-link-color;
 		font-size: 14px;
 		font-weight: normal;
-    border: none;
-    background: none;
-    cursor: pointer;
+    	border: none;
+    	background: none;
+    	cursor: pointer;
 		@include close_icon(12px, $reset-link-color, 2px, 4px);
 
 		@include media(tablet) {

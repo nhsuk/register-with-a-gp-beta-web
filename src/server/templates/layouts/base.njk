@@ -5,7 +5,7 @@
 
 {% block body_notifications %}
 
-{% if showNotifications %}
+{% if showCookieBar %}
     <div class="notification-banner notification-info util-print-hide" id="global-cookies-banner" role="alert">
         <p class="notification-banner__inner">
             NHS.UK uses cookies to make the site simpler.
@@ -27,12 +27,10 @@
       <div class="global-header__inner">
         {% if CURRENT_PRACTICE %}
           <a href="/{{ CURRENT_PRACTICE.key }}/start" class="">
-            <img src="{{ asset_path('assets/images/logotype-nhs-colour.png') }}" alt="NHS">
-          </a>
+            <img src="{{ asset_path('assets/images/logotype-nhs-colour.png') }}" alt="NHS"></a>
         {% else %}
           <a href="/" class="">
-            <img src="{{ asset_path('assets/images/logotype-nhs-colour.png') }}" alt="NHS">
-          </a>
+            <img src="{{ asset_path('assets/images/logotype-nhs-colour.png') }}" alt="NHS"></a>
         {% endif %}
         {% block header_service_title %}
           {% if serviceTitle %}
@@ -46,6 +44,8 @@
         <div class="beta-service__inner">
           <img src="/static/BETA.svg" class="beta-sevice-icon">
           <p class="beta-service-title"> This is a new service.</p>
+          {% if showSurveyLink%}
+          <p class="beta-service-title beta-service__surveyLink"><a href=""> Provide your feedback</a>{% endif %}</p>
         </div>
       </div>
     {% endif %}

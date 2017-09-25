@@ -30,7 +30,7 @@ Date of Birth: {{ data.dateOfBirth['year'] }}/{{ data.dateOfBirth['month'] }}/{{
 {{ render_multi_line('Address', data.addressLookup, ['houseNumber']) }}
 
 {{ render_multi_line('Contact Details', data.contactDetails) }}
-{{ render_multi_line('Country and Town', data.countryAndTown) }}
+{{ render_multi_line('Place of birth', data.countryAndTown) }}
 
 {% if data.nhsNumber['nhs-number-known'] -%}
   {{ render_one_line('NHS number', {'nhs-number': data.nhsNumber['nhs-number']}) }}

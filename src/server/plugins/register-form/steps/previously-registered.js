@@ -18,7 +18,7 @@ const schema = Joi.object().keys({
     })
     .options({
       language: {
-        any: { required: '!!Please tell us if you’re registered with a GP' },
+        any: { required: 'Please answer this question' },
       },
     }),
   'gpName': Joi.alternatives()
@@ -35,9 +35,18 @@ const schema = Joi.object().keys({
       then:Joi.string().max(50).required().options({
         language: {
           key: ' ',
-          any: { empty: 'Please type a GP name' },
+          any: { empty: 'Please enter the GP practice name' },
         },
       }),
+    }).options({
+      language: {
+        any: {
+          empty: 'Please enter the GP practice name'
+        },
+        alternatives: {
+          base: ' '
+        }
+      },
     }),
   'gpAddress': Joi.when('previously-registered', {is: false, then:Joi.string().allow('').optional()}),
   'manualGPName': Joi.alternatives()
@@ -79,6 +88,10 @@ const schema = Joi.object().keys({
         },
       }),
       otherwise: Joi.string().allow('')
+    }).options({
+      language: {
+        any: { required: 'Please enter a postcode' },
+      },
     }),
   'submit': Joi.any().optional().strip()
 });

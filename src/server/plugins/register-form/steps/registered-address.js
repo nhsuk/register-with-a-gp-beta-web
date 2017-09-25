@@ -16,7 +16,7 @@ const schema = Joi.object().keys({
     })
     .options({
       language: {
-        any: { required: '!!Please tell us if you’re registered with with this address' },
+        any: { required: 'Please answer this question' },
       },
     }),
   'submit': Joi.any().optional().strip()

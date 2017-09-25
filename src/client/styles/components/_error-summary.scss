@@ -25,3 +25,20 @@
     color: darken($red, 10);
   }
 }
+
+.callout--error{
+  margin-bottom: 20px;
+  clear: right;
+
+  .error__title{
+    @include bold-font(20);
+
+    @include media(tablet) {
+      @include bold-font(24);
+    }
+  }
+  @include media(tablet) {
+    margin-bottom: 30px;
+    max-width: 75%;
+  }
+}
