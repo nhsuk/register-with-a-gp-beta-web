@@ -153,18 +153,34 @@ peel-croft-surgery would be:
 GP_EMAIL_PEEL_CROFT_SURGERY=email-address@domain.com
 ```
 
-#### Tests
+### Tests
+
+#### Unit tests
 
 You can run the tests with the following:
 ```bash
 $ yarn test
 ```
 
-We have picked `jest` because it lets us get a test framework up and running
-without having to make too many decision about libraries, runners, mocks and
-execution environments but I can see that we would want to run our tests in
-headless browsers at some point. I recommend moving to a
-`mocha/chai-as-promised` + `jsdom` + `sinon`
+#### Acceptance tests
+
+Acceptance tests are running through codecept.js and backed by Selenium.
+
+Installation on Linux or Mac:
+```bash
+./node_modules/.bin/selenium-standalone install
+```
+
+Running the tests on Linux or Mac:
+
+Terminal session 1:
+```bash
+./node_modules/.bin/selenium-standalone start
+```
+Terminal session 2:
+```bash
+yarn test:acceptance_local
+```
 
 ### Production
 
