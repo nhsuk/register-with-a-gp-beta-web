@@ -22,23 +22,17 @@ const schema = Joi.object().keys({
       variant: 'checkbox',
       hint: 'Select all that apply'
     }),
-  'medical-history': Joi.alternatives().try(
-      Joi.array().items(Joi.string().max(200).allow('')),
-      Joi.string().max(200).allow('')
-    ).label('I have a condition not listed above')
+  'medical-history': Joi.string().max(200).allow('')
+    .label('I have a condition not listed above')
     .meta({
-      componentType: 'nested-inline',
-      addRowLabel: 'Add another condition'
+      componentType: 'textbox',
+      variant: 'large',
     }),
-  'medical-history-details': Joi.alternatives().try(
-      Joi.array().items(Joi.string().max(200).allow('')),
-      Joi.string().max(200).allow('')
-    ).label('I had major surgery')
-    .meta({
-      componentType: 'nested-inline',
-      addRowLabel: 'Add another surgery'
+  'medical-history-details': Joi.string().max(200).allow('')
+    .label('I had major surgery').meta({
+      componentType: 'textbox',
+      variant: 'large',
     }),
-
   'submit': Joi.any().optional().strip()
 });
 
