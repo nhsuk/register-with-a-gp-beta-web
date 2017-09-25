@@ -81,7 +81,7 @@ class AddressAjax {
     this.formFields.hide();
     this.addressButton.hide();
     this.addressContinue.show();
-    this.manualDiv.hide();    
+    this.manualDiv.hide();
   }
 
   fillManual(){
