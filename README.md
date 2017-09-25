@@ -172,8 +172,13 @@ Installation on Linux or Mac:
 ```
 
 Running the tests on Linux or Mac:
+
+Terminal session 1:
 ```bash
 ./node_modules/.bin/selenium-standalone start
+```
+Terminal session 2:
+```bash
 yarn test:acceptance_local
 ```
 
