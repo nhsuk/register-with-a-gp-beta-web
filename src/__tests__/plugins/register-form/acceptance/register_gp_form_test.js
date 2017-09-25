@@ -41,7 +41,7 @@ Scenario('Test all yes/no question with "no" answer on gp registration flow', (I
   I.click('Continue');
 
   I.see('What is your address?');
-  I.fillField('Postcode', 'SW1A1AA');
+  I.fillField('Postcode', 'SW1W 9SZ');
   I.click('Find address');
   I.waitForElement('#select-link-0', 3);
   I.click('#select-link-0');
@@ -75,21 +75,22 @@ Scenario('Test all yes/no question with "no" answer on gp registration flow', (I
   I.click('label[data-label=Cancer]');
   I.click('label[data-label=Diabetes]');
   I.fillField('#input-medical-history-0', 'FLU');
-  I.fillField('#input-medical-history-1', 'Anxiety');
   I.click('Add another condition');
-  I.waitForElement('#input-medical-history-2', 3);
-  I.fillField('#input-medical-history-2', 'Dyslexia');
+  I.waitForElement('#input-medical-history-1', 3);
+  I.fillField('#input-medical-history-1', 'Dyslexia');
+  
   I.fillField('#input-medical-history-details-0', 'Cardiology');
-  I.fillField('#input-medical-history-details-1', 'Radiology');
   I.click('Add another surgery');
-  I.waitForElement('#input-medical-history-2', 3);
-  I.fillField('#input-medical-history-details-2', 'Dentist');
+  I.waitForElement('#input-medical-history-1', 3);
+  I.fillField('#input-medical-history-details-1', 'Radiology');
   I.click('Continue');
+
 
   I.see('Check your details');
   I.click('Send to surgery');
 
-  I.see(`Your application has been sent to ${firstPractice.name}`);
+  I.see('Application sent');
+  I.see('What to do next');
 });
 
 
@@ -129,7 +130,7 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
   I.click('Continue');
 
   I.see('What is your address?');
-  I.fillField('Postcode', 'SW1A1AA');
+  I.fillField('Postcode', 'SW1W 9SZ');
   I.click('Find address');
   I.waitForElement('#select-link-0', 3);
   I.click('#select-link-0');
@@ -192,19 +193,19 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
   I.click('label[data-label=Cancer]');
   I.click('label[data-label=Diabetes]');
   I.fillField('#input-medical-history-0', 'FLU');
-  I.fillField('#input-medical-history-1', 'Anxiety');
   I.click('Add another condition');
-  I.waitForElement('#input-medical-history-2', 3);
-  I.fillField('#input-medical-history-2', 'Dyslexia');
+  I.waitForElement('#input-medical-history-1', 3);
+  I.fillField('#input-medical-history-1', 'Dyslexia');
+  
   I.fillField('#input-medical-history-details-0', 'Cardiology');
-  I.fillField('#input-medical-history-details-1', 'Radiology');
   I.click('Add another surgery');
-  I.waitForElement('#input-medical-history-2', 3);
-  I.fillField('#input-medical-history-details-2', 'Dentist');
+  I.waitForElement('#input-medical-history-1', 3);
+  I.fillField('#input-medical-history-details-1', 'Radiology');
   I.click('Continue');
 
   I.see('Check your details');
   I.click('Send to surgery');
 
-  I.see(`Your application has been sent to ${firstPractice.name}`);
+  I.see('Application sent');
+  I.see('What to do next');
 });
