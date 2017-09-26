@@ -7,17 +7,7 @@ const schema = Joi.object().keys({
     .meta({
       componentType: 'allergies-nested-radio',
       nestedFieldVisibleValue: 'true',
-      nestedFields: [
-        {
-          'label': 'Allergies',
-          'key': 'allergies',
-        },
-        {
-          'label': 'Allergies',
-          'key': 'allergies',
-        }
-      ],
-      addRowLabel: 'Add another allergy',
+      nestedField: 'allergies',
       children: [
         { label: 'Yes', value: 'true', show_nested_fields:true},
         { label: 'No', value: 'false', show_nested_fields:false},
@@ -33,9 +23,9 @@ const schema = Joi.object().keys({
     }),
   'allergies': Joi.when('any-allergies', {
     is: true,
-    then: Joi.array().items(Joi.string().max(200).allow('')).options({
+    then: Joi.string().max(200).allow('').options({
       language: {
-        key: 'A allergy item ',
+        key: 'Allergies ',
       },
     })
   }),

@@ -66,3 +66,9 @@ textarea.form-textbox {
 #armed-nested-container #inputdiv-day.form-line {
   padding-left: 0;
 }
+
+textarea.form-textbox {
+  background-image: none;
+  resize: none;
+  display: inline-block;
+}
