@@ -149,6 +149,7 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
   I.see('Are you already registered with a GP?');
   I.click('label[data-label=Yes]');
   I.fillField('#input-gp-lookup', 'South Chinnor');
+  I.click('Find Surgery');
   I.waitForElement('#select-link-0', 5);
   I.click('#select-link-0');
   I.waitForElement('#selected-gp-summary', 5);
