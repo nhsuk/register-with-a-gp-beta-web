@@ -1,8 +1,47 @@
-import * as server from '../../../../server/index';
+let server;
+let _runningInstance;
+
+class ServerInstanceUndefined {
+  constructor(message = 'Server Instance is Undefined') {
+    this.name = 'ServerInstanceUndefined';
+    this.message = message;
+    this.stack = (new Error()).stack;
+  }
+}
+
+function startTestServer(done) {
+  return new Promise((resolve) => {
+    server = require('../../../../server/');
+    server.start().then((instance) => {
+      _runningInstance = instance;
+      instance.start((err) => {
+        if (err) {
+          throw err;
+        }
+        instance.log('info', 'Server running at: ' + instance.info.uri);
+        resolve();
+        done();
+      });
+    });
+  });
+}
+
+function stopTestServer(done) {
+  return new Promise((resolve) => {
+    if (_runningInstance) {
+      _runningInstance.stop().then(function () {
+        resolve();
+        done();
+        process.exit();
+      });
+    } else {
+      throw ServerInstanceUndefined();
+    }
+  });
+}
+
 
 module.exports = {
-  bootstrap: server.start,
-  teardown: () => {
-    process.exit();
-  },
+  bootstrap: startTestServer,
+  teardown: stopTestServer,
 };

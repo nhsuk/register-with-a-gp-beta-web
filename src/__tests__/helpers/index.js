@@ -45,7 +45,13 @@ const GPLookupData = [{
   '_source':{
     'organisation_code':'J81032',
     'name':'South Chinnor',
-    'address':'South Chinnor GP Practice, 5CE 4DL',
+    'address':{
+      'addressLines': [
+        'South Chinnor',
+        'West Yorkshire'
+      ],
+      'postcode': '5CE 4DL'
+    },
     'contact_telephone_number':'1111 222222',
     'practitioners':[]
   }
