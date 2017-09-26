@@ -73,34 +73,17 @@
       </label>
     {% endfor %}
     </div>
-    {% if field.nestedFields %}
+    {% if field.nestedField %}
       {% set showNestedField = (value in field.nestedFieldVisibleValue) %}
 
       <div id="current-medication-nested-container" class="nested-fields-container"  style="{{ 'display:none' if not showNestedField }}">
-
-      {% set firstNestedField = field.nestedFields[0] %}
-
-      <label for="input-{{ firstNestedField.key }}" class="form-label nested-inline-label">
-        {% if stepData[firstNestedField.key] %}
-            {% for d in stepData[firstNestedField.key] %}
-              {{ f.label if loop.first }}
-              {% set nestedFieldError = stepErrors[firstNestedField.key+'.'+loop.index0].message | replace(stepErrors[firstNestedField.key+'.'+loop.index0].label, "") %}
-              <input type="text" name="{{ firstNestedField.key }}" id="input-{{ firstNestedField.key }}-{{ loop.index0 }}"
-              class="form-textbox  nested-input {{ ' has-error' if nestedFieldError }} {{ ' nested-inline-base-input' if loop.first }}"
-              value="{{ d }}">
-            {% endfor %}
-        {% else %}
-              {% for f in field.nestedFields %}
-                {{ f.label if loop.first }}
-                {% set nestedFieldError = stepErrors[f.key+'.'+i].message | replace(stepErrors[f.key+'.'+loop.index].label, "") %}
-                <input type="text" name="{{ f.key }}" id="input-{{ f.key }}-{{ loop.index0 }}"
-                class="form-textbox nested-input {{ ' has-error' if nestedFieldError }} {{ ' nested-inline-base-input' if loop.first }}"
-                value="{{ stepData[f.key][loop.index] | default('') }}">
-              {% endfor %}
-        {% endif %}
-      </label>
-
-      <p class="add-element-link"><span class="add-icon"></span><a href="#" class="add-row">{{ field.addRowLabel }}</a></p>
+        {% component 'form-textbox', {
+          label: 'Medications',
+          name: field.nestedField,
+          variant: 'large',
+          error: stepErrors[field.nestedField].message | replace(stepErrors[field.nestedField].label, ""),
+          value: stepData[field.nestedField]
+        } %}
       </div>
     {% endif %}
   

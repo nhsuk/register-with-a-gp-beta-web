@@ -27,12 +27,15 @@
     {% endif %}
   </label>
 {% endif %}
-
 <input
   type="number"
   name="{{ name }}"
   id="input-{{ name }}"
-  class="form-textbox{{ ' form-textbox--short' if variant == 'short' }}{{ ' has-error' if error }}"
+  class="form-textbox{{ ' form-textbox--short' if variant == 'short' }}
+  {% if (error) or ((stepErrors['value'].label == 'value') and (name == 'day')) %}
+    has-error
+  {% endif %}
+  "
   {% if value %}
     value="{{ value }}"
   {% endif %}

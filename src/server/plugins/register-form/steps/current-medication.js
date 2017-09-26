@@ -1,22 +1,13 @@
 import Joi from 'joi';
 import {postHandlerFactory, getHandlerFactory} from './common';
 
+
 const schema = Joi.object().keys({
   'current-medication': Joi.boolean().required()
     .meta({
       componentType: 'current-medication-radio',
       nestedFieldVisibleValue: 'true',
-      nestedFields: [
-        {
-          'label': 'Medication',
-          'key': 'medications',
-        },
-        {
-          'label': 'Medication',
-          'key': 'medications',
-        }
-      ],
-      addRowLabel: 'Add another medication',
+      nestedField: 'medications',
       children: [
         { label: 'Yes', value: 'true', show_nested_fields:true},
         { label: 'No', value: 'false', show_nested_fields:false},
@@ -32,10 +23,12 @@ const schema = Joi.object().keys({
     }),
   'medications': Joi.when('current-medication', {
     is: true,
-    then: Joi.array().items(Joi.string().max(200).allow('')).options({
+    then: Joi.string().max(200).allow('').options({
       language: {
-        key: 'A medication item ',
+        key: 'Medications ',
       },
+    }).meta({
+      componentType: 'textbox',
     })
   }),
   'submit': Joi.any().optional().strip()

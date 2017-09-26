@@ -27,8 +27,8 @@ function getFilters(env) {
       return str.split(seperator);
     },
     fulldateerror(str){
-      if (str.includes('Fulldate error')){
-        return 'This is not a valid date';
+      if (str === 'value'){
+        return 'day';
       } else {
         return str;
       }

@@ -9,7 +9,7 @@ describe('Nunjucks global filters', () => {
   });
 
   it('nl2br should return a string with line breaks', () => {
-    expect(getFilters(env).fulldateerror('Fulldate error')).toBe('This is not a valid date');
+    expect(getFilters(env).fulldateerror('value')).toBe('day');
   });
 
 });
