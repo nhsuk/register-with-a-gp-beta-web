@@ -139,6 +139,16 @@ under the "babel" key.
 | `POSTCODE_API_KEY` | Api key for getAddress.io |  |
 | `POSTCODE_API_HOST` | Api host for getAddress.io |  |
 
+### Services
+
+##### Elasticsearch
+
+The GP data stored in ElasticSsearch. We are using the ES search index for current GP lookup functionality.
+
+##### Elasticsearch Updater
+
+GP data changes updating by a [elasticsearch-updater](https://github.com/nhsuk/elasticsearch-updater) instance. We are not maintaining `elasticsearch-updater` repository. We just integrated the docker image to our infrastructure.  
+
 ##### GP Email addresses
 
 To keep the value of the recipient email address private they need to be stored
