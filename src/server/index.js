@@ -128,6 +128,11 @@ const manifest = {
     },
     {
       plugin: {
+        register: './plugins/signup'
+      }
+    },
+    {
+      plugin: {
         register: 'blipp',
         options: {}
       }

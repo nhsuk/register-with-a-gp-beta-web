@@ -1,0 +1,19 @@
+{% extends 'layouts/base.njk' %}
+
+{% block head_title_content %}Register with a GP - NHS.UK{% endblock %}
+
+{% block body_main_content %}
+  <div class="page-section">
+
+    <h1 class="form-title">Register with a GP experiment and sign up</h1>
+
+    <form method="post" id="current-step-form" action="#googleformlink">
+      {% block submitRow %}
+        <div class="form-group continue-step">
+          <button type="submit" class="button">Form</button>
+        </div>
+      {% endblock submitRow %}
+
+    </form>
+  </div>
+{% endblock body_main_content %}
