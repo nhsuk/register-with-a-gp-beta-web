@@ -280,9 +280,11 @@ CI build which runs all the tests and the linter. Travis build generating a dev 
 We are using [Teamcity] to push the release to Staging and Production.
 
 In Teamcity under `Rancher Deployments` > select `register-with-a-gp-beta-web` you will see three jobs
-`Promote Release to Staging
- Promote Release to Production 
- Promote Release to Production UKWest`
+```
+Promote Release to Staging
+Promote Release to Production 
+Promote Release to Production UKWest
+```
 Select the appropriate job. You will see the latest release you made in github. Select the desired release and click on `Run` on right side of the page.
 
 ## License
