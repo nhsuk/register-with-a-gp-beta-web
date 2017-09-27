@@ -273,28 +273,12 @@ If you're code doesn't conform then the [CI](#continuous-integration) build will
 #### TravisCI
 
 We are using [TravisCI] for our continuous integration, each commit triggers a
-CI build which runs all the tests and the linter, it doesn't deploy anywhere
-as of yet.
+CI build which runs all the tests and the linter. Travis build generating a dev docker instance and deploying to  Rancher.  You can reach the dev instance domain on Github pull-request page. The domain  will  appear bottom of the page after all build finished.
 
 #### TeamCity
 
 We are looking at using the TeamCity server at https://tc.nhschoices.net but
 at this point in time there doesn't seem to be a compelling case to move over.
-
-#### Deploy to Heroku
-
-```bash
-heroku plugins:install heroku-container-tools
-heroku plugins:install heroku-container-registry
-heroku container:login
-
-heroku create register-with-gp
-heroku config:set NODE_ENV=development --app register-with-gp
-heroku config:set SESSION_SECRET=secret_session_session --app register-with-gp
-heroku ps:scale web=1 --app register-with-gp
-heroku container:push web --app register-with-gp
-heroku open --app register-with-gp
-```
 
 ## License
 Short version: MIT
