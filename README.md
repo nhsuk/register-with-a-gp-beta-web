@@ -72,7 +72,7 @@ Make sure you have Docker and compose installed for your operating system
 then run:
 
 ```bash
-$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+$ docker-compose -p gp-reg -f docker-compose.yml up --build --force-recreate
 ```
 
 > Note: The Dockerfile is currently set up to provide a development
@@ -81,7 +81,7 @@ $ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 
 If you want to run in production mode then you should run:
 ```bash
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+  docker-compose -p gp-reg -f docker-compose.yml -f docker-compose.prod.yml up --build --force-recreate "$@"
 ```
 
 Because these commands are annoying to type there are some helper scripts in
@@ -89,8 +89,8 @@ the `bin` directory:
 
 | Script | Command |
 |:---------|:------------|
-| `bin/dev.sh` | `$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up` |
-| `bin/prod.sh` | `$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up` |
+| `bin/dev.sh` | `$ docker-compose -p gp-reg -f docker-compose.yml up --build --force-recreate` |
+| `bin/prod.sh` | `$ docker-compose -p gp-reg -f docker-compose.yml -f docker-compose.prod.yml up --build --force-recreate "$@"` |
 
 To correctly test the production version (it sends cookies with the secure flag)
 you will need to browse it with a HTTPS connection. I do this by installing
