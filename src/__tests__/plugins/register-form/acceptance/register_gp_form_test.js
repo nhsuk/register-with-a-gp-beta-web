@@ -2,10 +2,17 @@
 // eslint-disable-next-line no-undef
 
 import practiceLookup from '../../../../shared/lib/practice-lookup';
+import currentMedicationStep from '../../../../server/plugins/register-form/steps/current-medication';
 
 const firstPractice = practiceLookup.getPractices()[0];
 
 Feature('GP Registration Form');
+
+Scenario('Test current medication', (I) => {
+  I.amOnPage(`/${firstPractice.key}/register/${currentMedicationStep.slug}`);
+  I.see('Are you taking any medication?');
+});
+
 
 Scenario('Test all yes/no question with "no" answer on gp registration flow', (I) => {
   I.amOnPage('/');
