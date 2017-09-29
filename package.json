@@ -81,6 +81,7 @@
     "build": "./node_modules/.bin/npm-run-all clean --parallel build:* && cp -r src/client/compiled/ dist/client/",
     "test:acceptance_local": "babel-node ./node_modules/.bin/codeceptjs run --steps --verbose --config=./conf/acceptance_local.conf.js",
     "test:acceptance_cloud": "babel-node ./node_modules/.bin/codeceptjs run --steps --verbose --config=./conf/acceptance_cloud.conf.js",
+    "test:acceptance_windows_local": "babel-node ./node_modules/codeceptjs/bin/codecept.js run --steps --verbose --config=./conf/acceptance_local.conf.js",
     "lint:eslint": "DEBUG=eslint:cli-engine eslint .",
     "lint:editorconfig": "eclint check src/** README.md",
     "lint": "npm-run-all --parallel lint:*",
