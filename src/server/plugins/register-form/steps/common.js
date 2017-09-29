@@ -151,7 +151,7 @@ export function getLatestUncompletedStep(cookieData) {
 
 export function checkStepCompletedBefore(requestedStepKey, latestUncompletedStep){
 	// fixme: Our current test framework(jest) not working with codeceptJS,
-  // that's the reason implemeted this logic. it is mocking data for acceptance tests.
+  // that's the reason implemeted this logic. Step not validate during the acceptance tests runnig
   if (process.env.ACCEPTANCE_TEST){
     return true;
   }
