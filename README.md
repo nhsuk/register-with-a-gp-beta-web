@@ -141,15 +141,15 @@ under the "babel" key.
 
 ### Services
 
-##### Elasticsearch
+#### Elasticsearch
 
 The GP data stored in ElasticSsearch. We are using the ES search index for current GP lookup functionality.
 
-##### Elasticsearch Updater
+#### Elasticsearch Updater
 
 GP data changes updating by a [elasticsearch-updater](https://github.com/nhsuk/elasticsearch-updater) instance. We are not maintaining `elasticsearch-updater` repository. We just integrated the docker image to our infrastructure.  
 
-##### GP Email addresses
+### GP Email addresses
 
 To keep the value of the recipient email address private they need to be stored
 in environment variables. Each GP email variable is made up of `GP_EMAIL_` and
@@ -284,6 +284,8 @@ If you're code doesn't conform then the [CI](#continuous-integration) build will
 
 We are using [TravisCI] for our continuous integration, each commit triggers a
 CI build which runs all the tests and the linter. Travis build generating a dev docker instance and deploying to  Rancher.  You can reach the dev instance domain on Github pull-request page. The domain  will  appear bottom of the page after all build finished.
+
+[Check CI/CD workflow diagram here](https://user-images.githubusercontent.com/1518272/31014020-bd1bca36-a510-11e7-9d75-36226e7cb2e5.png)
 
 #### TeamCity
 
