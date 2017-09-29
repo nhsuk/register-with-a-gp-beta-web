@@ -7,6 +7,7 @@ const firstPractice = practiceLookup.getPractices()[0];
 
 Feature('GP Registration Form');
 
+
 Scenario('Test all yes/no question with "no" answer on gp registration flow', (I) => {
   I.amOnPage('/');
   I.see('Apply to register with a GP practice');
