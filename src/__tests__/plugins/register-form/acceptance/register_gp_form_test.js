@@ -188,7 +188,7 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
 
 });
 
-Scenario.only('test all mandatory fields',(I)=>{
+Scenario('test all mandatory fields',(I)=>{
 
   I.amOnPage('/');
   I.see('Apply to register with a GP practice');
@@ -249,7 +249,7 @@ Scenario.only('test all mandatory fields',(I)=>{
   I.fillField('Town or City', 'London');
   I.click('Continue');
 
-  I.see('What is your address?');//todo
+  I.see('What is your address?');
   I.fillField('Postcode', 'SW1W 9SZ');
   I.click('Find address');
   I.waitForElement('#select-link-0', 3);
@@ -261,7 +261,7 @@ Scenario.only('test all mandatory fields',(I)=>{
   I.click('Continue');
   I.waitForElement({css: ".callout--error"},5);
   I.see("Please enter a phone number");
-  I.fillField('#input-bestPhone','07779998833');// valid phone number validation is missing
+  I.fillField('#input-bestPhone','07779998833');
   I.click('Continue');
 
   I.see('Have you served in the armed forces?');
