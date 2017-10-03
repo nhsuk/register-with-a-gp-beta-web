@@ -18,7 +18,7 @@ class GPAutoComplete {
     this.manualAddressContainer = $('#gp-manual-address');
     this.resetButton.on('click', this.resetBtnClickHandler.bind(this));
     this.findSurgeryButton.on('click', this.findSurgeryButtonClickHandler.bind(this));
-    this.autoCompleteInput.on('keyup', this.autoCompleteInputKeyUpHandler.bind(this));
+    this.autoCompleteInput.on('keypress', this.autoCompleteInputKeyPressHandler.bind(this));
     this.resultListContainer.on('click', '.select-link', this.resultItemClickHandler.bind(this));
   }
 
@@ -89,19 +89,12 @@ class GPAutoComplete {
     return false;
   }
 
-  autoCompleteInputKeyUpHandler (e){
+  autoCompleteInputKeyPressHandler (e){
     const keyCode = e.keyCode || e.which;
-    if (keyCode === 40 || keyCode === 38 || keyCode === 13){
+    if (keyCode === 13){
+      this.fetchList(this.endpoint, this.queryParam, this.autoCompleteInput.val());
+      e.preventDefault();
       return false;
-    }
-
-    this.cleanSelectedGP();
-    const keywords = $(e.target).val();
-    clearTimeout(this.timer);
-    if (keywords){
-      this.timer = setTimeout(this.fetchList.bind(this, this.endpoint, this.queryParam, keywords), 400);
-    }else{
-      this.cleanResults();
     }
   }
 

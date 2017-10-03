@@ -4,7 +4,7 @@ Date: 16/03/2017
 
 ## Status
 
-Accepted
+Superceded by [5. Add Synthetic max-age to Session Cookie](0005-add-synthetic-max-age-to-session-cookie.md)
 
 ## Context
 

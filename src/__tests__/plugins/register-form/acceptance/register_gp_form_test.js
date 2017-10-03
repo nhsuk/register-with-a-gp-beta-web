@@ -7,6 +7,7 @@ const firstPractice = practiceLookup.getPractices()[0];
 
 Feature('GP Registration Form');
 
+
 Scenario('Test all yes/no question with "no" answer on gp registration flow', (I) => {
   I.amOnPage('/');
   I.see('Apply to register with a GP practice');
@@ -149,6 +150,7 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
   I.see('Are you already registered with a GP?');
   I.click('label[data-label=Yes]');
   I.fillField('#input-gp-lookup', 'South Chinnor');
+  I.click('Find Surgery');
   I.waitForElement('#select-link-0', 5);
   I.click('#select-link-0');
   I.waitForElement('#selected-gp-summary', 5);
