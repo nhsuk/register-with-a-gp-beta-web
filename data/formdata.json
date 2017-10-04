@@ -1,0 +1,68 @@
+{
+  "nhsNumber":{
+    "nhs-number-known":false,
+    "nhs-number":""
+  },
+  "gender":{
+    "gender":"Male"
+  },
+  "name":{
+    "nameTitle":"Mr",
+    "firstName":"Joe",
+    "middleNames":"",
+    "lastName":"Pesci"
+  },
+  "dateOfBirth":{
+    "day":9,
+    "month":2,
+    "year":1943
+  },
+  "countryAndTown":{
+    "country":"United States",
+    "town":"New Jersey"
+  },
+  "addressLookup":{
+    "address1":"Buckingham Palace",
+    "address2":"",
+    "address3":"",
+    "town":"London",
+    "county":"Greater London",
+    "houseNumber":"",
+    "postcode":"SW1A1AA"
+  },
+  "contactDetails":{
+    "bestPhone":"07777727777",
+    "backUpPhone":"",
+    "email":"joe.p@email.com"
+  },
+  "previouslyArmed":{
+    "previously-armed":false,
+    "armedStaffNumber":"",
+    "day":"",
+    "month":"",
+    "year":""
+  },
+  "previouslyRegistered":{
+    "previously-registered":false,
+    "gpName":"",
+    "gpAddress":"",
+    "manualGPName":"",
+    "address1":"",
+    "address2":"",
+    "address3":"",
+    "locality":"",
+    "postcode":""
+  },
+  "currentMedication":{
+    "current-medication":false,
+    "medications":""
+  },
+  "allergies":{
+    "any-allergies":false,
+    "allergies":""
+  },
+  "medicalHistory":{
+    "medical-history":"",
+    "medical-history-details":""
+  }
+}
