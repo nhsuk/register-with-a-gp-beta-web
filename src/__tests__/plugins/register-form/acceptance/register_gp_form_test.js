@@ -201,7 +201,7 @@ Scenario('test all mandatory fields',(I)=>{
   I.see('Do you know your NHS number?');
   I.click('Continue');
   I.seeElement({css: ".callout--error"});
-  I.see('There was a problem submitting this page');
+  I.see('There’s a problem');
   I.click('label[data-label=No]');
   I.click('Continue');
   I.click({css:".button--back"});
@@ -247,8 +247,8 @@ Scenario('test all mandatory fields',(I)=>{
   I.see('Where were you born?');
   I.selectOption('Country','United Kingdom');
   I.click('Continue');
-  I.see("Please enter your town or city");
-  I.fillField('Town or City', 'London');
+  I.see("Please enter where you were born");
+  I.fillField('Town or city', 'London');
   I.click('Continue');
 
   I.see('What is your address?');
