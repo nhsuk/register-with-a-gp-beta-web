@@ -128,6 +128,12 @@ const manifest = {
     },
     {
       plugin: {
+        register: './plugins/formdata',
+        options: {}
+      }
+    },
+    {
+      plugin: {
         register: 'blipp',
         options: {}
       }
