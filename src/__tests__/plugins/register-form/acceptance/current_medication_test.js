@@ -13,7 +13,7 @@ Scenario('Test Current Medication validation error messages shows up', (I) => {
   I.see('Are you taking any medication?');
 
   I.click('Continue');
-  I.see('There was a problem submitting this page');
+  I.see('There’s a problem');
   I.see('Please answer this question');
 });
 

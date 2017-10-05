@@ -38,7 +38,7 @@ Scenario('Test all yes/no question with "no" answer on gp registration flow', (I
 
   I.see('Where were you born?');
   I.selectOption('Country','United Kingdom');
-  I.fillField('Town or City', 'London');
+  I.fillField('Town or city', 'London');
   I.click('Continue');
 
   I.see('What is your address?');
@@ -84,7 +84,7 @@ Scenario('Test all yes/no question with "no" answer on gp registration flow', (I
 
 
   I.see('Check your details');
-  I.click('Send to surgery');
+  I.click('Send to GP surgery');
 
 });
 
@@ -121,7 +121,7 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
 
   I.see('Where were you born?');
   I.selectOption('Country','United Kingdom');
-  I.fillField('Town or City', 'London');
+  I.fillField('Town or city', 'London');
   I.click('Continue');
 
   I.see('What is your address?');
@@ -186,7 +186,7 @@ Scenario('Test all yes/no question with "yes" answer on gp registration flow', (
   I.click('Continue');
 
   I.see('Check your details');
-  I.click('Send to surgery');
+  I.click('Send to GP surgery');
 
 });
 

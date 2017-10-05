@@ -57,8 +57,8 @@ const key = 'previouslyArmed';
 const slug = 'previously-armed';
 
 const details = {
-  summary: 'Why am I being asked this question?',
-  content: 'If you’ve served for at least one day in the armed forces (as a regular or a reservist) you’re entitled to priority care for any conditions relating to that time. <br><br>Telling your new GP practice about your service will: <ul><li>start the transfer of your medical records from the Ministry of Defence</li><li>help you benefit from special services, like prosthetics and mental health</li></ul>',
+  summary: 'Why GPs ask this?',
+  content: 'Knowing about your time in the armed forces helps GPs get your military medical records. <br>You could also get priority care for health issues relating to your service.',
   position: 'below'
 };
 

@@ -26,13 +26,13 @@
       {{ row('Name', data.name, 'name') }}
       {{ row('Sex', data.gender, 'gender') }}
       {{ row('Date of birth', data.dateOfBirth, 'dateOfBirth', false, '/') }}
-      {{ row('Current Address', data.addressLookup, 'addressLookup', true, ' ', ['houseNumber']) }}
-      {{ row('Contact Details', data.contactDetails, 'contactDetails', true) }}
+      {{ row('Current address', data.addressLookup, 'addressLookup', true, ' ', ['houseNumber']) }}
+      {{ row('Contact details', data.contactDetails, 'contactDetails', true) }}
       {{ row('Place of birth', data.countryAndTown, 'countryAndTown', true) }}
       {% if data.nhsNumber['nhs-number-known'] %}
         {{ row('NHS number', {'nhs-number': data.nhsNumber['nhs-number']}, 'nhsNumber', true) }}
       {% else %}
-        {{ row('NHS number', {'empty': 'I don’t know my NHS number'}, 'nhsNumber') }}
+        {{ row('NHS number', {'empty': 'NHS number not known'}, 'nhsNumber') }}
       {% endif %}
       {% if data.previouslyArmed['previously-armed'] %}
 
@@ -40,7 +40,7 @@
         {{ row('Enlist date', {'day' : data.previouslyArmed['day'], 'month': data.previouslyArmed['month'], 'year':data.previouslyArmed['year']}, 'previouslyArmed', false, '/')}}
 
       {% else %}
-        {{ row('Armed forces',{'empty': 'I haven’t served in the armed forces'}, 'previouslyArmed' )}}
+        {{ row('Armed forces',{'empty': 'Not served in the armed forces'}, 'previouslyArmed' )}}
       {% endif %}
     </table>
     <table class="summary">
@@ -67,7 +67,7 @@
         {% endif %}
 
       {% else %}
-        {{ row('Current GP', {'empty': 'I’m not registered with a GP'}, 'previouslyRegistered') }}
+        {{ row('Current GP', {'empty': 'Not registered with a GP'}, 'previouslyRegistered') }}
       {% endif %}
     </table>
 
@@ -77,19 +77,19 @@
       {% if (data.currentMedication['current-medication']) and (data.currentMedication['medications'] | nl2br) %}
         {{ row('Medication', {'medicationDetails': data.currentMedication['medications']}, 'currentMedication', true) }}
       {% else %}
-        {{ row('Medication', {'empty': 'I’m not currently taking any medication'}, 'currentMedication') }}
+        {{ row('Medication', {'empty': 'Not taking medication'}, 'currentMedication') }}
       {% endif %}
 
       {% if (data.allergies['any-allergies']) and (data.allergies['allergies'] | nl2br) %}
         {{ row('Allergies', {'allergies-list': data.allergies['allergies']}, 'allergies', true) }}
       {% else %}
-        {{ row('Allergies', {'empty': 'I don’t have any allergies'}, 'allergies') }}
+        {{ row('Allergies', {'empty': 'No allergies'}, 'allergies') }}
       {% endif %}
 
       {% if (data.medicalHistory['medical-history'] | nl2br) or (data.medicalHistory['history-chosen'] | nl2br) or (data.medicalHistory['medical-history-details'] | nl2br) %}
         {{ row('Health', data.medicalHistory, 'medicalHistory', true) }}
       {% else %}
-        {{ row('Health', {'empty': 'I’m not supplying any health details'}, 'medicalHistory') }}
+        {{ row('Health', {'empty': 'No medical history'}, 'medicalHistory') }}
       {% endif %}
     </table>
 
@@ -106,18 +106,18 @@
 
     <details class="summary-info-details">
       <summary>
-        <span class="details__summary">How your personal information is handled</span>
+        <span class="details__summary">How your information is used</span>
       </summary>
       <div class="details__content">
         <div class="callout callout--info">
-          <p>Only the GP surgery sees the personal information in your application. It’s sent securely to them so they can add it to your medical record. It’s not stored for any other purpose.</p>
+          <p>Only the GP surgery sees the information in your application form. It’s sent securely so they can add it to your medical record. It’s not used for any other purpose.</p>
         </div>
       </div>
     </details>
 
       <form id="sendForm" name="sendForm" method="post" class="confirm-summary">
        <input type="hidden" name="csrf" value="{{csrf}}">
-       <button type="submit" id="sendBtn" class="button">Send to surgery</button>
+       <button type="submit" id="sendBtn" class="button">Send to GP surgery</button>
       </form>
   </div>
 {% endblock body_main_content %}

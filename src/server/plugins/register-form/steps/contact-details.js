@@ -13,7 +13,7 @@ const schema = Joi.object().keys({
       },
     }),
   'backUpPhone': Joi.string().allow('').max(20).label('Back-up phone number (optional)').meta({ componentType: 'tel' }),
-  'email': Joi.string().email().allow('').max(254).optional().label('Email address (optional)').meta({ componentType: 'textbox' }),
+  'email': Joi.string().email().allow('').max(254).optional().label('Email (optional)').meta({ componentType: 'textbox' }),
   'submit': Joi.any().optional().strip()
 });
 
@@ -22,8 +22,8 @@ const key = 'contactDetails';
 const slug = 'contact-details';
 
 const details = {
-  summary: 'Why am I being asked this question?',
-  content: '{{ CURRENT_PRACTICE.name }} may need to get in touch with you to complete your registration.',
+  summary: 'Why GPs ask this?',
+  content: '{{ CURRENT_PRACTICE.name }} may need to contact you to complete your registration.',
   position: 'below'
 };
 
