@@ -200,7 +200,7 @@ Scenario('test all mandatory fields',(I)=>{
 
   I.see('Do you know your NHS number?');
   I.click('Continue');
-  I.seeElement({css: ".callout--error"});
+  I.seeElement({css: '.callout--error'});
   I.see('There’s a problem');
   I.click('label[data-label=No]');
   I.click('Continue');
