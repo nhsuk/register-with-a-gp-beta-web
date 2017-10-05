@@ -204,7 +204,7 @@ Scenario('test all mandatory fields',(I)=>{
   I.see('There’s a problem');
   I.click('label[data-label=No]');
   I.click('Continue');
-  I.click({css:".button--back"});
+  I.click({css:'.button--back'});
   I.see('Do you know your NHS number?');
   I.click('label[data-label=Yes]');
   I.waitForElement('.nested-fields-container', 3);
@@ -215,13 +215,13 @@ Scenario('test all mandatory fields',(I)=>{
 
   I.see('What is your sex?');
   I.click('Continue');
-  I.waitForElement({css: ".callout--error"},5);
+  I.waitForElement({css: '.callout--error'},5);
   I.click('label[data-label=Female]');
   I.click('Continue');
 
   I.see('What is your name?');
   I.click('Continue');
-  I.waitForElement({css: ".callout--error"},5);
+  I.waitForElement({css: '.callout--error'},5);
   I.see('Please select a title');
   I.see('Please enter your first name');
   I.see('Please enter your last name');
@@ -235,19 +235,19 @@ Scenario('test all mandatory fields',(I)=>{
 
   I.see('What is your date of birth?');
   I.click('Continue');
-  I.seeElement({css: ".callout--error"});
+  I.seeElement({css: '.callout--error'});
   I.fillField('#input-day', '01');
   I.fillField('#input-month','12');
   I.fillField('#input-year','0000');
   I.click('Continue');
-  I.see("Please enter a year after 1885");
+  I.see('Please enter a year after 1885');
   I.fillField('#input-year','1980');
-  I.click('Continue');  
+  I.click('Continue');
 
   I.see('Where were you born?');
   I.selectOption('Country','United Kingdom');
   I.click('Continue');
-  I.see("Please enter where you were born");
+  I.see('Please enter where you were born');
   I.fillField('Town or city', 'London');
   I.click('Continue');
 
@@ -258,21 +258,21 @@ Scenario('test all mandatory fields',(I)=>{
   I.click('#select-link-0');
   I.waitForElement('#address-confirm', 3);
   I.click('Continue');
-  
+
   I.see(`How can ${firstPractice.name} contact you?`);
   I.click('Continue');
-  I.waitForElement({css: ".callout--error"},5);
-  I.see("Please enter a phone number");
+  I.waitForElement({css: '.callout--error'},5);
+  I.see('Please enter a phone number');
   I.fillField('#input-bestPhone','07779998833');
   I.click('Continue');
 
   I.see('Have you served in the armed forces?');
   I.click('Continue');
-  I.waitForElement({css: ".callout--error"},3);
+  I.waitForElement({css: '.callout--error'},3);
   I.click('label[data-label=Yes]');
   I.waitForElement('.nested-fields-container', 3);
   I.click('Continue');
-  I.waitForElement({css: ".callout--error"},3);
+  I.waitForElement({css: '.callout--error'},3);
   I.fillField('Service or staff number', '11111112233');
   I.fillField('Day', '11');
   I.fillField('Month', '11');
@@ -281,7 +281,7 @@ Scenario('test all mandatory fields',(I)=>{
 
   I.see('Are you already registered with a GP?');
   I.click('Continue');
-  I.seeElement({css: ".callout--error"},3);
+  I.seeElement({css: '.callout--error'},3);
   I.click('label[data-label=Yes]');
   I.click({css: '.details__summary'});
   I.waitForElement({css: '#input-manual-gp-name'},5);
@@ -294,36 +294,32 @@ Scenario('test all mandatory fields',(I)=>{
   I.click('Continue');
   I.see('What was your address?');
   I.click('Continue');
-  I.seeElement({css: ".callout--error"},3);
+  I.seeElement({css: '.callout--error'},3);
   I.see('Please enter a postcode');
   I.fillField('#input-postcode','SW3 6NA');
   I.click('Continue');
    //I.see(`Are you registered at ${firstPractice.name} with this name?`);
-  I.waitForElement({css: ".registered-name"},10);
-  I.see("Mrs Elizabeth Mary");
+  I.waitForElement({css: '.registered-name'},10);
+  I.see('Mrs Elizabeth Mary');
   I.click('Continue');
-  I.seeElement({css: ".callout--error"},3);
+  I.seeElement({css: '.callout--error'},3);
   I.click('label[data-label=Yes]');
   I.click('Continue');
 
 
   I.see('Are you taking any medication?');
   I.click('Continue');
-  I.seeElement({css: ".callout--error"},3);
+  I.seeElement({css: '.callout--error'},3);
   I.click('label[data-label=No]');
   I.click('Continue');
 
   I.see('Do you have any allergies?');
   I.click('Continue');
-  I.seeElement({css: ".callout--error"},3);
+  I.seeElement({css: '.callout--error'},3);
   I.click('label[data-label=No]');
   I.click('Continue');
 
   I.see('Have you ever had any of these conditions?');
-
-
-  
-  
 
 
 });
