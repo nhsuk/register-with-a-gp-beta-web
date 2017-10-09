@@ -9,6 +9,7 @@ cache:
 env: DISPLAY=':99.0'
 script:
   - sh generate_acceptance_cloud.conf.sh
+  - yarn build
   - yarn test:acceptance_cloud
 after_success:
   - bash ./scripts/deploy.sh
