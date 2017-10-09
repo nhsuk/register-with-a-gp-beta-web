@@ -29,6 +29,4 @@ USER $USERNAME
 
 RUN yarn build
 
-ENTRYPOINT generate_acceptance_cloud.conf.sh
-
 CMD yarn start
