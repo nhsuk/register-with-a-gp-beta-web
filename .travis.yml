@@ -8,10 +8,8 @@ cache:
   yarn: true
 env: DISPLAY=':99.0'
 script:
-  - yarn build
-  - yarn run lint
-  - yarn test
-  - yarn test:acceptance_local
+  - sh generate_acceptance_cloud.conf.sh
+  - yarn test:acceptance_cloud
 after_success:
   - bash ./scripts/deploy.sh
 before_script:
