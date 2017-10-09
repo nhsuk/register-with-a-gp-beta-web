@@ -101,25 +101,25 @@
             <label for="manualAddress1" class="form-label">
               Address
             </label>
-            <input type="text" name="address1" class="form-textbox {{ ' has-error' if manualaddress1Error }}"  id="manualAddress1" value="{{ stepData['address1'] }}"/>
+            <input type="text" name="address1" class="form-textbox {{ ' has-error' if manualaddress1Error }}"  id="manualAddress1" value="{{ stepData['address1'] }}" aria-label="Address line 1"/>
           </div>
           <div id="inputdiv-manualAddress2" class="form-line">
-            <input type="text" name="address2" class="form-textbox {{ ' has-error' if manualaddress2Error }}" id="manualAddress2" value="{{ stepData['address2'] }}"/>
+            <input type="text" name="address2" class="form-textbox {{ ' has-error' if manualaddress2Error }}" id="manualAddress2" value="{{ stepData['address2'] }}" aria-label="Address line 2"/>
           </div>
            <div id="inputdiv-manualAddress3" class="form-line">
-            <input type="text" name="address3" class="form-textbox {{ ' has-error' if manualaddress3Error }}" id="manualAddress3" value="{{ stepData['address3'] }}"/>
+            <input type="text" name="address3" class="form-textbox {{ ' has-error' if manualaddress3Error }}" id="manualAddress3" value="{{ stepData['address3'] }}" aria-label="Address line 3"/>
           </div>
           <div id="inputdiv-manualTown" class="form-line">
             <label for="input-manualTown" class="form-label">
               Town or city
             </label>
-            <input type="text" name="locality" class="form-textbox {{ ' has-error' if manualaddress3Error }}" id="input-manualTown" value="{{ stepData['locality'] }}"/>
+            <input type="text" name="locality" class="form-textbox {{ ' has-error' if manualaddress3Error }}" id="input-manualTown" value="{{ stepData['locality'] }}" aria-label="Town or city"/>
           </div>
           <div id="inputdiv-manualPostcode" class="form-line">
             <label for="input-manualPostcode" class="form-label">
               Postcode
             </label>
-            <input type="text" name="postcode" class="form-textbox form-textbox--short {{ ' has-error' if postcodeError }}" id="input-manualPostcode" value="{{ stepData['postcode'] }}"/>
+            <input type="text" name="postcode" class="form-textbox form-textbox--short {{ ' has-error' if postcodeError }}" id="input-manualPostcode" value="{{ stepData['postcode'] }}" aria-label="Postcode"/>
           </div>
         </div>
         </div>

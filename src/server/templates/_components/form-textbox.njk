@@ -43,6 +43,10 @@
     {% if hint %}
       aria-describedby="{{ hintId }}"
     {% endif %}
+    {% if ariaLabel %}
+      aria-label="{{ ariaLabel }}"
+    {% endif %}
+   
   >
 {% endif %}
 </div>
