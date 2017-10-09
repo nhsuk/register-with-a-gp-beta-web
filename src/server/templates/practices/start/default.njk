@@ -11,35 +11,16 @@
   {% endblock %}
 
   <div class="page-section">
-    {% block body_main_content_main %}
-    <p>You can apply online if you’re registering for yourself.</p>
-    <div class="reading-width">
-      {% if CURRENT_PRACTICE.contact.link %}
-          <section class="callout callout--info">
-            <div class="reading-with">
-              <p>
-                To register for someone else, you need to go in person to <a href="{{ CURRENT_PRACTICE.contact.link }}">{{ CURRENT_PRACTICE.name }}</a>.
-              </p>
-              </div>
-          </section>
-      {% endif %}
-
-      <h3>How long it takes</h3>
-      <p>
-        {% block how_long_takes_paragraph %}
-          Applying online takes about 10 minutes. You’ll then need to go to {{ CURRENT_PRACTICE.name }} with proof of your identity and address. It usually takes {{ CURRENT_PRACTICE.regdays | default(7) }} days after that before you’re registered.
-        {% endblock %}
-      </p>
-
-      <section class="callout callout--info">
-        <div class="reading-with">
-          <p>
-            Some GP practices only register people who live in the local area. Check with <a href="{{ CURRENT_PRACTICE.contact.link }}">{{ CURRENT_PRACTICE.name }}</a> if you’re unsure.
-          </p>
-          </div>
-      </section>
-
+    <div class="reading-width register-gp-start">
+      {% block body_main_content_steps %}
+        <p>To register: </p>
+        <ol>
+          <li>Fill out this form (takes about 10 minutes) </li>
+          <li>Go to the surgery with proof of ID and address</li>
+        </ol>
       {% endblock %}
+
+      <p>You should be registered in [x] days.</p>
       <details>
         <summary>
           <span class="details__summary">How your information is used</span>
@@ -51,8 +32,18 @@
         </div>
       </details>
 
-      <a href="{{ firstStep }}" class="button start-step-btn" id="start-button">Start</a>
+      <a href="{{ firstStep }}" class="button start-step-btn" id="start-button">Start now</a>
+
+      {% block who_uses_service %}
+        <h3>Who can use this service</h3>
+          <p> Use this service to register yourself. To register someone else, go in person to the surgery.</p>
+          <p>Some GP practices only register people living in the local area. Check with {{ CURRENT_PRACTICE.name | default('the GP practice') }} if you’re unsure.</p>
+      {% endblock %}
+      
     </div>
   </div>
-  
 {% endblock %}
+      
+    
+  
+
