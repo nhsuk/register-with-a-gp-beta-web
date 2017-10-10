@@ -6,7 +6,7 @@
 
   {% block header_section %}
     <div class="local-header">
-      <h1 class="local-header__title">{% block header_section_title %} Register with {{ CURRENT_PRACTICE.name | default('the GP practice') }} {% endblock %}</h1>
+      <h1 class="form-title">{% block header_section_title %} Register with {{ CURRENT_PRACTICE.name | default('the GP practice') }} {% endblock %}</h1>
     </div>
   {% endblock %}
 
@@ -20,7 +20,7 @@
         </ol>
       {% endblock %}
 
-      <p>You should be registered in [x] days.</p>
+      <p class="registration-days">You should be registered in [x] days.</p>
       <details>
         <summary>
           <span class="details__summary">How your information is used</span>
@@ -35,9 +35,11 @@
       <a href="{{ firstStep }}" class="button start-step-btn" id="start-button">Start now</a>
 
       {% block who_uses_service %}
-        <h3>Who can use this service</h3>
+      <div class="service-use-block">
+        <h3 class="sub-header">Who can use this service</h3>
           <p> Use this service to register yourself. To register someone else, go in person to the surgery.</p>
-          <p>Some GP practices only register people living in the local area. Check with {{ CURRENT_PRACTICE.name | default('the GP practice') }} if you’re unsure.</p>
+          <p class="service-use__info">Some GP practices only register people living in the local area. Check with {{ CURRENT_PRACTICE.name | default('the GP practice') }} if you’re unsure.</p>
+      </div>
       {% endblock %}
       
     </div>
