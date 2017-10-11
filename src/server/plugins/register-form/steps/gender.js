@@ -12,6 +12,8 @@ const schema = Joi.object().keys({
         { label: 'Other', value: 'Not male or female' },
       ],
       variant: 'radio',
+      legendText : 'What is your sex?',
+      legendClass : 'legend-hidden'
     })
     .options({
       language: {

@@ -4,7 +4,10 @@ import {postHandlerFactory, getHandlerFactory} from './common';
 const schema = Joi.object().keys({
   'bestPhone': Joi.string().required().max(20).label('Best phone number')
     .meta({
-      componentType: 'tel'
+      componentType: 'tel',
+      fieldset: true,
+      legendText:'How can GP practice contact you?',
+      legendClass: 'legend-hidden'
     }).options({
       language: {
         any: {
@@ -13,7 +16,11 @@ const schema = Joi.object().keys({
       },
     }),
   'backUpPhone': Joi.string().allow('').max(20).label('Back-up phone number (optional)').meta({ componentType: 'tel' }),
-  'email': Joi.string().email().allow('').max(254).optional().label('Email (optional)').meta({ componentType: 'textbox' }),
+  'email': Joi.string().email().allow('').max(254).optional().label('Email (optional)')
+    .meta({ 
+      componentType: 'textbox',
+      fieldsetEnd: true 
+     }),
   'submit': Joi.any().optional().strip()
 });
 

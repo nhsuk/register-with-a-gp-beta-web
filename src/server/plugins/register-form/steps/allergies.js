@@ -13,6 +13,10 @@ const schema = Joi.object().keys({
         { label: 'No', value: 'false', show_nested_fields:false},
       ],
       variant: 'radio',
+      fieldset: true,
+      legendText:'Do you have any allergies?',
+      legendClass: 'legend-hidden',
+      fieldsetEnd: true
     })
     .options({
       language: {

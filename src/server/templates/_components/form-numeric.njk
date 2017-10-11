@@ -18,29 +18,37 @@
  #   } %}
  #}
 {% set hintId = 'hint-' + name %}
-<div id="inputdiv-{{ name }}" class="form-line">
-{% if label or error or hint %}
-  <label for="input-{{ name }}" class="form-label">
-    {{ label }} {% if optional %}(optional){% endif %}
-    {% if hint %}
-      <span class="form-label__hint" id="{{ hintId }}">{{ hint }}</span>
+
+{% if fieldset %}
+  <fieldset id="input-{{ name }}">
+    <legend class="{{ legendClass }}">{{legendText}}</legend>
+  {% endif %}
+    <div id="inputdiv-{{ name }}" class="form-line">
+    {% if label or error or hint %}
+      <label for="input-{{ name }}" class="form-label">
+        {{ label }} {% if optional %}(optional){% endif %}
+        {% if hint %}
+          <span class="form-label__hint" id="{{ hintId }}">{{ hint }}</span>
+        {% endif %}
+      </label>
     {% endif %}
-  </label>
-{% endif %}
-<input
-  type="number"
-  name="{{ name }}"
-  id="input-{{ name }}"
-  class="form-textbox{{ ' form-textbox--short' if variant == 'short' }}
-  {% if (error) or ((stepErrors['value'].label == 'value') and (name == 'day')) %}
-    has-error
+    <input
+      type="number"
+      name="{{ name }}"
+      id="input-{{ name }}"
+      class="form-textbox{{ ' form-textbox--short' if variant == 'short' }}
+      {% if (error) or ((stepErrors['value'].label == 'value') and (name == 'day')) %}
+        has-error
+      {% endif %}
+      "
+      {% if value %}
+        value="{{ value }}"
+      {% endif %}
+      {% if hint %}
+        aria-describedby="{{ hintId }}"
+      {% endif %}
+    >
+    </div>
+  {% if fieldsetEnd %}
+  </fieldset>
   {% endif %}
-  "
-  {% if value %}
-    value="{{ value }}"
-  {% endif %}
-  {% if hint %}
-    aria-describedby="{{ hintId }}"
-  {% endif %}
->
-</div>

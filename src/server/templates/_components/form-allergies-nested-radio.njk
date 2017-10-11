@@ -30,61 +30,58 @@
  #}
 {% set hintId = 'hint-' + name %}
 
-<fieldset id="input-{{ name }}">
-  {% if label or hint or error %}
-    <legend class="form-label" id="group-{{ name }}">
-      {{ label }} {% if optional %}(optional){% endif %}
-      {% if hint %}
-        <span class="form-label__hint" id="{{ hintId }}">{{ hint }}</span>
-      {% endif %}
-    </legend>
-  {% endif %}
+{% if fieldset %}
+  <fieldset id="input-{{ name }}">
+    <legend class="{{ legendClass }}">{{legendText}}</legend>
+{% endif %}
 
-  <div class="multiple-choice__container">
-    {% for option in children %}
-      {% set inputValue = option.value if 'value' in option else option.label %}
-      {% set inputId = ['input', name, loop.index] | join('--') %}
+    <div class="multiple-choice__container">
+      {% for option in children %}
+        {% set inputValue = option.value if 'value' in option else option.label %}
+        {% set inputId = ['input', name, loop.index] | join('--') %}
 
-      {% if variant == 'checkbox' %}
-        {% set isSelected = (value and (inputValue in value)) %}
-      {% else %}
-        {% set isSelected = (inputValue | string == value | default('') | string) %}
-      {% endif %}
+        {% if variant == 'checkbox' %}
+          {% set isSelected = (value and (inputValue in value)) %}
+        {% else %}
+          {% set isSelected = (inputValue | string == value | default('') | string) %}
+        {% endif %}
 
-      <label
-        for="{{ inputId }}"
-        class="multiple-choice multiple-choice--{{ variant | default('radio') }}{{ ' multiple-choice--inline' if inline }}{{ ' has-error' if error }} multiple-choice-radio-horizontal nested-radio-button"
-        data-label="{{ option.label }}" data-show-nested-fields="{{ option.show_nested_fields }}"
-      >
-        {{ option.label }}
-        <input
-          type="{{ variant | default('radio') }}"
-          name="{{ name }}"
-          id="{{ inputId }}"
-          value="{{ inputValue }}"
-          class="multiple-choice__input"
-          {% if isSelected %}
-            checked="checked"
-          {% endif %}
-          {% if hint %}
-            aria-describedby="{{ hintId }}"
-          {% endif %}
+        <label
+          for="{{ inputId }}"
+          class="multiple-choice multiple-choice--{{ variant | default('radio') }}{{ ' multiple-choice--inline' if inline }}{{ ' has-error' if error }} multiple-choice-radio-horizontal nested-radio-button"
+          data-label="{{ option.label }}" data-show-nested-fields="{{ option.show_nested_fields }}"
         >
-      </label>
-    {% endfor %}
+          {{ option.label }}
+          <input
+            type="{{ variant | default('radio') }}"
+            name="{{ name }}"
+            id="{{ inputId }}"
+            value="{{ inputValue }}"
+            class="multiple-choice__input"
+            {% if isSelected %}
+              checked="checked"
+            {% endif %}
+            {% if hint %}
+              aria-describedby="{{ hintId }}"
+            {% endif %}
+          >
+        </label>
+      {% endfor %}
     </div>
-    {% if field.nestedField %}
-      {% set showNestedField = (value in field.nestedFieldVisibleValue) %}
+      {% if field.nestedField %}
+        {% set showNestedField = (value in field.nestedFieldVisibleValue) %}
 
-      <div id="allergies-nested-container" class="nested-fields-container"  style="{{ 'display:none' if not showNestedField }}">
-        {% component 'form-textbox', {
-          label: 'Allergies',
-          name: field.nestedField,
-          variant: 'large',
-          error: stepErrors[field.nestedField].message | replace(stepErrors[field.nestedField].label, ""),
-          value: stepData[field.nestedField]
-        } %}
-      </div>
-    {% endif %}
+        <div id="allergies-nested-container" class="nested-fields-container"  style="{{ 'display:none' if not showNestedField }}">
+          {% component 'form-textbox', {
+            label: 'Allergies',
+            name: field.nestedField,
+            variant: 'large',
+            error: stepErrors[field.nestedField].message | replace(stepErrors[field.nestedField].label, ""),
+            value: stepData[field.nestedField]
+          } %}
+        </div>
+      {% endif %}
 
+{% if fieldsetEnd %}
 </fieldset>
+{% endif %}
