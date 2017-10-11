@@ -6,10 +6,11 @@ const Joi = JoiBase.extend(FullDateValidator);
 
 const schema = Joi.object().keys({
   'day': Joi.number().integer().min(1).max(31).required().label('Day')
-  .meta({ componentType: 'numeric',
-          fieldset: true,
-          legendText:'What is your date of birth?',
-          legendClass: 'legend-hidden' })
+  .meta({ 
+    componentType: 'numeric',
+    fieldset: true,
+    legendText:'What is your date of birth?',
+    legendClass: 'legend-hidden' })
   .options({
       language: {
         number: {
@@ -17,8 +18,8 @@ const schema = Joi.object().keys({
           min: 'Please enter a valid day',
           max: 'Please enter a valid day'
 
+        }
       }
-    }
   }),
   'month': Joi.number().integer().min(1).max(12).required().label('Month').meta({ componentType: 'numeric' }).options({
     language: {
@@ -30,7 +31,7 @@ const schema = Joi.object().keys({
     }
   }),
   'year': Joi.number().integer().min(1885).max(2025).required().label('Year')
-  .meta({ 
+  .meta({
     componentType: 'numeric',
     fieldsetEnd: true })
   .options({

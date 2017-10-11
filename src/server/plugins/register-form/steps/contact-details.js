@@ -17,10 +17,10 @@ const schema = Joi.object().keys({
     }),
   'backUpPhone': Joi.string().allow('').max(20).label('Back-up phone number (optional)').meta({ componentType: 'tel' }),
   'email': Joi.string().email().allow('').max(254).optional().label('Email (optional)')
-    .meta({ 
+    .meta({
       componentType: 'textbox',
-      fieldsetEnd: true 
-     }),
+      fieldsetEnd: true
+    }),
   'submit': Joi.any().optional().strip()
 });
 
