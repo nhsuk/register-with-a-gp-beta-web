@@ -17,10 +17,16 @@
   margin-top: 0px !important;
 }
 #inputdiv-year.form-line {
-  width: 120px;
-  float: left;
-  display: inline-block;
   margin-top: 0px !important;
+  padding: 0 4px 4px 4px;
+  @include media(tablet) {
+    width: 120px;
+    float: left;
+    display: inline-block;
+  }
+  @include media(mobile) {
+    overflow: hidden;
+  }
 }
 
 .form-textbox {
