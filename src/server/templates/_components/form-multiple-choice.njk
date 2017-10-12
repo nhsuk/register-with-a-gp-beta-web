@@ -30,7 +30,7 @@
  #}
 {% set hintId = 'hint-' + name %}
 
-<fieldset id="input-{{ name }}">
+<fieldset id="fieldset-{{ name }}">
   <legend class="{{ legendClass }}">{{ legendText }}</legend>
     {% if hint %}
       <p class="form-label form-label__hint" id="{{ hintId }}">{{ hint }}</p>
