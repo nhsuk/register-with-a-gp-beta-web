@@ -27,7 +27,7 @@
     "hoek": "^4.1.0",
     "inert": "^4.1.0",
     "javascript-natural-sort": "^0.7.1",
-    "joi": "^10.2.2",
+    "joi": "^12.0.0",
     "joi-postcode": "^3.0.0",
     "jquery": "~1.12.4",
     "lodash": "^4.17.4",
