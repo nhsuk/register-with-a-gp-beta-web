@@ -10,15 +10,19 @@ const schema = Joi.object().keys({
     .meta({
       componentType: 'dropdown' ,
       children: COUNTRIES,
+      fieldset: true,
+      legendText:'Where were you born?',
+      legendClass: 'legend-hidden'
     }),
-  'town': Joi.string().max(50).label('Town or City').required()
+  'town': Joi.string().max(50).label('Town or city').required()
     .meta({
-      componentType: 'textbox'
+      componentType: 'textbox',
+      fieldsetEnd: true
     }).options({
       language: {
         any: {
-          empty: 'Please enter your town or city',
-          required: 'Please enter your town or city'
+          empty: 'Please enter where you were born',
+          required: 'Please enter where you were born'
         },
       },
     }),

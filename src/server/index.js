@@ -128,7 +128,8 @@ const manifest = {
     },
     {
       plugin: {
-        register: './plugins/signup'
+        register: './plugins/formdata',
+        options: {}
       }
     },
     {
@@ -164,6 +165,12 @@ const manifest = {
     {
       plugin: {
         register: './plugins/redirect',
+        options: {}
+      }
+    },
+    {
+      plugin: {
+        register: './plugins/signup',
         options: {}
       }
     }

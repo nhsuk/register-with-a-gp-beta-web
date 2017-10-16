@@ -1,6 +1,6 @@
 {% set hintId = 'hint-' + name %}
 
-<fieldset id="input-{{ name }}">
+<fieldset id="fieldset-{{ name }}">
   {% if label or hint or error %}
     <legend class="form-label" id="group-{{ name }}">
       {{ label }} {% if optional %}(optional){% endif %}

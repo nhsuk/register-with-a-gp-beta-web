@@ -17,14 +17,13 @@
   float: left;
   padding: 0;
   text-align:left;
-
-  &:link,
-  &:visited,
+  &:visited, &:link {
+    color: $grey-1;
+  },
   &:focus,
-  &:active,
   &:hover {
     background-color: transparent;
-    color: $grey-1;
+    color: #000000;
     text-decoration: underline;
   }
 

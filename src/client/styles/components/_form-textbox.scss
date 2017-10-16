@@ -3,24 +3,30 @@
 }
 
 #inputdiv-day.form-line {
-  width: 50px;
+  width: 70px;
   float: left;
   display: inline-block;
   margin-right: 15px;
   margin-top: 0px !important;
 }
 #inputdiv-month.form-line {
-  width: 50px;
+  width: 70px;
   float: left;
   display: inline-block;
   margin-right: 15px;
   margin-top: 0px !important;
 }
 #inputdiv-year.form-line {
-  width: 90px;
-  float: left;
-  display: inline-block;
   margin-top: 0px !important;
+  padding: 0 4px 4px 4px;
+  @include media(tablet) {
+    width: 120px;
+    float: left;
+    display: inline-block;
+  }
+  @include media(mobile) {
+    overflow: hidden;
+  }
 }
 
 .form-textbox {

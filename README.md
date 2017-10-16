@@ -72,7 +72,7 @@ Make sure you have Docker and compose installed for your operating system
 then run:
 
 ```bash
-$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+$ docker-compose -p gp-reg -f docker-compose.yml up --build --force-recreate
 ```
 
 > Note: The Dockerfile is currently set up to provide a development
@@ -81,7 +81,7 @@ $ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 
 If you want to run in production mode then you should run:
 ```bash
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+  docker-compose -p gp-reg -f docker-compose.yml -f docker-compose.prod.yml up --build --force-recreate "$@"
 ```
 
 Because these commands are annoying to type there are some helper scripts in
@@ -89,8 +89,8 @@ the `bin` directory:
 
 | Script | Command |
 |:---------|:------------|
-| `bin/dev.sh` | `$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up` |
-| `bin/prod.sh` | `$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up` |
+| `bin/dev.sh` | `$ docker-compose -p gp-reg -f docker-compose.yml up --build --force-recreate` |
+| `bin/prod.sh` | `$ docker-compose -p gp-reg -f docker-compose.yml -f docker-compose.prod.yml up --build --force-recreate "$@"` |
 
 To correctly test the production version (it sends cookies with the secure flag)
 you will need to browse it with a HTTPS connection. I do this by installing
@@ -139,7 +139,17 @@ under the "babel" key.
 | `POSTCODE_API_KEY` | Api key for getAddress.io |  |
 | `POSTCODE_API_HOST` | Api host for getAddress.io |  |
 
-##### GP Email addresses
+### Services
+
+#### Elasticsearch
+
+The GP data stored in ElasticSsearch. We are using the ES search index for current GP lookup functionality.
+
+#### Elasticsearch Updater
+
+GP data changes updating by a [elasticsearch-updater](https://github.com/nhsuk/elasticsearch-updater) instance. We are not maintaining `elasticsearch-updater` repository. We just integrated the docker image to our infrastructure.  
+
+### GP Email addresses
 
 To keep the value of the recipient email address private they need to be stored
 in environment variables. Each GP email variable is made up of `GP_EMAIL_` and
@@ -273,28 +283,21 @@ If you're code doesn't conform then the [CI](#continuous-integration) build will
 #### TravisCI
 
 We are using [TravisCI] for our continuous integration, each commit triggers a
-CI build which runs all the tests and the linter, it doesn't deploy anywhere
-as of yet.
+CI build which runs all the tests and the linter. Travis build generating a dev docker instance and deploying to  Rancher.  You can reach the dev instance domain on Github pull-request page. The domain  will  appear bottom of the page after all build finished.
+
+[Check CI/CD workflow diagram here](https://user-images.githubusercontent.com/1518272/31014020-bd1bca36-a510-11e7-9d75-36226e7cb2e5.png)
 
 #### TeamCity
 
-We are looking at using the TeamCity server at https://tc.nhschoices.net but
-at this point in time there doesn't seem to be a compelling case to move over.
+We are using [Teamcity] to push the release to Staging and Production.
 
-#### Deploy to Heroku
-
-```bash
-heroku plugins:install heroku-container-tools
-heroku plugins:install heroku-container-registry
-heroku container:login
-
-heroku create register-with-gp
-heroku config:set NODE_ENV=development --app register-with-gp
-heroku config:set SESSION_SECRET=secret_session_session --app register-with-gp
-heroku ps:scale web=1 --app register-with-gp
-heroku container:push web --app register-with-gp
-heroku open --app register-with-gp
+In Teamcity under `Rancher Deployments` > select `register-with-a-gp-beta-web` you will see three jobs
 ```
+Promote Release to Staging
+Promote Release to Production 
+Promote Release to Production UKWest
+```
+Select the appropriate job. You will see the latest release you made in github. Select the desired release and click on `Run` on right side of the page.
 
 ## License
 Short version: MIT

@@ -13,6 +13,10 @@ const schema = Joi.object().keys({
         { label: 'No', value: 'false', show_nested_fields:false},
       ],
       variant: 'radio',
+      fieldset: true,
+      legendText:'Are you taking any medication?',
+      legendClass: 'legend-hidden',
+      fieldsetEnd: true
     })
     .options({
       language: {
@@ -38,7 +42,7 @@ const title = 'Are you taking any medication?';
 const key = 'currentMedication';
 const slug = 'current-medication';
 const details = {
-  summary: 'Why am I being asked this?',
+  summary: 'Why GPs ask this?',
   content: 'Letting your new GP know about your medication will help them while they wait for your medical records to transfer.',
   position: 'below'
 };

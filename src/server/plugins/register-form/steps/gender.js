@@ -9,9 +9,11 @@ const schema = Joi.object().keys({
       children: [
         { label: 'Female', value: 'Female' },
         { label: 'Male', value: 'Male' },
-        { label: 'Other', value: 'Unspecified' },
+        { label: 'Other', value: 'Not male or female' },
       ],
       variant: 'radio',
+      legendText : 'What is your sex?',
+      legendClass : 'legend-hidden'
     })
     .options({
       language: {
