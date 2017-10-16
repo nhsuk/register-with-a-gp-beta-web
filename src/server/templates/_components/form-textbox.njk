@@ -19,6 +19,10 @@
  #   } %}
  #}
 {% set hintId = 'hint-' + name %}
+{% if fieldset %}
+<fieldset id="fieldset-{{ name }}">
+  <legend class="{{ legendClass }}">{{legendText}}</legend>
+{% endif %}
 <div id="inputdiv-{{ name }}" class="form-line">
 {% if label or error or hint %}
   <label for="input-{{ name }}" class="form-label">
@@ -43,6 +47,13 @@
     {% if hint %}
       aria-describedby="{{ hintId }}"
     {% endif %}
+    {% if ariaLabel %}
+      aria-label="{{ ariaLabel }}"
+    {% endif %}
+   
   >
 {% endif %}
 </div>
+{% if fieldsetEnd %}
+</fieldset>
+{% endif %}

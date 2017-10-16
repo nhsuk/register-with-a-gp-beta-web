@@ -14,6 +14,9 @@ const schema = Joi.object().keys({
         { label: 'Dr', value: 'Dr'},
         { label: 'Prof', value: 'Prof'}
       ],
+      fieldset: true,
+      legendText:'What is your name?',
+      legendClass: 'legend-hidden'
     }).options({
       language: {
         any: {
@@ -33,7 +36,8 @@ const schema = Joi.object().keys({
     .meta({componentType: 'textbox'}),
   'lastName': Joi.string().max(100).label('Last name')
     .meta({
-      componentType: 'textbox'
+      componentType: 'textbox',
+      fieldsetEnd: true
     }).options({
       language: {
         any: {
