@@ -237,3 +237,18 @@ input[type=number] {
 .legend-hidden {
 	display: none;
 }
+.service-use__info, .registration-days, .signup-subheader {
+	margin-top: 15px;
+	@include media(tablet) {
+		margin-top: 30px;
+	}
+}
+
+.register-gp-start,signup-survey {
+	.sub-header {
+		@include bold-font(20);
+		@include media(tablet) {
+			@include bold-font(24);
+		}
+	}
+}
