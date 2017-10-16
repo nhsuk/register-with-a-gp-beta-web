@@ -1,0 +1,31 @@
+.register-gp-start {
+	.sub-header {
+		@include bold-font(20);
+		@include media(tablet) {
+			@include bold-font(24);
+		}
+	}
+	.local-header {
+		@include media(tablet) {
+			margin-top: 30px;
+		}
+	}
+	.page-section {
+		@include media(tablet) {
+			padding-top: 5px;
+		}
+	}
+	.registration-days {
+		margin-top: 20px;
+		@include media(tablet) {
+			margin-top: 30px;
+		}
+	}
+}
+.service-use-block p + p {
+	margin-top:25px;
+	@include media(tablet) {
+			margin-top: 30px;
+		}
+
+}

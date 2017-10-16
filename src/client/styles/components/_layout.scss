@@ -243,18 +243,4 @@ input[type=number] {
 }
 
 
-.service-use__info, .registration-days {
-	margin-top: 15px;
-	@include media(tablet) {
-		margin-top: 30px;
-	}
-}
 
-.register-gp-start {
-	.sub-header {
-		@include bold-font(20);
-		@include media(tablet) {
-			@include bold-font(24);
-		}
-	}
-}

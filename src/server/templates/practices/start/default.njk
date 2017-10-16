@@ -3,15 +3,15 @@
 {% set serviceTitle = '' %}
 
 {% block body_main_content %}
-
+<div class="register-gp-start">
   {% block header_section %}
     <div class="local-header">
-      <h1 class="form-title">{% block header_section_title %} Register with {{ CURRENT_PRACTICE.name | default('the GP practice') }} {% endblock %}</h1>
+      <h1 class="form-title reading-width">{% block header_section_title %} Register with {{ CURRENT_PRACTICE.name | default('the GP practice') }} {% endblock %}</h1>
     </div>
   {% endblock %}
 
   <div class="page-section">
-    <div class="reading-width register-gp-start">
+    <div class="reading-width">
       {% block body_main_content_steps %}
         <p>To register: </p>
         <ol>
@@ -21,29 +21,31 @@
       {% endblock %}
 
       <p class="registration-days">You should be registered in [x] days.</p>
-      <details>
-        <summary>
-          <span class="details__summary">How your information is used</span>
-        </summary>
-        <div class="details__content">
-          <div class="callout callout--info">
-            <p>Only the GP surgery sees the information in your application form. It’s sent securely so they can add it to your medical record. It’s not used for any other purpose.</p>
-          </div>
+    </div>
+    <details>
+      <summary>
+        <span class="details__summary">How your information is used</span>
+      </summary>
+      <div class="details__content reading-width">
+        <div class="callout callout--info">
+          <p>Only the GP surgery sees the information in your application form. It’s sent securely so they can add it to your medical record. It’s not used for any other purpose.</p>
         </div>
-      </details>
-
-      <a href="{{ firstStep }}" class="button start-step-btn" id="start-button">Start now</a>
-
-      {% block who_uses_service %}
-      <div class="service-use-block">
-        <h3 class="sub-header">Who can use this service</h3>
-          <p> Use this service to register yourself. To register someone else, go in person to the surgery.</p>
-          <p class="service-use__info">Some GP practices only register people living in the local area. Check with {{ CURRENT_PRACTICE.name | default('the GP practice') }} if you’re unsure.</p>
       </div>
-      {% endblock %}
+    </details>
+
+    <a href="{{ firstStep }}" class="button start-step-btn" id="start-button">Start now</a>
+
+    {% block who_uses_service %}
+    <div class="service-use-block reading-width">
+      <h3 class="sub-header">Who can use this service</h3>
+        <p> Use this service to register yourself. To register someone else, go in person to the surgery.</p>
+        <p>Some GP practices only register people living in the local area. Check with {{ CURRENT_PRACTICE.name | default('the GP practice') }} if you’re unsure.</p>
+    </div>
+    {% endblock %}
       
     </div>
   </div>
+
 {% endblock %}
       
     
