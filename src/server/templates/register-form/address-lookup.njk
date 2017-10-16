@@ -16,6 +16,8 @@
       <input type="hidden" id="practice" value="{{ CURRENT_PRACTICE.key }}">
       
       {% block formFields %}
+      <fieldset id="fieldset-addressLookup">
+        <legend class="legend-hidden">Address lookup</legend>
         <div class="form-fields" id="address-lookup__inline">
           {% for field in fields %}
             {% if field.componentType in ['textbox', 'multiple-choice', 'disclosure', 'dropdown', 'numeric', 'tel','radio-horizontal', 'hidden'] %}
@@ -36,6 +38,7 @@
         <div class="form-group addresslookup">
            <button type="button" id="addressbutton" class="button findAddress">Find address</button>
         </div>
+      </fieldset>
         
       {% endblock %}
       {% block confirm %}
@@ -66,45 +69,47 @@
         <summary role="button" id="manual-address-link">
           <span class="details__summary">I can't find my address, enter manually</span>
         </summary>
-        <div id="manual-address-details" class="details__content">
-          <div class="nested-fields-container">
-            <div id="inputdiv-manualAddress1" class="form-line">
-              <label for="input-locality" class="form-label">
-                Address
-              </label>
-              <input type="text" class="form-textbox" id="manualAddress1" value="" />
+        <fieldset id="fieldset-manual-address-details">
+          <legend class="legend-hidden">Address Details</legend>
+          <div id="manual-address-details" class="details__content">
+            <div class="nested-fields-container">
+              <div id="inputdiv-manualAddress1" class="form-line">
+                <label for="manualAddress1" class="form-label">
+                  Address
+                </label>
+                <input type="text" class="form-textbox" id="manualAddress1" value="" aria-label="Address line 1"/>
+              </div>
+              <div id="inputdiv-manualAddress2" class="form-line">
+                <input type="text" class="form-textbox" id="manualAddress2" value="" aria-label="Address line 2"/>
+              </div>
+              <div id="inputdiv-manualAddress3" class="form-line">
+                <input type="text" class="form-textbox" id="manualAddress3" value="" aria-label="Address line 3"/>
+              </div>
+              <div id="inputdiv-manualTown" class="form-line">
+                <label for="manualTown" class="form-label">
+                  Town or city
+                </label>
+                <input type="text" class="form-textbox" id="manualTown" value="" aria-label="Town or city" />
+              </div>
+              <div id="inputdiv-manualCounty" class="form-line">
+                <label for="manualCounty" class="form-label">
+                  County
+                </label>
+                <input type="text" class="form-textbox" id="manualCounty" value="" aria-label="County" />
+              </div>
+              <div id="inputdiv-manualPostcode" class="form-line">
+                <label for="manualPostcode" class="form-label">
+                  Postcode
+                </label>
+                <input type="text"  class="form-textbox form-textbox--short" id="manualPostcode" value="" aria-label="Postcode"/>
+              </div>
+              <div class="form-group continue-step">
+                <button type="button" id="manualcontinue" class="button">Continue</button>
+              </div>
             </div>
-            <div id="inputdiv-manualAddress2" class="form-line">
-              <input type="text" class="form-textbox" id="manualAddress2" value="" />
-            </div>
-             <div id="inputdiv-manualAddress3" class="form-line">
-              <input type="text" class="form-textbox" id="manualAddress3" value="" />
-            </div>
-            <div id="inputdiv-manualTown" class="form-line">
-              <label for="input-manualTown" class="form-label">
-                Town or city
-              </label>
-              <input type="text" class="form-textbox" id="manualTown" value="" />
-            </div>
-            <div id="inputdiv-manualCounty" class="form-line">
-              <label for="input-manualCounty" class="form-label">
-                County
-              </label>
-              <input type="text" class="form-textbox" id="manualCounty" value="" />
-            </div>
-            <div id="inputdiv-manualPostcode" class="form-line">
-              <label for="input-manualPostcode" class="form-label">
-                Postcode
-              </label>
-              <input type="text"  class="form-textbox form-textbox--short" id="manualPostcode" value="" />
-            </div>
-            <div class="form-group continue-step">
-            <button type="button" id="manualcontinue" class="button">Continue</button>
           </div>
-          </div>
-          </div>
-          
-        </details>
+        </fieldset>
+      </details>
     </form>
   </div>
 {% endblock body_main_content %}

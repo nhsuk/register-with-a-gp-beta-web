@@ -177,12 +177,12 @@ input[type=number] {
     padding: 2px 0 0 20px;
     margin-left: 0;
 
-    #inputdiv-day, #inputdiv-month, #inputdiv-year {
-    	float: none;
-    }
-
     @include media(tablet) {
     	padding: 10px 0 0 20px;
+
+    	#inputdiv-day, #inputdiv-month, #inputdiv-year {
+    		float: none;
+    	}
     }
 }
 .button {
@@ -242,5 +242,7 @@ input[type=number] {
 	}
 }
 
-
+.legend-hidden {
+	display: none;
+}
 

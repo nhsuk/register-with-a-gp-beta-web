@@ -20,6 +20,8 @@ const schema = Joi.object().keys({
         { label: 'No', value: false, show_nested_fields:false},
       ],
       variant: 'radio',
+      legendText:'Do you know your NHS number?',
+      legendClass: 'legend-hidden'
     })
     .options({
       language: {

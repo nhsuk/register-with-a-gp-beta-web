@@ -5,7 +5,13 @@ import FullDateValidator from '../../../../shared/lib/joi-full-date-validator';
 const Joi = JoiBase.extend(FullDateValidator);
 
 const schema = Joi.object().keys({
-  'day': Joi.number().integer().min(1).max(31).required().label('Day').meta({ componentType: 'numeric' }).options({
+  'day': Joi.number().integer().min(1).max(31).required().label('Day')
+  .meta({
+    componentType: 'numeric',
+    fieldset: true,
+    legendText:'What is your date of birth?',
+    legendClass: 'legend-hidden' })
+  .options({
     language: {
       number: {
         base: 'Please enter a valid day using numbers only',
@@ -24,7 +30,11 @@ const schema = Joi.object().keys({
       }
     }
   }),
-  'year': Joi.number().integer().min(1885).max(2025).required().label('Year').meta({ componentType: 'numeric' }).options({
+  'year': Joi.number().integer().min(1885).max(2025).required().label('Year')
+  .meta({
+    componentType: 'numeric',
+    fieldsetEnd: true })
+  .options({
     language: {
       number: {
         base: 'Please enter a valid year using numbers only',

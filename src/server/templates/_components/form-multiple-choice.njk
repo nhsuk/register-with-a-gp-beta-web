@@ -30,15 +30,12 @@
  #}
 {% set hintId = 'hint-' + name %}
 
-<fieldset id="input-{{ name }}">
-  {% if label or hint or error %}
-    <legend class="form-label" id="group-{{ name }}">
-      {{ label }} {% if optional %}(optional){% endif %}
-      {% if hint %}
-        <span class="form-label__hint" id="{{ hintId }}">{{ hint }}</span>
-      {% endif %}
-    </legend>
-  {% endif %}
+<fieldset id="fieldset-{{ name }}">
+  <legend class="{{ legendClass }}">{{ legendText }}</legend>
+    {% if hint %}
+      <p class="form-label form-label__hint" id="{{ hintId }}">{{ hint }}</p>
+    {% endif %}
+
 
   <div class="multiple-choice__container">
     {% for option in children %}
@@ -65,9 +62,6 @@
           class="multiple-choice__input"
           {% if isSelected %}
             checked="checked"
-          {% endif %}
-          {% if hint %}
-            aria-describedby="{{ hintId }}"
           {% endif %}
         >
       </label>

@@ -20,32 +20,40 @@
  #   } %}
  #}
 {% set hintId = 'hint-' + name %}
-<div id="inputdiv-{{ name }}" class="form-line">
-{% if label or error or hint %}
-  <label for="input-{{ name }}" class="form-label">
-    {{ label }} {% if optional %}(optional){% endif %}
-    {% if hint %}
-      <span class="form-label__hint" id="{{ hintId }}">{{ hint }}</span>
+
+{% if fieldset %}
+  <fieldset id="fieldset-{{ name }}">
+    <legend class="{{ legendClass }}">{{legendText}}</legend>
+{% endif %}
+    <div id="inputdiv-{{ name }}" class="form-line">
+    {% if label or error or hint %}
+      <label for="input-{{ name }}" class="form-label">
+        {{ label }} {% if optional %}(optional){% endif %}
+        {% if hint %}
+          <span class="form-label__hint" id="{{ hintId }}">{{ hint }}</span>
+        {% endif %}
+      </label>
     {% endif %}
-  </label>
-{% endif %}
 
-{% if value %}
-
-{% endif %}
-  <select
-    name="{{ name }}"
-    id="input-{{ name }}"
-    class="form-dropdown{{ ' has-error' if error }}"
-  >
-  {% for c in children %}
     {% if value %}
-      {% set isSelected = (value | string == c.value | default('')) %}
-    {% endif %}
-    <option value="{{ c.value }}" {% if isSelected %}selected="selected"{% endif %}>
-      {{ c.label }}
-    </option>
-  {% endfor %}
 
-  </select>
-</div>
+    {% endif %}
+      <select
+        name="{{ name }}"
+        id="input-{{ name }}"
+        class="form-dropdown{{ ' has-error' if error }}"
+      >
+      {% for c in children %}
+        {% if value %}
+          {% set isSelected = (value | string == c.value | default('')) %}
+        {% endif %}
+        <option value="{{ c.value }}" {% if isSelected %}selected="selected"{% endif %}>
+          {{ c.label }}
+        </option>
+      {% endfor %}
+
+      </select>
+    </div>
+  {% if fieldsetEnd %}
+  </fieldset>
+  {% endif %}
