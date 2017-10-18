@@ -176,6 +176,8 @@ $ yarn test
 
 Acceptance tests are running through codecept.js and backed by Selenium.
 
+Run tests Locally:
+
 Installation on Linux or Mac:
 ```bash
 ./node_modules/.bin/selenium-standalone install
@@ -191,6 +193,13 @@ Terminal session 2:
 ```bash
 yarn test:acceptance_local
 ```
+
+Run tests on Travis:
+
+1. checkout branch `acceptance-test`.
+2. Merge the changes/branch you want to test into branch `acceptance-test` this should start a Travis job.
+3. In Travis click on build history and you should be able to see `acceptance-test` click on it to see Job log.
+
 
 ### Production
 
