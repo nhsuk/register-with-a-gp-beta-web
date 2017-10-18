@@ -8,18 +8,9 @@ const firstPractice = practiceLookup.getPractices()[0];
 
 Feature('GP Registration Form');
 
-Scenario('Test Current Medication validation error messages shows up', (I) => {
-  I.amOnPage(`/${firstPractice.key}/register/${currentMedicationStep.slug}`);
-  I.see('Are you taking any medication?');
-
-  I.click('Continue');
-  I.see('There’s a problem');
-  I.see('Please answer this question');
-});
-
 
 Scenario('Test Current Medication submit for both choises(yes/no)', (I) => {
-  I.amOnPage(`/${firstPractice.key}/register/${currentMedicationStep.slug}`);
+  I.amOnPage('/fakeform/K76hgyO76655ghkH'+'?url='+`/${firstPractice.key}/register/${currentMedicationStep.slug}`);
 
   I.click('label[data-label=Yes]');
   I.waitForElement('.nested-fields-container', 3);
@@ -27,7 +18,7 @@ Scenario('Test Current Medication submit for both choises(yes/no)', (I) => {
   I.click('Continue');
   I.see('Do you have any allergies?');
 
-  I.amOnPage(`/${firstPractice.key}/register/${currentMedicationStep.slug}`);
+  I.amOnPage('/fakeform/K76hgyO76655ghkH'+'?url='+`/${firstPractice.key}/register/${currentMedicationStep.slug}`);
   I.click('label[data-label=No]');
   I.click('Continue');
   I.see('Do you have any allergies?');
