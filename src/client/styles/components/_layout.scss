@@ -246,3 +246,22 @@ input[type=number] {
 	display: none;
 }
 
+.signup-survey {
+	.sub-header {
+		margin-top: 25px;
+		margin-bottom: 12px;
+	}
+
+	.signup-service-summary p + p {
+		margin-top: 20px;
+	}
+
+	.page-section {
+		@include media(tablet) {
+			padding-top: 5px;
+		}
+	}
+}
+.start-survey-btn {
+	margin: 30px 0 10px 0;
+}
