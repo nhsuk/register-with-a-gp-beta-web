@@ -16,7 +16,9 @@
 }
 
 #input-houseNumber.form-textbox {
-	max-width: 324px;
+	@include media(tablet){
+		max-width: 324px;
+	}
 }
 
 .addresslookup {
