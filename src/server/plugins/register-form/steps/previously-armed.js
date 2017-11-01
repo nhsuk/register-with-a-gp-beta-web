@@ -1,8 +1,11 @@
 /**
  * @type Step
  */
-import Joi from 'joi';
+import JoiBase from 'joi';
 import {postHandlerFactory, getHandlerFactory} from './common';
+import FullDateValidator from '../../../../shared/lib/joi-full-date-validator';
+
+const Joi = JoiBase.extend(FullDateValidator);
 
 const schema = Joi.object().keys({
   'previously-armed': Joi.boolean().required()
@@ -49,7 +52,7 @@ const schema = Joi.object().keys({
   'month': Joi.when('previously-armed', {is: true, then:Joi.number().integer().min(1).max(12).required()}),
   'year': Joi.when('previously-armed', {is: true, then:Joi.number().integer().min(1885).max(2025).required()}),
   'submit': Joi.any().optional().strip()
-});
+}).fulldate();
 
 
 const title = 'Have you served in the armed forces?';
