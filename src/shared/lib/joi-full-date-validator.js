@@ -12,13 +12,23 @@ const invalidFullDateRule = {
   validate(params, value, state, options){
     let mm = '0' + value.month.toString();
     let dd = '0' + value.day.toString();
+    let pa = true;
+    console.log(value);
+    if('previously-armed' in value){
+      pa = value['previously-armed'];
+    }
+    console.log(pa);
     mm = mm.slice(-2);
     dd = dd.slice(-2);
     DateConcat = dd + mm + value.year.toString();
-    if(dValidate(DateConcat)){
+    if(!pa){
       return value;
     } else {
-      return this.createError('object.fulldate', { v: value.day }, state, options);
+      if(dValidate(DateConcat)){
+        return value;
+      } else {
+        return this.createError('object.fulldate', { v: value.day }, state, options);
+      }
     }
   }
 };
