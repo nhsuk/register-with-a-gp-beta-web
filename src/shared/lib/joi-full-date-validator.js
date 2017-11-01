@@ -13,11 +13,9 @@ const invalidFullDateRule = {
     let mm = '0' + value.month.toString();
     let dd = '0' + value.day.toString();
     let pa = true;
-    console.log(value);
     if('previously-armed' in value){
       pa = value['previously-armed'];
     }
-    console.log(pa);
     mm = mm.slice(-2);
     dd = dd.slice(-2);
     DateConcat = dd + mm + value.year.toString();
