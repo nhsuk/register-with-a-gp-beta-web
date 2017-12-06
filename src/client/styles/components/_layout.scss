@@ -272,5 +272,6 @@ input[type=number] {
 .gp-service-animation {
 	@include media(tablet) {
 		width: 650px;
+		height: 320px;
 	}
 }

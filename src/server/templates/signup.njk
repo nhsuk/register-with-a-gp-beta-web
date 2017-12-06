@@ -27,14 +27,13 @@
         <li>tell us if you want to try the service</li>
       </ul>
 
-      <a href="" class="button start-survey-btn" id="start-button">Start survey</a>
+      <a href="https://goo.gl/forms/UPTnX02bIucz7GJG3" class="button start-survey-btn" id="start-button">Start survey</a>
 
       <h3 class="sub-header">How the service works</h3>
-      <div class="">
-        <video controls class="gp-service-animation">
-          <source src="" type="video/mp4">
-          <source src="" type="video/ogg">
-        </video>
+      <div id="gp-animation-div">
+      <iframe class="gp-service-animation"
+       src="https://www.youtube.com/embed/aNMTB1zM5AU?rel=0"  gesture="media" allow="encrypted-media" allowfullscreen>
+      </iframe>
       </div>
       <div class="signup-service-summary">
         <h3 class="sub-header">In summary</h3>
@@ -55,14 +54,9 @@
       </div>
     </div>
     
-    <form method="post" id="current-step-form" action="#googleformlink">
-      {% block submitRow %}
-        <div class="form-group">
-          <button type="submit" class="button start-survey-btn">Start survey</button>
-        </div>
-      {% endblock submitRow %}
-
-    </form>
+    <div class="form-group">
+          <a href="https://goo.gl/forms/UPTnX02bIucz7GJG3" class="button start-survey-btn" id="start-button">Start survey</a>
+    </div>
   </div>
 </div>
 {% endblock body_main_content %}
