@@ -107,10 +107,10 @@ exports.register = function(server, options, next) {
     isCached: !debug,
     context: function (request) {
       const context = {
-        BUTTON_TEXT: function(key, defaultText){
+        BUTTON_TEXT: function(key, defaultText) {
           return isButtonDone(key, defaultText, request.state.fromSummaryTo);
         },
-        GA_ID: function(){
+        GA_ID: function() {
           return GOOGLEANALYTICSKEY;
         },
         REQUEST_AKA: function(key) {
@@ -120,7 +120,7 @@ exports.register = function(server, options, next) {
           return '/' + request.params.practice + '/redirect/' + getSlugByKey(key);
         },
         ENV_VALUE: function(name) {
-          if(process.env[name] === 'undefined'){
+          if(process.env[name] === 'undefined') {
             return '';
           } else {
             return process.env[name];
