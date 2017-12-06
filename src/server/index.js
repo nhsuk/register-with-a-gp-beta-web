@@ -167,6 +167,12 @@ const manifest = {
         register: './plugins/redirect',
         options: {}
       }
+    },
+    {
+      plugin: {
+        register: './plugins/signup',
+        options: {}
+      }
     }
   ]
 

@@ -1,0 +1,62 @@
+{% extends 'layouts/base.njk' %}
+
+{% block head_title_content %}Register with a GP - NHS.UK{% endblock %}
+
+{% block body_main_content %}
+<div class="signup-survey">
+  {% block header_section %}
+  
+    <div class="local-header">
+      <h1 class="form-title">{% block header_section_title %} Help us improve <br>Register with a GP {% endblock %}</h1>
+    </div>
+  {% endblock %}
+
+  <div class="page-section">
+    <div class="reading-width">
+      <p> We're improving the way people register with their GP.</p>
+      <p> We're building an online services to do this that's:
+      <ul>
+        <li>secure</li>
+         <li>free for patients and GP practices</li>
+         <li>mirros current GMS1 and new patient information forms</li>
+      </ul>
+
+      <h3 class="sub-header">Please take a quick (5 min) survey to:</h3>
+      <ul>
+        <li>tell us about your registration process</li>
+        <li>tell us if you want to try the service</li>
+      </ul>
+
+      <a href="https://goo.gl/forms/UPTnX02bIucz7GJG3" class="button start-survey-btn" id="start-button">Start survey</a>
+
+      <h3 class="sub-header">How the service works</h3>
+      <div id="gp-animation-div">
+      <iframe class="gp-service-animation"
+       src="https://www.youtube.com/embed/aNMTB1zM5AU?rel=0"  gesture="media" allow="encrypted-media" allowfullscreen>
+      </iframe>
+      </div>
+      <div class="signup-service-summary">
+        <h3 class="sub-header">In summary</h3>
+        <p>Patients provide the same registration details as the GMS1 and most new
+          patient information forms (like medical history, allergies etc).</p>
+
+        <p> Patient details sent safely and securely to your preferred nhs.net email.</p>
+
+        <p> If needed, patients told to provide proof of ID and addressin person at your surgery.</p>
+
+        <p> The service is: </p>
+        <ul>
+          <li>safe and secure</li>
+          <li>free and easy to use</li>
+          <li>works on desktops, mobiles and tablets</li>
+          <li>ensures patients provides correct information (like NHS number, address etc)</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="form-group">
+          <a href="https://goo.gl/forms/UPTnX02bIucz7GJG3" class="button start-survey-btn" id="start-button">Start survey</a>
+    </div>
+  </div>
+</div>
+{% endblock body_main_content %}

@@ -212,7 +212,7 @@ input[type=number] {
 	}
 }
 
-.callout p, .callout li, .register-gp-start p, .register-gp-start li {
+.callout p, .callout li, .register-gp-start p, .register-gp-start li, .signup-survey p, .signup-survey li {
 	@include core-font(16);
 
 	@include media(tablet) {
@@ -246,3 +246,32 @@ input[type=number] {
 	display: none;
 }
 
+.signup-survey {
+	.sub-header {
+		margin-top: 25px;
+		margin-bottom: 12px;
+		@include bold-font(20);
+		@include media(tablet) {
+			@include bold-font(24);
+		}
+	}
+
+	.signup-service-summary p + p {
+		margin-top: 20px;
+	}
+
+	.page-section {
+		@include media(tablet) {
+			padding-top: 5px;
+		}
+	}
+}
+.start-survey-btn {
+	margin: 30px 0 10px 0;
+}
+.gp-service-animation {
+	@include media(tablet) {
+		width: 650px;
+		height: 320px;
+	}
+}
