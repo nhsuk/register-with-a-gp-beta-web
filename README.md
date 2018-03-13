@@ -1,3 +1,7 @@
+# **DEPRECATED** - no longer actively maintained
+
+---
+
 # Register With A GP Beta Web
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/nhsuk/register-with-a-gp-beta-web.svg)](https://greenkeeper.io/)
